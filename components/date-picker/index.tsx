@@ -5,7 +5,7 @@ import React from 'react';
 import DatePicker, { ReactDatePickerProps, registerLocale } from "react-datepicker";
 import vi from 'date-fns/locale/vi';
 
-registerLocale("vi", vi)
+registerLocale("vi", vi);
 
 export default React.memo(function(props: ReactDatePickerProps) {
     return <DatePicker {...props} />;

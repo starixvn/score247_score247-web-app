@@ -1,0 +1,44 @@
+import "./style.scss";
+import React, { PureComponent } from "react";
+import { State, Props } from "./type";
+import { format, isSameDay } from "date-fns";
+import { WithTranslation } from "next-i18next";
+import { withTranslation } from "../../common/helpers/Localizer";
+
+class Breadcrumbs extends PureComponent<Props & WithTranslation, State> {
+  today: Date = new Date();
+
+  constructor(props: Props & WithTranslation) {
+    super(props);
+  }
+
+  render() {
+    const { selectedDate, onlyLiveMatch, t } = this.props;
+
+    return (
+      <div className="site-info">
+        <div className="breadcrumbs">
+          <span className="selected-sport">{t("soccer")} / </span>
+          <span className="selected-date">
+<<<<<<< HEAD:components/Breadcrumbs/index.tsx
+            {onlyLiveMatch
+              ? t("livematch")
+              : isSameDay(selectedDate, this.today)
+              ? t("today")
+              : format(selectedDate, "dd MMM yyyy")}
+=======
+          {onlyLiveMatch
+            ? t("livematch")
+            : isSameDay(selectedDate, this.today)
+            ? t("today").toUpperCase()
+            : format(selectedDate, "dd MMM yyyy")}
+>>>>>>> 000 - rename folders:components/bread-crumbs/index.tsx
+          </span>
+        </div>
+        <div className="GMT-time">{format(this.today, "H:mm OOO")}</div>
+      </div>
+    );
+  }
+}
+
+export default withTranslation("common")(Breadcrumbs);
