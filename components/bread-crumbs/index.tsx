@@ -23,7 +23,7 @@ class Breadcrumbs extends PureComponent<Props & WithTranslation, State> {
             {onlyLiveMatch
               ? t("livematch")
               : isSameDay(selectedDate, this.today)
-              ? t("today")
+            ? t("today").toUpperCase()
               : format(selectedDate, "dd MMM yyyy")}
           </span>
         </div>

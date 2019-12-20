@@ -10,7 +10,6 @@ const CustomDateInput = (props: any) => {
   return (
     <span onClick={props.onClick}>
       <i className="icon-calendar" />
-      123
     </span>
   );
 };
@@ -85,10 +84,10 @@ class DateBar extends Component<Props & WithTranslation, State> {
           onClick={this.handleLiveMatchChange}
         >
           <span className="badge-label">2</span>
-          <span>&nbsp;{this.props.t("livematch")}</span>
+          <span>{this.props.t("livematch")}</span>
         </button>
         <div className="date-bar">
-          <span className="show-mobile">Live</span>
+          <span className="show-mobile live" onClick={this.handleLiveMatchChange}>{this.props.t("live")}</span>
           {this.state.dateList.map(this.renderDate)}
           <DatePicker
             selected={this.props.selectedDate}

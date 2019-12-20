@@ -1,9 +1,9 @@
-import Link from "next/link";
 import React, { Children } from "react";
 import { withRouter } from "next/router";
 import { WithRouterProps } from "next/dist/client/with-router";
 import { ReactElementLike } from "prop-types";
 import { SportsEnum } from "../../common/sportenum";
+import { Link } from '../../common/helpers/Localizer';
 
 interface IProps extends WithRouterProps {
   href: string;
