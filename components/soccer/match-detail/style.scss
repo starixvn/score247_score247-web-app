@@ -15,9 +15,8 @@
   }
 }
 
-
 .react-tabs {
-  .react-tabs__tab-list {    
+  .react-tabs__tab-list {
     background-color: #1b3464;
     border-bottom: none;
     display: flex;
@@ -26,7 +25,7 @@
     flex-wrap: wrap;
     width: 100%;
     .mobile & {
-      background-color: #fff;      
+      background-color: #fff;
     }
   }
   .react-tabs__tab {
@@ -51,12 +50,29 @@
     border-bottom: 1px solid #e70c12;
     .mobile & {
       background-color: #fff;
-      color: #FF7D00;
-      border-bottom: 2px solid #FF7D00;
+      color: #ff7d00;
+      border-bottom: 2px solid #ff7d00;
     }
   }
 }
 
+.info-tab {
+  display: flex;
+}
+
 .mobile .match-detail {
   width: 100%;
+}
+
+.left-section,
+.right-section {
+  width: 25.5rem;
+}
+
+.ball-tracker {
+  width: calc(100% - 25.5rem - 25.5rem);
+
+  .mobile & {
+    width: 100%;
+  }
 }

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import BallTracker from "../ball-tracker";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import GeneralInfo from "../general-info";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import MatchInfoTab from "../tabs/match-info-tab";
 import Advertisement from "../../../common/advertisement";
 
 type Props = {
@@ -44,7 +44,11 @@ const Desktop: React.FC<Props> = props => {
           </TabList>
         </div>
         <TabPanel forceRender={true}>
-          <MatchInfoTab matchId={props.matchInfo.Match.Id} />
+          <div className="info-tab">
+            <div className="left-section"></div>
+            <BallTracker matchId={props.matchInfo.Match.Id} />
+            <div className="right-section"></div>
+          </div>
         </TabPanel>
         <TabPanel>This is Commentary page</TabPanel>
         <TabPanel>This is Statistics page</TabPanel>

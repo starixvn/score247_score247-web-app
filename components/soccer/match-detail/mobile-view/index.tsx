@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import GeneralInfo from "../general-info";
+import BallTracker from "../ball-tracker";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import SwipeableViews from "react-swipeable-views";
-import MatchInfoTab from "../tabs/match-info-tab";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -31,7 +31,9 @@ const Mobile: React.FC<Props> = props => {
         >
           <TabPanel>This is Info Page</TabPanel>
           <TabPanel forceRender={true}>
-            <MatchInfoTab matchId={props.matchInfo.Match.Id} />
+          <div className="info-tab">
+            <BallTracker matchId={props.matchInfo.Match.Id} />
+          </div>
           </TabPanel>
           <TabPanel>This is Stats page</TabPanel>
           <TabPanel>This is Line-ups page</TabPanel>
