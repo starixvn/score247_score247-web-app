@@ -4,9 +4,11 @@ import BallTracker from "../ball-tracker";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import SwipeableViews from "react-swipeable-views";
+import { MatchLineups } from "../../../../apis/soccer/models";
 
 type Props = {
   matchInfo: MatchInfo;
+  matchLineUps: MatchLineups | null;
 };
 
 const Mobile: React.FC<Props> = props => {

@@ -1,7 +1,7 @@
 import "./style.scss";
 import React from "react";
 import dynamic from "next/dynamic";
-import { MatchInfo } from "../../../apis/soccer/models";
+import { MatchInfo, MatchLineups } from "../../../apis/soccer/models";
 import { SoccerAPI } from "../../../apis/soccer/soccer-api";
 import { SoccerSignalRClient } from "../../../apis/soccer/soccer-signalr-client";
 import appSettings from "../../../app-settings";
@@ -19,6 +19,7 @@ type Props = {
 
 type State = {
   matchInfo: MatchInfo | null;
+  matchLineUps: MatchLineups | null;
   soccerSignalRClient?: SoccerSignalRClient;
 };
 
@@ -27,18 +28,20 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      matchInfo: null
+      matchInfo: null,
+      matchLineUps: null
     };
   }
 
   async componentDidMount() {
     const matchInfo = await SoccerAPI.GetMatch(this.props.matchId);
+    const matchLineUps = await SoccerAPI.GetMatchLineups(this.props.matchId, new Date());
     if(!matchInfo.TimelineEvents) {
       matchInfo.TimelineEvents = [];
     }
 
     this.setupSignalClient();
-    this.setState({ matchInfo });
+    this.setState({ matchInfo, matchLineUps });
   }
 
   setupSignalClient() {
@@ -88,9 +91,9 @@ class SoccerMatchDetail extends React.Component<Props, State> {
   renderMatchDetail = (value: DeviceContextType) => {
     if (this.state.matchInfo) {
       if (value.isMobile) {
-        return <MobileView matchInfo={this.state.matchInfo} />;
+        return <MobileView matchInfo={this.state.matchInfo} matchLineUps={this.state.matchLineUps} />;
       }
-      return <DesktopView matchInfo={this.state.matchInfo} />;
+      return <DesktopView matchInfo={this.state.matchInfo}  matchLineUps={this.state.matchLineUps} />;
     }
 
     return null;

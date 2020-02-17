@@ -4,9 +4,12 @@ import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import GeneralInfo from "../general-info";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Advertisement from "../../../common/advertisement";
+import { MatchLineups } from "../../../../apis/soccer/models";
+import TeamLineUps from "./team-line-ups";
 
 type Props = {
   matchInfo: MatchInfo;
+  matchLineUps: MatchLineups | null;
 };
 
 const Desktop: React.FC<Props> = props => {
@@ -45,9 +48,17 @@ const Desktop: React.FC<Props> = props => {
         </div>
         <TabPanel forceRender={true}>
           <div className="info-tab">
-            <div className="left-section"></div>
+            <div className="left-section">
+              {props.matchLineUps && (
+                <TeamLineUps lineUps={props.matchLineUps.Home} />
+              )}
+            </div>
             <BallTracker matchId={props.matchInfo.Match.Id} />
-            <div className="right-section"></div>
+            <div className="right-section">
+              {props.matchLineUps && (
+                <TeamLineUps lineUps={props.matchLineUps.Away} />
+              )}
+            </div>
           </div>
         </TabPanel>
         <TabPanel>This is Commentary page</TabPanel>
