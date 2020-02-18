@@ -7,5 +7,5 @@ export interface Player {
   JerseyNumber: number;
   Position: Enumeration;
   Order: number;
-  EventStatistic: { [key: string]: number };
+  EventStatisticFormatted: { [key: string]: number };
 }
