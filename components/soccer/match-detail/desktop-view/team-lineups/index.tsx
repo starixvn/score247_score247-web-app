@@ -17,8 +17,8 @@ export default function TeamLineUps(props: Props) {
       {props.pitchView ? (
         <PitchView pitchView={props.pitchView} />
       ) : (
-        <StartingLineups lineUps={props.lineUps.Players} />
-      )}
+          <StartingLineups lineUps={props.lineUps.Players} />
+        )}
       <div className="text-uppercase">substitution</div>
       <Substitution substitutionEvents={props.lineUps.SubstitutionEvents} />
       <div className="text-uppercase">substitute players</div>
