@@ -15,6 +15,7 @@ type Props = {
 
 export default function TeamLineUps(props: Props) {
   const { t } = useTranslation(ResourceType.SOCCER);
+  const { lineUps, pitchView } = props;
 
   return (
     <>
@@ -22,16 +23,13 @@ export default function TeamLineUps(props: Props) {
         {props.lineUps.Name}
         <div>{props.lineUps.Formation}</div>
       </div>
-      <StartingLineups lineUps={props.lineUps.Players} />
-      {/* {props.pitchView ? <PitchView pitchView={props.pitchView} /> : <StartingLineups lineUps={props.lineUps.Players} />} */}
+      {props.pitchView ? <PitchView pitchView={pitchView} /> : <StartingLineups lineUps={lineUps.Players} />}
       <div className="text-uppercase">{t(SoccerResourceKey.SUBSTITUTION)}</div>
-      <div className="substitution">
-        <div className="sub-title">substitution</div>
-        <Substitution substitutionEvents={props.lineUps.SubstitutionEvents} />
-      </div>
-      <SubstitutePlayers substitutePlayers={props.lineUps.Substitutions} />
+      <Substitution substitutionEvents={lineUps.SubstitutionEvents} />
+      <div className="text-uppercase">{t(SoccerResourceKey.SUBSTITUTE_PLAYERS)}</div>
+      <SubstitutePlayers substitutePlayers={lineUps.Substitutions} />
       <div className="text-uppercase">{t(SoccerResourceKey.COACH)}</div>
-      <TeamCoach coach={props.lineUps.Coach} />
+      <TeamCoach coach={lineUps.Coach} />
     </>
   );
 }

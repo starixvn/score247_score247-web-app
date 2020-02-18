@@ -6,6 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Advertisement from "../../../common/advertisement";
 import { MatchLineups } from "../../../../apis/soccer/models";
 import TeamLineUps from "./team-lineups";
+import OtherInfo from "../other-info";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -49,57 +50,14 @@ const Desktop: React.FC<Props> = props => {
         <TabPanel forceRender={true}>
           <div className="info-tab">
             <div className="line-ups left">
-              <div className="sub-wrapper">
-                {props.matchLineUps && (
-                  <TeamLineUps
-                    lineUps={props.matchLineUps.Home}
-                    pitchView={props.matchLineUps.PitchView}
-                  />
-                )}
-              </div>
-              <div className="substittute-player">
-                <div className="sub-title">Substitute player</div>
-                <div className="sub-player-item sub-line">
-                  <div><span>3</span>R.Vinagre</div>
-                  <div>IN</div>
-                </div>
-                <div className="sub-player-item sub-line">
-                  <div><span>8</span>M.Gibbs-White</div>
-                </div>
-                <div className="sub-player-item sub-line">
-                  <div><span>12</span>J.Ruddy</div>
-                </div>
-                <div className="sub-player-item sub-line">
-                  <div><span>14</span>R.Bennett</div>
-                </div>
-                <div className="sub-player-item sub-line">
-                  <div><span>15</span>M.Kilman</div>
-                </div>
-                <div className="sub-player-item sub-line">
-                  <div><span>23</span>B.Bennett</div>
-                </div>
-                <div className="sub-player-item sub-line">
-                  <div><span>34</span>O.Buur</div>
-                </div>
-              </div>
-              <div className="coach">
-                <div className="sub-title">Coach</div>
-                <div className="coach-name sub-line">Nuno Espirito Santo</div>
-              </div>
+              {props.matchLineUps && (<TeamLineUps lineUps={props.matchLineUps.Home} pitchView={props.matchLineUps.PitchView} />)}
             </div>
-
-            <BallTracker matchId={props.matchInfo.Match.Id} />
+            <div className="center">
+              <BallTracker matchId={props.matchInfo.Match.Id} />
+              <OtherInfo matchInfo={props.matchInfo} />
+            </div>
             <div className="line-ups right">
-              <div className="sub-wrapper">
-                {props.matchLineUps && (
-                  <TeamLineUps
-                    lineUps={props.matchLineUps.Away}
-                    pitchView={props.matchLineUps.PitchView}
-                  />
-                )}
-              </div>
-              <div className="substittute-player"></div>
-              <div className="coach"></div>
+              {props.matchLineUps && (<TeamLineUps lineUps={props.matchLineUps.Away} pitchView={props.matchLineUps.PitchView} />)}
             </div>
           </div>
         </TabPanel>

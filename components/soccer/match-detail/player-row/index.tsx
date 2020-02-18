@@ -10,9 +10,13 @@ type Props = {
 };
 
 const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer = true }) => {
-    const hasSubstitution = player.EventStatisticFormatted ? player.EventStatisticFormatted[EventTypes.SUBSTITUTION.value] : null;
+    const hasSubstitution = player.EventStatisticFormatted && player.EventStatisticFormatted[EventTypes.SUBSTITUTION.value];
 
     const renderGoals = () => {
+        if (player.EventStatisticFormatted) {
+            return null;
+        }
+
         const normalGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE.value];
         const penGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE_BY_PENALTY.value];
         const ownGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value];

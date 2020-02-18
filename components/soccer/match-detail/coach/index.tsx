@@ -6,5 +6,5 @@ type Props = {
 };
 
 export default function TeamCoach(props: Props) {
-  return <></>;
+  return <div className="coach">{props.coach.Name}</div>;
 }
