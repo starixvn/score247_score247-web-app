@@ -36,7 +36,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
   async componentDidMount() {
     const matchInfo = await SoccerAPI.GetMatch(this.props.matchId);
     const matchLineUps = await SoccerAPI.GetMatchLineups(this.props.matchId, new Date(matchInfo.Match.EventDate[0]));
-    
+
     if (!matchInfo.TimelineEvents) {
       matchInfo.TimelineEvents = [];
     }

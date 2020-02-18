@@ -11,7 +11,7 @@ export default function StartingLineups(props: Props) {
   return (
     <div className="line-ups">
       {
-        lineUps.map(player => <PlayerRow player={player} key={player.Id} />)
+        lineUps.map(player => <PlayerRow player={player} key={player.Id} isMainPlayer={true} />)
       }
     </div>
   );
