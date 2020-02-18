@@ -5,6 +5,10 @@ import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import SwipeableViews from "react-swipeable-views";
 import { MatchLineups } from "../../../../apis/soccer/models";
+import PitchView from "../pitch-view";
+import StartingLineups from "../starting-lineups";
+import Substitution from "../substitution";
+import SubstitutePlayers from "../substitute-players";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -38,7 +42,37 @@ const Mobile: React.FC<Props> = props => {
             </div>
           </TabPanel>
           <TabPanel>This is Stats page</TabPanel>
-          <TabPanel>This is Line-ups page</TabPanel>
+          <TabPanel>
+            {props.matchLineUps && (
+              <>
+                {props.matchLineUps.PitchView ? (
+                  <PitchView pitchView={props.matchLineUps.PitchView} />
+                ) : (
+                  <>
+                    <div>line-ups</div>
+                    <div>
+                      <StartingLineups
+                        lineUps={props.matchLineUps.Home.Players}
+                      />
+                      <StartingLineups
+                        lineUps={props.matchLineUps.Away.Players}
+                      />
+                    </div>
+                  </>
+                )}
+                <div>substitutions</div>
+                <div>
+                  <Substitution substitutionEvents={props.matchLineUps.Home.SubstitutionEvents} />
+                  <Substitution substitutionEvents={props.matchLineUps.Away.SubstitutionEvents} />
+                </div>
+                <div>substitute players</div>
+                <div>
+                  <SubstitutePlayers substitutePlayers={props.matchLineUps.Home.Substitutions} />
+                  <SubstitutePlayers substitutePlayers={props.matchLineUps.Away.Substitutions} />
+                </div>
+              </>
+            )}
+          </TabPanel>
           <TabPanel>This is H2H page</TabPanel>
           <TabPanel>This is Table page</TabPanel>
         </SwipeableViews>

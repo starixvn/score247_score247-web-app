@@ -4,6 +4,7 @@ import StartingLineups from "../../starting-lineups";
 import Substitution from "../../substitution";
 import SubstitutePlayers from "../../substitute-players";
 import TeamCoach from "../../coach";
+import PitchView from "../../pitch-view";
 
 type Props = {
   lineUps: TeamLineups;
@@ -13,13 +14,17 @@ type Props = {
 export default function TeamLineUps(props: Props) {
   return (
     <>
-      <StartingLineups lineUps={props.pitchView || props.lineUps.Players} />
+      {props.pitchView ? (
+        <PitchView pitchView={props.pitchView} />
+      ) : (
+        <StartingLineups lineUps={props.lineUps.Players} />
+      )}
       <div className="text-uppercase">substitution</div>
       <Substitution substitutionEvents={props.lineUps.SubstitutionEvents} />
       <div className="text-uppercase">substitute players</div>
       <SubstitutePlayers substitutePlayers={props.lineUps.Substitutions} />
       <div className="text-uppercase">coach</div>
-      <TeamCoach coach={props.lineUps.Coach}/>
+      <TeamCoach coach={props.lineUps.Coach} />
     </>
   );
 }
