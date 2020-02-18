@@ -1,6 +1,6 @@
 import React from "react";
 import { Player } from "../../../../apis/soccer/models";
-import PlayerRow from "../player";
+import PlayerRow from "../player-row";
 
 type Props = {
   lineUps: Player[];

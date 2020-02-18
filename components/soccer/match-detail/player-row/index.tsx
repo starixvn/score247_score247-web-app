@@ -10,8 +10,8 @@ const PlayerRow: React.FC<Props> = props => {
 
     return (
         <div className="player">
-            <div className="jersey">{player.JerseyNumber}.</div>
-            <div className="name">{player.Name}</div>
+            <span className="jersey">{player.JerseyNumber}.</span>
+            <span className="name">{player.Name}</span>
         </div>
     );
 };
