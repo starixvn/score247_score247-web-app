@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import GeneralInfo from "../general-info";
 import BallTracker from "../ball-tracker";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
-import GeneralInfo from "../general-info";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Advertisement from "../../../common/advertisement";
 import { MatchLineups } from "../../../../apis/soccer/models";

@@ -1,5 +1,5 @@
-import React from "react";
 import "./style.scss";
+import React from "react";
 import { Props } from "./type";
 import { useDeviceContext } from "../../../../contexts/device-context";
 import DesktopView from "./desktop-view";
