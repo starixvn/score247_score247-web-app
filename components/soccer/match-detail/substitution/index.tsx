@@ -24,11 +24,12 @@ const SubstitutionRow = (substitutionEvent: TimelineEvent) => (
 );
 
 const Substitution: React.FC<Props> = (props: Props) => {
-  const sortedSubstitutionEvents = sortArray(props.substitutionEvents, "CreatedTime");
+  // const sortedSubstitutionEvents = sortArray(props.substitutionEvents, "CreatedTime");
+  const sortedSubstitutionEvents = props.substitutionEvents;
 
   return (
     <div>
-      {sortedSubstitutionEvents.map(event => SubstitutionRow(event))}
+      {sortedSubstitutionEvents?.map(event => SubstitutionRow(event))}
     </div>
   );
 };
