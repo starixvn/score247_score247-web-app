@@ -1,7 +1,7 @@
 import React from "react";
 import { TeamLineups } from "../../../../../apis/soccer/models";
 import StartingLineups from "../../starting-lineups";
-import Substitution from "../../substitution";
+import SubstitutionDesktopView from "../../substitution/desktop-view";
 import SubstitutePlayers from "../../substitute-players";
 import TeamCoach from "../../coach";
 import PitchView from "../../pitch-view";
@@ -20,7 +20,7 @@ export default function TeamLineUps(props: Props) {
           <StartingLineups lineUps={props.lineUps.Players} />
         )}
       <div className="text-uppercase">substitution</div>
-      <Substitution substitutionEvents={props.lineUps.SubstitutionEvents} />
+      <SubstitutionDesktopView substitutionEvents={props.lineUps.SubstitutionEvents} />
       <div className="text-uppercase">substitute players</div>
       <SubstitutePlayers substitutePlayers={props.lineUps.Substitutions} />
       <div className="text-uppercase">coach</div>
