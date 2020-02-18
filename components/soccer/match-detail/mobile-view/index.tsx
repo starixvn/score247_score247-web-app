@@ -17,7 +17,7 @@ type Props = {
 
 const Mobile: React.FC<Props> = props => {
   const [selectedTabIndex, setTab] = useState(0);
-
+  console.log(props.matchLineUps)
   return (
     <>
       <GeneralInfo match={props.matchInfo.Match} />
@@ -67,8 +67,12 @@ const Mobile: React.FC<Props> = props => {
                 </div>
                 <div>substitute players</div>
                 <div>
-                  <SubstitutePlayers substitutePlayers={props.matchLineUps.Home.Substitutions} />
-                  <SubstitutePlayers substitutePlayers={props.matchLineUps.Away.Substitutions} />
+                  <div className="home-substitution">
+                    <SubstitutePlayers substitutePlayers={props.matchLineUps.Home.Substitutions} />
+                  </div>
+                  <div className="away-substitution">
+                    <SubstitutePlayers substitutePlayers={props.matchLineUps.Away.Substitutions} />
+                  </div>
                 </div>
               </>
             )}
