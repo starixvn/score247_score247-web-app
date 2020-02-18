@@ -8,17 +8,17 @@ type Props = {
 };
 
 const PlayerRow = (player: Player, substitutionType: SubstitutionType) => (
-  <>
-    {player.JerseyNumber} {player.Name} {substitutionType === SubstitutionType.In ? "IN" : "OUT"}
-  </>
+  <div className={substitutionType === SubstitutionType.In ? "player-in" : "player-out"}>
+    {player.JerseyNumber} {player.Name}
+  </div>
 );
 
 const SubstitutionRow = (substitutionEvent: TimelineEvent) => (
   <div className="substitution-row" key={substitutionEvent.Id}>
     {substitutionEvent.MatchTime}
     <span>
-      {PlayerRow(substitutionEvent.PlayerOut, SubstitutionType.Out)}
       {PlayerRow(substitutionEvent.PlayerOut, SubstitutionType.In)}
+      {PlayerRow(substitutionEvent.PlayerOut, SubstitutionType.Out)}
     </span>
   </div>
 );
