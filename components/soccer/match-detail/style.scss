@@ -74,12 +74,22 @@
 }
 
 //////////   line-ups   ////////////
+.pitch-wrapper {  
+  height: 18.9rem;
+  position: relative;
+  .mobile & {
+    height: unset;
+  }
+}
 .pitch-view {
   .left & {
     clip-path: inset(0 0 50% 0);
   }
   .right & {
     clip-path: inset(50% 0 0 0);
+    position: absolute;
+    width: 100%;
+    bottom: 0;
   }
 }
 
