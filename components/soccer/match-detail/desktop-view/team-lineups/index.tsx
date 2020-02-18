@@ -23,7 +23,6 @@ export default function TeamLineUps(props: Props) {
       ) : (
           <StartingLineups lineUps={props.lineUps.Players} />
         )}
-      <div className="text-uppercase">substitution</div>
       <Substitution substitutionEvents={props.lineUps.SubstitutionEvents} />
       <div className="text-uppercase">substitute players</div>
       <SubstitutePlayers substitutePlayers={props.lineUps.Substitutions} />
