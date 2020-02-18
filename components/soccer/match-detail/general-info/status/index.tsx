@@ -30,7 +30,7 @@ const Status: React.FC<Props> = props => {
         </div>
       )}
       <div className="status">
-        {!isMobile && MatchStatusHelper.isLiveMatch() && <span className="icon-clock"></span>}
+        {!isMobile && MatchStatusHelper.isLiveMatch(match.EventStatus) && <span className="icon-clock"></span>}
         {status}</div>
     </div>
   );

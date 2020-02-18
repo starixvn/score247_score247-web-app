@@ -36,7 +36,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
   async componentDidMount() {
     const matchInfo = await SoccerAPI.GetMatch(this.props.matchId);
     const matchLineUps = await SoccerAPI.GetMatchLineups(this.props.matchId, new Date(matchInfo.Match.EventDate[0]));
-
+    
     if (!matchInfo.TimelineEvents) {
       matchInfo.TimelineEvents = [];
     }
@@ -63,7 +63,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     );
   }
 
-  matchEventHandler = (message: MatchEventSignalRMessage) => {
+  matchEventHandler = async (message: MatchEventSignalRMessage) => {
     const { matchInfo } = this.state;
 
     const matchEvent = message?.MatchEvent;
@@ -73,7 +73,6 @@ class SoccerMatchDetail extends React.Component<Props, State> {
       matchEvent.Timeline &&
       matchInfo?.Match.Id === matchEvent.MatchId
     ) {
-      console.log(message);
       const matchResult = matchEvent.MatchResult;
       const timeline = matchEvent.Timeline;
 
@@ -85,7 +84,9 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
       updateMatchFromEvent(matchInfo.Match, timeline, matchResult);
 
-      this.setState({ matchInfo });
+      const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
+
+      this.setState({ matchInfo, matchLineUps });
     }
   };
 

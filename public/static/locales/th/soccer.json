@@ -1,5 +1,8 @@
 {
-    "matchinfo": "match info",
-    "score": "Score",
-    "first_half": "1H"
+  "matchinfo": "match info",
+  "score": "Score",
+  "first_half": "1H",
+  "substitution": "substitution",
+  "substitute_players": "substitute players",
+  "coach": "coach"
 }
