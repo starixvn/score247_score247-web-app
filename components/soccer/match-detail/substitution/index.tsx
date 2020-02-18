@@ -1,7 +1,7 @@
 import React from "react";
-import { TimelineEvent, Player } from "../../../../../apis/soccer/models";
-import { sortArray } from "../../../../../common/utils/sort";
-import { SubstitutionType } from '../type';
+import { TimelineEvent, Player } from "../../../../apis/soccer/models";
+import { sortArray } from "../../../../common/utils/sort";
+import { SubstitutionType } from './type';
 
 type Props = {
   substitutionEvents: TimelineEvent[];
@@ -23,7 +23,7 @@ const SubstitutionRow = (substitutionEvent: TimelineEvent) => (
   </div>
 );
 
-const SubstitutionDesktopView: React.FC<Props> = (props: Props) => {
+const Substitution: React.FC<Props> = (props: Props) => {
   const sortedSubstitutionEvents = sortArray(props.substitutionEvents, "CreatedTime");
 
   return (
@@ -33,4 +33,4 @@ const SubstitutionDesktopView: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default SubstitutionDesktopView;
+export default Substitution;

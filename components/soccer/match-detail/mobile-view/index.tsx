@@ -8,7 +8,7 @@ import { MatchLineups } from "../../../../apis/soccer/models";
 import PitchView from "../pitch-view";
 import StartingLineups from "../starting-lineups";
 import SubstitutePlayers from "../substitute-players";
-import SubstitutionMobileView from '../substitution/mobile-view';
+import Substitution from '../substitution';
 
 type Props = {
   matchInfo: MatchInfo;
@@ -62,10 +62,8 @@ const Mobile: React.FC<Props> = props => {
                   )}
                 <div>substitutions</div>
                 <div>
-                  <SubstitutionMobileView
-                    homeSubstitutionEvents={props.matchLineUps.Home.SubstitutionEvents}
-                    awaySubstitutionEvents={props.matchLineUps.Away.SubstitutionEvents}
-                  />
+                  <Substitution substitutionEvents={props.matchLineUps.Home.SubstitutionEvents} />
+                  <Substitution substitutionEvents={props.matchLineUps.Away.SubstitutionEvents} />
                 </div>
                 <div>substitute players</div>
                 <div>
