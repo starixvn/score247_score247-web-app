@@ -60,6 +60,9 @@
   display: grid;
   grid-template-columns: 25.5rem 1fr 25.5rem;
   grid-column-gap: 1.2rem;
+  .mobile & {
+    display: flex;
+  }
 }
 
 .mobile .match-detail {

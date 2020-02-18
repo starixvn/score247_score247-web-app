@@ -64,6 +64,29 @@
       vertical-align: middle;
       padding: 1.4rem 1.8rem;
       cursor: pointer;
+      position: relative; 
+      &:before {
+        content: '';
+        height: .2rem;
+        background-color: #E70C12;
+        width: 0;
+        position: absolute;
+        bottom: -1px;
+        left: 0;        
+        transition: width .3s ease-out;
+        .mobile & {
+          height: .1rem;
+        }
+      }
+
+      &.active, &:hover {
+        color: #E70C12;
+        font-weight: bold;
+        &:before {
+          width: 100%;
+        }
+      }
+      
 
       .mobile & {        
         font-size: 0.9rem;
@@ -85,14 +108,15 @@
     text-transform: uppercase;
   }
 
-  .active {
-    color: #E70C12;
-    border-bottom: 2px solid #E70C12;
-    font-weight: bold;
-    .mobile & {
-      border-bottom: 1px solid #E70C12;
-    }
-  }
+ 
+  // .active {
+  //   color: #E70C12;
+  //   border-bottom: 2px solid #E70C12;
+  //   font-weight: bold;
+  //   .mobile & {
+  //     border-bottom: 1px solid #E70C12;
+  //   }
+  // }
 
   .live-score {
     position: relative;
