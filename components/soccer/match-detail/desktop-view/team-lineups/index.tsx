@@ -14,6 +14,10 @@ type Props = {
 export default function TeamLineUps(props: Props) {
   return (
     <>
+    <div>
+      {props.lineUps.Name}
+      <div>{props.lineUps.Formation}</div>
+    </div>
       {props.pitchView ? (
         <PitchView pitchView={props.pitchView} />
       ) : (

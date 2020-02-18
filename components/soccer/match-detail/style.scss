@@ -74,9 +74,13 @@
 }
 
 //////////   line-ups   ////////////
-
-.pitch-view img {
-  width: 25.5rem;
+.pitch-view {
+  .left & {
+    clip-path: inset(0 0 50% 0);
+  }
+  .right & {
+    clip-path: inset(50% 0 0 0);
+  }
 }
 
 .sub-wrapper {

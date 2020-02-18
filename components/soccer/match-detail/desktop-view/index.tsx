@@ -55,9 +55,6 @@ const Desktop: React.FC<Props> = props => {
                   pitchView={props.matchLineUps.PitchView}
                 />
               )}
-              <div className="pitch-view">
-                <img src="/static/images/pitch.svg" alt="pitch"></img>
-              </div>
               <div className="sub-wrapper">
                 <div className="substitution">
                   <div className="sub-title">substitution</div>
@@ -113,9 +110,6 @@ const Desktop: React.FC<Props> = props => {
                   pitchView={props.matchLineUps.PitchView}
                 />
               )}
-              <div className="pitch-view">
-                <img src="/static/images/pitch.svg" alt="pitch"></img>
-              </div>
               <div className="substitution"></div>
               <div className="substittute-player"></div>
               <div className="coach"></div>
