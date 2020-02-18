@@ -2,33 +2,28 @@ import React, { Fragment } from "react";
 import { TimelineEvent, Player } from "../../../../apis/soccer/models";
 import { sortArray } from "../../../../common/utils/sort";
 import { SubstitutionType } from './type';
+import PlayerRow from '../player-row';
+import { EventTypes } from "../../../../common/enums/event-type";
 
 type Props = {
   substitutionEvents: TimelineEvent[];
 };
 
-const PlayerRow = (player: Player, substitutionType: SubstitutionType) => {
-  const className = `player ${substitutionType === SubstitutionType.In ? "player-in" : "player-out"}`;
-  return (
-    <Fragment>
-      <div className={className}>
-        <span>{player.JerseyNumber}</span><span>{player.Name}</span>
-      </div>
-      <div className=""></div>
-    </Fragment>
-  );
-}
+const SubstitutionRow = (substitutionEvent: TimelineEvent) => {
+  const eventStatisticFormatted = { [EventTypes.SUBSTITUTION.value]: 1 };
+  substitutionEvent.PlayerIn.EventStatisticFormatted = substitutionEvent.PlayerIn.EventStatisticFormatted ?? eventStatisticFormatted;
+  substitutionEvent.PlayerOut.EventStatisticFormatted = substitutionEvent.PlayerOut.EventStatisticFormatted ?? eventStatisticFormatted;
 
-const SubstitutionRow = (substitutionEvent: TimelineEvent) => (
-  <div className="subtitution-item sub-line" key={substitutionEvent.Id}>
-    <div className="time">{substitutionEvent.MatchTime}</div>
-    {PlayerRow(substitutionEvent.PlayerIn, SubstitutionType.In)}
-    {PlayerRow(substitutionEvent.PlayerOut, SubstitutionType.Out)}
-  </div>
-);
+  return (
+    <div className="subtitution-item sub-line" key={substitutionEvent.Id}>
+      <div className="time">{substitutionEvent.MatchTime}</div>
+      {PlayerRow({ player: substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: true })}
+      {PlayerRow({ player: substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: false })}
+    </div>);
+};
 
 const Substitution: React.FC<Props> = (props: Props) => {
-  const sortedSubstitutionEvents = sortArray(props.substitutionEvents, "MatchTime", "DESC");
+  const sortedSubstitutionEvents = props.substitutionEvents ? sortArray(props.substitutionEvents, "MatchTime", "DESC") : props.substitutionEvents;
 
   return (
     <>

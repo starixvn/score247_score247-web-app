@@ -10,7 +10,7 @@ type Props = {
 };
 
 const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer = true }) => {
-    const hasSubstitution = player.EventStatisticFormatted[EventTypes.SUBSTITUTION.value];
+    const hasSubstitution = player.EventStatisticFormatted ? player.EventStatisticFormatted[EventTypes.SUBSTITUTION.value] : null;
 
     const renderGoals = () => {
         const normalGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE.value];
@@ -39,7 +39,7 @@ const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer 
         <div className="player-row">
             <div className="event-statistic">
                 {displayScore && renderGoals()}
-                {hasSubstitution && <span className={isMainPlayer ? "sub-out" : "sub-in"}>IN</span>}
+                {hasSubstitution && <span className={isMainPlayer ? "sub-out" : "sub-in"}></span>}
             </div>
             <div><span className="jersey">{player.JerseyNumber}.</span>{player.Name}</div>
         </div>
