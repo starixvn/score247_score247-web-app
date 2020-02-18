@@ -9,6 +9,7 @@ import { MatchEventSignalRMessage } from "../../../apis/soccer/models/signalr-me
 import { DeviceContextConsumer } from "../../../contexts/device-context";
 import { DeviceContextType } from "../../../contexts/device-context-type";
 import { updateMatchFromEvent } from "../../../common/helpers/soccer-match-helper";
+import { EventTypes } from '../../../common/enums/event-type';
 
 const MobileView = dynamic(() => import("./mobile-view"));
 const DesktopView = dynamic(() => import("./desktop-view"));
@@ -84,9 +85,22 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
       updateMatchFromEvent(matchInfo.Match, timeline, matchResult);
 
-      const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
+      const eventTypeToChangeLineUps: number[] = [
+        EventTypes.RED_CARD.value,
+        EventTypes.SCORE_CHANGE.value,
+        EventTypes.SUBSTITUTION.value,
+        EventTypes.YELLOW_CARD.value,
+        EventTypes.YELLOW_RED_CARD.value,
+        EventTypes.SCORE_CHANGE_BY_PENALTY.value,
+        EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value
+      ];
 
-      this.setState({ matchInfo, matchLineUps });
+      if (eventTypeToChangeLineUps.includes(matchEvent.Timeline.Type.Value)) {
+        const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
+        this.setState({ matchInfo, matchLineUps });
+      }
+
+      this.setState({ matchInfo });
     }
   };
 
