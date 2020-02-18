@@ -11,7 +11,7 @@ const PlayerRow = (player: Player, substitutionType: SubstitutionType) => {
   const className = `player ${substitutionType === SubstitutionType.In ? "player-in" : "player-out"}`;
   return (
     <Fragment>
-      <div className="player player-in">
+      <div className={className}>
         <span>{player.JerseyNumber}</span><span>{player.Name}</span>
       </div>
       <div className=""></div>
@@ -28,13 +28,12 @@ const SubstitutionRow = (substitutionEvent: TimelineEvent) => (
 );
 
 const Substitution: React.FC<Props> = (props: Props) => {
-  const sortedSubstitutionEvents = props.substitutionEvents;
+  const sortedSubstitutionEvents = sortArray(props.substitutionEvents, "MatchTime", "DESC");
 
   return (
-    <div className="substitution">
-      <div className="sub-title">substitution</div>
+    <>
       {sortedSubstitutionEvents?.map(event => SubstitutionRow(event))}
-    </div>
+    </>
   );
 };
 

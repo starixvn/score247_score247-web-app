@@ -98,7 +98,6 @@ const Desktop: React.FC<Props> = props => {
                   />
                 )}
               </div>
-              <div className="substitution"></div>
               <div className="substittute-player"></div>
               <div className="coach"></div>
             </div>
