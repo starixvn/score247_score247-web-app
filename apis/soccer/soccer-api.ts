@@ -43,7 +43,7 @@ export const SoccerAPI = {
   },
 
   GetMatchLineups: async (matchId: string | string[], eventDate: Date, language = "en-US"): Promise<MatchLineups> => {
-    const response = await API.get(`${appSettings.soccerAPIBaseUrl}/${language}/matches/${matchId}/lineups?eventDate=${eventDate}`);
+    const response = await API.get(`${appSettings.soccerAPIBaseUrl}/${language}/matches/${matchId}/lineups?eventDate=${covertToUTC(eventDate)}&useNewFormat=${true}`);
 
     return response.data;
   },

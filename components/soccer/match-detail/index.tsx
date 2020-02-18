@@ -35,13 +35,14 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
   async componentDidMount() {
     const matchInfo = await SoccerAPI.GetMatch(this.props.matchId);
-    //const matchLineUps = await SoccerAPI.GetMatchLineups(this.props.matchId, new Date());
-    if(!matchInfo.TimelineEvents) {
+    const matchLineUps = await SoccerAPI.GetMatchLineups(this.props.matchId, new Date(matchInfo.Match.EventDate[0]));
+    console.log(matchLineUps);
+    if (!matchInfo.TimelineEvents) {
       matchInfo.TimelineEvents = [];
     }
 
     this.setupSignalClient();
-    this.setState({ matchInfo });
+    this.setState({ matchInfo, matchLineUps });
   }
 
   setupSignalClient() {
@@ -93,7 +94,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
       if (value.isMobile) {
         return <MobileView matchInfo={this.state.matchInfo} matchLineUps={this.state.matchLineUps} />;
       }
-      return <DesktopView matchInfo={this.state.matchInfo}  matchLineUps={this.state.matchLineUps} />;
+      return <DesktopView matchInfo={this.state.matchInfo} matchLineUps={this.state.matchLineUps} />;
     }
 
     return null;
