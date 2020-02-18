@@ -33,9 +33,9 @@ const Mobile: React.FC<Props> = props => {
         >
           <TabPanel>This is Info Page</TabPanel>
           <TabPanel forceRender={true}>
-          <div className="info-tab">
-            <BallTracker matchId={props.matchInfo.Match.Id} />
-          </div>
+            <div className="info-tab">
+              <BallTracker matchId={props.matchInfo.Match.Id} />
+            </div>
           </TabPanel>
           <TabPanel>This is Stats page</TabPanel>
           <TabPanel>This is Line-ups page</TabPanel>

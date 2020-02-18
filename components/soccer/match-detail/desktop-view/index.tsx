@@ -5,7 +5,7 @@ import GeneralInfo from "../general-info";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Advertisement from "../../../common/advertisement";
 import { MatchLineups } from "../../../../apis/soccer/models";
-import TeamLineUps from "./team-line-ups";
+import TeamLineUps from "./team-lineups";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -50,13 +50,19 @@ const Desktop: React.FC<Props> = props => {
           <div className="info-tab">
             <div className="left-section">
               {props.matchLineUps && (
-                <TeamLineUps lineUps={props.matchLineUps.Home} />
+                <TeamLineUps
+                  lineUps={props.matchLineUps.Home}
+                  pitchView={props.matchLineUps.PitchView}
+                />
               )}
             </div>
             <BallTracker matchId={props.matchInfo.Match.Id} />
             <div className="right-section">
               {props.matchLineUps && (
-                <TeamLineUps lineUps={props.matchLineUps.Away} />
+                <TeamLineUps
+                  lineUps={props.matchLineUps.Away}
+                  pitchView={props.matchLineUps.PitchView}
+                />
               )}
             </div>
           </div>
