@@ -4,6 +4,7 @@
     display: inline-block;
 
     .react-datepicker {
+      font-family: 'Roboto', sans-serif;
       font-size: 1.4rem;
       border: 0;
       box-shadow: 0 0 0.5rem 0 #d7d7d7;
@@ -51,6 +52,10 @@
       font-size: 1.6rem;
       color: #E6292E;
       font-weight: normal;
+    }
+
+    .react-datepicker__day--outside-month {
+      color: #CACACD;
     }
 
     .react-datepicker__navigation {

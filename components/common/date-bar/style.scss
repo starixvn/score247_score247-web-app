@@ -87,10 +87,10 @@
 
   .active {
     color: #E70C12;
-    border-bottom: 0.2rem solid #E70C12;
+    border-bottom: 2px solid #E70C12;
     font-weight: bold;
     .mobile & {
-      border-bottom: 0.1rem solid #E70C12;
+      border-bottom: 1px solid #E70C12;
     }
   }
 
