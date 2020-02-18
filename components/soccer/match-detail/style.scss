@@ -25,7 +25,7 @@
     flex-wrap: wrap;
     width: 100%;
     .mobile & {
-      background-color: #fff;
+      background-color: #F8F9FC;
     }
   }
   .react-tabs__tab {
@@ -49,7 +49,7 @@
     background-color: #122344;
     border-bottom: 1px solid #e70c12;
     .mobile & {
-      background-color: #fff;
+      background-color: #F8F9FC;
       color: #ff7d00;
       border-bottom: 2px solid #ff7d00;
     }
@@ -81,10 +81,13 @@
   height: 18.9rem;
   position: relative;
   .mobile & {
-    height: unset;
+    height: initial;
   }
 }
 .pitch-view {
+  .mobile & {
+    clip-path: inset(10px 10px 10px 10px);
+  }
   .left & {
     clip-path: inset(0 0 50% 0);
   }
