@@ -30,8 +30,8 @@ const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer 
 
             return (
                 <>
-                    <span className="icon-goal">Goal: {totalGoals}</span>
-                    {ownGoals && <span className="icon-own-goal">Own Goal: {ownGoals}</span>}
+                    <span className="icon-goal"></span>
+                    {ownGoals && <span className="icon-own-goal"></span>}
                 </>
             );
         }
@@ -42,9 +42,8 @@ const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer 
     return (
         <div className="player-row">
             <div className="event-statistic">
-                {/* {displayScore && renderGoals()}
-                {hasSubstitution && <span className={isMainPlayer ? "sub-out" : "sub-in"}></span>} */}
-                <span className="icon-goal"></span><span className="icon-own-goal"></span><span className="icon-out"></span>
+                {displayScore && renderGoals()}
+                {hasSubstitution && <span className={isMainPlayer ? "icon-out" : "icon-in"}></span>}
             </div>
             <div><span className="jersey">{player.JerseyNumber}. </span>{player.Name}</div>
         </div>
