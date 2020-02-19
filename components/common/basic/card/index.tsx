@@ -7,13 +7,15 @@ type Props = {
     titleIcon?: string;
 };
 
-const Card: React.FC<Props> = ({ children, className = "", title = "", titleIcon = null }) => {
+const Card: React.FC<Props> = ({ children, title, titleIcon, className = "" }) => {
     return (
         <div className={`card ${className}`}>
-            <div className="card-title">
-                {titleIcon && <span className={titleIcon}></span>}
-                {title}
-            </div>
+            {title && (
+                <div className="card-title">
+                    {titleIcon && <span className={titleIcon}></span>}
+                    {title}
+                </div>)
+            }
             <div className="card-body">{children}</div>
         </div>
     );

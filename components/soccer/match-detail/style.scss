@@ -4,11 +4,14 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.8rem;
+
   [class*="banner"] {
     padding: 0 0.4rem;
+
     &:first-child {
       padding-left: 0;
     }
+
     &:last-child {
       padding-right: 0;
     }
@@ -24,10 +27,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+
     .mobile & {
       background-color: #F8F9FC;
     }
   }
+
   .react-tabs__tab {
     border: none;
     bottom: 0;
@@ -39,15 +44,18 @@
     max-width: 100%;
     text-align: center;
     padding: 1rem 0 1.1rem;
+
     .mobile & {
       font-size: 1.2rem;
       color: #000;
     }
   }
+
   .react-tabs__tab--selected {
     border-radius: 0;
     background-color: #122344;
     border-bottom: 1px solid #e70c12;
+
     .mobile & {
       background-color: #F8F9FC;
       color: #ff7d00;
@@ -60,6 +68,7 @@
   display: grid;
   grid-template-columns: 32rem 1fr 32rem;
   grid-column-gap: 1.2rem;
+
   .mobile & {
     display: flex;
   }
@@ -69,7 +78,7 @@
   width: 100%;
 }
 
-.ball-tracker {  
+.ball-tracker {
 
   .mobile & {
     width: 100%;
@@ -77,17 +86,20 @@
 }
 
 //////////   line-ups   ////////////
-.pitch-wrapper {  
+.pitch-wrapper {
   height: 23.7rem;
   position: relative;
+
   .mobile & {
     height: initial;
   }
 }
+
 .pitch-view {
   .left & {
     clip-path: inset(0 0 50% 0);
   }
+
   .right & {
     clip-path: inset(50% 0 0 0);
     position: absolute;
@@ -97,16 +109,18 @@
 }
 
 .sub-wrapper {
-  .sub-title  {
+  .sub-title {
     text-transform: uppercase;
     padding: 1.2rem;
     border-bottom: 1px solid #dedede;
   }
-  .sub-line {      
+
+  .sub-line {
     padding: .8rem 1.2rem;
     border-bottom: 1px solid #dedede;
   }
 }
+
 .subtitution-item {
   display: grid;
   grid-template-columns: 1fr 4rem;
@@ -114,10 +128,12 @@
   justify-items: center;
   align-items: center;
   border-bottom: 1px solid #dedede;
+
   .time {
     grid-column: 2;
     grid-row: 1 / 3;
   }
+
   .player-row {
     justify-self: left;
     padding: .4rem 1.2rem;
@@ -131,45 +147,9 @@
   }
 }
 
-.card {
-  box-shadow: 0 .1rem 0.4rem rgba(0, 0, 0, 0.25);
-  margin-top: 1.2rem;
-
-  .card-title {
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    padding: 0.8rem;
-    border-bottom: 1px solid #DEE2E6;
-    color: #000;
-    font-weight: bold;
-  }
-}
-
 .formation {
   background-color: #4F6B0E;
   color: #fff;
   text-align: center;
   padding: 0.8rem 0;
 }
-
-.team-info {
-  background-color: #4F6B0E;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: .4rem .8rem;
-  .team-name {
-    text-transform: uppercase;
-  }
-  &.away {
-    position: relative;
-    top: -.4rem;
-  }
-}
-
-.line-ups-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-} 
-

@@ -1,3 +1,4 @@
+import "./style.scss";
 import React, { useState } from "react";
 import GeneralInfo from "../general-info";
 import BallTracker from "../ball-tracker";
@@ -46,28 +47,28 @@ const Mobile: React.FC<Props> = props => {
           <TabPanel>
             {props.matchLineUps && (
               <>
-                <Card>
-                  {props.matchLineUps.PitchView
-                    ? (<>
-                      <div className="team-info">
-                        <span className="team-name">{props.matchLineUps.Home.Name}</span>
-                        <span className="formation">{props.matchLineUps.Home.Formation}</span>
-                      </div>
-                      <PitchView pitchView={props.matchLineUps.PitchView} />
-                      <div className="team-info away">
-                        <span className="team-name">{props.matchLineUps.Away.Name}</span>
-                        <span className="formation">{props.matchLineUps.Away.Formation}</span>
-                      </div>
-                    </>
-                    )
-                    : (
+                {props.matchLineUps.PitchView
+                  ? (<Card>
+                    <div className="team-info">
+                      <span className="team-name">{props.matchLineUps.Home.Name}</span>
+                      <span className="formation">{props.matchLineUps.Home.Formation}</span>
+                    </div>
+                    <PitchView pitchView={props.matchLineUps.PitchView} />
+                    <div className="team-info away">
+                      <span className="team-name">{props.matchLineUps.Away.Name}</span>
+                      <span className="formation">{props.matchLineUps.Away.Formation}</span>
+                    </div>
+                  </Card>
+                  )
+                  : (
+                    <Card title={t(SoccerResourceKey.LINE_UPS)}>
                       <div className="line-ups-wrapper">
                         <StartingLineups lineups={props.matchLineUps.Home.Players} />
                         <StartingLineups lineups={props.matchLineUps.Away.Players} />
                       </div>
-                    )
-                  }
-                </Card>
+                    </Card>
+                  )
+                }
                 <Card title={t(SoccerResourceKey.SUBSTITUTION)}>
                   <Substitution substitutionEvents={props.matchLineUps.Home.SubstitutionEvents} />
                   <Substitution substitutionEvents={props.matchLineUps.Away.SubstitutionEvents} />

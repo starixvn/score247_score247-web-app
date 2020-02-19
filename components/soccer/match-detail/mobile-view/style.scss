@@ -1,0 +1,22 @@
+.team-info {
+    background-color: #4F6B0E;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .4rem .8rem;
+
+    .team-name {
+        text-transform: uppercase;
+    }
+
+    &.away {
+        position: relative;
+        top: -.4rem;
+    }
+}
+
+.line-ups-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

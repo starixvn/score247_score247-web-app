@@ -1,0 +1,13 @@
+.card {
+    box-shadow: 0 .1rem 0.4rem rgba(0, 0, 0, 0.25);
+    margin-top: 1.2rem;
+
+    .card-title {
+        text-transform: uppercase;
+        font-size: 1.4rem;
+        padding: 0.8rem;
+        border-bottom: 1px solid #DEE2E6;
+        color: #000;
+        font-weight: bold;
+    }
+}
