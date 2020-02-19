@@ -1,0 +1,1 @@
+call pybot -e NoRun --outputdir "%~dp0\Report" "%~dp0\Test_Module\S01_Desktop_Layout.txt"

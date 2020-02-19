@@ -1,0 +1,47 @@
+*** Settings ***
+Library           Selenium2Library
+Library           OperatingSystem
+Library           Screenshot
+Library           Collections
+Library           String
+Library           Dialogs
+Library           Process
+Library           ExcelLibrary
+Resource          ../Actions/CreateDataTool.txt
+Resource          ../Actions/CommonAction.txt
+Resource          ../Actions/ViewMatchInfo_Desktop.txt
+Resource          ../Actions/CheckLiveMatch.txt
+
+*** Test Cases ***
+Verify LeaguesCode
+    Verify LeaguesCode    1
+
+01 Test
+    test
+
+Post Match - Postponed Match
+    Verify Postponed Match
+
+Post Match - start_delayed Match
+    Verify start_delayed Match
+
+Post Match - cancel Match
+    Verify cancel Match
+
+Post Match - abandoned Match
+    Verify abandoned Match
+
+Post Match - interrupted Match
+    Verify interrupted Match
+
+01 Live Match - Score Change
+    Verify Score Change
+
+02 Live Match - Card Event
+    Verify Card Event
+
+03 Live Match - Injuty Time
+    Verify Injuty Time
+
+04 Live Match - 1H Break Time - 2H
+    Verify 1H Break Start
