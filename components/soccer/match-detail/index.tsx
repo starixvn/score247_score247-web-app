@@ -25,6 +25,16 @@ type State = {
 };
 
 class SoccerMatchDetail extends React.Component<Props, State> {
+  eventTypeToChangeLineUps: number[] = [
+    EventTypes.RED_CARD.value,
+    EventTypes.SCORE_CHANGE.value,
+    EventTypes.SUBSTITUTION.value,
+    EventTypes.YELLOW_CARD.value,
+    EventTypes.YELLOW_RED_CARD.value,
+    EventTypes.SCORE_CHANGE_BY_PENALTY.value,
+    EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value
+  ];
+
   constructor(props: Props) {
     super(props);
 
@@ -85,22 +95,12 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
       updateMatchFromEvent(matchInfo.Match, timeline, matchResult);
 
-      const eventTypeToChangeLineUps: number[] = [
-        EventTypes.RED_CARD.value,
-        EventTypes.SCORE_CHANGE.value,
-        EventTypes.SUBSTITUTION.value,
-        EventTypes.YELLOW_CARD.value,
-        EventTypes.YELLOW_RED_CARD.value,
-        EventTypes.SCORE_CHANGE_BY_PENALTY.value,
-        EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value
-      ];
-
-      if (eventTypeToChangeLineUps.includes(matchEvent.Timeline.Type.Value)) {
+      if (this.eventTypeToChangeLineUps.includes(matchEvent.Timeline.Type.Value)) {
         const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
         this.setState({ matchInfo, matchLineUps });
+      } else {
+        this.setState({ matchInfo });
       }
-
-      this.setState({ matchInfo });
     }
   };
 
