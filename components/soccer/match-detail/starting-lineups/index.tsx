@@ -3,15 +3,15 @@ import { Player } from "../../../../apis/soccer/models";
 import PlayerRow from "../player-row";
 
 type Props = {
-  lineUps: Player[];
+  lineups: Player[];
 };
 
 export default function StartingLineups(props: Props) {
-  const { lineUps } = props;
+  const { lineups } = props;
   return (
     <div className="line-ups">
       {
-        lineUps.map(player => <PlayerRow player={player} key={player.Id} isMainPlayer={true} />)
+        lineups.map(player => <PlayerRow player={player} key={player.Id} isMainPlayer={true} />)
       }
     </div>
   );

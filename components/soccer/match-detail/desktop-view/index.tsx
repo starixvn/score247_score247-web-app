@@ -50,14 +50,14 @@ const Desktop: React.FC<Props> = props => {
         <TabPanel forceRender={true}>
           <div className="info-tab">
             <div className="line-ups left">
-              {props.matchLineUps && (<TeamLineUps lineUps={props.matchLineUps.Home} pitchView={props.matchLineUps.PitchView} />)}
+              {props.matchLineUps && (<TeamLineUps lineups={props.matchLineUps.Home} pitchView={props.matchLineUps.PitchView} />)}
             </div>
             <div className="center">
               <BallTracker matchId={props.matchInfo.Match.Id} />
               <OtherInfo matchInfo={props.matchInfo} />
             </div>
             <div className="line-ups right">
-              {props.matchLineUps && (<TeamLineUps lineUps={props.matchLineUps.Away} pitchView={props.matchLineUps.PitchView} />)}
+              {props.matchLineUps && (<TeamLineUps lineups={props.matchLineUps.Away} pitchView={props.matchLineUps.PitchView} />)}
             </div>
           </div>
         </TabPanel>

@@ -52,10 +52,10 @@ const Mobile: React.FC<Props> = props => {
                       <div>line-ups</div>
                       <div>
                         <StartingLineups
-                          lineUps={props.matchLineUps.Home.Players}
+                          lineups={props.matchLineUps.Home.Players}
                         />
                         <StartingLineups
-                          lineUps={props.matchLineUps.Away.Players}
+                          lineups={props.matchLineUps.Away.Players}
                         />
                       </div>
                     </>
