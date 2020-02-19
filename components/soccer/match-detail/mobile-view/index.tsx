@@ -9,6 +9,10 @@ import PitchView from "../pitch-view";
 import StartingLineups from "../starting-lineups";
 import SubstitutePlayers from "../substitute-players";
 import Substitution from '../substitution';
+import Card from "../../../common/basic/card";
+import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
+import { useTranslation } from "react-i18next";
+import TeamCoach from "../coach";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -16,8 +20,9 @@ type Props = {
 };
 
 const Mobile: React.FC<Props> = props => {
+  const { t } = useTranslation(ResourceType.SOCCER);
   const [selectedTabIndex, setTab] = useState(0);
-  console.log(props.matchLineUps)
+
   return (
     <>
       <GeneralInfo match={props.matchInfo.Match} />
@@ -30,11 +35,7 @@ const Mobile: React.FC<Props> = props => {
           <Tab>H2H</Tab>
           <Tab>Table</Tab>
         </TabList>
-        <SwipeableViews
-          index={selectedTabIndex}
-          onChangeIndex={setTab}
-          enableMouseEvents
-        >
+        <SwipeableViews index={selectedTabIndex} onChangeIndex={setTab} enableMouseEvents>
           <TabPanel>This is Info Page</TabPanel>
           <TabPanel forceRender={true}>
             <div className="info-tab">
@@ -45,35 +46,29 @@ const Mobile: React.FC<Props> = props => {
           <TabPanel>
             {props.matchLineUps && (
               <>
-                {props.matchLineUps.PitchView ? (
-                  <PitchView pitchView={props.matchLineUps.PitchView} />
-                ) : (
-                    <>
-                      <div>line-ups</div>
-                      <div>
-                        <StartingLineups
-                          lineups={props.matchLineUps.Home.Players}
-                        />
-                        <StartingLineups
-                          lineups={props.matchLineUps.Away.Players}
-                        />
-                      </div>
-                    </>
-                  )}
-                <div>substitutions</div>
-                <div>
+                <Card>
+                  {props.matchLineUps.PitchView
+                    ? (<PitchView pitchView={props.matchLineUps.PitchView} />)
+                    : (
+                      <>
+                        <StartingLineups lineups={props.matchLineUps.Home.Players} />
+                        <StartingLineups lineups={props.matchLineUps.Away.Players} />
+                      </>
+                    )
+                  }
+                </Card>
+                <Card title={t(SoccerResourceKey.SUBSTITUTION)}>
                   <Substitution substitutionEvents={props.matchLineUps.Home.SubstitutionEvents} />
                   <Substitution substitutionEvents={props.matchLineUps.Away.SubstitutionEvents} />
-                </div>
-                <div>substitute players</div>
-                <div>
-                  <div className="home-substitution">
-                    <SubstitutePlayers substitutePlayers={props.matchLineUps.Home.Substitutions} />
-                  </div>
-                  <div className="away-substitution">
-                    <SubstitutePlayers substitutePlayers={props.matchLineUps.Away.Substitutions} />
-                  </div>
-                </div>
+                </Card>
+                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)}>
+                  <SubstitutePlayers substitutePlayers={props.matchLineUps.Home.Substitutions} />
+                  <SubstitutePlayers substitutePlayers={props.matchLineUps.Away.Substitutions} />
+                </Card>
+                <Card title={t(SoccerResourceKey.COACH)}>
+                  <TeamCoach coach={props.matchLineUps.Home.Coach} />
+                  <TeamCoach coach={props.matchLineUps.Away.Coach} />
+                </Card>
               </>
             )}
           </TabPanel>
