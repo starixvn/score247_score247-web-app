@@ -1,13 +1,17 @@
-import React, { Fragment } from "react";
-import { TimelineEvent, Player } from "../../../../apis/soccer/models";
+import React from "react";
+import { TimelineEvent } from "../../../../apis/soccer/models";
 import { sortArray } from "../../../../common/utils/sort";
-import { SubstitutionType } from './type';
 import PlayerRow from '../player-row';
 import { EventTypes } from "../../../../common/enums/event-type";
 
 type Props = {
   substitutionEvents: TimelineEvent[];
 };
+
+const BuildMatchTime = (timelineEvent: TimelineEvent) =>
+  !timelineEvent.StoppageTime
+    ? `${timelineEvent.MatchTime}'`
+    : `${timelineEvent.MatchTime}'+${timelineEvent.StoppageTime}'`;
 
 const SubstitutionRow = (substitutionEvent: TimelineEvent) => {
   const eventStatisticFormatted = { [EventTypes.SUBSTITUTION.value]: 1 };
@@ -16,7 +20,7 @@ const SubstitutionRow = (substitutionEvent: TimelineEvent) => {
 
   return (
     <div className="subtitution-item sub-line" key={substitutionEvent.Id}>
-      <div className="time">{substitutionEvent.MatchTime}</div>
+      <div className="time">{BuildMatchTime(substitutionEvent)}</div>
       {PlayerRow({ player: substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: true })}
       {PlayerRow({ player: substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: false })}
     </div>);
