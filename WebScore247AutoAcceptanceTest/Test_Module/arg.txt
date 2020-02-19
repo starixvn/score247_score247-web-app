@@ -1,0 +1,22 @@
+--outputdir
+c:\users\mike.vu\appdata\local\temp\RIDE5qee3u.d
+-C
+off
+-W
+174
+--suite
+247.Test Module.S01 Desktop Layout
+--test
+247.Test Module.S01 Desktop Layout.Date_bar
+--suite
+247.Test Module.S01 Desktop Layout
+--test
+247.Test Module.S01 Desktop Layout.Function_bar
+--suite
+247.Test Module.S01 Desktop Layout
+--test
+247.Test Module.S01 Desktop Layout.Header
+--suite
+247.Test Module.S01 Desktop Layout
+--test
+247.Test Module.S01 Desktop Layout.Breadcrumbs

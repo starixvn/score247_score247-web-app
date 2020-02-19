@@ -43,26 +43,5 @@ Post Match - interrupted Match
 03 Live Match - Injuty Time
     Verify Injuty Time
 
-04 Live Match - 1H Break Time
+04 Live Match - 1H Break Time - 2H
     Verify 1H Break Start
-
-05 Live Match - Start 2H - Score change
-    Verify 2nd Period Start
-
-06 Live Match - Injury 2nd
-    Verify Injury 2nd
-
-07 Live Match - Awaiting Extra Time
-    Verify Break Awaiting Extra Time
-
-08 Live Match - Break 1st Ext and Start 2nd Ext
-    Verify Break Extra Time - 2nd Period Extra Time Start
-
-09 Live Match - Break 2nd Ext and Start PEN
-    Verify Break Awaiting Penalty - penalty_start
-
-08 Live Match - Match End Normal
-    Verify match_end_normal
-
-09 Live Match - Match End Aggregate
-    Verify match_end_Aggregate

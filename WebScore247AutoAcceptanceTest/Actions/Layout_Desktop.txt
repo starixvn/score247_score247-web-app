@@ -1,5 +1,5 @@
 *** Settings ***
-Library           Selenium2Library    run_on_failure=Selenium2Library.CapturePageScreenshot
+Library           Selenium2Library
 Library           DateTime
 Resource          ../Interfaces/Desktop/01_Layout/Header_Web.txt
 Resource          ../Interfaces/Desktop/01_Layout/Function_Bar_Web.txt

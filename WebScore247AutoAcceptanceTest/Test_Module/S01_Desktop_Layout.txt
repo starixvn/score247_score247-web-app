@@ -1,16 +1,15 @@
 *** Settings ***
-Library           AppiumLibrary    run_on_failure=Nothing
+Library           Selenium2Library
 Library           OperatingSystem
+Library           AppiumLibrary
 Library           Screenshot
 Library           Collections
-Library           Screenshot
 Library           String
 Library           Dialogs
 Library           Process
 Resource          ../Actions/Layout_Desktop.txt
 Resource          ../Actions/CommonAction.txt
 Library           ExcelLibrary
-Library           Selenium2Library    run_on_failure=Selenium2Library.CapturePageScreenshot
 
 *** Test Cases ***
 Header
@@ -18,6 +17,7 @@ Header
     #sleep    3s
     Assert Header
     sleep    3s
+    [Teardown]    Close Browser
 
 Function_bar
     Open Home page
