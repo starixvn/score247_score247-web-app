@@ -40,8 +40,8 @@ class BallTracker extends React.Component<Props, State> {
       <div className={this.state.isBallTrackerCollapsed ? "display-none" : ""}>
         <SportRadarWidget
           matchId={this.props.matchId}
-          widgetId="sr-widget"
-          widgetName="match.lmt"
+          widgetId="widget-ball-tracker"
+          widgetName="match.lmtPlus"
         />
       </div>
     );
