@@ -11,7 +11,7 @@ export default function SubstitutePlayers(props: Props) {
   return (
     <div className="sub-players">
       {
-        substitutePlayers.map(sub => <PlayerRow player={sub} isMainPlayer={false} />)
+        substitutePlayers.map(sub => <PlayerRow player={sub} isMainPlayer={false} key={sub.Id} />)
       }
     </div>
   );
