@@ -13,6 +13,42 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.icon-arrow-down1:before {
+    content: "\e916";
+    color: #f00;
+}
+.icon-arrow-up:before {
+    content: "\e917";
+    color: #00c500;
+}
+.icon-goal-pen:before {
+    content: "\e918";
+}
+.icon-account:before {
+    content: "\e914";
+}
+.icon-goal:before {
+    content: "\e915";
+}
+.icon-in:before {
+    content: "\e919";
+    color: #00c500;
+}
+.icon-out:before {
+    content: "\e91a";
+    color: #f00;
+}
+.icon-own-goal:before {
+    content: "\e91b";
+    color: #f00;
+}
+.icon-substitute-player:before {
+    content: "\e91c";
+}
+.icon-tracker:before {
+    content: "\e921";
+}
+
 .icon-clock:before {
     content: "\e913";
 }
@@ -82,7 +118,6 @@
 
 .icon-menu-tv:before {
     content: "\e905";
-    color: #fff;
 }
 
 .icon-menu-favorites:before {
@@ -91,10 +126,8 @@
 
 .icon-menu-leagues:before {
     content: "\e908";
-    color: #fff;
 }
 
 .icon-menu-news:before {
     content: "\e909";
-    color: #fff;
 }
