@@ -32,7 +32,8 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     EventTypes.YELLOW_CARD.value,
     EventTypes.YELLOW_RED_CARD.value,
     EventTypes.SCORE_CHANGE_BY_PENALTY.value,
-    EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value
+    EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value,
+    EventTypes.MATCH_STARTED.value
   ];
 
   constructor(props: Props) {

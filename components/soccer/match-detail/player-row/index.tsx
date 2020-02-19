@@ -45,7 +45,7 @@ const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer 
                 {displayScore && renderGoals()}
                 {hasSubstitution && <span className={isMainPlayer ? "sub-out" : "sub-in"}></span>}
             </div>
-            <div><span className="jersey">{player.JerseyNumber}.</span>{player.Name}</div>
+            <div><span className="jersey">{player.JerseyNumber}. </span>{player.Name}</div>
         </div>
     );
 };
