@@ -45,7 +45,7 @@ const Mobile: React.FC<Props> = props => {
           </TabPanel>
           <TabPanel>This is Stats page</TabPanel>
           <TabPanel>
-            {props.matchLineUps && (
+            {props.matchLineUps?.Id && (
               <>
                 {props.matchLineUps.PitchView
                   ? (<Card>
