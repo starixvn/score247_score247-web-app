@@ -20,13 +20,13 @@ export default function TeamLineUps(props: Props) {
 
   return (
     <>
-      <div>
-        {props.lineups.Name}
-        <div>{props.lineups.Formation}</div>
-      </div>
-      <Card>
-        {props.pitchView ? <PitchView pitchView={pitchView} /> : <StartingLineups lineups={lineups.Players} />}
-      </Card>
+      <div className="card pitch-view-team">
+        <div className="card-title team-name">
+          {props.lineUps.Name}          
+        </div>
+        <div className="formation">{props.lineUps.Formation}</div>
+        {props.pitchView ? <PitchView pitchView={pitchView} /> : <StartingLineups lineUps={lineUps.Players} />}
+      </div>     
       <Card title={t(SoccerResourceKey.SUBSTITUTION)}>
         <Substitution substitutionEvents={lineups.SubstitutionEvents} />
       </Card>

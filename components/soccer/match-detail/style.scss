@@ -58,7 +58,7 @@
 
 .info-tab {
   display: grid;
-  grid-template-columns: 25.5rem 1fr 25.5rem;
+  grid-template-columns: 32rem 1fr 32rem;
   grid-column-gap: 1.2rem;
   .mobile & {
     display: flex;
@@ -78,7 +78,7 @@
 
 //////////   line-ups   ////////////
 .pitch-wrapper {  
-  height: 18.9rem;
+  height: 23.7rem;
   position: relative;
   .mobile & {
     height: initial;
@@ -131,5 +131,21 @@
     display: flex;
     justify-content: space-between;
   }
+}
+
+.card {
+  box-shadow: 0 .1rem 0.4rem rgba(0, 0, 0, 0.25);
+  .card-title {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    padding: 0.8rem;
+  }
+}
+
+.formation {
+  background-color: #4F6B0E;
+  color: #fff;
+  text-align: center;
+  padding: 0.8rem 0;
 }
 
