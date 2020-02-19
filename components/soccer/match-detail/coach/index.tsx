@@ -6,5 +6,5 @@ type Props = {
 };
 
 export default function TeamCoach(props: Props) {
-  return <div className="coach">{props.coach.Name}</div>;
+  return <div className="player-row">{props.coach.Name}</div>;
 }

@@ -19,10 +19,10 @@ const SubstitutionRow = (substitutionEvent: TimelineEvent) => {
   substitutionEvent.PlayerOut.EventStatisticFormatted = substitutionEvent.PlayerOut.EventStatisticFormatted ?? eventStatisticFormatted;
 
   return (
-    <div className="subtitution-item sub-line" key={substitutionEvent.Id}>
-      <div className="time">{BuildMatchTime(substitutionEvent)}</div>
+    <div className="subtitution-item" key={substitutionEvent.Id}>      
       {PlayerRow({ player: substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: true })}
       {PlayerRow({ player: substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: false })}
+      <div className="time">{BuildMatchTime(substitutionEvent)}</div>
     </div>);
 };
 
