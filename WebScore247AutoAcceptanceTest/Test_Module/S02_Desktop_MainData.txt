@@ -17,7 +17,7 @@ Verify LeaguesCode
     Verify LeaguesCode    1
 
 01 Test
-    test
+    Test001
 
 Post Match - Postponed Match
     Verify Postponed Match

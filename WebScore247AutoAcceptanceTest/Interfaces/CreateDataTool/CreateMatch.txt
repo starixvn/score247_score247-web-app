@@ -24,9 +24,7 @@ ${InjuryPeriodType}    //*[@id="EventInjuryExtraTimeForm"]//*[@id="eventType"]
 ${InjuryTimeExtra}    //*[@id="EventInjuryExtraTimeForm"]//*[@id="payload_timeline_injury_time_announced"]
 ${Injury_Process}    //*[@id="EventInjuryExtraTimeForm"]/div[2]/button
 @{row}            //*[@id="TimelineTable"]/tbody//td[1]
-${Scenario_ScoreChange}    1611167330
-${Scenario_MatchStart}    1449653725
-${Scenario_CardEvent}    213913853
+${Scenario_MatchStart}    1552157748
 ######
 ${MatchTimeEvent}    //*[@id="matchTimeEventHeading"]/div
 ${MatchStart_Process}    //*[@id="EventInjuryExtraTimeForm"]/div[2]/button
