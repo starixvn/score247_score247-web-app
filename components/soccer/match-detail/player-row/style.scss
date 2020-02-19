@@ -1,6 +1,10 @@
 .player-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: .8rem 1.2rem;
-    border-bottom: 1px solid #dedede;
+    font-size: 1.4rem;
+    .jersey {
+        width: 3rem;
+        display: inline-block;
+    }
 }
