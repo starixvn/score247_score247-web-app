@@ -13,7 +13,7 @@ const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer 
     const hasSubstitution = player.EventStatisticFormatted && player.EventStatisticFormatted[EventTypes.SUBSTITUTION.value];
 
     const renderGoals = () => {
-        if (player.EventStatisticFormatted) {
+        if (!player.EventStatisticFormatted) {
             return null;
         }
 

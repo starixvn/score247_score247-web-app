@@ -7,6 +7,7 @@ import PitchView from "../../pitch-view";
 import Substitution from "../../substitution";
 import { useTranslation } from "../../../../../common/helpers/Localizer";
 import { ResourceType, SoccerResourceKey } from "../../../../../common/resources";
+import Card from "../../../../common/basic/card";
 
 type Props = {
   lineups: TeamLineups;
@@ -23,19 +24,18 @@ export default function TeamLineUps(props: Props) {
         {props.lineups.Name}
         <div>{props.lineups.Formation}</div>
       </div>
-      {props.pitchView ? (
-        <PitchView pitchView={pitchView} />
-      ) : (
-        <StartingLineups lineups={lineups.Players} />
-      )}
-      <div className="sub-wrapper">
-        <div className="sub-title">{t(SoccerResourceKey.SUBSTITUTION)}</div>
+      <Card>
+        {props.pitchView ? <PitchView pitchView={pitchView} /> : <StartingLineups lineups={lineups.Players} />}
+      </Card>
+      <Card title={t(SoccerResourceKey.SUBSTITUTION)}>
         <Substitution substitutionEvents={lineups.SubstitutionEvents} />
-      </div>
-      {t(SoccerResourceKey.SUBSTITUTE_PLAYERS)}
-      <SubstitutePlayers substitutePlayers={lineups.Substitutions} />
-      <div className="text-uppercase">{t(SoccerResourceKey.COACH)}</div>
-      <TeamCoach coach={lineups.Coach} />
+      </Card>
+      <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)}>
+        <SubstitutePlayers substitutePlayers={lineups.Substitutions} />
+      </Card>
+      <Card title={t(SoccerResourceKey.COACH)}>
+        <TeamCoach coach={lineups.Coach} />
+      </Card>
     </>
   );
 }
