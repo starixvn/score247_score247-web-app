@@ -12,7 +12,7 @@ const Card: React.FC<Props> = ({ children, title, titleIcon, className = "" }) =
         <div className={`card ${className}`}>
             {title && (
                 <div className="card-title">
-                    {titleIcon && <span className={titleIcon}></span>}
+                    {titleIcon&& <span className={titleIcon}></span>}
                     {title}
                 </div>)
             }

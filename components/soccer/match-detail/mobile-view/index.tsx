@@ -48,7 +48,7 @@ const Mobile: React.FC<Props> = props => {
             {props.matchLineUps?.Id && (
               <>
                 {props.matchLineUps.PitchView
-                  ? (<Card>
+                  ? (<Card className="pitch-view-team">
                     <div className="team-info">
                       <span className="team-name">{props.matchLineUps.Home.Name}</span>
                       <span className="formation">{props.matchLineUps.Home.Formation}</span>
@@ -69,17 +69,24 @@ const Mobile: React.FC<Props> = props => {
                     </Card>
                   )
                 }
-                <Card title={t(SoccerResourceKey.SUBSTITUTION)}>
-                  <Substitution substitutionEvents={props.matchLineUps.Home.SubstitutionEvents} />
-                  <Substitution substitutionEvents={props.matchLineUps.Away.SubstitutionEvents} />
+                <Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={"icon-substitution"}>
+                  <div className="line-ups-wrapper">
+                    <Substitution substitutionEvents={props.matchLineUps.Home.SubstitutionEvents} />
+                    <Substitution substitutionEvents={props.matchLineUps.Away.SubstitutionEvents} />
+                  </div>
                 </Card>
-                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)}>
-                  <SubstitutePlayers substitutePlayers={props.matchLineUps.Home.Substitutions} />
-                  <SubstitutePlayers substitutePlayers={props.matchLineUps.Away.Substitutions} />
+                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"}>
+                  <div className="line-ups-wrapper">
+                    <SubstitutePlayers substitutePlayers={props.matchLineUps.Home.Substitutions} />
+                    <SubstitutePlayers substitutePlayers={props.matchLineUps.Away.Substitutions} />
+                  </div>
                 </Card>
-                <Card title={t(SoccerResourceKey.COACH)}>
-                  <TeamCoach coach={props.matchLineUps.Home.Coach} />
-                  <TeamCoach coach={props.matchLineUps.Away.Coach} />
+                <Card title={t(SoccerResourceKey.COACH)} titleIcon={"icon-account"}>
+                  <div className="line-ups-wrapper">
+                    <TeamCoach coach={props.matchLineUps.Home.Coach} />
+                    <TeamCoach coach={props.matchLineUps.Away.Coach} />
+                  </div>
+                  
                 </Card>
               </>
             )}

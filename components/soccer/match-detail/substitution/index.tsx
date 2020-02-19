@@ -20,9 +20,9 @@ const SubstitutionRow = (substitutionEvent: TimelineEvent) => {
 
   return (
     <div className="subtitution-item" key={substitutionEvent.Id}>      
-      {PlayerRow({ player: substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: true })}
-      {PlayerRow({ player: substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: false })}
       <div className="time">{BuildMatchTime(substitutionEvent)}</div>
+      {PlayerRow({ player: substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: true })}
+      {PlayerRow({ player: substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: false })}      
     </div>);
 };
 

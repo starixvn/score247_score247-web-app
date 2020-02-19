@@ -3,8 +3,25 @@
     justify-content: flex-start;
     padding: .8rem 1.2rem;
     font-size: 1.4rem;
+    align-items: center;
+    .mobile & {
+        font-size: 1.2rem;
+    }
     .jersey {
-        width: 3rem;
+        width: 2.4rem;
         display: inline-block;
+    }
+    .icon-own-goal:before {
+        font-size: 1.9rem;
+    }
+    .event-statistic {
+        width: 4.6rem;
+        text-align: right;
+    }
+    [class*="icon-"] {
+        margin-right: .2rem;
+        &:last-child {
+            margin-right: .4rem;
+        }
     }
 }
