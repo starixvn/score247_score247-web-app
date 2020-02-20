@@ -1,5 +1,6 @@
 import React from "react";
 import appSetting from "../../../../app-settings";
+import "./style.scss";
 
 type Props = {
     matchId: string,
@@ -17,7 +18,7 @@ class SportRadarWidget extends React.Component<Props> {
             language: 'en'
         });
         SIR('addWidget', '#sr-widget', 'match.lmtPlus', {scoreboard: 'disable', momentum: 'disable',tabsPosition: 'top',matchId: ${this.props.matchId.split(":")[2]}, tabs: {
-            1: ['statistics', 'headToHead', 'timeline', 'standings']
+            1: ['statistics', 'headToHead', 'timeline', 'standings','lineups']
             }});`;
 
         document.body.appendChild(script);
