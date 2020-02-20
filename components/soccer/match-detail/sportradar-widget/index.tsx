@@ -10,9 +10,15 @@ type Props = {
 class SportRadarWidget extends React.Component<Props> {
     componentDidMount() {
         const script = document.createElement("script");
-
-        script.src = `https://widgets.sir.sportradar.com/${appSetting.sportRadarWidgetKey}/widgetloader`;
         script.async = true;
+        script.innerHTML = `(function(a,b,c,d,e,f,g,h,i){a[e]||(i=a[e]=function(){(a[e].q=a[e].q||[]).push(arguments)},i.l=1*new Date,i.o=f,
+        g=b.createElement(c),h=b.getElementsByTagName(c)[0],g.async=1,g.src=d,g.setAttribute("n",e),h.parentNode.insertBefore(g,h)
+        )})(window,document,"script","https://widgets.sir.sportradar.com/${appSetting.sportRadarWidgetKey}/widgetloader","SIR", {
+            language: 'en'
+        });
+        SIR('addWidget', '#sr-widget', 'match.lmtPlus', {scoreboard: 'disable', momentum: 'disable',tabsPosition: 'top',matchId: ${this.props.matchId.split(":")[2]}, tabs: {
+            1: ['statistics', 'headToHead', 'timeline', 'standings']
+            }});`;
 
         document.body.appendChild(script);
     }

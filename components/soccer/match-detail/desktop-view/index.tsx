@@ -7,6 +7,8 @@ import Advertisement from "../../../common/advertisement";
 import { MatchLineups } from "../../../../apis/soccer/models";
 import TeamLineUps from "./team-lineups";
 import OtherInfo from "../other-info";
+import SportRadarWidget from "../sportradar-widget";
+import Card from "../../../common/basic/card";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -36,36 +38,20 @@ const Desktop: React.FC<Props> = props => {
         </div>
       </div>
       <GeneralInfo match={props.matchInfo.Match} />
-
-      <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
-        <div>
-          <TabList>
-            <Tab>Info</Tab>
-            <Tab>Commentary</Tab>
-            <Tab>Statistics</Tab>
-            <Tab>H2H</Tab>
-            <Tab>Table</Tab>
-          </TabList>
+      <div className="info-tab">
+        <div className="line-ups left">
+          {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Home} pitchView={props.matchLineUps.PitchView} />)}
         </div>
-        <TabPanel forceRender={true}>
-          <div className="info-tab">
-            <div className="line-ups left">
-              {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Home} pitchView={props.matchLineUps.PitchView} />)}
-            </div>
-            <div className="center">
-              <BallTracker matchId={props.matchInfo.Match.Id} />
-              <OtherInfo matchInfo={props.matchInfo} />
-            </div>
-            <div className="line-ups right">
-              {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Away} pitchView={props.matchLineUps.PitchView} />)}
-            </div>
-          </div>
-        </TabPanel>
-        <TabPanel>This is Commentary page</TabPanel>
-        <TabPanel>This is Statistics page</TabPanel>
-        <TabPanel>This is H2H page</TabPanel>
-        <TabPanel>This is Table page</TabPanel>
-      </Tabs>
+        <div className="center">
+          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget" widgetName="match.lmtPlus" />
+          <Card title="Match Info">
+            <OtherInfo matchInfo={props.matchInfo} />
+          </Card>
+        </div>
+        <div className="line-ups right">
+          {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Away} pitchView={props.matchLineUps.PitchView} />)}
+        </div>
+      </div>
     </>
   );
 };

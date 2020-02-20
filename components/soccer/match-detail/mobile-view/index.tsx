@@ -14,6 +14,7 @@ import Card from "../../../common/basic/card";
 import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import { useTranslation } from "react-i18next";
 import TeamCoach from "../coach";
+import SportRadarWidget from "../sportradar-widget";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -27,7 +28,8 @@ const Mobile: React.FC<Props> = props => {
   return (
     <>
       <GeneralInfo match={props.matchInfo.Match} />
-      <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
+      <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget" widgetName="match.lmtPlus" />
+      {/* <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
         <TabList>
           <Tab>Info</Tab>
           <Tab>Tracker</Tab>
@@ -86,7 +88,7 @@ const Mobile: React.FC<Props> = props => {
                     <TeamCoach coach={props.matchLineUps.Home.Coach} />
                     <TeamCoach coach={props.matchLineUps.Away.Coach} />
                   </div>
-                  
+
                 </Card>
               </>
             )}
@@ -94,7 +96,7 @@ const Mobile: React.FC<Props> = props => {
           <TabPanel>This is H2H page</TabPanel>
           <TabPanel>This is Table page</TabPanel>
         </SwipeableViews>
-      </Tabs>
+      </Tabs> */}
     </>
   );
 };
