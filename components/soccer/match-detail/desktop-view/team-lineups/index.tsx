@@ -27,13 +27,10 @@ export default function TeamLineUps(props: Props) {
         {lineups.Formation && (
           <div className="formation">{lineups.Formation}</div>
         )}
-        {pitchView ? (
-          <PitchView pitchView={pitchView} />
-        ) : (
-          <StartingLineups lineups={lineups.Players} />
-        )}
+        {pitchView && <PitchView pitchView={pitchView} />}
+        <StartingLineups lineups={lineups.Players} />
       </Card>
-      {lineups.SubstitutionEvents?.some(x=> x) && (
+      {lineups.SubstitutionEvents?.some(x => x) && (
         <Card
           title={t(SoccerResourceKey.SUBSTITUTION)}
           titleIcon="icon-substitute-player"
@@ -41,12 +38,16 @@ export default function TeamLineUps(props: Props) {
           <Substitution substitutionEvents={lineups.SubstitutionEvents} />
         </Card>
       )}
-      {lineups.Substitutions?.some(x=> x) && (
+      {lineups.Substitutions?.some(x => x) && (
         <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)}>
           <SubstitutePlayers substitutePlayers={lineups.Substitutions} />
         </Card>
       )}
-      <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon="icon-account" >
+      <Card
+        className="coach"
+        title={t(SoccerResourceKey.COACH)}
+        titleIcon="icon-account"
+      >
         <TeamCoach coach={lineups.Coach} />
       </Card>
     </>

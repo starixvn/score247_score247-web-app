@@ -75,7 +75,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     );
   }
 
-  matchEventHandler = async (message: MatchEventSignalRMessage) => {
+  matchEventHandler = (message: MatchEventSignalRMessage) => {
     const { matchInfo } = this.state;
 
     const matchEvent = message?.MatchEvent;
@@ -97,8 +97,13 @@ class SoccerMatchDetail extends React.Component<Props, State> {
       updateMatchFromEvent(matchInfo.Match, timeline, matchResult);
 
       if (this.eventTypeToChangeLineUps.includes(matchEvent.Timeline.Type.Value)) {
-        const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
-        this.setState({ matchInfo, matchLineUps });
+        setTimeout(async () => {
+          debugger;
+          const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
+          console.log(message);
+          this.setState({ matchInfo, matchLineUps });
+        }, 5000); //NOSONAR
+       
       } else {
         this.setState({ matchInfo });
       }
