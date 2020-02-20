@@ -100,10 +100,12 @@
 .pitch-view {
   .left & {
     clip-path: inset(0 0 50% 0);
+    -webkit-clip-path: inset(0 0 50% 0);
   }
 
   .right & {
     clip-path: inset(50% 0 0 0);
+    -webkit-clip-path: inset(50% 0 0 0);
     position: absolute;
     width: 100%;
     bottom: 0;
