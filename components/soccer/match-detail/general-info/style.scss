@@ -112,6 +112,9 @@
 
   .reference-info {
     position: absolute;
+    .mobile & {
+      position: unset;
+    }
   }
 
   .home-name,
