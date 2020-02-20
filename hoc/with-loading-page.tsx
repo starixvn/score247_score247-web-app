@@ -29,13 +29,9 @@ const withLoadingPage = <P extends object, IP = P>(
   Wrapper.getInitialProps = async (ctx: NextPageContext) => {
     const loadingUrl = "/loading";
     const isMobile = new DeviceHelper(ctx).isMobile();
-    let viewMode = cookies(ctx)[CookieName.VIEW_MODE];
+    const viewMode = cookies(ctx)[CookieName.VIEW_MODE];
 
     const { res } = ctx;
-
-    if (!viewMode && window.matchMedia("(display-mode: standalone)").matches) {
-      viewMode = ViewMode.MOBILE;
-    }
 
     if (isMobile && !viewMode) {
       if (res) {
