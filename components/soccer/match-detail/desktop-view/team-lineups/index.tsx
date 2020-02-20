@@ -30,7 +30,7 @@ export default function TeamLineUps(props: Props) {
       <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon="icon-substitute-player">
         <SubstitutePlayers substitutePlayers={lineups.Substitutions} />
       </Card>
-      <Card title={t(SoccerResourceKey.COACH)} titleIcon="icon-account">
+      <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon="icon-account" >
         <TeamCoach coach={lineups.Coach} />
       </Card>
     </>

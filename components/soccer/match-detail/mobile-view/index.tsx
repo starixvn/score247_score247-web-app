@@ -81,7 +81,7 @@ const Mobile: React.FC<Props> = props => {
                     <SubstitutePlayers substitutePlayers={props.matchLineUps.Away.Substitutions} />
                   </div>
                 </Card>
-                <Card title={t(SoccerResourceKey.COACH)} titleIcon={"icon-account"}>
+                <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon={"icon-account"}>
                   <div className="line-ups-wrapper">
                     <TeamCoach coach={props.matchLineUps.Home.Coach} />
                     <TeamCoach coach={props.matchLineUps.Away.Coach} />
