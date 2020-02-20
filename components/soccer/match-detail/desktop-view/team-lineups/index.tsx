@@ -6,7 +6,10 @@ import TeamCoach from "../../coach";
 import PitchView from "../../pitch-view";
 import Substitution from "../../substitution";
 import { useTranslation } from "../../../../../common/helpers/Localizer";
-import { ResourceType, SoccerResourceKey } from "../../../../../common/resources";
+import {
+  ResourceType,
+  SoccerResourceKey
+} from "../../../../../common/resources";
 import Card from "../../../../common/basic/card";
 
 type Props = {
@@ -21,16 +24,28 @@ export default function TeamLineUps(props: Props) {
   return (
     <>
       <Card className="pitch-view-team" title={lineups.Name}>
-        {lineups.Formation && <div className="formation">{lineups.Formation}</div>}
-        {pitchView ? <PitchView pitchView={pitchView} /> : <StartingLineups lineups={lineups.Players} />}
+        {lineups.Formation && (
+          <div className="formation">{lineups.Formation}</div>
+        )}
+        {pitchView ? (
+          <PitchView pitchView={pitchView} />
+        ) : (
+          <StartingLineups lineups={lineups.Players} />
+        )}
       </Card>
-      <Card title={t(SoccerResourceKey.SUBSTITUTION)} >
-        <Substitution substitutionEvents={lineups.SubstitutionEvents} />
-      </Card>
-      <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon="icon-substitute-player">
-        <SubstitutePlayers substitutePlayers={lineups.Substitutions} />
-      </Card>
-      <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon="icon-account" >
+      {lineups.SubstitutionEvents?.some(x=> x) && (
+        <Card
+          title={t(SoccerResourceKey.SUBSTITUTION)}
+          titleIcon="icon-substitute-player"
+        >
+          <Substitution substitutionEvents={lineups.SubstitutionEvents} />
+        </Card>
+      )}
+      {lineups.Substitutions?.some(x=> x) && (
+        <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)}>
+          <SubstitutePlayers substitutePlayers={lineups.Substitutions} />
+        </Card>
+      )}
         <TeamCoach coach={lineups.Coach} />
       </Card>
     </>
