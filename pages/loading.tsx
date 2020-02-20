@@ -14,6 +14,7 @@ const LoadingPage: LocalizedPage = props => {
     if(window.matchMedia("(display-mode: standalone)").matches){
         cookie.set(CookieName.VIEW_MODE, ViewMode.MOBILE);
         Router.push("/");
+        return null;
     }
 
     const handleDesktopViewClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
