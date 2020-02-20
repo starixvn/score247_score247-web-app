@@ -26,7 +26,7 @@ const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer 
         return (
             <>
                 {totalGoals > 0 && <span className="icon-goal">{totalGoals > 1 && <span className="total-goal">{totalGoals}</span>}</span>}
-                {ownGoals && <span className="icon-goal own-goal">{ownGoals > 1 && ownGoals}</span>}
+                {ownGoals && <span className="icon-goal own-goal">{ownGoals > 1 && <span className="total-goal">{ownGoals}</span>}</span>}
             </>
         );
 
