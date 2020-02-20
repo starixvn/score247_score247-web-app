@@ -41,6 +41,10 @@
         }
         &.own-goal {
             color: #f00;
+            .total-goal {
+                color: #fff;
+                background-color: #000;
+            }
         }
     }
 }
