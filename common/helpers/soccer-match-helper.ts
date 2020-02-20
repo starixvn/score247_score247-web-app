@@ -63,3 +63,8 @@ function updateInjuryTime(timeline: TimelineEvent, match: MatchSummary) {
     match.InjuryTimeAnnounced = timeline.InjuryTimeAnnounced;
   }
 }
+
+export const BuildEventTime = (timelineEvent: TimelineEvent) =>
+  !timelineEvent.StoppageTime
+    ? `${timelineEvent.MatchTime}'`
+    : `${timelineEvent.MatchTime}'+${timelineEvent.StoppageTime}'`;

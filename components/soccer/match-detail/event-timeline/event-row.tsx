@@ -11,17 +11,22 @@ const EventRow: React.FC<Props> = props => {
     const renderEventRow = (event: TimelineEvent) => {
         switch (event.Type.Value) {
             case EventTypes.SCORE_CHANGE.value:
-            case EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value:
                 return ScoreChangeEventRow(event);
+
             case EventTypes.SUBSTITUTION.value:
                 return SubstitutionEventRow(event);
+
             case EventTypes.RED_CARD.value:
             case EventTypes.YELLOW_CARD.value:
             case EventTypes.YELLOW_RED_CARD.value:
                 return CardEventRow(event);
+
             case EventTypes.PENALTY_MISSED.value:
-            case EventTypes.SCORE_CHANGE_BY_PENALTY.value:
-                return PenaltyEventRow(event);
+                return PenaltyMissedEventRow(event);
+
+            case EventTypes.BREAK_START.value:
+            case EventTypes.MATCH_ENDED.value:
+                return ScoreRow(event);
         }
     };
 
@@ -33,18 +38,18 @@ const EventRow: React.FC<Props> = props => {
 export default EventRow;
 
 const ScoreChangeEventRow = (event: TimelineEvent) => {
-    const goalScorer = event.GoalScorer.Method === SoccerGoalMethod.OWN_GOAL
-        ? <span className="own-scorer">{event.GoalScorer.Name}</span>
-        : (
-            <>
-                <span className="goal-scorer">{event.GoalScorer.Name}</span>
-                {event.Assist && <span className="goal-assist">{event.Assist.Name}</span>}
-            </>
-        )
+    const className = event.GoalScorer.Method === SoccerGoalMethod.OWN_GOAL ?
+        "own-scorer" :
+        event.GoalScorer.Method === SoccerGoalMethod.PENALTY ?
+            "penalty-goal" :
+            "goal-scorer";
 
     return (
         <div className="score-change">
-            {goalScorer}
+            <>
+                <span className={className}>{event.GoalScorer.Name}</span>
+                {event.Assist && <span className="goal-assist">{event.Assist.Name}</span>}
+            </>
         </div>
     );
 };
@@ -55,23 +60,34 @@ const SubstitutionEventRow = (event: TimelineEvent) =>
         <span className="player-out">{event.PlayerOut.Name}</span>
     </div>;
 
-const PenaltyEventRow = (event: TimelineEvent) =>
+const PenaltyMissedEventRow = (event: TimelineEvent) =>
     <div>
-        {
-            event.Type.Value === EventTypes.PENALTY_MISSED.value ?
-                <span className="">{event.Player.Name}</span> :
-                <span className="">{event.GoalScorer.Name}</span>
-        }
+        <span className="missed-penalty">{event.Player.Name}</span>
     </div>;
 
-const CardEventRow = (event: TimelineEvent) =>
-    <div>
-        {
-            event.Type.Value === EventTypes.YELLOW_CARD.value ?
-                <span className="yellow-card">{event.Player.Name}</span> :
-                event.Type.Value === EventTypes.RED_CARD.value ?
-                    <span className="red-card">{event.Player.Name}</span> :
-                    <span className="yellowred-card">{event.Player.Name}</span>
+const CardEventRow = (event: TimelineEvent) => {
+    const className = event.Type.Value === EventTypes.YELLOW_CARD.value ?
+        "yellow-card" :
+        event.Type.Value === EventTypes.RED_CARD.value ?
+            "red-card" :
+            "yellow-red-card";
+    return (
+        <div>
+            <span className={className}></span><span>{event.Player.Name}</span>
+        </div>
+    );
+};
 
-        }
-    </div>;
+const ScoreRow = (event: TimelineEvent) => {
+    const className = event.Type.Value === EventTypes.BREAK_START.value ?
+        "haft-time" :
+        event.Type.Value === EventTypes.MATCH_ENDED.value ?
+            "full-time" :
+            "";
+
+    return (
+        <div>
+            <span className={className}>Break</span>
+        </div>
+    );
+};
