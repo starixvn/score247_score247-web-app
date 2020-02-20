@@ -6,10 +6,7 @@ import TeamCoach from "../../coach";
 import PitchView from "../../pitch-view";
 import Substitution from "../../substitution";
 import { useTranslation } from "../../../../../common/helpers/Localizer";
-import {
-  ResourceType,
-  SoccerResourceKey
-} from "../../../../../common/resources";
+import { ResourceType, SoccerResourceKey } from "../../../../../common/resources";
 import Card from "../../../../common/basic/card";
 
 type Props = {
@@ -24,17 +21,11 @@ export default function TeamLineUps(props: Props) {
   return (
     <>
       <Card className="pitch-view-team" title={lineups.Name}>
-        {lineups.Formation && (
-          <div className="formation">{lineups.Formation}</div>
-        )}
-        {pitchView && <PitchView pitchView={pitchView} />}
-        <StartingLineups lineups={lineups.Players} />
+        {lineups.Formation && (<div className="formation">{lineups.Formation}</div>)}
+        {pitchView ? <PitchView pitchView={pitchView} /> : <StartingLineups lineups={lineups.Players} />}
       </Card>
       {lineups.SubstitutionEvents?.some(x => x) && (
-        <Card
-          title={t(SoccerResourceKey.SUBSTITUTION)}
-          titleIcon="icon-substitute-player"
-        >
+        <Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon="icon-substitute-player">
           <Substitution substitutionEvents={lineups.SubstitutionEvents} />
         </Card>
       )}
@@ -43,11 +34,7 @@ export default function TeamLineUps(props: Props) {
           <SubstitutePlayers substitutePlayers={lineups.Substitutions} />
         </Card>
       )}
-      <Card
-        className="coach"
-        title={t(SoccerResourceKey.COACH)}
-        titleIcon="icon-account"
-      >
+      <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon="icon-account">
         <TeamCoach coach={lineups.Coach} />
       </Card>
     </>

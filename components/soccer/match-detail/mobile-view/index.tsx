@@ -28,8 +28,7 @@ const Mobile: React.FC<Props> = props => {
   return (
     <>
       <GeneralInfo match={props.matchInfo.Match} />
-      <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget" widgetName="match.lmtPlus" />
-      {/* <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
+      <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
         <TabList>
           <Tab>Info</Tab>
           <Tab>Tracker</Tab>
@@ -39,13 +38,13 @@ const Mobile: React.FC<Props> = props => {
           <Tab>Table</Tab>
         </TabList>
         <SwipeableViews index={selectedTabIndex} onChangeIndex={setTab} enableMouseEvents>
-          <TabPanel>This is Info Page</TabPanel>
+          <TabPanel><SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} /></TabPanel>
           <TabPanel forceRender={true}>
-            <div className="info-tab">
-              <BallTracker matchId={props.matchInfo.Match.Id} />
-            </div>
+            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-pitch" tabName="" disablePitch={false} />
           </TabPanel>
-          <TabPanel>This is Stats page</TabPanel>
+          <TabPanel>
+            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName="statistics" disablePitch={true} />
+          </TabPanel>
           <TabPanel>
             {props.matchLineUps?.Id && (
               <>
@@ -93,10 +92,14 @@ const Mobile: React.FC<Props> = props => {
               </>
             )}
           </TabPanel>
-          <TabPanel>This is H2H page</TabPanel>
-          <TabPanel>This is Table page</TabPanel>
+          <TabPanel>
+            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName="headToHead" disablePitch={true} />
+          </TabPanel>
+          <TabPanel>
+            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-standings" tabName="standings" disablePitch={true} />
+          </TabPanel>
         </SwipeableViews>
-      </Tabs> */}
+      </Tabs>
     </>
   );
 };

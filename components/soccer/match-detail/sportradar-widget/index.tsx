@@ -5,30 +5,41 @@ import "./style.scss";
 type Props = {
     matchId: string,
     widgetId: string,
-    widgetName: string
+    tabName: string,
+    disablePitch: boolean
 };
 
 class SportRadarWidget extends React.Component<Props> {
+    private readonly secondIndex = 2;
+    id: string;
+
+    constructor(props: Props) {
+        super(props);
+        this.id = this.props.matchId.split(":")[this.secondIndex];
+    }
+
     componentDidMount() {
         const script = document.createElement("script");
         script.async = true;
-        script.innerHTML = `(function(a,b,c,d,e,f,g,h,i){a[e]||(i=a[e]=function(){(a[e].q=a[e].q||[]).push(arguments)},i.l=1*new Date,i.o=f,
-        g=b.createElement(c),h=b.getElementsByTagName(c)[0],g.async=1,g.src=d,g.setAttribute("n",e),h.parentNode.insertBefore(g,h)
-        )})(window,document,"script","https://widgets.sir.sportradar.com/${appSetting.sportRadarWidgetKey}/widgetloader","SIR", {
-            language: 'en'
-        });
-        SIR('addWidget', '#sr-widget', 'match.lmtPlus', {scoreboard: 'disable', momentum: 'disable',tabsPosition: 'top',matchId: ${this.props.matchId.split(":")[2]}, tabs: {
-            1: ['statistics', 'headToHead', 'timeline', 'standings','lineups']
-            }});`;
+        script.innerHTML = `SIR(
+            'addWidget', 
+            '#${this.props.widgetId}', 
+            'match.lmtPlus', 
+            {
+                scoreboard: 'disable', 
+                momentum: 'disable',
+                tabsPosition: 'disable', 
+                disablePitch: '${this.props.disablePitch}',
+                matchId: ${this.id},
+                tabs: {1: ['${this.props.tabName}']}
+            }
+            );`;
 
         document.body.appendChild(script);
     }
 
     render() {
-        const secondIndex = 2;
-        const id = this.props.matchId.split(":")[secondIndex];
-
-        return (<div className="ball-tracker-content" id={this.props.widgetId} data-sr-widget={this.props.widgetName} data-sr-match-id={id}></div>);
+        return (<div className="ball-tracker-content" id={this.props.widgetId} data-sr-widget="match.lmtPlus" data-sr-match-id={this.id}></div>);
     }
 }
 

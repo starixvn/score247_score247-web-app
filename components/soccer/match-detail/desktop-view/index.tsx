@@ -9,6 +9,8 @@ import TeamLineUps from "./team-lineups";
 import OtherInfo from "../other-info";
 import SportRadarWidget from "../sportradar-widget";
 import Card from "../../../common/basic/card";
+import { useTranslation } from "react-i18next";
+import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -17,6 +19,7 @@ type Props = {
 
 const Desktop: React.FC<Props> = props => {
   const [selectedTabIndex, setTab] = useState(0);
+  const { t } = useTranslation(ResourceType.SOCCER);
 
   return (
     <>
@@ -38,20 +41,44 @@ const Desktop: React.FC<Props> = props => {
         </div>
       </div>
       <GeneralInfo match={props.matchInfo.Match} />
-      <div className="info-tab">
-        <div className="line-ups left">
-          {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Home} pitchView={props.matchLineUps.PitchView} />)}
+      <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
+        <div>
+          <TabList>
+            <Tab>Info</Tab>
+            <Tab>Commentary</Tab>
+            <Tab>Statistics</Tab>
+            <Tab>H2H</Tab>
+            <Tab>Table</Tab>
+          </TabList>
         </div>
-        <div className="center">
-          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget" widgetName="match.lmtPlus" />
-          <Card title="Match Info">
-            <OtherInfo matchInfo={props.matchInfo} />
-          </Card>
-        </div>
-        <div className="line-ups right">
-          {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Away} pitchView={props.matchLineUps.PitchView} />)}
-        </div>
-      </div>
+        <TabPanel>
+          <div className="info-tab">
+            <div className="line-ups left">
+              {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Home} pitchView={props.matchLineUps.PitchView} />)}
+            </div>
+            <div className="center">
+              <BallTracker matchId={props.matchInfo.Match.Id} />
+              <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
+              <Card title={t(SoccerResourceKey.MATCH_INFO)}>
+                <OtherInfo matchInfo={props.matchInfo} />
+              </Card>
+            </div>
+            <div className="line-ups right">
+              {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Away} pitchView={props.matchLineUps.PitchView} />)}
+            </div>
+          </div>
+        </TabPanel>
+        <TabPanel>This is Commentary page</TabPanel>
+        <TabPanel>
+          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName="statistics" disablePitch={true} />
+        </TabPanel>
+        <TabPanel>
+          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName="headToHead" disablePitch={true} />
+        </TabPanel>
+        <TabPanel>
+          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-standings" tabName="standings" disablePitch={true} />
+        </TabPanel>
+      </Tabs>
     </>
   );
 };
