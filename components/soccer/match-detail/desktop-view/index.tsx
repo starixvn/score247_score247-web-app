@@ -11,6 +11,8 @@ import { MatchLineups } from "../../../../apis/soccer/models";
 import TeamLineUps from "./team-lineups";
 import OtherInfo from "../other-info";
 import SportRadarWidget from "../sportradar-widget";
+import { useTranslation } from "react-i18next";
+import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 
 type Props = {
   matchInfo: MatchInfo;

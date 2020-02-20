@@ -1812,3 +1812,24 @@ $base: #FFFFFF;
 .sr-bb .srt-logo-powered-by-dark {
     display: none;
 }
+
+
+/////////// Time line ////////////
+.sr-bb {
+    .sr-timeline__event {
+        font-size: 1.3rem;
+    }
+    .srt-base-1-is-active {
+        background: #F5F5F5;
+        border-color: #DEE2E6;
+    }
+    .sr-lmt-plus-1-verticaltimeline__switch {
+        border-bottom: 1px solid #DEE2E6;
+        padding-top: .5rem;
+
+    }
+    .sr-lmt-plus-slider-title__wrap {
+        font-size: 1.3rem;
+        border: none;
+    }
+}
