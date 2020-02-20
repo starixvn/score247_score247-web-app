@@ -68,9 +68,11 @@
   display: grid;
   grid-template-columns: 32rem 1fr 32rem;
   grid-column-gap: 1.2rem;
+  font-size: 1.3rem;
 
   .mobile & {
     display: flex;
+    font-size: 1.2rem;
   }
 }
 

@@ -6,14 +6,10 @@
 
     .card-title {
         text-transform: uppercase;
-        font-size: 1.4rem;
         padding: 0.8rem;
         border-bottom: 1px solid #DEE2E6;
         color: #000;
-        font-weight: bold;
-        .mobile & {
-            font-size: 1.2rem;
-        }
+        font-weight: 600;
         [class*="icon"] {
             padding-right: .8rem;
         }
