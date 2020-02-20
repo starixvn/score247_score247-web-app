@@ -98,9 +98,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
       if (this.eventTypeToChangeLineUps.includes(matchEvent.Timeline.Type.Value)) {
         setTimeout(async () => {
-          debugger;
           const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
-          console.log(message);
           this.setState({ matchInfo, matchLineUps });
         }, 5000); //NOSONAR
        
