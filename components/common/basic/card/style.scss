@@ -14,5 +14,8 @@
         .mobile & {
             font-size: 1.2rem;
         }
+        [class*="icon"] {
+            padding-right: .8rem;
+        }
     }
 }

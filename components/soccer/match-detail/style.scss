@@ -140,9 +140,14 @@
   .player-row {
     justify-self: left;
     padding: .4rem 1.2rem;
+    .event-statistic {
+      width: unset;
+    }
   }
 }
-
+.icon-substitute-player {
+  font-size: 1rem;
+}
 .formation {
   background-color: #4F6B0E;
   color: #fff;
