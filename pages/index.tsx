@@ -2,7 +2,6 @@ import * as React from "react";
 import Layout from "../components/layout";
 import DateBar from "../components/common/date-bar";
 import Banner from "../components/common/banner";
-import { SportsEnum } from "../common/enums/sport-enum";
 import { DateTimeFormat } from "../common/constants";
 import { WithTranslation } from "next-i18next";
 import { isSameDay } from "date-fns";
@@ -33,7 +32,7 @@ class SoccerPage extends React.Component<WithTranslation, State> {
     super(props);
     this.state = {
       selectedDate: new Date(),
-      breadcrumbs: [props.t(SportsEnum.SOCCER), props.t(CommonResourceKey.TODAY)],
+      breadcrumbs: [props.t(CommonResourceKey.SOCCER), props.t(CommonResourceKey.TODAY)],
       onlyLiveMatch: false,
       soccerSignalRClient: undefined
     };
@@ -111,7 +110,7 @@ class SoccerPage extends React.Component<WithTranslation, State> {
   render() {
     const { t } = this.props;
     return (
-      <Layout title={t(SportsEnum.SOCCER)} breadcrumbs={this.state.breadcrumbs}>
+      <Layout title={t(CommonResourceKey.SOCCER)} breadcrumbs={this.state.breadcrumbs}>
         <LeftBar />
         <div className="main-container"><Banner url="#" imgSrc="/static/images/ads-banner-1.jpg" />
           <DateBar
