@@ -6,9 +6,15 @@ import { ViewMode, CookieName, MobileAppUrl } from "../common/constants";
 import Button from "../components/common/basic/button";
 import "../assets/styles/pages/loading.scss";
 import { ResourceType, CommonResourceKey } from "../common/resources";
+import dynamic from "next/dynamic";
 
 const LoadingPage: LocalizedPage = props => {
     const { t } = props;
+
+    if(window.matchMedia("(display-mode: standalone)").matches){
+        cookie.set(CookieName.VIEW_MODE, ViewMode.MOBILE);
+        Router.push("/");
+    }
 
     const handleDesktopViewClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
@@ -48,4 +54,4 @@ LoadingPage.getInitialProps = () => ({
     namespacesRequired: [ResourceType.COMMON]
 });
 
-export default withTranslation()(LoadingPage);
+export default dynamic(() => Promise.resolve(withTranslation()(LoadingPage)), {ssr: false});
