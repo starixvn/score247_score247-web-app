@@ -20,23 +20,16 @@ const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer 
         const normalGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE.value];
         const penGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE_BY_PENALTY.value];
         const ownGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value];
-        const hasGoals = normalGoals || penGoals || ownGoals;
 
-        if (hasGoals) {
-            let totalGoals = normalGoals ?? 0;
-            if (penGoals) {
-                totalGoals += penGoals;
-            }
+        const totalGoals = (normalGoals + penGoals) || 0;
 
-            return (
-                <>
-                    <span className="icon-goal">{totalGoals > 1 && <span className="total-goal">{totalGoals}</span>}</span>
-                    {ownGoals && <span className="icon-goal own-goal">{ownGoals > 1 && ownGoals}</span>}
-                </>
-            );
-        }
+        return (
+            <>
+                {totalGoals > 0 && <span className="icon-goal">{totalGoals > 1 && <span className="total-goal">{totalGoals}</span>}</span>}
+                {ownGoals && <span className="icon-goal own-goal">{ownGoals > 1 && ownGoals}</span>}
+            </>
+        );
 
-        return null;
     };
 
     return (
