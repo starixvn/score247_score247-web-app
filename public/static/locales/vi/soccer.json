@@ -6,5 +6,15 @@
     "substitute_players": "cầu thủ dự bị",
     "coach": "huấn luyện viên",
     "line_ups": "line-ups",
-    "aggregate_score": "2nd leg, aggregate score {{score}}"
+    "aggregate_score": "2nd leg, aggregate score {{score}}",
+    "info": "Info",
+    "tracker": "Tracker",
+    "stats": "Stats",
+    "h2h": "H2H",
+    "table": "Table",
+    "commentary": "Commentary",
+    "statistics": "Statistics",
+    "referee": "Referee",
+    "venue": "Venue",
+    "spectators": "Spectators"
 }

@@ -44,11 +44,11 @@ const Desktop: React.FC<Props> = props => {
       <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
         <div>
           <TabList>
-            <Tab>Info</Tab>
-            <Tab>Commentary</Tab>
-            <Tab>Statistics</Tab>
-            <Tab>H2H</Tab>
-            <Tab>Table</Tab>
+            <Tab>{t(SoccerResourceKey.INFO)}</Tab>
+            <Tab>{t(SoccerResourceKey.COMMENTARY)}</Tab>
+            <Tab>{t(SoccerResourceKey.STATISTICS)}</Tab>
+            <Tab>{t(SoccerResourceKey.H2H)}</Tab>
+            <Tab>{t(SoccerResourceKey.TABLE)}</Tab>
           </TabList>
         </div>
         <TabPanel>

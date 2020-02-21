@@ -32,12 +32,12 @@ const Mobile: React.FC<Props> = props => {
       <GeneralInfo match={matchInfo.Match} />
       <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
         <TabList>
-          <Tab>Info</Tab>
-          <Tab>Tracker</Tab>
-          <Tab>Stats</Tab>
-          <Tab>Line-ups</Tab>
-          <Tab>H2H</Tab>
-          <Tab>Table</Tab>
+          <Tab>{t(SoccerResourceKey.INFO)}</Tab>
+          <Tab>{t(SoccerResourceKey.TRACKER)}</Tab>
+          <Tab>{t(SoccerResourceKey.STATS)}</Tab>
+          <Tab>{t(SoccerResourceKey.LINE_UPS)}</Tab>
+          <Tab>{t(SoccerResourceKey.H2H)}</Tab>
+          <Tab>{t(SoccerResourceKey.TABLE)}</Tab>
         </TabList>
         <SwipeableViews index={selectedTabIndex} onChangeIndex={setTab} enableMouseEvents>
           <TabPanel>

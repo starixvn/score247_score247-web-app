@@ -7,4 +7,14 @@ export class SoccerResourceKey {
     public static readonly COACH = "coach";
     public static readonly LINE_UPS = "line_ups";
     public static readonly AGGREGATE_SCORE = "aggregate_score";
+    public static readonly INFO = "info";
+    public static readonly TRACKER = "tracker";
+    public static readonly STATS = "stats";
+    public static readonly H2H = "h2h";
+    public static readonly TABLE = "table";
+    public static readonly COMMENTARY = "commentary";
+    public static readonly STATISTICS = "statistics";
+    public static readonly REFEREE = "referee";
+    public static readonly VENUE = "venue";
+    public static readonly SPECTATORS = "spectators";
 }
