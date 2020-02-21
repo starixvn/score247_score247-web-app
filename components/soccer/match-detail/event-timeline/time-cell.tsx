@@ -1,12 +1,14 @@
 import React from "react";
+import { TimelineEvent } from "../../../../apis/soccer/models";
+import { BuildEventTime } from '../../../../common/helpers/soccer-match-helper';
 
 type Props = {
-
+    event: TimelineEvent
 };
 
-const ScoreCell: React.FC<Props> = (props: Props) =>
-    <div>
+const TimeCell: React.FC<Props> = (props: Props) =>
+    <div className="time-cell">
+        <span>{BuildEventTime(props.event)}</span>
+    </div>;
 
-    </div>
-
-export default ScoreCell;
+export default TimeCell;
