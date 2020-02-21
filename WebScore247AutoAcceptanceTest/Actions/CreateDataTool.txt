@@ -32,9 +32,9 @@ Create New Match
     Selenium2Library.Page Should Contain Element    ${Data_League_sel}    timeout=15
     Select From List By value    ${Data_League_sel}    ${value}
     Selenium2Library.Page Should Contain Element    ${Data_Home_sel}    timeout=15
-    Select From List By value    ${Data_Home_sel}    sr:team:1759904207
+    Select From List By value    ${Data_Home_sel}    sr:competitor:2829
     Selenium2Library.Page Should Contain Element    ${Data_Away_sel}    timeout=15
-    Select From List By value    ${Data_Away_sel}    sr:team:955685600
+    Select From List By value    ${Data_Away_sel}    sr:competitor:10
     Selenium2Library.Wait Until Page Contains Element    ${Data_Sunmit_btn}    timeout=15
     Selenium2Library.Click button    ${Data_Sunmit_btn}
     Selenium2Library.Wait Until Page Contains Element    ${Data_GetMatchID}    timeout=355

@@ -25,6 +25,7 @@ ${InjuryTimeExtra}    //*[@id="EventInjuryExtraTimeForm"]//*[@id="payload_timeli
 ${Injury_Process}    //*[@id="EventInjuryExtraTimeForm"]/div[2]/button
 @{row}            //*[@id="TimelineTable"]/tbody//td[1]
 ${Scenario_MatchStart}    1552157748
+${Scenario_2nd_Injury}    573567520
 ######
 ${MatchTimeEvent}    //*[@id="matchTimeEventHeading"]/div
 ${MatchStart_Process}    //*[@id="EventInjuryExtraTimeForm"]/div[2]/button
@@ -34,3 +35,11 @@ ${Timeline}       //*[@id="TimelineTable"]/tbody/tr[1]/td[2]
 ${MatchTimeEvent}    //*[@id="matchTimeEventHeading"]/div
 ${MatchTime_EventType}    //*[@id="payload_timeline_type"]
 ${MatchTime_Process}    //*[@id="EventTimeForm"]/div[2]/button
+########## PSO
+${PSO_Event}      //*[@id="matchPenaltyShootEventHeading"]/div
+${PSO_Timeline}    //*[@id="EventPenaltyShootForm"]/div[1]/div[3]//*[@id="payload_timeline_hour"]
+${PSO_Team_sel}    //*[@id="EventPenaltyShootForm"]/div[1]/div[4]//*[@id="payload_timeline_team"]
+${PSO_scored_sel}    //*[@id="EventPenaltyShootForm"]/div[1]/div[7]//*[@id="payload_timeline_status"]
+${PSO_Player}     //*[@id="EventPenaltyShootForm"]/div[1]/div[6]/div[1]//*[@id="penaltyGoalScorerName"]
+${PSO_Process}    //*[@id="EventPenaltyShootForm"]/div[2]/button
+#########

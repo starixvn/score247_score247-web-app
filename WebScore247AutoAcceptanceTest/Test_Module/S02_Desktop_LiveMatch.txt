@@ -13,6 +13,10 @@ Resource          ../Actions/ViewMatchInfo_Desktop.txt
 Resource          ../Actions/CheckLiveMatch.txt
 
 *** Test Cases ***
-Verify Live Match
+Verify Main Data
+    Verify Live Match
+    #Test001
+
+Verify Match Info
     Verify Live Match
     #Test001
