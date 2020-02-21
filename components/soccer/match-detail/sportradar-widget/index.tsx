@@ -1,6 +1,5 @@
-import React from "react";
-import appSetting from "../../../../app-settings";
 import "./style.scss";
+import React from "react";
 
 type Props = {
     matchId: string,

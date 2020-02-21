@@ -1,20 +1,19 @@
 import "./style.scss";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import GeneralInfo from "../general-info";
-import BallTracker from "../ball-tracker";
+import SwipeableViews from "react-swipeable-views";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import SwipeableViews from "react-swipeable-views";
 import { MatchLineups } from "../../../../apis/soccer/models";
+import SportRadarWidget from "../sportradar-widget";
+import Card from "../../../common/basic/card";
 import PitchView from "../pitch-view";
 import StartingLineups from "../starting-lineups";
 import SubstitutePlayers from "../substitute-players";
 import Substitution from '../substitution';
-import Card from "../../../common/basic/card";
-import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
-import { useTranslation } from "react-i18next";
 import TeamCoach from "../coach";
-import SportRadarWidget from "../sportradar-widget";
 
 type Props = {
   matchInfo: MatchInfo;

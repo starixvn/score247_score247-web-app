@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import GeneralInfo from "../general-info";
-import BallTracker from "../ball-tracker";
-import { MatchInfo } from "../../../../apis/soccer/models/match-info";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useTranslation } from "react-i18next";
+import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import Advertisement from "../../../common/advertisement";
+import GeneralInfo from "../general-info";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import BallTracker from "../ball-tracker";
+import Card from "../../../common/basic/card";
+import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { MatchLineups } from "../../../../apis/soccer/models";
 import TeamLineUps from "./team-lineups";
 import OtherInfo from "../other-info";
 import SportRadarWidget from "../sportradar-widget";
-import Card from "../../../common/basic/card";
-import { useTranslation } from "react-i18next";
-import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -58,7 +58,9 @@ const Desktop: React.FC<Props> = props => {
             </div>
             <div className="center">
               <BallTracker matchId={props.matchInfo.Match.Id} />
-              <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
+              <Card>
+                <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
+              </Card>
               <Card title={t(SoccerResourceKey.MATCH_INFO)}>
                 <OtherInfo matchInfo={props.matchInfo} />
               </Card>
