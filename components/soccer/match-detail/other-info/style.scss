@@ -1,0 +1,18 @@
+.other-info {    
+    .other-info-item {
+        padding: .8rem 1.2rem;        
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #F5F5F5;
+        &:last-child {
+            border-bottom: none;
+        }
+        [class*="icon"] {
+            font-size: 1.4rem;
+            padding-right: .8rem;
+        }
+        .key {
+            width: 10rem;
+        }
+    }
+}

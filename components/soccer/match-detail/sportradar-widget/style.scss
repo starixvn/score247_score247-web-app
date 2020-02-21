@@ -1815,9 +1815,13 @@ $base: #FFFFFF;
 
 
 /////////// Time line ////////////
+$color-switch: #76D672;
 .sr-bb {
     .sr-timeline__event {
         font-size: 1.3rem;
+        .mobile & {
+            font-size: 1.2rem;
+        }
         &:after {
             border-color: #DEE2E6;
         }
@@ -1828,6 +1832,9 @@ $base: #FFFFFF;
     }
     .sr-timeline__eventWrap {
         min-height: 4rem;
+        .mobile & {
+            min-height: 3.6rem;
+        }
     }
     .sr-lmt-plus-1-verticaltimeline__switch {
         border-bottom: 1px solid #DEE2E6;
@@ -1845,5 +1852,15 @@ $base: #FFFFFF;
         &:after {
             content: none;
         }
+    }
+    .srt-base-1-primary {
+        color: $color-switch;
+        border-color: $color-switch;
+    }
+    .srt-fill-primary-1 {
+        fill: $color-switch;
+    }
+    .srt-primary-7 {
+        background-color: $color-switch;
     }
 }

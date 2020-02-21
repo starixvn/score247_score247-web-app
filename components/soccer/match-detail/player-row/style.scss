@@ -2,11 +2,7 @@
     display: flex;
     justify-content: flex-start;
     padding: .8rem 1.2rem;
-    font-size: 1.4rem;
     align-items: center;
-    .mobile & {
-        font-size: 1.2rem;
-    }
     .jersey {
         width: 2.4rem;
         display: inline-block;

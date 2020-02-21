@@ -13,6 +13,18 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.icon-info:before {
+    content: "\e91d";
+}
+.icon-referee:before {
+    content: "\e91e";
+}
+.icon-spectator:before {
+    content: "\e91f";
+}
+.icon-venue:before {
+    content: "\e920";
+}
 .icon-arrow-down1:before {
     content: "\e916";
     color: #f00;

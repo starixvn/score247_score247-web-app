@@ -61,7 +61,7 @@ const Desktop: React.FC<Props> = props => {
               <Card>
                 <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
               </Card>
-              <Card title={t(SoccerResourceKey.MATCH_INFO)}>
+              <Card title={t(SoccerResourceKey.MATCH_INFO)} titleIcon={"icon-info"}>
                 <OtherInfo matchInfo={props.matchInfo} />
               </Card>
             </div>
