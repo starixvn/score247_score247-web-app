@@ -58,11 +58,11 @@ const Desktop: React.FC<Props> = props => {
             </div>
             <div className="center">
               <BallTracker matchId={props.matchInfo.Match.Id} />
-              <Card>
-                <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
-              </Card>
               <Card title={t(SoccerResourceKey.MATCH_INFO)} titleIcon={"icon-info"}>
                 <OtherInfo matchInfo={props.matchInfo} />
+              </Card>
+              <Card>
+                <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
               </Card>
             </div>
             <div className="line-ups right">

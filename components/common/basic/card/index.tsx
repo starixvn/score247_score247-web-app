@@ -4,15 +4,23 @@ import React from "react";
 type Props = {
     className?: string;
     title?: string;
-    titleIcon?: string;
+    titleIcon?: string | string[];
 };
 
 const Card: React.FC<Props> = ({ children, title, titleIcon, className = "" }) => {
+    const renderIcons = (icons: string | string[]) => {
+        if (typeof icons === "string") {
+            return (<span className={icons}></span>);
+        }
+
+        return (icons.forEach(icon => <span className={icon}></span>));
+    };
+
     return (
         <div className={`card ${className}`}>
             {title && (
                 <div className="card-title">
-                    {titleIcon&& <span className={titleIcon}></span>}
+                    {titleIcon && renderIcons(titleIcon)}
                     {title}
                 </div>)
             }

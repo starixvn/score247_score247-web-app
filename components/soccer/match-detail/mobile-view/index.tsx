@@ -13,6 +13,7 @@ import SubstitutePlayers from "../substitute-players";
 import Substitution from '../substitution';
 import TeamCoach from "../coach";
 import Card from "../../../common/basic/card";
+import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget from "../sportradar-widget";
 
@@ -39,7 +40,12 @@ const Mobile: React.FC<Props> = props => {
         </TabList>
         <SwipeableViews index={selectedTabIndex} onChangeIndex={setTab} enableMouseEvents>
           <TabPanel>
-            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
+            <Card title={t(SoccerResourceKey.MATCH_INFO)} titleIcon={"icon-info"}>
+              <OtherInfo matchInfo={props.matchInfo} />
+            </Card>
+            <Card>
+              <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
+            </Card>
           </TabPanel>
           <TabPanel>
             <BallTracker matchId={props.matchInfo.Match.Id} />
