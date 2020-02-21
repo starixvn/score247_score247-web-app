@@ -1863,4 +1863,9 @@ $color-switch: #76D672;
     .srt-primary-7 {
         background-color: $color-switch;
     }
+    .sr-lmt-plus-slider-title__title {
+        .mobile & {
+            display: none;
+        }
+    }
 }

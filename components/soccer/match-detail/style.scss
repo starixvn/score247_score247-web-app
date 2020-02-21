@@ -27,6 +27,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    border-bottom: 1px solid #DEE2E6;
 
     .mobile & {
       background-color: #F8F9FC;
@@ -48,6 +49,7 @@
     .mobile & {
       font-size: 1.2rem;
       color: #000;
+      padding: 0.8rem 0 0.6rem;
     }
   }
 
