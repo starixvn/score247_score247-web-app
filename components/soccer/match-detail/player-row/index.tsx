@@ -17,11 +17,11 @@ const PlayerRow: React.FC<Props> = ({ player, displayScore = true, isMainPlayer 
             return null;
         }
 
-        const normalGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE.value];
-        const penGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE_BY_PENALTY.value];
+        const normalGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE.value] || 0;
+        const penGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE_BY_PENALTY.value] || 0;
         const ownGoals = player.EventStatisticFormatted[EventTypes.SCORE_CHANGE_BY_OWN_GOAL.value];
 
-        const totalGoals = (normalGoals + penGoals) || 0;
+        const totalGoals = normalGoals + penGoals;
 
         return (
             <>
