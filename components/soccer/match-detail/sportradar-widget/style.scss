@@ -1818,10 +1818,16 @@ $base: #FFFFFF;
 .sr-bb {
     .sr-timeline__event {
         font-size: 1.3rem;
+        &:after {
+            border-color: #DEE2E6;
+        }
     }
     .srt-base-1-is-active {
         background: #F5F5F5;
         border-color: #DEE2E6;
+    }
+    .sr-timeline__eventWrap {
+        min-height: 4rem;
     }
     .sr-lmt-plus-1-verticaltimeline__switch {
         border-bottom: 1px solid #DEE2E6;
@@ -1831,5 +1837,13 @@ $base: #FFFFFF;
     .sr-lmt-plus-slider-title__wrap {
         font-size: 1.3rem;
         border: none;
+    }
+    .sr-lmt-plus-1-verticaltimeline__content {
+        bottom: -5px;
+    }
+    .sr-timeline__events .sr-timeline__event:last-child {
+        &:after {
+            content: none;
+        }
     }
 }
