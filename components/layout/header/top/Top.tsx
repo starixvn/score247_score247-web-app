@@ -5,7 +5,11 @@ import Router from "next/router";
 import { SportsEnum } from "../../../../common/enums/sport-enum";
 import { filter } from "lodash";
 import { WithTranslation } from "next-i18next";
-import { withTranslation } from "../../../../common/helpers/Localizer";
+import {
+  withTranslation,
+  supportedLanguages,
+  Language
+} from "../../../../common/helpers/Localizer";
 import { ResourceType, CommonResourceKey } from "../../../../common/resources";
 
 type Props = {
@@ -50,8 +54,14 @@ const onChangeSportMobile = (selectedOption: ValueType<SelectOptions>) => {
   Router.push(option.value);
 };
 
+const renderLanguageOption = (language: Language) => (
+  <option key={language.code} value={language.code}>
+    {language.name}
+  </option>
+);
+
 const Top: React.FunctionComponent<Props> = props => {
-  const { t, sport } = props;
+  const { t, sport, i18n } = props;
   const sportOptions = createOptions();
   return (
     <>
@@ -66,8 +76,15 @@ const Top: React.FunctionComponent<Props> = props => {
             />
           </div>
           <div className="user-languages">
-            <div className="login">{t(CommonResourceKey.LANGUAGES)}</div>
-            <div className="login">{t(CommonResourceKey.LOGIN)}/{t(CommonResourceKey.REGISTER)}</div>
+            <select
+              value={i18n.language}
+              onChange={event => i18n.changeLanguage(event.target.value)}
+            >
+              {supportedLanguages.map(renderLanguageOption)}
+            </select>
+            <div className="login">
+              {t(CommonResourceKey.LOGIN)}/{t(CommonResourceKey.REGISTER)}
+            </div>
           </div>
         </div>
       </div>

@@ -20,7 +20,6 @@ import { ResourceType, CommonResourceKey } from "../common/resources";
 
 type State = {
   selectedDate: Date;
-  breadcrumbs: string[];
   onlyLiveMatch: boolean;
   soccerSignalRClient?: SoccerSignalRClient;
 };
@@ -32,7 +31,6 @@ class SoccerPage extends React.Component<WithTranslation, State> {
     super(props);
     this.state = {
       selectedDate: new Date(),
-      breadcrumbs: [props.t(CommonResourceKey.SOCCER), props.t(CommonResourceKey.TODAY)],
       onlyLiveMatch: false,
       soccerSignalRClient: undefined
     };
@@ -54,25 +52,16 @@ class SoccerPage extends React.Component<WithTranslation, State> {
   };
 
   handleDateChange = async (date: Date) => {
-    const breadcrumbs = this.state.breadcrumbs.slice();
-    breadcrumbs[1] = isSameDay(this.today, date)
-      ? this.props.t(CommonResourceKey.TODAY)
-      : formatDate(date, DateTimeFormat.DATE_ONLY, this.props.i18n.language);
-
     this.setState({
       selectedDate: date,
-      onlyLiveMatch: false,
-      breadcrumbs
+      onlyLiveMatch: false
     });
 
     await this.filterSoccerTable.current?.handleDateChange(date);
   };
 
   handleLiveButtonClick = async () => {
-    const breadcrumbs = this.state.breadcrumbs.slice();
-    breadcrumbs[1] = this.props.t(CommonResourceKey.LIVE_MATCH);
-
-    this.setState({ onlyLiveMatch: true, breadcrumbs });
+    this.setState({ onlyLiveMatch: true });
     await this.filterSoccerTable.current?.handleLiveButtonClick();
   };
 
@@ -107,12 +96,36 @@ class SoccerPage extends React.Component<WithTranslation, State> {
     </>
   );
 
+  buildBreadcrumbs = () => {
+    const { t, i18n } = this.props;
+    const breadcrumbs = [t(CommonResourceKey.SOCCER)];
+
+    if (this.state.onlyLiveMatch) {
+      breadcrumbs.push(t(CommonResourceKey.LIVE_MATCH));
+    } else {
+      breadcrumbs.push(
+        isSameDay(this.today, this.state.selectedDate)
+          ? this.props.t(CommonResourceKey.TODAY)
+          : formatDate(
+              this.state.selectedDate,
+              DateTimeFormat.DATE_ONLY,
+              i18n.language
+            )
+      );
+    }
+
+    return breadcrumbs;
+  };
+
   render() {
     const { t } = this.props;
+    const breadcrumbs = this.buildBreadcrumbs();
+    
     return (
-      <Layout title={t(CommonResourceKey.SOCCER)} breadcrumbs={this.state.breadcrumbs}>
+      <Layout title={t(CommonResourceKey.SOCCER)} breadcrumbs={breadcrumbs}>
         <LeftBar />
-        <div className="main-container"><Banner url="#" imgSrc="/static/images/ads-banner-1.jpg" />
+        <div className="main-container">
+          <Banner url="#" imgSrc="/static/images/ads-banner-1.jpg" />
           <DateBar
             onDateChange={this.handleDateChange}
             onLiveMatchChange={this.handleLiveButtonClick}
@@ -121,7 +134,9 @@ class SoccerPage extends React.Component<WithTranslation, State> {
           />
           <div className="content">
             <FilterSoccerTable ref={this.filterSoccerTable} />
-            <DeviceContextConsumer>{this.renderDateSwitch}</DeviceContextConsumer>
+            <DeviceContextConsumer>
+              {this.renderDateSwitch}
+            </DeviceContextConsumer>
           </div>
         </div>
         <RightBar />

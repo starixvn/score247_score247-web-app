@@ -1,5 +1,6 @@
 import NextI18Next, { WithTranslation } from "next-i18next";
 import { NextPage } from "next";
+
 const NextI18NextInstance = new NextI18Next({
   defaultLanguage: "en",
   otherLanguages: ["vi", "id", "th", "zhTW", "zhCN"],
@@ -10,7 +11,7 @@ const NextI18NextInstance = new NextI18Next({
     id: "id",
     th: "th",
     zhCN: "zhCN",
-    zhTW: "zhTW",
+    zhTW: "zhTW"
   }
 });
 
@@ -28,3 +29,31 @@ export type LocalizedPage<P = {}, IP = P> = NextPage<
 >;
 
 export default NextI18NextInstance;
+
+export type Language = { code: string; name: string };
+export const supportedLanguages: Language[] = [
+  {
+    code: "en",
+    name: "English"
+  },
+  {
+    code: "vi",
+    name: "Vietnamese"
+  },
+  {
+    code: "id",
+    name: "Indonesian"
+  },
+  {
+    code: "th",
+    name: "Thai"
+  },
+  {
+    code: "zhTW",
+    name: "Chinese (Traditional)"
+  },
+  {
+    code: "zhCN",
+    name: "Chinese (Simplified)"
+  }
+];
