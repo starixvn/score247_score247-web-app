@@ -5,12 +5,9 @@ import Router from "next/router";
 import { SportsEnum } from "../../../../common/enums/sport-enum";
 import { filter } from "lodash";
 import { WithTranslation } from "next-i18next";
-import {
-  withTranslation,
-  supportedLanguages,
-  Language
-} from "../../../../common/helpers/Localizer";
+import { withTranslation } from "../../../../common/helpers/Localizer";
 import { ResourceType, CommonResourceKey } from "../../../../common/resources";
+import LanguageSelection from "../../../language-selection";
 
 type Props = {
   sport: string;
@@ -54,12 +51,6 @@ const onChangeSportMobile = (selectedOption: ValueType<SelectOptions>) => {
   Router.push(option.value);
 };
 
-const renderLanguageOption = (language: Language) => (
-  <option key={language.code} value={language.code}>
-    {language.name}
-  </option>
-);
-
 const Top: React.FunctionComponent<Props> = props => {
   const { t, sport, i18n } = props;
   const sportOptions = createOptions();
@@ -76,12 +67,7 @@ const Top: React.FunctionComponent<Props> = props => {
             />
           </div>
           <div className="user-languages">
-            <select
-              value={i18n.language}
-              onChange={event => i18n.changeLanguage(event.target.value)}
-            >
-              {supportedLanguages.map(renderLanguageOption)}
-            </select>
+            <LanguageSelection />
             <div className="login">
               {t(CommonResourceKey.LOGIN)}/{t(CommonResourceKey.REGISTER)}
             </div>
