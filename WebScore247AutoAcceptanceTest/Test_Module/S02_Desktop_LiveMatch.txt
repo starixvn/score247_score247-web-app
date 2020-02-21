@@ -14,5 +14,5 @@ Resource          ../Actions/CheckLiveMatch.txt
 
 *** Test Cases ***
 Verify Live Match
-    #Verify Live Match
-    Test001
+    Verify Live Match
+    #Test001
