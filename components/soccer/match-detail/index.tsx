@@ -10,6 +10,7 @@ import { DeviceContextConsumer } from "../../../contexts/device-context";
 import { DeviceContextType } from "../../../contexts/device-context-type";
 import { updateMatchFromEvent } from "../../../common/helpers/soccer-match-helper";
 import { EventTypes } from '../../../common/enums/event-type';
+import { i18n } from "../../../common/helpers/Localizer";
 
 const MobileView = dynamic(() => import("./mobile-view"));
 const DesktopView = dynamic(() => import("./desktop-view"));
@@ -36,6 +37,14 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     EventTypes.MATCH_STARTED.value
   ];
 
+  supportedLangues: { [key: string]: string } = {
+    "en": "en",
+    "id": "id",
+    "th": "th",
+    "zhTW": "zht",
+    "zhCN": "zh"
+  };
+
   constructor(props: Props) {
     super(props);
 
@@ -60,7 +69,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     script.innerHTML = `(function(a,b,c,d,e,f,g,h,i){a[e]||(i=a[e]=function(){(a[e].q=a[e].q||[]).push(arguments)},i.l=1*new Date,i.o=f,
         g=b.createElement(c),h=b.getElementsByTagName(c)[0],g.async=1,g.src=d,g.setAttribute("n",e),h.parentNode.insertBefore(g,h)
         )})(window,document,"script","https://widgets.sir.sportradar.com/${appSettings.sportRadarWidgetKey}/widgetloader","SIR", {
-            language: 'en'
+            language: '${this.supportedLangues[i18n.language]}'
         });`;
 
     document.body.appendChild(script);
@@ -112,7 +121,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
           const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
           this.setState({ matchInfo, matchLineUps });
         }, 5000); //NOSONAR
-       
+
       } else {
         this.setState({ matchInfo });
       }
