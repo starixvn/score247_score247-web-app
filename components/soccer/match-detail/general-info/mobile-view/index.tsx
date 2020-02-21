@@ -7,6 +7,7 @@ import AwayTeam from "../away-team";
 import Score from "../score";
 import Status from "../status";
 import appSettings from "../../../../../app-settings";
+import AggregateScore from "../aggregate-score";
 
 const MobileView: React.FC<Props> = props => {
   const { match } = props;
@@ -29,6 +30,7 @@ const MobileView: React.FC<Props> = props => {
           <AwayTeam match={match} />
         </div>
         <span className="icon-menu-favorites"></span>
+        <AggregateScore match={match} />
       </div>
     </div>
   );
