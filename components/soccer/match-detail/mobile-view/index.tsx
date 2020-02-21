@@ -7,14 +7,14 @@ import SwipeableViews from "react-swipeable-views";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { MatchLineups } from "../../../../apis/soccer/models";
-import SportRadarWidget from "../sportradar-widget";
-import Card from "../../../common/basic/card";
 import PitchView from "../pitch-view";
 import StartingLineups from "../starting-lineups";
 import SubstitutePlayers from "../substitute-players";
 import Substitution from '../substitution';
 import TeamCoach from "../coach";
+import Card from "../../../common/basic/card";
 import BallTracker from "../ball-tracker";
+import SportRadarWidget from "../sportradar-widget";
 
 type Props = {
   matchInfo: MatchInfo;

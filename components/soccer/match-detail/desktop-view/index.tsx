@@ -4,13 +4,13 @@ import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import Advertisement from "../../../common/advertisement";
 import GeneralInfo from "../general-info";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import Card from "../../../common/basic/card";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { MatchLineups } from "../../../../apis/soccer/models";
 import TeamLineUps from "./team-lineups";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget from "../sportradar-widget";
+import Card from "../../../common/basic/card";
 
 type Props = {
   matchInfo: MatchInfo;
