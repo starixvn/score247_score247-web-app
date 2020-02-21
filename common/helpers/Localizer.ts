@@ -4,8 +4,6 @@ import { NextPage } from "next";
 const NextI18NextInstance = new NextI18Next({
   defaultLanguage: "en",
   otherLanguages: ["vi", "id", "th", "zhTW", "zhCN"],
-  localePath:
-    typeof window === "undefined" ? "public/static/locales" : "static/locales",
   localeSubpaths: {
     vi: "vi",
     id: "id",

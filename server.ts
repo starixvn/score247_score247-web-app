@@ -12,6 +12,7 @@ const handler = app.getRequestHandler();
   await app.prepare();
   const server = express();
 
+  await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 
   server.get("*", (req: IncomingMessage, res: ServerResponse) =>

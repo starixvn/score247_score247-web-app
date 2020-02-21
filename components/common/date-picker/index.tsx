@@ -1,21 +1,20 @@
 import "./style.scss";
 import React, { PureComponent } from "react";
 import DatePicker, { ReactDatePickerProps } from "react-datepicker";
-import { i18n } from "../../../common/helpers/Localizer";
 import { registerDatePickerLocale } from "./register-locale";
+import { useTranslation } from "../../../common/helpers/Localizer";
 
 registerDatePickerLocale();
 
-class DatePickerWrapper extends PureComponent<ReactDatePickerProps> {
-  render() {
-    const { className, ...rest } = this.props;
-
-    return (
-      <div className={`datepicker-wrapper ${className}`}>
-        <DatePicker locale={i18n.language} {...rest} />
-      </div>
-    );
-  }
+function DatePickerWrapper(props: ReactDatePickerProps) {
+  const { className, ...rest } = props;
+  const { i18n } = useTranslation();
+  
+  return (
+    <div className={`datepicker-wrapper ${className}`}>
+      <DatePicker locale={i18n.language} {...rest} />
+    </div>
+  );
 }
 
 export default DatePickerWrapper;

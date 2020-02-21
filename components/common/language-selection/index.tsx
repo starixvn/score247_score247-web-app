@@ -1,8 +1,8 @@
 import React from "react";
 import {
   Language,
-  i18n,
-  supportedLanguages
+  supportedLanguages,
+  useTranslation
 } from "../../../common/helpers/Localizer";
 
 function renderLanguageOption(language: Language) {
@@ -13,7 +13,10 @@ function renderLanguageOption(language: Language) {
   );
 }
 
+
 export default function LanguageSelection() {
+  const { i18n } = useTranslation();
+
   return (
     <select
       value={i18n.language}
@@ -23,3 +26,4 @@ export default function LanguageSelection() {
     </select>
   );
 }
+
