@@ -2,11 +2,15 @@ import React from "react";
 import { TimelineEvent } from '../../../../apis/soccer/models';
 import { EventTypes } from '../../../../common/enums/event-type';
 import PlayerRow from '../player-row';
-import { BuildEventTime } from '../../../../common/helpers/soccer-match-helper';
 
 type Props = {
     substitutionEvent: TimelineEvent
 };
+
+const BuildEventTime = (substitutionEvent: TimelineEvent) =>
+    !substitutionEvent.StoppageTime
+        ? `${substitutionEvent.MatchTime}'`
+        : `${substitutionEvent.MatchTime}'+${substitutionEvent.StoppageTime}'`;
 
 const SubstitutionRow: React.FC<Props> = (props: Props) => {
     const eventStatisticFormatted = { [EventTypes.SUBSTITUTION.value]: 1 };
