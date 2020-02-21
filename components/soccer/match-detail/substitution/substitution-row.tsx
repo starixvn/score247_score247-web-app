@@ -20,12 +20,12 @@ const SubstitutionRow: React.FC<Props> = (props: Props) => {
     return (
         <div className="subtitution-item">
             <div className="time">{BuildEventTime(props.substitutionEvent)}</div>
-            <span className="player-in">
+            <div className="subs-in">
                 {PlayerRow({ player: props.substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: false })}
-            </span>
-            <span className="player-out">
+            </div>
+            <div className="subs-out">
                 {PlayerRow({ player: props.substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: true })}
-            </span>
+            </div>
         </div >);
 };
 
