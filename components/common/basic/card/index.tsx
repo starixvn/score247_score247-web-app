@@ -13,7 +13,7 @@ const Card: React.FC<Props> = ({ children, title, titleIcon, className = "" }) =
             return (<span className={icons}></span>);
         }
 
-        return (icons.forEach(icon => <span className={icon}></span>));
+        return (icons.map((icon, index) => <span className={icon} key={index}></span>));
     };
 
     return (

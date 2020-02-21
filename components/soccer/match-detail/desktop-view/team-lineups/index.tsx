@@ -25,7 +25,7 @@ export default function TeamLineUps(props: Props) {
         {pitchView ? <PitchView pitchView={pitchView} /> : <StartingLineups lineups={lineups.Players} />}
       </Card>
       {lineups.SubstitutionEvents?.some(x => x) && (
-        <Card title={t(SoccerResourceKey.SUBSTITUTION)} >
+        <Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={["icon-substitute-player", "icon-account"]} >
           <Substitution substitutionEvents={lineups.SubstitutionEvents} />
         </Card>
       )}
