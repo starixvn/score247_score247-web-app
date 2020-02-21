@@ -126,7 +126,22 @@
     border-bottom: 1px solid #dedede;
   }
 }
-
+.substitution {
+  .card-title {
+    position: relative;
+  }
+  [class*="icon-arrow"] {
+    font-size: .8rem;
+    position: relative;
+  }
+  .icon-arrow-down1 {
+    padding-right: 0 !important;
+    bottom: -.3rem;
+  }
+  .icon-arrow-up {
+    top: -.3rem;
+  }
+}
 .subtitution-item {
   display: grid;
   grid-template-columns: 3.5rem 1fr;
