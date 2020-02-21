@@ -1,145 +1,149 @@
 [class^="icon-"],
 [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'Score247' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "Score247" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .icon-info:before {
-    content: "\e91d";
+  content: "\e91d";
 }
 .icon-referee:before {
-    content: "\e91e";
+  content: "\e91e";
 }
 .icon-spectator:before {
-    content: "\e91f";
+  content: "\e91f";
 }
 .icon-venue:before {
-    content: "\e920";
+  content: "\e920";
 }
 .icon-arrow-down1:before {
-    content: "\e916";
-    color: #f00;
+  content: "\e916";
+  color: #f00;
 }
 .icon-arrow-up:before {
-    content: "\e917";
-    color: #00c500;
+  content: "\e917";
+  color: #00c500;
 }
 .icon-goal-pen:before {
-    content: "\e918";
+  content: "\e918";
 }
 .icon-account:before {
-    content: "\e914";
+  content: "\e914";
 }
 .icon-goal:before {
-    content: "\e915";
+  content: "\e915";
 }
 .icon-in:before {
-    content: "\e919";
-    color: #00c500;
+  content: "\e919";
+  color: #00c500;
 }
 .icon-out:before {
-    content: "\e91a";
-    color: #f00;
+  content: "\e91a";
+  color: #f00;
 }
 .icon-own-goal:before {
-    content: "\e91b";
-    color: #f00;
+  content: "\e91b";
+  color: #f00;
 }
 .icon-substitute-player:before {
-    content: "\e91c";
+  content: "\e91c";
 }
 .icon-tracker:before {
-    content: "\e921";
+  content: "\e921";
 }
 
 .icon-clock:before {
-    content: "\e913";
+  content: "\e913";
 }
 .icon-more:before {
-    content: "\e912";
-    color: #fff;
+  content: "\e912";
+  color: #fff;
 }
 .icon-sort:before {
-    content: "\e911";
-    color: #fff;
-  }
+  content: "\e911";
+  color: #fff;
+}
 .icon-arrow-down:before {
-    content: "\e910";
+  content: "\e910";
 }
 .icon-close:before {
-    content: "\e90e";
+  content: "\e90e";
 }
 .icon-copy-right:before {
-    content: "\e90f";
-    color: #86888a;
+  content: "\e90f";
+  color: #86888a;
 }
 
 .icon-link-match:before {
-    content: "\e90d";
-    color: #474747;
+  content: "\e90d";
+  color: #474747;
 }
 
 .icon-arrow-right:before {
-    content: "\e90b";
+  content: "\e90b";
 }
 
 .icon-penalty:before {
-    content: "\e90c";
+  content: "\e90c";
 }
 
 .icon-live:before {
-    content: "\e90a";
-    color: #9193a1;
+  content: "\e90a";
+  color: #9193a1;
 }
 
 .icon-esports:before {
-    content: "\e900";
+  content: "\e900";
 }
 
 .icon-basketball:before {
-    content: "\e901";
+  content: "\e901";
 }
 
 .icon-search:before {
-    content: "\e902";
-    color: #fff;
+  content: "\e902";
+  color: #fff;
 }
 
 .icon-soccer:before {
-    content: "\e903";
+  content: "\e903";
 }
 
 .icon-calendar:before {
-    content: "\e906";
-    color: #9193a1;
+  content: "\e906";
+  color: #9193a1;
 }
 
 .icon-hambuger:before {
-    content: "\e904";
-    color: #fff;
+  content: "\e904";
+  color: #fff;
 }
 
 .icon-menu-tv:before {
-    content: "\e905";
+  content: "\e905";
 }
 
 .icon-menu-favorites:before {
-    content: "\e907";
+  content: "\e907";
 }
 
 .icon-menu-leagues:before {
-    content: "\e908";
+  content: "\e908";
 }
 
 .icon-menu-news:before {
-    content: "\e909";
+  content: "\e909";
+}
+
+.player-in {
+  font-weight: bold;
 }

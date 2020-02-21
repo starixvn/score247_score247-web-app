@@ -1,5 +1,5 @@
 import React from "react";
-import { MatchCommentary } from "../../../../apis/soccer/models";
+import { MatchCommentary } from "../../../../../apis/soccer/models";
 
 type Props = {
     comment: MatchCommentary
