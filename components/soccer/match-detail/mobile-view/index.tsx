@@ -14,6 +14,7 @@ import StartingLineups from "../starting-lineups";
 import SubstitutePlayers from "../substitute-players";
 import Substitution from '../substitution';
 import TeamCoach from "../coach";
+import BallTracker from "../ball-tracker";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -37,9 +38,11 @@ const Mobile: React.FC<Props> = props => {
           <Tab>Table</Tab>
         </TabList>
         <SwipeableViews index={selectedTabIndex} onChangeIndex={setTab} enableMouseEvents>
-          <TabPanel><SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} /></TabPanel>
-          <TabPanel forceRender={true}>
-            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-pitch" tabName="" disablePitch={false} />
+          <TabPanel>
+            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
+          </TabPanel>
+          <TabPanel>
+            <BallTracker matchId={props.matchInfo.Match.Id} />
           </TabPanel>
           <TabPanel>
             <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName="statistics" disablePitch={true} />

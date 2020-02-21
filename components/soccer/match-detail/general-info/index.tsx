@@ -8,11 +8,11 @@ import MobileView from "./mobile-view";
 const GeneralInfo: React.FC<Props> = props => {
   const { match } = props;
   const { isMobile } = useDeviceContext();
-  
+
   if (isMobile) {
     return <MobileView match={match} />;
   }
-  
+
   return <DesktopView match={match} />;
 };
 
