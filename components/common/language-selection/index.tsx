@@ -3,7 +3,7 @@ import {
   Language,
   i18n,
   supportedLanguages
-} from "../../common/helpers/Localizer";
+} from "../../../common/helpers/Localizer";
 
 function renderLanguageOption(language: Language) {
   return (

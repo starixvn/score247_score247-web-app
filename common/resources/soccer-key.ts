@@ -6,4 +6,5 @@ export class SoccerResourceKey {
     public static readonly SUBSTITUTE_PLAYERS = "substitute_players";
     public static readonly COACH = "coach";
     public static readonly LINE_UPS = "line_ups";
+    public static readonly AGGREGATE_SCORE = "aggregate_score";
 }

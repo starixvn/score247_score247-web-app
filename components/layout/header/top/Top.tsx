@@ -7,7 +7,7 @@ import { filter } from "lodash";
 import { WithTranslation } from "next-i18next";
 import { withTranslation } from "../../../../common/helpers/Localizer";
 import { ResourceType, CommonResourceKey } from "../../../../common/resources";
-import LanguageSelection from "../../../language-selection";
+import LanguageSelection from "../../../common/language-selection";
 
 type Props = {
   sport: string;

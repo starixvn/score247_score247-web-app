@@ -8,6 +8,7 @@ import { useTranslation } from "../../../../../common/helpers/Localizer";
 import { formatDate } from "../../../../../common/helpers/date-time-helper";
 import { CommonResourceKey } from "../../../../../common/resources";
 import appSettings from "../../../../../app-settings";
+import AggregateScore from "../aggregate-score";
 
 const DesktopView: React.FC<Props> = props => {
   const { match } = props;
@@ -33,6 +34,7 @@ const DesktopView: React.FC<Props> = props => {
           <AwayTeam match={match} />
         </div>
         <span className="icon-menu-favorites"></span>
+        <AggregateScore  match={match}  />
       </div>
     </div>
   );
