@@ -2,10 +2,19 @@ import "./style.scss";
 import React from "react";
 
 type Props = {
-    matchId: string,
-    widgetId: string,
-    tabName: string,
-    disablePitch: boolean
+    matchId: string;
+    widgetId: string;
+    tabName: string;
+    disablePitch?: boolean;
+    className?: string;
+};
+
+export const WidgetTab = {
+    TIMELINE: "timeline",
+    STATISTICS: "statistics",
+    H2H: "headToHead",
+    STANDINGS: "standings",
+    LINEUPS: "lineups"
 };
 
 class SportRadarWidget extends React.Component<Props> {
@@ -16,6 +25,11 @@ class SportRadarWidget extends React.Component<Props> {
         super(props);
         this.id = this.props.matchId.split(":")[this.secondIndex];
     }
+
+    public static defaultProps: Partial<Props> = {
+        disablePitch: true,
+        className: ""
+    };
 
     componentDidMount() {
         const script = document.createElement("script");
@@ -38,7 +52,9 @@ class SportRadarWidget extends React.Component<Props> {
     }
 
     render() {
-        return (<div className="ball-tracker-content" id={this.props.widgetId} data-sr-widget="match.lmtPlus" data-sr-match-id={this.id}></div>);
+        const { className, widgetId } = this.props;
+
+        return (<div className={className} id={widgetId} data-sr-widget="match.lmtPlus" data-sr-match-id={this.id}></div>);
     }
 }
 

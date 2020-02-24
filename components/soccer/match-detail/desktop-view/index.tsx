@@ -9,7 +9,7 @@ import { MatchLineups, MatchCommentary } from "../../../../apis/soccer/models";
 import TeamLineUps from "./team-lineups";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
-import SportRadarWidget from "../sportradar-widget";
+import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Card from "../../../common/basic/card";
 import Commentary from '../commentary';
 
@@ -66,7 +66,7 @@ const Desktop: React.FC<Props> = props => {
                 </Card>)
               }
               <Card>
-                <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
+                <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName={WidgetTab.TIMELINE} className="timeline" />
               </Card>
             </div>
             <div className="line-ups right">
@@ -77,13 +77,13 @@ const Desktop: React.FC<Props> = props => {
         {/* <TabPanel><Commentary comments={props.matchCommentaries} /></TabPanel> */}
         <TabPanel>Commentary page</TabPanel>
         <TabPanel>
-          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName="statistics" disablePitch={true} />
+          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} />
         </TabPanel>
         <TabPanel>
-          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName="headToHead" disablePitch={true} />
+          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName={WidgetTab.H2H} />
         </TabPanel>
         <TabPanel>
-          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-standings" tabName="standings" disablePitch={true} />
+          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-standings" tabName={WidgetTab.STANDINGS} />
         </TabPanel>
       </Tabs>
     </>

@@ -15,7 +15,7 @@ import TeamCoach from "../coach";
 import Card from "../../../common/basic/card";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
-import SportRadarWidget from "../sportradar-widget";
+import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Commentary from '../commentary';
 
 type Props = {
@@ -49,7 +49,7 @@ const Mobile: React.FC<Props> = props => {
               </Card>)
             }
             <Card>
-              <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
+              <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName={WidgetTab.TIMELINE} className="timeline" />
             </Card>
           </TabPanel>
           <TabPanel>
@@ -57,7 +57,7 @@ const Mobile: React.FC<Props> = props => {
             {/* {props.matchCommentaries?.some(x => x) && <Commentary comments={props.matchCommentaries} />} */}
           </TabPanel>
           <TabPanel>
-            <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName="statistics" disablePitch={true} />
+            <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} />
           </TabPanel>
           <TabPanel>
             {matchLineUps?.Id && (
@@ -108,10 +108,10 @@ const Mobile: React.FC<Props> = props => {
             )}
           </TabPanel>
           <TabPanel>
-            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName="headToHead" disablePitch={true} />
+            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName={WidgetTab.H2H} />
           </TabPanel>
           <TabPanel>
-            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-standings" tabName="standings" disablePitch={true} />
+            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-standings" tabName={WidgetTab.STANDINGS} />
           </TabPanel>
         </SwipeableViews>
       </Tabs>
