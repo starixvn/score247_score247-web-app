@@ -10,14 +10,15 @@ import { DeviceContextConsumer } from "../../../contexts/device-context";
 import { DeviceContextType } from "../../../contexts/device-context-type";
 import { updateMatchFromEvent } from "../../../common/helpers/soccer-match-helper";
 import { EventTypes } from '../../../common/enums/event-type';
-import { i18n } from "../../../common/helpers/Localizer";
+import { i18n, withTranslation } from "../../../common/helpers/Localizer";
+import { WithTranslation } from "next-i18next";
 
 const MobileView = dynamic(() => import("./mobile-view"));
 const DesktopView = dynamic(() => import("./desktop-view"));
 
 type Props = {
   matchId: string | string[];
-};
+} & WithTranslation;
 
 type State = {
   matchInfo: MatchInfo | null;
@@ -47,6 +48,8 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     "zhCN": "zh"
   };
 
+  private currentLanguage: string;
+
   constructor(props: Props) {
     super(props);
 
@@ -55,6 +58,20 @@ class SoccerMatchDetail extends React.Component<Props, State> {
       matchLineUps: null,
       matchCommentaries: null
     };
+
+    this.currentLanguage = props.i18n.language;
+  }
+
+  componentDidUpdate(){
+    if(this.currentLanguage !== this.props.i18n.language){
+      this.currentLanguage = this.props.i18n.language;
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.innerHTML = `SIR('changeLanguage','${this.supportedLangues[this.currentLanguage]}')`;
+  
+      document.body.appendChild(script);
+    }
   }
 
   async componentDidMount() {
@@ -73,7 +90,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     script.innerHTML = `(function(a,b,c,d,e,f,g,h,i){a[e]||(i=a[e]=function(){(a[e].q=a[e].q||[]).push(arguments)},i.l=1*new Date,i.o=f,
         g=b.createElement(c),h=b.getElementsByTagName(c)[0],g.async=1,g.src=d,g.setAttribute("n",e),h.parentNode.insertBefore(g,h)
         )})(window,document,"script","https://widgets.sir.sportradar.com/${appSettings.sportRadarWidgetKey}/widgetloader","SIR", {
-            language: '${this.supportedLangues[i18n.language]}'
+            language: '${this.supportedLangues[this.currentLanguage]}'
         });`;
 
     document.body.appendChild(script);
@@ -81,6 +98,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     this.setState({ matchInfo, matchLineUps, matchCommentaries });
   }
 
+  
   setupSignalClient() {
     const eventHandlers = {
       MatchEvent: this.matchEventHandler
@@ -152,4 +170,4 @@ class SoccerMatchDetail extends React.Component<Props, State> {
   }
 }
 
-export default SoccerMatchDetail;
+export default withTranslation()(SoccerMatchDetail);

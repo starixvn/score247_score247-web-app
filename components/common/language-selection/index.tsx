@@ -14,17 +14,15 @@ function renderLanguageOption(language: Language) {
   );
 }
 
-
 export default function LanguageSelection() {
   const { i18n } = useTranslation();
 
   return (
     <select
       value={i18n.language}
-      onChange={event => {i18n.changeLanguage(event.target.value).then(() => Router.reload()); }}
+      onChange={event => i18n.changeLanguage(event.target.value)}
     >
       {supportedLanguages.map(renderLanguageOption)}
     </select>
   );
 }
-
