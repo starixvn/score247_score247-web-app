@@ -41,9 +41,11 @@ const Mobile: React.FC<Props> = props => {
         </TabList>
         <SwipeableViews index={selectedTabIndex} onChangeIndex={setTab} enableMouseEvents>
           <TabPanel>
-            <Card title={t(SoccerResourceKey.MATCH_INFO)} titleIcon={"icon-info"}>
-              <OtherInfo matchInfo={matchInfo} />
-            </Card>
+            {(matchInfo.Venue || matchInfo.Referee || matchInfo.Attendance > 0) &&
+              (<Card title={t(SoccerResourceKey.MATCH_INFO)} titleIcon={"icon-info"}>
+                <OtherInfo matchInfo={matchInfo} />
+              </Card>)
+            }
             <Card>
               <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-timeline" tabName="timeline" disablePitch={true} />
             </Card>
