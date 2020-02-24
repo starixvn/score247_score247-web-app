@@ -10,7 +10,7 @@ type Props = {
 const BuildEventTime = (substitutionEvent: TimelineEvent) =>
     !substitutionEvent.StoppageTime
         ? `${substitutionEvent.MatchTime}'`
-        : `${substitutionEvent.MatchTime}+${substitutionEvent.StoppageTime}'`;
+        : `${substitutionEvent.MatchTime}'+${substitutionEvent.StoppageTime}`;
 
 const SubstitutionRow: React.FC<Props> = (props: Props) => {
     const eventStatisticFormatted = { [EventTypes.SUBSTITUTION.value]: 1 };
@@ -20,11 +20,11 @@ const SubstitutionRow: React.FC<Props> = (props: Props) => {
     return (
         <div className="subtitution-item">
             <div className="time">{BuildEventTime(props.substitutionEvent)}</div>
-            <div className="subs-in">
-                {PlayerRow({ player: props.substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: false })}
-            </div>
             <div className="subs-out">
                 {PlayerRow({ player: props.substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: true })}
+            </div>
+            <div className="subs-in">
+                {PlayerRow({ player: props.substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: false })}
             </div>
         </div >);
 };

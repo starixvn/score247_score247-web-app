@@ -6,7 +6,7 @@ import GeneralInfo from "../general-info";
 import SwipeableViews from "react-swipeable-views";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { MatchLineups } from "../../../../apis/soccer/models";
+import { MatchLineups, MatchCommentary } from "../../../../apis/soccer/models";
 import PitchView from "../pitch-view";
 import StartingLineups from "../starting-lineups";
 import SubstitutePlayers from "../substitute-players";
@@ -16,10 +16,12 @@ import Card from "../../../common/basic/card";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget from "../sportradar-widget";
+import Commentary from '../commentary';
 
 type Props = {
   matchInfo: MatchInfo;
   matchLineUps: MatchLineups | null;
+  matchCommentaries: MatchCommentary[] | null;
 };
 
 const Mobile: React.FC<Props> = props => {
@@ -52,6 +54,7 @@ const Mobile: React.FC<Props> = props => {
           </TabPanel>
           <TabPanel>
             <BallTracker matchId={matchInfo.Match.Id} />
+            {/* {props.matchCommentaries?.some(x => x) && <Commentary comments={props.matchCommentaries} />} */}
           </TabPanel>
           <TabPanel>
             <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName="statistics" disablePitch={true} />

@@ -74,7 +74,8 @@ const Desktop: React.FC<Props> = props => {
             </div>
           </div>
         </TabPanel>
-        <TabPanel>This is Commentary page</TabPanel>
+        {/* <TabPanel><Commentary comments={props.matchCommentaries} /></TabPanel> */}
+        <TabPanel>Commentary page</TabPanel>
         <TabPanel>
           <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName="statistics" disablePitch={true} />
         </TabPanel>
