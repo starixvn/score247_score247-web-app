@@ -60,7 +60,7 @@ const Desktop: React.FC<Props> = props => {
             </div>
             <div className="center">
               <BallTracker matchId={props.matchInfo.Match.Id} />
-              <Commentary comments={props.matchCommentaries} />
+              {/* <Commentary comments={props.matchCommentaries} /> */}
               <Card title={t(SoccerResourceKey.MATCH_INFO)} titleIcon={"icon-info"}>
                 <OtherInfo matchInfo={props.matchInfo} />
               </Card>
