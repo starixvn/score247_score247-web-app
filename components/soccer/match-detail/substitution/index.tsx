@@ -11,9 +11,9 @@ const Substitution: React.FC<Props> = (props: Props) => {
   const sortedSubstitutionEvents = props.substitutionEvents ? sortArray(props.substitutionEvents, "MatchTime", "DESC") : props.substitutionEvents;
 
   return (
-    <>
+    <div>
       {sortedSubstitutionEvents?.map(event => <SubstitutionRow substitutionEvent={event} key={event.Id} />)}
-    </>
+    </div>
   );
 };
 

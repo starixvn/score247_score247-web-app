@@ -86,13 +86,13 @@ const Mobile: React.FC<Props> = props => {
                   )
                 }
                 {(matchLineUps.Home.SubstitutionEvents?.some(x => x) || matchLineUps.Away.SubstitutionEvents?.some(x => x))
-                  && (<Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={"icon-substitution"}>
+                  && (<Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={"icon-substitution"} className="substitution">
                     <div className="line-ups-wrapper">
                       {matchLineUps.Home.SubstitutionEvents?.some(x => x) && <Substitution substitutionEvents={matchLineUps.Home.SubstitutionEvents} />}
                       {matchLineUps.Away.SubstitutionEvents?.some(x => x) && <Substitution substitutionEvents={matchLineUps.Away.SubstitutionEvents} />}
                     </div>
                   </Card>)}
-                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"}>
+                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"} className="substitute-player">
                   <div className="line-ups-wrapper">
                     <SubstitutePlayers substitutePlayers={matchLineUps.Home.Substitutions} />
                     <SubstitutePlayers substitutePlayers={matchLineUps.Away.Substitutions} />

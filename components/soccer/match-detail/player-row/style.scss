@@ -1,8 +1,9 @@
 .player-row {
     display: flex;
     justify-content: flex-start;
-    padding: .8rem 1.2rem;
+    padding: 1.2rem;
     align-items: center;
+    border-bottom: 1px solid #DEE2E6;
     .jersey {
         width: 1.8rem;
         display: inline-block;
@@ -11,7 +12,7 @@
         font-size: 1.9rem;
     }
     .event-statistic {
-        width: 6.2rem;
+        width: 5.6rem;
         text-align: right;        
     }
     [class*="icon-"] {
