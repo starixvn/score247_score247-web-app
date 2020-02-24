@@ -3,17 +3,16 @@ import React, { PureComponent } from "react";
 import { addDays } from "date-fns";
 import { formatDate } from "../../../common/helpers/date-time-helper";
 import { DateTimeFormat } from "../../../common/constants";
+import {  withTranslation } from "../../../common/helpers/Localizer";
 import { Props } from "./type";
-import { useTranslation } from "../../../common/helpers/Localizer";
 
 
 class DateSwitch extends PureComponent<Props> {
   render() {
-    const { currentDate, onClick } = this.props;
+    const { currentDate, onClick, i18n } = this.props;
     const beforeCurrentDate = addDays(currentDate, -1);
     const afterCurrentDate = addDays(currentDate, 1);
-    const { i18n } = useTranslation();
-    
+
     return (
       <div className="calendar-switch">
         <button onClick={onClick.bind(this, beforeCurrentDate)} className="btn btn-primary-outline">
@@ -35,4 +34,4 @@ class DateSwitch extends PureComponent<Props> {
   }
 }
 
-export default DateSwitch;
+export default withTranslation()(DateSwitch);

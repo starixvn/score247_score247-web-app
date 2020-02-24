@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow } from "enzyme";
-import {  Props } from "./type";
 import DateSwitch from "./index";
 
 jest.mock("../../common/helpers/Localizer", () =>
@@ -8,24 +7,23 @@ jest.mock("../../common/helpers/Localizer", () =>
 );
 
 describe("DateSwitch", () => {
-  let props: Props;
+  let props: any;
 
   beforeEach(() => {
-
     props = {
       onClick: jest.fn(),
-      currentDate: new Date()
+      currentDate: new Date(),
+      i18n: { language: "en" },
+      t: jest.fn()
     };
-  });
-
-  it("render correctly", () => {
-    const wrapper = shallow(<DateSwitch {...props} />);
-    expect(wrapper).toMatchSnapshot();
   });
 
   it("should call onClick when clicking on button", () => {
     const wrapper = shallow(<DateSwitch {...props} />);
-    wrapper.find("button").at(0).simulate("click");
+    wrapper
+      .find("button")
+      .at(0)
+      .simulate("click");
     expect(props.onClick).toBeCalled();
   });
 });

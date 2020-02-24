@@ -4,7 +4,15 @@ import { WithTranslation } from "next-i18next";
 export const withTranslation = function() {
   return function(Component: React.ComponentType<WithTranslation>) {
     return function(props: WithTranslation) {
-      return <Component {...props} />;
+      const hook = useTranslation();
+
+      const passDownProps: any = {
+        ...props,
+        ...hook,
+        tReady: true,
+      };
+
+      return <Component {...passDownProps} />;
     };
   };
 };
