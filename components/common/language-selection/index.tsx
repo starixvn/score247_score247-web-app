@@ -2,9 +2,9 @@ import React from "react";
 import {
   Language,
   supportedLanguages,
-  useTranslation,
-  Router
+  useTranslation
 } from "../../../common/helpers/Localizer";
+import { changeWidgetLanguage } from "../../../common/helpers/widget";
 
 function renderLanguageOption(language: Language) {
   return (
@@ -20,7 +20,11 @@ export default function LanguageSelection() {
   return (
     <select
       value={i18n.language}
-      onChange={event => i18n.changeLanguage(event.target.value)}
+      onChange={event =>
+        i18n
+          .changeLanguage(event.target.value)
+          .then(() => changeWidgetLanguage(i18n.language))
+      }
     >
       {supportedLanguages.map(renderLanguageOption)}
     </select>

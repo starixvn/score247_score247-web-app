@@ -1,7 +1,11 @@
 import "./style.scss";
 import React from "react";
 import dynamic from "next/dynamic";
-import { MatchInfo, MatchLineups, MatchCommentary } from "../../../apis/soccer/models";
+import {
+  MatchInfo,
+  MatchLineups,
+  MatchCommentary
+} from "../../../apis/soccer/models";
 import { SoccerAPI } from "../../../apis/soccer/soccer-api";
 import { SoccerSignalRClient } from "../../../apis/soccer/soccer-signalr-client";
 import appSettings from "../../../app-settings";
@@ -9,16 +13,14 @@ import { MatchEventSignalRMessage } from "../../../apis/soccer/models/signalr-me
 import { DeviceContextConsumer } from "../../../contexts/device-context";
 import { DeviceContextType } from "../../../contexts/device-context-type";
 import { updateMatchFromEvent } from "../../../common/helpers/soccer-match-helper";
-import { EventTypes } from '../../../common/enums/event-type';
-import { i18n, withTranslation } from "../../../common/helpers/Localizer";
-import { WithTranslation } from "next-i18next";
+import { EventTypes } from "../../../common/enums/event-type";
 
 const MobileView = dynamic(() => import("./mobile-view"));
 const DesktopView = dynamic(() => import("./desktop-view"));
 
 type Props = {
   matchId: string | string[];
-} & WithTranslation;
+};
 
 type State = {
   matchInfo: MatchInfo | null;
@@ -39,17 +41,6 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     EventTypes.MATCH_STARTED.value
   ];
 
-  supportedLangues: { [key: string]: string } = {
-    "en": "en",
-    "vi": "vi",
-    "id": "id",
-    "th": "th",
-    "zhTW": "zht",
-    "zhCN": "zh"
-  };
-
-  private currentLanguage: string;
-
   constructor(props: Props) {
     super(props);
 
@@ -58,26 +49,18 @@ class SoccerMatchDetail extends React.Component<Props, State> {
       matchLineUps: null,
       matchCommentaries: null
     };
-
-    this.currentLanguage = props.i18n.language;
-  }
-
-  componentDidUpdate(){
-    if(this.currentLanguage !== this.props.i18n.language){
-      this.currentLanguage = this.props.i18n.language;
-
-      const script = document.createElement("script");
-      script.async = true;
-      script.innerHTML = `SIR('changeLanguage','${this.supportedLangues[this.currentLanguage]}')`;
-  
-      document.body.appendChild(script);
-    }
   }
 
   async componentDidMount() {
     const matchInfo = await SoccerAPI.GetMatch(this.props.matchId);
-    const matchLineUps = await SoccerAPI.GetMatchLineups(this.props.matchId, new Date(matchInfo.Match.EventDate[0]));
-    const matchCommentaries = await SoccerAPI.GetMatchCommentaries(this.props.matchId, new Date(matchInfo.Match.EventDate[0]));
+    const matchLineUps = await SoccerAPI.GetMatchLineups(
+      this.props.matchId,
+      new Date(matchInfo.Match.EventDate[0])
+    );
+    const matchCommentaries = await SoccerAPI.GetMatchCommentaries(
+      this.props.matchId,
+      new Date(matchInfo.Match.EventDate[0])
+    );
 
     if (!matchInfo.TimelineEvents) {
       matchInfo.TimelineEvents = [];
@@ -85,20 +68,9 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
     this.setupSignalClient();
 
-    const script = document.createElement("script");
-    script.async = true;
-    script.innerHTML = `(function(a,b,c,d,e,f,g,h,i){a[e]||(i=a[e]=function(){(a[e].q=a[e].q||[]).push(arguments)},i.l=1*new Date,i.o=f,
-        g=b.createElement(c),h=b.getElementsByTagName(c)[0],g.async=1,g.src=d,g.setAttribute("n",e),h.parentNode.insertBefore(g,h)
-        )})(window,document,"script","https://widgets.sir.sportradar.com/${appSettings.sportRadarWidgetKey}/widgetloader","SIR", {
-            language: '${this.supportedLangues[this.currentLanguage]}'
-        });`;
-
-    document.body.appendChild(script);
-
     this.setState({ matchInfo, matchLineUps, matchCommentaries });
   }
 
-  
   setupSignalClient() {
     const eventHandlers = {
       MatchEvent: this.matchEventHandler
@@ -138,12 +110,16 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
       updateMatchFromEvent(matchInfo.Match, timeline, matchResult);
 
-      if (this.eventTypeToChangeLineUps.includes(matchEvent.Timeline.Type.Value)) {
+      if (
+        this.eventTypeToChangeLineUps.includes(matchEvent.Timeline.Type.Value)
+      ) {
         setTimeout(async () => {
-          const matchLineUps = await SoccerAPI.GetMatchLineups(matchInfo.Match.Id, new Date(matchInfo.Match.EventDate[0]));
+          const matchLineUps = await SoccerAPI.GetMatchLineups(
+            matchInfo.Match.Id,
+            new Date(matchInfo.Match.EventDate[0])
+          );
           this.setState({ matchInfo, matchLineUps });
         }, 5000); //NOSONAR
-
       } else {
         this.setState({ matchInfo });
       }
@@ -153,9 +129,21 @@ class SoccerMatchDetail extends React.Component<Props, State> {
   renderMatchDetail = (value: DeviceContextType) => {
     if (this.state.matchInfo) {
       if (value.isMobile) {
-        return <MobileView matchInfo={this.state.matchInfo} matchLineUps={this.state.matchLineUps} matchCommentaries={this.state.matchCommentaries} />;
+        return (
+          <MobileView
+            matchInfo={this.state.matchInfo}
+            matchLineUps={this.state.matchLineUps}
+            matchCommentaries={this.state.matchCommentaries}
+          />
+        );
       }
-      return <DesktopView matchInfo={this.state.matchInfo} matchLineUps={this.state.matchLineUps} matchCommentaries={this.state.matchCommentaries} />;
+      return (
+        <DesktopView
+          matchInfo={this.state.matchInfo}
+          matchLineUps={this.state.matchLineUps}
+          matchCommentaries={this.state.matchCommentaries}
+        />
+      );
     }
 
     return null;
@@ -170,4 +158,4 @@ class SoccerMatchDetail extends React.Component<Props, State> {
   }
 }
 
-export default withTranslation()(SoccerMatchDetail);
+export default SoccerMatchDetail;
