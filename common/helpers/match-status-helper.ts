@@ -38,7 +38,7 @@ function buildMatchMinuteWithInjuryTime(
     displayInjuryTime = announcementInjuryTime;
   }
 
-  return `${periodTime.endTime}+${displayInjuryTime}'`;
+  return `${periodTime.endTime}'+${displayInjuryTime}`;
 }
 
 function buildMatchMinute(match: MatchSummary): string {
