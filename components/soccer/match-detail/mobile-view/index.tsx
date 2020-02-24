@@ -57,7 +57,7 @@ const Mobile: React.FC<Props> = props => {
             {/* {props.matchCommentaries?.some(x => x) && <Commentary comments={props.matchCommentaries} />} */}
           </TabPanel>
           <TabPanel>
-            <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} />
+            <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} className="statistics" />
           </TabPanel>
           <TabPanel>
             {matchLineUps?.Id && (
@@ -108,7 +108,7 @@ const Mobile: React.FC<Props> = props => {
             )}
           </TabPanel>
           <TabPanel>
-            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName={WidgetTab.H2H} />
+            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName={WidgetTab.H2H} className="h2h" />
           </TabPanel>
           <TabPanel>
             <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-standings" tabName={WidgetTab.STANDINGS} />

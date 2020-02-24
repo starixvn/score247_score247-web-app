@@ -77,7 +77,7 @@ const Desktop: React.FC<Props> = props => {
         {/* <TabPanel><Commentary comments={props.matchCommentaries} /></TabPanel> */}
         <TabPanel>Commentary page</TabPanel>
         <TabPanel>
-          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} />
+          <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} className="statistics" />
         </TabPanel>
         <TabPanel>
           <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName={WidgetTab.H2H} />
