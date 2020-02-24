@@ -12,27 +12,30 @@ import AggregateScore from "../aggregate-score";
 const MobileView: React.FC<Props> = props => {
   const { match } = props;
   return (
-    <div className="general-info">
-      <div className="extra-info">
-        <div className="league-name">
-          <img src={`${appSettings.assetsUrl}/flags/${match.CountryCode}.svg`} />
-          {match?.LeagueName}
+    <div>
+      <div className="general-info">
+        <div className="extra-info">
+          <div className="league-name">
+            <img src={`${appSettings.assetsUrl}/flags/${match.CountryCode}.svg`} />
+            {match?.LeagueName}
+          </div>
+          <div className="kick-off-time">
+            {formatDate(new Date(match.EventDate[0]), DateTimeFormat.DAY_MONTH_ONLY)}
+          </div>
         </div>
-        <div className="kick-off-time">
-          {formatDate(new Date(match.EventDate[0]), DateTimeFormat.DAY_MONTH_ONLY)}
-        </div>
+        <div className="main-info">
+          <Status match={match} />
+          <div className="match-section">
+            <HomeTeam match={match} />
+            <Score match={match} />
+            <AwayTeam match={match} />
+          </div>
+          <span className="icon-menu-favorites"></span>        
+        </div>   
       </div>
-      <div className="main-info">
-        <Status match={match} />
-        <div className="match-section">
-          <HomeTeam match={match} />
-          <Score match={match} />
-          <AwayTeam match={match} />
-        </div>
-        <span className="icon-menu-favorites"></span>
-        <AggregateScore match={match} />
-      </div>
+      <AggregateScore match={match} />
     </div>
+    
   );
 };
 

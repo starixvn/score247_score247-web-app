@@ -2,6 +2,7 @@
   border-radius: 0.4rem;
   box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.25);
   margin-bottom: 0.8rem;
+  font-size: 1.3rem;
   .mobile & {
     margin: 0 0.8rem 0.8rem 0.8rem;
     background-color: #fff;
@@ -45,7 +46,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 0 3.6rem;
+  padding: 1.2rem 0 2.4rem;
   position: relative;
 
   .mobile & {
@@ -184,5 +185,17 @@
       left: unset;
       transform: unset;
     }
+  }
+}
+
+.arrg-text {
+  grid-column: 1/4;
+  justify-self: center;
+  padding-top: 3rem;
+  color: #292929;
+  .mobile & {
+    text-align: center;
+    padding: .8rem 0;
+    font-size: 1.1rem;
   }
 }
