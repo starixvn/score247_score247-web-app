@@ -39,6 +39,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
   supportedLangues: { [key: string]: string } = {
     "en": "en",
+    "vi": "vi",
     "id": "id",
     "th": "th",
     "zhTW": "zht",

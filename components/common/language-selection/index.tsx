@@ -2,7 +2,8 @@ import React from "react";
 import {
   Language,
   supportedLanguages,
-  useTranslation
+  useTranslation,
+  Router
 } from "../../../common/helpers/Localizer";
 
 function renderLanguageOption(language: Language) {
@@ -20,7 +21,7 @@ export default function LanguageSelection() {
   return (
     <select
       value={i18n.language}
-      onChange={event => i18n.changeLanguage(event.target.value)}
+      onChange={event => {i18n.changeLanguage(event.target.value).then(() => Router.reload()); }}
     >
       {supportedLanguages.map(renderLanguageOption)}
     </select>

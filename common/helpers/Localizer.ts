@@ -3,14 +3,7 @@ import { NextPage } from "next";
 
 const NextI18NextInstance = new NextI18Next({
   defaultLanguage: "en",
-  otherLanguages: ["vi", "id", "th", "zhTW", "zhCN"],
-  localeSubpaths: {
-    vi: "vi",
-    id: "id",
-    th: "th",
-    zhCN: "zhCN",
-    zhTW: "zhTW"
-  }
+  otherLanguages: ["vi", "id", "th", "zhTW", "zhCN"]
 });
 
 export const {
@@ -18,7 +11,8 @@ export const {
   appWithTranslation,
   Link,
   i18n,
-  useTranslation
+  useTranslation,
+  Router
 } = NextI18NextInstance;
 
 export type LocalizedPage<P = {}, IP = P> = NextPage<

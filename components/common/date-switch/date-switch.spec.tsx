@@ -21,6 +21,7 @@ describe("DateSwitch", () => {
   it("should call onClick when clicking on button", () => {
     const wrapper = shallow(<DateSwitch {...props} />);
     wrapper
+      .dive()
       .find("button")
       .at(0)
       .simulate("click");
