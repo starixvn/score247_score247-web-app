@@ -9,8 +9,8 @@ import { MatchSummary } from "../../../../../apis/soccer/models";
 import Status from "../status";
 import { useDeviceContext } from "../../../../../contexts/device-context";
 
-function isPreMatch(matchStatusId?: number): boolean {
-  return !matchStatusId || PreMatchStatuses.some(x => x === matchStatusId);
+function isPreMatch(eventStatusId?: number): boolean {
+  return !eventStatusId || PreMatchStatuses.some(x => x === eventStatusId);
 }
 
 function renderFirstHalfScore(match: MatchSummary) {
@@ -41,8 +41,8 @@ function renderFirstHalfScore(match: MatchSummary) {
 
 const Score: React.FC<Props> = props => {
   const { match } = props;
-  const matchStatusId = match.MatchStatus?.Value;
-  const renderScore = !isPreMatch(matchStatusId);
+  const eventStatusId = match.EventStatus?.Value;
+  const renderScore = !isPreMatch(eventStatusId);
   const { isMobile } = useDeviceContext();
 
   return (

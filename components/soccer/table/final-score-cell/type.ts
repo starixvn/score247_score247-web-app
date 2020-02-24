@@ -5,4 +5,5 @@ export type Props = {
     awayScore: number;
     firstHalfPeriod?: MatchPeriod;
     matchStatusId?: number;
+    eventStatusId?: number;
 };

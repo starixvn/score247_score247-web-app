@@ -4,10 +4,10 @@ import { Props } from "./type";
 import { MatchStatusType, PreMatchStatuses } from "../../../../common/enums/match-status-type";
 import { MatchPeriod } from "../../../../apis/soccer/models";
 
-function isPreMatch(matchStatusId?: number): boolean {
+function isPreMatch(eventStatusId?: number): boolean {
   return (
-    matchStatusId === undefined ||
-    PreMatchStatuses.some(x => x === matchStatusId)
+    eventStatusId === undefined ||
+    PreMatchStatuses.some(x => x === eventStatusId)
   );
 }
 
@@ -33,9 +33,9 @@ function renderFirstHalfScore(
 }
 
 export default function FinalScoreCell(props: Props) {
-  const { firstHalfPeriod, homeScore, awayScore, matchStatusId } = props;
+  const { firstHalfPeriod, homeScore, awayScore, matchStatusId, eventStatusId } = props;
   const { isMobile } = React.useContext(DeviceContext);
-  const displayScore = isPreMatch(matchStatusId)
+  const displayScore = isPreMatch(eventStatusId)
     ? "-"
     : `${homeScore} - ${awayScore}`;
 

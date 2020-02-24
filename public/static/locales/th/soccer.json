@@ -6,7 +6,7 @@
   "substitute_players": "substitute players",
   "coach": "coach",
   "line_ups": "line-ups",
-  "aggregate_score": "2nd leg, aggregate score {{score}}",
+  "aggregate_score": "2nd leg, aggregate score: {{score}}",
   "info": "Info",
   "tracker": "Tracker",
   "stats": "Stats",

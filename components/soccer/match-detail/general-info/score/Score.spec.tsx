@@ -16,10 +16,7 @@ describe("Score", () => {
           Value: MatchStatusType.NOT_STARTED.value,
           DisplayName: MatchStatusType.NOT_STARTED.displayName
         },
-        MatchStatus: {
-          Value: MatchStatusType.NOT_STARTED.value,
-          DisplayName: MatchStatusType.NOT_STARTED.displayName
-        }
+        MatchStatus: null
       }
     };
 

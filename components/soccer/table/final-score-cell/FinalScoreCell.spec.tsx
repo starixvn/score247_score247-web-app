@@ -21,7 +21,8 @@ describe("FinalScoreCell", () => {
           Value: PeriodType.Regular
         }
       },
-      matchStatusId: MatchStatusType.SECOND_HALF.value
+      matchStatusId: MatchStatusType.SECOND_HALF.value,
+      eventStatusId: MatchStatusType.LIVE.value
     };
   });
 
