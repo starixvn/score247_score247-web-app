@@ -7,9 +7,6 @@ Resource          ../Interfaces/CreateDataTool/LoginPage.txt
 Resource          ../Actions/CommonAction.txt
 
 *** Keywords ***
-test
-    ${NewMatchID}    Create Post Match    sr:tournament:17    postponed
-
 Verify Live Match
     ${NewMatchID}    Create New Match    sr:tournament:17
     Scenario MatchStart
@@ -183,8 +180,8 @@ Verify Live Match
     Selenium2Library.switch browser    tab2
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
-    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    3
-    Should be equal    45+    ${Status_Result_txt}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    45'+    ${Status_Result_txt}
     # Score change in Injury time
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -322,8 +319,8 @@ Verify Live Match
     Selenium2Library.switch browser    tab2
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
-    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    3
-    Should be equal    90+    ${Status_Result_txt}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    90'+    ${Status_Result_txt}
     # Score change in Injury time
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -473,8 +470,8 @@ Verify Live Match
     Selenium2Library.switch browser    tab2
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
-    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
-    Should be equal    105+    ${Status_Result_txt}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    5
+    Should be equal    105'+    ${Status_Result_txt}
     # score change
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -602,8 +599,8 @@ Verify Live Match
     Selenium2Library.switch browser    tab2
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
-    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
-    Should be equal    120+    ${Status_Result_txt}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    5
+    Should be equal    120'+    ${Status_Result_txt}
     # score change
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -938,6 +935,11 @@ Get yellow card value for Home
     ${YellowCard_Result_txt}    Selenium2Library.Get text    ${YellowCard_Result_Xpath}
     [Return]    ${YellowCard_Result_txt}
 
+Get yellow card value for Home General
+    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class="home-section"]//span[@class="yellow-card"]    timeout=60
+    ${YellowCard_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class="home-section"]//span[@class="yellow-card"]
+    [Return]    ${YellowCard_Result_txt}
+
 Get red card value for Home
     [Arguments]    ${NewMatchID}
     ${RedCard_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[5]//span[@class='red-card']
@@ -945,6 +947,21 @@ Get red card value for Home
     Selenium2Library.Page Should Contain Element    ${RedCard_Result_Xpath}    timeout=60
     ${RedCard_Result_txt}    Selenium2Library.Get text    ${RedCard_Result_Xpath}
     [Return]    ${RedCard_Result_txt}
+
+Get yellow card value for Away General
+    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class="away-section"]//span[@class="yellow-card"]    timeout=60
+    ${YellowCard_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class="away-section"]//span[@class="yellow-card"]
+    [Return]    ${YellowCard_Result_txt}
+
+Get red card value for Home General
+    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class="home-section"]//span[@class="red-card"]    timeout=60
+    ${YellowCard_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class="home-section"]//span[@class="red-card"]
+    [Return]    ${YellowCard_Result_txt}
+
+Get red card value for Away General
+    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class="away-section"]//span[@class="red-card"]    timeout=60
+    ${YellowCard_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class="away-section"]//span[@class="red-card"]
+    [Return]    ${YellowCard_Result_txt}
 
 Get yellow card value for Away
     [Arguments]    ${NewMatchID}
@@ -970,6 +987,19 @@ Get Status
     ${Status_Result_txt}    Selenium2Library.Get text    ${Status_Result_Xpath}
     [Return]    ${Status_Result_txt}
 
+Get Status General
+    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class='status']    timeout=60
+    ${Status_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class='status']
+    [Return]    ${Status_Result_txt}
+
+Get Score General
+    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class='home-score']    timeout=60
+    ${Score_Home_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class='home-score']
+    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class='away-score']    timeout=60
+    ${Score_Away_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class='away-score']
+    ${Score_Result_txt}=    Catenate    SEPARATOR=    ${Score_Home_Result_txt}-${Score_Away_Result_txt}
+    [Return]    ${Score_Result_txt}
+
 Get Score
     [Arguments]    ${NewMatchID}
     ${Score_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[6]
@@ -984,4 +1014,9 @@ Get Score 1H
     ${1H_Result_Xpath}=    Replace String    ${1H_Result_Xpath}    ${space}    ${empty}
     Selenium2Library.Page Should Contain Element    ${1H_Result_Xpath}    timeout=60
     ${1H_Result_txt}    Selenium2Library.Get text    ${1H_Result_Xpath}
+    [Return]    ${1H_Result_txt}
+
+Get Score 1H General
+    Selenium2Library.Page Should Contain Element    //div[@class="score"]/div[@class="half-score"]    timeout=60
+    ${1H_Result_txt}    Selenium2Library.Get text    //div[@class="score"]/div[@class="half-score"]
     [Return]    ${1H_Result_txt}

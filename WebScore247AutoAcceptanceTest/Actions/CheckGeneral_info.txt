@@ -1,0 +1,1918 @@
+*** Settings ***
+Library           Selenium2Library
+Library           AppiumLibrary
+Library           DateTime
+Resource          ../Interfaces/CreateDataTool/CreateMatch.txt
+Resource          ../Interfaces/CreateDataTool/LoginPage.txt
+Resource          ../Actions/CommonAction.txt
+Resource          ../Actions/CheckLiveMatch.txt
+
+*** Keywords ***
+Open General Info
+    [Arguments]    ${NewMatchID}
+    ${Score_Result_Xpath}=    Catenate    SEPARATOR=    //input[@id = '${NewMatchID}']//ancestor::tr/td[6]
+    Selenium2Library.Page Should Contain Element    ${Score_Result_Xpath}    timeout=60
+    Selenium2Library.Click Element    ${Score_Result_Xpath}
+    Select Window    new
+
+Verify Live Match
+    ###--- Create new match ----###
+    ${NewMatchID}    Create New Match    sr:tournament:17
+    ###--- Match Start ----###
+    Scenario MatchStart
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    1
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Open Home Page
+    sleep    3s
+    # Check Status
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should not be equal    -    ${Status_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    0 - 0    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    0 - 0    ${1H_Result_txt}
+    sleep    1s
+    ###--- Check match info ----###
+    Open General Info    ${NewMatchID}
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}<46
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    0-0    ${Score_Result_txt}
+    ###--- Score change scenario ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    regular_period    10
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 0    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 0    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    1-0    ${Score_Result_txt}
+    ###--- Score change scenario ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    regular_period    10
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    1-1    ${Score_Result_txt}
+    ###---    Card Event scenario yellow_card----###
+    Selenium2Library.switch browser    tab1
+    # yellow card for Home
+    Selenium2Library.Reload Page
+    sleep    2s
+    Card Event    home    yellow_card    11
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    # check no. of yellow card
+    ${YellowCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${YellowCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${YellowCard_Result_txt}    Get yellow card value for Home General
+    sleep    1s
+    Should be equal    1    ${YellowCard_Result_txt}
+    ###---    Card Event scenario red_card----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Card Event    home    red_card    12
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${RedCard_Result_txt}    Get red card value for Home General
+    sleep    1s
+    Should be equal    1    ${RedCard_Result_txt}
+    ###---    Card Event scenario yellow_red_card ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Card Event    home    yellow_red_card    13
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    sleep    1s
+    ###--- Check match info ----###
+    Select Window    new
+    ${RedCard_Result_txt}    Get red card value for Home General
+    sleep    1s
+    Should be equal    2    ${RedCard_Result_txt}
+    ###---    Card Event scenario yellow ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    2s
+    Card Event    away    yellow_card    14
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${YellowCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${YellowCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    ${YellowCard_Result_txt}    Get yellow card value for Away General
+    sleep    1s
+    Should be equal    1    ${YellowCard_Result_txt}
+    ###---    Card Event scenario red away ----###
+    Selenium2Library.switch browser    tab1
+    Card Event    away    red_card    15
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    ${redCard_Result_txt}    Get red card value for Away General
+    sleep    1s
+    Should be equal    1    ${redCard_Result_txt}
+    ###---    Card Event scenario yellow_red_card away ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Card Event    away    yellow_red_card    16
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    ${redCard_Result_txt}    Get red card value for Away General
+    sleep    1s
+    Should be equal    2    ${redCard_Result_txt}
+    ####### Injury Time 1H ####
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Injury Time    1st_half
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    45'+    ${Status_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    ${Status_Result_txt}    45'+
+    # Score change in Injury time
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    extra_time    45
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    2 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    2-1    ${Score_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    extra_time    45
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    2 - 2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # Check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    2-2    ${Score_Result_txt}
+    ###-------- Break time 1H
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Match Time Event    break_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    HT    ${Status_Result_txt}
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    2 - 2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    Should be equal    ${Status_Result_txt}    HT
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    #######----- 2nd Start
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    2nd_period_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}>45
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}>45
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    2-2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    #######----- 2nd Start - score change Home
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    regular_period    55
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    ### check main data
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    3 - 2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    3-2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    #######----- 2nd Start - score change Away
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    regular_period    55
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    3 - 3    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    3-3    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    #######----- Injury Time 2H -------####
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Injury Time    2nd_half
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    # check main data
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    90'+    ${Status_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    ${Status_Result_txt}    90'+
+    # Score change home in Injury time
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    extra_time    90
+    sleep    15s
+    Wait Until Keyword Succeeds    20 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    4 - 3    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    4-3    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    # Score change away in Injury time
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    extra_time    90
+    sleep    15s
+    Wait Until Keyword Succeeds    30 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    4 - 4    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # Check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    4-4    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    ####### Break 2nd    Awaiting Extra Time
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    await_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    Await. ET    ${Status_Result_txt}
+    #Check Extra Line
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Should be equal    FT[4-4]    ${Extra_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    Should be equal    ${Status_Result_txt}    Await. ET
+    ####### Ext_Time    1st    start
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    1st_extra_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}>90
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    overtime    100
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    5 - 4    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    overtime    100
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    Get Score    ${NewMatchID}
+    Should be equal    5 - 5    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    Selenium2Library.switch browser    tab1
+    # yellow card for Home
+    Selenium2Library.Reload Page
+    sleep    2s
+    Card Event    home    yellow_card    100
+    Wait Until Keyword Succeeds    20 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Log to console    ${Score_Result_txt}
+    #Should be equal    4 - 4    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    #Check Extra Line
+    Log to console    121212
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[1-1]    ${Extra_Result_txt}
+    ####### Injury Ext_Time    1st
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Injury Time    1st_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    5
+    Should be equal    105'+    ${Status_Result_txt}
+    # score change
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    overtime    105
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    6 - 5    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[2-1]    ${Extra_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    overtime    105
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    Get Score    ${NewMatchID}
+    Should be equal    6 - 6    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[2-2]    ${Extra_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###### Break Extime
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    break_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    ETHT    ${Status_Result_txt}
+    ####### Ext_Time    2nd    start
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    2nd_extra_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}>105
+    # score change
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    overtime    110
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    7 - 6    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[3-2]    ${Extra_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    overtime    110
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    Get Score    ${NewMatchID}
+    Should be equal    7 - 7    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[3-3]    ${Extra_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ####### Injury Ext_Time    2nd
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Injury Time    2nd_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    5
+    Should be equal    120'+    ${Status_Result_txt}
+    # score change
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    overtime    120
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    8 - 7    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[4-3]    ${Extra_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    overtime    120
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    Get Score    ${NewMatchID}
+    Should be equal    8 - 8    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[4-4]    ${Extra_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ######### Break Awaiting Penalty    Await. PEN
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    await_penalty
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    Await. PEN    ${Status_Result_txt}
+    ####### PEN start
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    penalty_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    PEN    ${Status_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[4-4],PEN[0-0]    ${Extra_Result_txt}
+    ### PEN Shoot Out
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    PEN Shoot Event    home    scored    Mike
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    PEN    ${Status_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[4-4],PEN[1-0]    ${Extra_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    PEN Shoot Event    away    scored    Mike
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    PEN    ${Status_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[4-4],PEN[1-1]    ${Extra_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    PEN Shoot Event    home    scored    Mike
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    PEN    ${Status_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    PEN Shoot Event    away    missed    Mike
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    PEN    ${Status_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
+    ######### End Match After Pen
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time End    match_end_pen    home
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    AP    ${Status_Result_txt}
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Log to console    ${Extra_Result_txt}
+    Should be equal    FT[4-4],ET[4-4],AGGR[10-10],PEN[2-1]    ${Extra_Result_txt}
+
+test
+    ###--- Create new match ----###
+    ${NewMatchID}    Create New Match    sr:tournament:17
+    ###--- Match Start ----###
+    Scenario MatchStart
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    1
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Open Home Page
+    sleep    3s
+    # Check Status
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should not be equal    -    ${Status_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    0 - 0    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    0 - 0    ${1H_Result_txt}
+    sleep    1s
+    ###--- Check match info ----###
+    Open General Info    ${NewMatchID}
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}<46
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    0-0    ${Score_Result_txt}
+    ###--- Score change scenario ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    regular_period    10
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 0    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 0    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    1-0    ${Score_Result_txt}
+    ###--- Score change scenario ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    regular_period    10
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    1-1    ${Score_Result_txt}
+    ###---    Card Event scenario yellow_card----###
+    Selenium2Library.switch browser    tab1
+    # yellow card for Home
+    Selenium2Library.Reload Page
+    sleep    2s
+    Card Event    home    yellow_card    11
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    # check no. of yellow card
+    ${YellowCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${YellowCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${YellowCard_Result_txt}    Get yellow card value for Home General
+    sleep    1s
+    Should be equal    1    ${YellowCard_Result_txt}
+    ###---    Card Event scenario red_card----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Card Event    home    red_card    12
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${RedCard_Result_txt}    Get red card value for Home General
+    sleep    1s
+    Should be equal    1    ${RedCard_Result_txt}
+    ###---    Card Event scenario yellow_red_card ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Card Event    home    yellow_red_card    13
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    sleep    1s
+    ###--- Check match info ----###
+    Select Window    new
+    ${RedCard_Result_txt}    Get red card value for Home General
+    sleep    1s
+    Should be equal    2    ${RedCard_Result_txt}
+    ###---    Card Event scenario yellow ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    2s
+    Card Event    away    yellow_card    14
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${YellowCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${YellowCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    ${YellowCard_Result_txt}    Get yellow card value for Away General
+    sleep    1s
+    Should be equal    1    ${YellowCard_Result_txt}
+    ###---    Card Event scenario red away ----###
+    Selenium2Library.switch browser    tab1
+    Card Event    away    red_card    15
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    1s
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    ${redCard_Result_txt}    Get red card value for Away General
+    sleep    1s
+    Should be equal    1    ${redCard_Result_txt}
+    ###---    Card Event scenario yellow_red_card away ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Card Event    away    yellow_red_card    16
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    1 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    1 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    ${redCard_Result_txt}    Get red card value for Away General
+    sleep    1s
+    Should be equal    2    ${redCard_Result_txt}
+    ####### Injury Time 1H ####
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Injury Time    1st_half
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    45'+    ${Status_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    ${Status_Result_txt}    45'+
+    # Score change in Injury time
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    extra_time    45
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    2 - 1    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 1    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    2-1    ${Score_Result_txt}
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    extra_time    45
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    2 - 2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # Check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    2-2    ${Score_Result_txt}
+    ###-------- Break time 1H
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Match Time Event    break_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    HT    ${Status_Result_txt}
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    2 - 2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    Should be equal    ${Status_Result_txt}    HT
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    #######----- 2nd Start
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    2nd_period_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}>45
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}>45
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    2-2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    #######----- 2nd Start - score change Home
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    regular_period    55
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    ### check main data
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    3 - 2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    3-2    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    #######----- 2nd Start - score change Away
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    regular_period    55
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    3 - 3    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    3-3    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    #######----- Injury Time 2H -------####
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    Injury Time    2nd_half
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    # check main data
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    90'+    ${Status_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
+    Should be equal    ${Status_Result_txt}    90'+
+    # Score change home in Injury time
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    extra_time    90
+    sleep    15s
+    Wait Until Keyword Succeeds    20 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    4 - 3    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    4-3    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    # Score change away in Injury time
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    extra_time    90
+    sleep    15s
+    Wait Until Keyword Succeeds    30 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    4 - 4    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
+    Should be equal    2 - 2    ${1H_Result_txt}
+    # Check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
+    Should be equal    2    ${RedCard_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    4-4    ${Score_Result_txt}
+    # Check Score 1H
+    ${1H_Result_txt}    Get Score 1H General
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # check No. of card
+    ${RedCard_Result_txt}    Get yellow card value for Home General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Home General
+    Should be equal    2    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get yellow card value for Away General
+    Should be equal    1    ${RedCard_Result_txt}
+    ${RedCard_Result_txt}    Get red card value for Away General
+    Should be equal    2    ${RedCard_Result_txt}
+    ####### Break 2nd    Awaiting Extra Time
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    await_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.switch browser    tab2
+    Select Window    main
+    sleep    5s
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should be equal    Await. ET    ${Status_Result_txt}
+    #Check Extra Line
+    ${Extra_Result_txt}    Get extra line    ${NewMatchID}
+    Should be equal    FT[4-4]    ${Extra_Result_txt}
+    ###--- Check match info ----###
+    Select Window    new
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    Should be equal    ${Status_Result_txt}    Await. ET
+
+flow
+    ${NewMatchID}    Create New Match    sr:tournament:17
+    Scenario MatchStart
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    1
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Open Home Page
+    sleep    3s
+    Open General Info    ${NewMatchID}
+    # Check Status
+    ${Status_Result_txt}    Get Status General
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be true    ${Status_Result_txt}<46
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    0-0    ${Score_Result_txt}
+    ####------Score change
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    regular_period    10
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    sleep    5s
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    1-0    ${Score_Result_txt}
+    sleep    1s
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    regular_period    10
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.switch browser    tab2
+    sleep    5s
+    # Check Score
+    ${Score_Result_txt}    Get Score General
+    sleep    1s
+    Should be equal    1-1    ${Score_Result_txt}
+    sleep    1s
+    ###### Card Event scenario
+    Selenium2Library.switch browser    tab1
+    # yellow card for Home
+    Selenium2Library.Reload Page
+    sleep    2s
+    Card Event    home    yellow_card    11
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    Card Event    home    red_card    12
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    Card Event    home    yellow_red_card    13
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    2s
+    Card Event    away    yellow_card    14
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Card Event    away    red_card    15
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    Card Event    away    yellow_red_card    16
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    Injury Time    1st_half
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    extra_time    45
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    extra_time    45
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    Match Time Event    break_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    2nd_period_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    regular_period    55
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    regular_period    55
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    Injury Time    2nd_half
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    extra_time    90
+    sleep    15s
+    Wait Until Keyword Succeeds    20 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    extra_time    90
+    sleep    15s
+    Wait Until Keyword Succeeds    30 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    await_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    1st_extra_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    overtime    100
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    overtime    100
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    # yellow card for Home
+    Selenium2Library.Reload Page
+    sleep    2s
+    Card Event    home    yellow_card    100
+    Wait Until Keyword Succeeds    20 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Injury Time    1st_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    overtime    105
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    overtime    105
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    break_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    2nd_extra_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    overtime    110
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    overtime    110
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    sleep    3s
+    Injury Time    2nd_extra
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    overtime    120
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    away    overtime    120
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    await_penalty
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time Event    penalty_start
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    PEN Shoot Event    home    scored    Mike
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    PEN Shoot Event    away    scored    Mike
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    PEN Shoot Event    home    scored    Mike
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    PEN Shoot Event    away    missed    Mike
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    Selenium2Library.Reload Page
+    sleep    3s
+    Match Time End    match_end_pen    home
+    sleep    15s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}

@@ -10,6 +10,7 @@ Library           ExcelLibrary
 Resource          ../Actions/CreateDataTool.txt
 Resource          ../Actions/CommonAction.txt
 Resource          ../Actions/ViewMatchInfo_Desktop.txt
+Resource          ../Actions/CheckGeneral_info.txt
 Resource          ../Actions/CheckLiveMatch.txt
 
 *** Test Cases ***
@@ -18,5 +19,5 @@ Verify Main Data
     #Test001
 
 Verify Match Info
-    Verify Live Match
-    #Test001
+    #CheckGeneral_info
+    test
