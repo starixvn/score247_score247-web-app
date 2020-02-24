@@ -10,7 +10,7 @@ type Props = {
 const BuildEventTime = (substitutionEvent: TimelineEvent) =>
     !substitutionEvent.StoppageTime
         ? `${substitutionEvent.MatchTime}'`
-        : `${substitutionEvent.MatchTime}'+${substitutionEvent.StoppageTime}'`;
+        : `${substitutionEvent.MatchTime}+${substitutionEvent.StoppageTime}'`;
 
 const SubstitutionRow: React.FC<Props> = (props: Props) => {
     const eventStatisticFormatted = { [EventTypes.SUBSTITUTION.value]: 1 };

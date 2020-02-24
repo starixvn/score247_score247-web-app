@@ -1,7 +1,7 @@
 import "./style.scss";
 import React from "react";
 import dynamic from "next/dynamic";
-import { MatchInfo, MatchLineups } from "../../../apis/soccer/models";
+import { MatchInfo, MatchLineups, MatchCommentary } from "../../../apis/soccer/models";
 import { SoccerAPI } from "../../../apis/soccer/soccer-api";
 import { SoccerSignalRClient } from "../../../apis/soccer/soccer-signalr-client";
 import appSettings from "../../../app-settings";
@@ -22,6 +22,7 @@ type Props = {
 type State = {
   matchInfo: MatchInfo | null;
   matchLineUps: MatchLineups | null;
+  matchCommentaries: MatchCommentary[] | null;
   soccerSignalRClient?: SoccerSignalRClient;
 };
 
@@ -51,13 +52,15 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
     this.state = {
       matchInfo: null,
-      matchLineUps: null
+      matchLineUps: null,
+      matchCommentaries: null
     };
   }
 
   async componentDidMount() {
     const matchInfo = await SoccerAPI.GetMatch(this.props.matchId);
     const matchLineUps = await SoccerAPI.GetMatchLineups(this.props.matchId, new Date(matchInfo.Match.EventDate[0]));
+    const matchCommentaries = await SoccerAPI.GetMatchCommentaries(this.props.matchId, new Date(matchInfo.Match.EventDate[0]));
 
     if (!matchInfo.TimelineEvents) {
       matchInfo.TimelineEvents = [];
@@ -75,7 +78,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
     document.body.appendChild(script);
 
-    this.setState({ matchInfo, matchLineUps });
+    this.setState({ matchInfo, matchLineUps, matchCommentaries });
   }
 
   setupSignalClient() {
@@ -134,7 +137,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
       if (value.isMobile) {
         return <MobileView matchInfo={this.state.matchInfo} matchLineUps={this.state.matchLineUps} />;
       }
-      return <DesktopView matchInfo={this.state.matchInfo} matchLineUps={this.state.matchLineUps} />;
+      return <DesktopView matchInfo={this.state.matchInfo} matchLineUps={this.state.matchLineUps} matchCommentaries={this.state.matchCommentaries} />;
     }
 
     return null;

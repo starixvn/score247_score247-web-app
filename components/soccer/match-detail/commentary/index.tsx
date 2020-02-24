@@ -1,15 +1,16 @@
 import React from "react";
-import { Commentary } from '../../../../apis/soccer/models';
+import { MatchCommentary } from '../../../../apis/soccer/models';
+import CommentaryRow from './commentary-row';
 
 type Props = {
-    comments: Commentary[]
-}
+    comments: MatchCommentary[] | null;
+};
 
 const Commentary: React.FC<Props> = (props: Props) => {
-
     return (
-        <>
-        </>
+        <div>
+            {props.comments?.map(x => <CommentaryRow comment={x} key={x.TimelineId} />)}
+        </div>
     );
 };
 

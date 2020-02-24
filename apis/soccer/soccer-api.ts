@@ -30,7 +30,7 @@ export const SoccerAPI = {
     return response.data;
   },
 
-  GetMatchCommentaries: async (matchId: string, eventDate: Date, language = "en-US"): Promise<MatchCommentary[]> => {
+  GetMatchCommentaries: async (matchId: string | string[], eventDate: Date, language = "en-US"): Promise<MatchCommentary[]> => {
     const response = await API.get(`${appSettings.soccerAPIBaseUrl}/${language}/matches/${matchId}/commentaries?eventDate=${eventDate}`);
 
     return response.data;
