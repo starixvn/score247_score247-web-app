@@ -30,7 +30,7 @@ class SearchBox extends React.Component<SearchBarProps> {
                     onChange={this.handleFilterTextChange}
                     className="txt-search"
                 />
-                <span className="icon-close" onClick={this.props.onReset}></span>
+                {this.props.filterText.length > 0 && <span className="icon-close" onClick={this.props.onReset}></span>}
             </div>
         );
     }
