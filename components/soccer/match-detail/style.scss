@@ -79,9 +79,6 @@
   grid-template-columns: 32rem 1fr 32rem;
   grid-column-gap: 1.2rem;
   font-size: 1.3rem;
-  .card {
-    margin-top: 1.2rem;
-  }
 
   .mobile & {
     display: flex;
@@ -101,6 +98,11 @@
 }
 
 //////////   line-ups   ////////////
+.card {
+  &.substitution, &.substitute-player, &.coach {
+    margin-top: 1.2rem;
+  }
+}
 .pitch-wrapper {
   height: 23.7rem;
   position: relative;

@@ -13,6 +13,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-check:before {
+  content: "\e922";
+  color: #00c500;
+}
 .icon-info:before {
   content: "\e91d";
 }

@@ -1818,6 +1818,7 @@ $base: #FFFFFF;
 $color-switch: #76D672;
 
 .sr-bb {
+    font-family: 'Roboto', sans-serif;
     .sr-timeline__event {
         font-size: 1.3rem;
 
@@ -1881,6 +1882,13 @@ $color-switch: #76D672;
         .mobile & {
             display: none;
         }
+    }
+    .sr-lmt-plus-1-statistics__as-cards-title {
+        font-size: 1.3rem;
+    }
+    .sr-bb .sr-lmt-plus-0-hor-chart__title {
+        color: #000;
+        font-size: 1.3rem;
     }
 }
 
