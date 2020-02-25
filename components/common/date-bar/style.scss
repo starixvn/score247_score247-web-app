@@ -70,19 +70,16 @@
       &:before {
         content: '';
         height: .2rem;
-        background-color: #E70C12;
+        background-color: #FF7D00;
         width: 0;
         position: absolute;
         bottom: -1px;
         left: 0;        
         transition: width .1s ease-out;
-        .mobile & {
-          height: .1rem;
-        }
       }
 
       &.active, &:hover {
-        color: #E70C12;
+        color: #FF7D00;
         font-weight: bold;
         &:before {
           width: 100%;
@@ -110,15 +107,6 @@
     text-transform: uppercase;
   }
 
- 
-  // .active {
-  //   color: #E70C12;
-  //   border-bottom: 2px solid #E70C12;
-  //   font-weight: bold;
-  //   .mobile & {
-  //     border-bottom: 1px solid #E70C12;
-  //   }
-  // }
 
   .live-score {
     position: relative;
