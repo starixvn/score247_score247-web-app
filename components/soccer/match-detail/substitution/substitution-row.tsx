@@ -18,7 +18,7 @@ const SubstitutionRow: React.FC<Props> = (props: Props) => {
     props.substitutionEvent.PlayerOut.EventStatisticFormatted = props.substitutionEvent.PlayerOut.EventStatisticFormatted ?? eventStatisticFormatted;
 
     return (
-        <div className="subtitution-item">
+        <div className="substitution-item">
             <div className="time">{BuildEventTime(props.substitutionEvent)}</div>
             <div className="subs-out">
                 {PlayerRow({ player: props.substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: true })}
