@@ -8,6 +8,8 @@ import { WithTranslation } from "next-i18next";
 import { withTranslation } from "../../../../common/helpers/Localizer";
 import { ResourceType, CommonResourceKey } from "../../../../common/resources";
 import LanguageSelection from "../../../common/language-selection";
+import { useDeviceContext } from "../../../../contexts/device-context";
+import SideBar from "./side-bar";
 
 type Props = {
   sport: string;
@@ -54,28 +56,12 @@ const onChangeSportMobile = (selectedOption: ValueType<SelectOptions>) => {
 const Top: React.FunctionComponent<Props> = props => {
   const { t, sport, i18n } = props;
   const sportOptions = createOptions();
-  return (
-    <>
-      <div className="header-top">
-        <div className="container">
-          <div className="logo">
-            <img src="/static/images/Logo.png" alt="Logo" />
-            <img
-              className="logo-text"
-              src="/static/images/SCORE247.png"
-              alt="Logo"
-            />
-          </div>
-          <div className="user-languages">
-            <LanguageSelection />
-            <div className="login">
-              {t(CommonResourceKey.LOGIN)}/{t(CommonResourceKey.REGISTER)}
-            </div>
-          </div>
-        </div>
-      </div>
+  const { isMobile } = useDeviceContext();
+
+  if (isMobile) {
+    return (
       <div className="header-top-mobile">
-        <i className="icon-hambuger" />
+        <SideBar />
         <Select
           instanceId={sport}
           className="sport-dropdown"
@@ -86,7 +72,28 @@ const Top: React.FunctionComponent<Props> = props => {
           isSearchable={false}
         />
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className="header-top">
+      <div className="container">
+        <div className="logo">
+          <img src="/static/images/Logo.png" alt="Logo" />
+          <img
+            className="logo-text"
+            src="/static/images/SCORE247.png"
+            alt="Logo"
+          />
+        </div>
+        <div className="user-languages">
+          <LanguageSelection />
+          <div className="login">
+            {t(CommonResourceKey.LOGIN)}/{t(CommonResourceKey.REGISTER)}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
