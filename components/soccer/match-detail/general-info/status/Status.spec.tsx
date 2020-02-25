@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import Score from "./index";
 import { MatchStatusType } from "../../../../../common/enums/match-status-type";
 
-describe("Score", () => {
+describe("Status", () => {
   it("should render correctly", () => {
     const props: any = {
       match: {
@@ -20,6 +20,6 @@ describe("Score", () => {
     };
 
     const wrapper = shallow(<Score {...props} />);
-    expect(wrapper.find(".status").length).toEqual(1);
+    expect(wrapper.dive().find(".status").length).toEqual(1);
   });
 });
