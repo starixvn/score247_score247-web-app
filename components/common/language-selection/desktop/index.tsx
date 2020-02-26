@@ -41,7 +41,7 @@ class Desktop extends React.PureComponent<Props, State> {
       }
     };
   
-    toggleSelectList = () => this.setState({ isOpen: !this.state.isOpen });
+    toggleSelectList = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }));
   
     handleLanguageChange = (
       event: React.MouseEvent<HTMLLIElement, MouseEvent>

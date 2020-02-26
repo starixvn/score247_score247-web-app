@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Top.scss";
 import Select, { ValueType } from "react-select";
 import Router from "next/router";
@@ -57,21 +57,25 @@ const Top: React.FunctionComponent<Props> = props => {
   const { t, sport } = props;
   const sportOptions = createOptions();
   const { isMobile } = useDeviceContext();
+  const [showSideBar, setSideBar] = useState(false);
 
   if (isMobile) {
     return (
-      <div className="header-top-mobile">
-        <SideBar />
-        <Select
-          instanceId={sport}
-          className="sport-dropdown"
-          classNamePrefix="select"
-          options={sportOptions}
-          value={filter(sportOptions, { forSport: `${sport.toUpperCase()}` })}
-          onChange={onChangeSportMobile}
-          isSearchable={false}
-        />
-      </div>
+      <>
+        <div className="header-top-mobile">
+          <i className="icon-hambuger" onClick={()=> setSideBar(!showSideBar)} />
+          <Select
+            instanceId={sport}
+            className="sport-dropdown"
+            classNamePrefix="select"
+            options={sportOptions}
+            value={filter(sportOptions, { forSport: `${sport.toUpperCase()}` })}
+            onChange={onChangeSportMobile}
+            isSearchable={false}
+          />
+        </div>
+        <SideBar isActive={showSideBar} />
+      </>
     );
   }
 

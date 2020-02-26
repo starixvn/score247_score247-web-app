@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sidebar.scss";
 import LanguageSelection from "../../../../common/language-selection";
 
-export default function SideBar() {
+type Props = {
+  isActive: boolean;
+}
+
+export default function SideBar(props: Props) {
+  const [showLanguageSelection, setLanguageSelection] = useState(false);
+
   return (
     <>
-      <i className="icon-hambuger" />
-      <div className="push-menu">
+      <div className={`push-menu ${props.isActive && "active"}`}>
         <div className="block-setting">
           <div className="block-title">Settings</div>
           <div className="block-content">
@@ -20,13 +25,12 @@ export default function SideBar() {
                 <span className="icon-arrow-down caret-right"></span>
               </div>
             </div>
-            <div className="row">
+            <div className="row" onClick={() => setLanguageSelection(true)}>
               <div className="key">
                 <span className="icon-language-de"></span>
                 Default Language
               </div>
               <div className="value">
-            <img src="/static/images/flag_en.svg"></img>
                 <span className="text">English</span>
                 <span className="icon-arrow-down caret-right"></span>
               </div>
@@ -65,7 +69,9 @@ export default function SideBar() {
           </div>
         </div>
       </div>
-      <LanguageSelection />
+
+      <LanguageSelection isActive={showLanguageSelection} />
+
     </>
   );
 }

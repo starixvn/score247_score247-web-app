@@ -2,11 +2,14 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     z-index: 400;
     background-color: #182E58;
-    display: none;
+    transition: left .2s ease-out;
+    &.active {
+        left: 0;
+    }
 }
 .block-setting {
     color: #fff;
