@@ -150,8 +150,6 @@
       font-size: 1.4rem;
       height: 6.4rem;
       width: 6.4rem;
-      border-radius: 50%;
-      background-color: #e0e0e0;
       color: #000;
       word-break: break-all;
       padding: 0 .8rem;
@@ -174,7 +172,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -1.6rem;
+    bottom: -.8rem;
     font-size: 1.4rem;
 
     .mobile & {
