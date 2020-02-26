@@ -4,7 +4,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 200;
+    z-index: 400;
     background-color: #182E58;
     display: none;
 }
@@ -42,6 +42,12 @@
             font-size: 1.4rem;
             margin-right: .8rem;
         }
+        .value {
+            display: flex;
+            img {
+                margin-right: .8rem;
+            }
+        }
     }
 }
 
@@ -53,6 +59,7 @@
     width: 100%;
     z-index: 300;
     background-color: #fff;
+    display: none;
 }
 .language-item {
     display: flex;

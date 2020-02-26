@@ -24,7 +24,7 @@ export default function SideBar() {
             Default Language
           </div>
           <div className="value">
-            <img src=""></img>
+            <img src="/static/images/flag_en.svg"></img>
             <span className="text">English</span>
             <span className="icon-arrow-down caret-right"></span>
           </div>
