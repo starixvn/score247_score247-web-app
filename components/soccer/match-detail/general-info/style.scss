@@ -47,7 +47,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 0 2.4rem;
+  padding: 1.2rem 0 1.6rem;
   position: relative;
 
   .mobile & {
@@ -190,7 +190,7 @@
 .arrg-text {
   grid-column: 1/4;
   justify-self: center;
-  padding-top: 3rem;
+  padding-top: 1.6rem;
   color: #292929;
   .mobile & {
     text-align: center;
