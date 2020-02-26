@@ -1,0 +1,87 @@
+.push-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+    background-color: #182E58;
+    display: none;
+}
+.block-setting {
+    color: #fff;
+    .block-title {
+        border: 1px  solid #22365c;
+        border-right: none;
+        border-left: none;
+        color: #fff;
+        padding: 1.2rem;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+    &:first-child {
+        margin-top: 6.4rem;
+    }
+    .row {
+        display: flex;
+        justify-content: space-between;
+        background-color: #15284d;
+        padding: 1.2rem;
+        border-bottom:  1px  solid #22365c;
+        .icon-arrow-down {
+            font-size: .6rem;
+            &.caret-right {
+                transform: rotate(-90deg);
+                display: inline-block;
+            }
+        }
+        .text {
+            padding-right: .8rem;
+        }
+        .key [class*="icon-"] {
+            font-size: 1.4rem;
+            margin-right: .8rem;
+        }
+    }
+}
+
+.language-box {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 300;
+    background-color: #fff;
+}
+.language-item {
+    display: flex;
+    align-items: center;
+    padding: 1.2rem;
+    position: relative;
+    border-bottom: 1px solid #DEE2E6;
+    &:first-child {
+        margin-top: 6.4rem;
+    }
+    img {
+        width: 2.2rem;
+        position: relative;
+        top: .2rem;
+    }
+    .text {
+        padding-left: .6rem;
+    }
+    &:hover {
+        background-color: #F5F5F5;
+        cursor: pointer;
+    }
+    .icon-check {
+        position: absolute;
+        right: 1.2rem;
+        font-size: 1rem;
+        display: none;
+    }
+    &.active .icon-check {
+        display: block;
+    }
+}
