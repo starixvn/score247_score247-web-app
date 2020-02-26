@@ -6,13 +6,13 @@ import { SoccerResourceKey, ResourceType } from "../../../../../common/resources
 
 type Props = {
     match: MatchSummary;
-}
+};
 
-export default function AggregateScore(props: Props){
-    const {match} = props;
-    const {t} = useTranslation(ResourceType.SOCCER);
-    if(match.AggregateWinnerId && match.EventStatus?.Value === MatchStatusType.CLOSED.value){
-        return <div className="arrg-text">{t(SoccerResourceKey.AGGREGATE_SCORE, { score: `${match.AggregateHomeScore} - ${match.AggregateAwayScore}`})}</div>;
+export default function AggregateScore(props: Props) {
+    const { match } = props;
+    const { t } = useTranslation(ResourceType.SOCCER);
+    if (match.AggregateWinnerId && match.EventStatus?.Value === MatchStatusType.CLOSED.value) {
+        return <div className="arrg-text">{t(SoccerResourceKey.AGGREGATE_SCORE, { score: `${match.AggregateHomeScore} - ${match.AggregateAwayScore}` })}</div>;
     }
 
     return null;

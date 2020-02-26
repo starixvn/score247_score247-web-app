@@ -1,12 +1,12 @@
 import React from "react";
 import { WithTranslation } from "next-i18next";
 
-export const withTranslation = function() {
-  return function(Component: React.ComponentType<WithTranslation>) {
-    return function(props: WithTranslation) {
+export const withTranslation = function () {
+  return function (Component: React.ComponentType<WithTranslation>) {
+    return function (props: WithTranslation) {
       const hook = useTranslation();
 
-      const passDownProps: any = {
+      const passDownProps: any = { //NOSONAR
         ...props,
         ...hook,
         tReady: true,

@@ -35,7 +35,7 @@ const prefix = () => ({
 
 const SoccerSortOption: React.FC<Props> = props => {
     const colourStyles = {
-        singleValue: (styles: any) => ({ ...styles, ...prefix() }),
+        singleValue: (styles: any) => ({ ...styles, ...prefix() }),//NOSONAR
     };
 
     const handleSortChange = (selectedOption: ValueType<SortOption>) => {

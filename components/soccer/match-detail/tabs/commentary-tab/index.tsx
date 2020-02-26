@@ -11,4 +11,4 @@ class CommentaryTab extends React.Component<Props> {
     }
 }
 
-export default CommentaryTab
+export default CommentaryTab;

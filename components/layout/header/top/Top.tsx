@@ -54,7 +54,7 @@ const onChangeSportMobile = (selectedOption: ValueType<SelectOptions>) => {
 };
 
 const Top: React.FunctionComponent<Props> = props => {
-  const { t, sport, i18n } = props;
+  const { t, sport } = props;
   const sportOptions = createOptions();
   const { isMobile } = useDeviceContext();
 
