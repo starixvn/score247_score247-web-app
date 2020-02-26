@@ -61,6 +61,7 @@ class LanguageSelection extends React.PureComponent<WithTranslation, State> {
     const lang = event.currentTarget.dataset["lang"];
     if (lang && lang !== this.props.i18n.language) {
       this.props.i18n.changeLanguage(lang);
+      changeWidgetLanguage(lang);
       this.setState({ isOpen: false });
     }
   };
