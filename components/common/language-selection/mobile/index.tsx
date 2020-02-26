@@ -1,15 +1,18 @@
+import "./style.scss";
 import React from "react";
 import {
   Language,
-  supportedLanguages
+  supportedLanguages,
+  withTranslation
 } from "../../../../common/helpers/Localizer";
 import countryFlag from "../country-flag";
+import { WithTranslation } from "next-i18next";
+import { changeWidgetLanguage } from "../../../../common/helpers/widget";
 
 type Props = {
-  onLanguageChange: (lang: string) => void;
-  currentLanguage: string;
   isActive: boolean;
-};
+  onFinished: () => void;
+} & WithTranslation;
 
 class Mobile extends React.PureComponent<Props> {
   constructor(props: Props) {
@@ -20,8 +23,9 @@ class Mobile extends React.PureComponent<Props> {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     const lang = event.currentTarget.dataset["lang"];
-    if (lang && lang !== this.props.currentLanguage) {
-      this.props.onLanguageChange(lang);
+    if (lang && lang !== this.props.i18n.language) {
+      this.props.i18n.changeLanguage(lang);
+      changeWidgetLanguage(lang);
     }
   };
 
@@ -35,7 +39,7 @@ class Mobile extends React.PureComponent<Props> {
       >
         <img src={`/static/images/${countryFlag[language.code]}`}></img>
         <span className="text">{language.name}</span>
-        {this.props.currentLanguage === language.code && (
+        {this.props.i18n.language === language.code && (
           <span className="icon-check"></span>
         )}
       </div>
@@ -46,9 +50,14 @@ class Mobile extends React.PureComponent<Props> {
     return (
       <div className={`language-box ${this.props.isActive && "active"}`}>
         <div className="function-box">
-          <div className="back-box"><span className="icon-arrow-down back"></span><span>back</span></div>
+          <div className="back-box" onClick={this.props.onFinished}>
+            <span className="icon-arrow-down back"></span>
+            <span>back</span>
+          </div>
           <span className="txt-title">Select Language</span>
-          <span className="done">Done</span>
+          <span className="done" onClick={this.props.onFinished}>
+            Done
+          </span>
         </div>
         {supportedLanguages.map(this.renderLanguageOption)}
       </div>
@@ -56,4 +65,4 @@ class Mobile extends React.PureComponent<Props> {
   }
 }
 
-export default Mobile;
+export default withTranslation()(Mobile);

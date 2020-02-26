@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./sidebar.scss";
-import LanguageSelection from "../../../../common/language-selection";
+import Mobile from "../../../../common/language-selection/mobile";
 
 type Props = {
   isActive: boolean;
-}
+};
 
 export default function SideBar(props: Props) {
   const [showLanguageSelection, setLanguageSelection] = useState(false);
@@ -69,9 +69,10 @@ export default function SideBar(props: Props) {
           </div>
         </div>
       </div>
-
-      <LanguageSelection isActive={showLanguageSelection} />
-
+      <Mobile
+        isActive={showLanguageSelection}
+        onFinished={() => setLanguageSelection(false)}
+      />
     </>
   );
 }
