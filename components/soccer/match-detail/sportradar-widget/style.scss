@@ -1890,6 +1890,12 @@ $color-switch: #76D672;
         color: #000;
         font-size: 1.3rem;
     }
+    .sr-lmt-plus-1-statistics-large.sr-bb .sr-lmt-plus-1-statistics__slider {
+        justify-content: flex-start;
+    }
+    .sr-lmt-plus-1-headtohead-large.sr-bb .sr-lmt-plus-1-headtohead__slide {
+        flex: unset;
+    }
 }
 
 .mobile {
@@ -1903,16 +1909,16 @@ $color-switch: #76D672;
     }
 
     .timeline .sr-lmt-plus__comp-padding {
-        padding-bottom: 107%;
+        padding-bottom: 85%;
     }
 
     .statistics .sr-lmt-plus__comp-padding {
-        padding-bottom: 80%;
+        padding-bottom: 50%;
     }
 
     .h2h {
         .sr-lmt-plus__comp-padding {
-            padding-bottom: 140%;
+            padding-bottom: 60%;
         }
 
         .sr-lmt-plus-1-headtohead__slide {
