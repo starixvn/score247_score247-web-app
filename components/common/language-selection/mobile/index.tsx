@@ -8,6 +8,7 @@ import countryFlag from "../country-flag";
 type Props = {
   onLanguageChange: (lang: string) => void;
   currentLanguage: string;
+  isActive: boolean;
 };
 
 class Mobile extends React.PureComponent<Props> {
@@ -43,7 +44,12 @@ class Mobile extends React.PureComponent<Props> {
 
   render() {
     return (
-      <div className="language-box">
+      <div className={`language-box ${this.props.isActive && "active"}`}>
+        <div className="function-box">
+          <div className="back-box"><span className="icon-arrow-down back"></span><span>back</span></div>
+          <span className="txt-title">Select Language</span>
+          <span className="done">Done</span>
+        </div>
         {supportedLanguages.map(this.renderLanguageOption)}
       </div>
     );

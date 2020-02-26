@@ -7,7 +7,11 @@ import { useDeviceContext } from "../../../contexts/device-context";
 import Mobile from "./mobile";
 import Desktop from "./desktop";
 
-export default function LanguageSelection() {
+type Props = {
+  isActive?: boolean;
+}
+
+export default function LanguageSelection(props: Props) {
   const { isMobile } = useDeviceContext();
   const { i18n } = useTranslation();
 
@@ -18,7 +22,7 @@ export default function LanguageSelection() {
 
   if (isMobile) {
     return (
-      <Mobile
+      <Mobile isActive={props.isActive || false}
         currentLanguage={i18n.language}
         onLanguageChange={handleLanguageChange}
       />
