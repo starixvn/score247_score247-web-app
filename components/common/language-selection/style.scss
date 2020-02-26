@@ -32,6 +32,9 @@
     top: 4.2rem;
     margin: 0;
     display: none;
+    &.open {
+        display: unset;
+    }
 }
 
 .language-item {
