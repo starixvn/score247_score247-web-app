@@ -15,7 +15,7 @@ export default function SubstitutePlayers(props: Props) {
       {
         substitutePlayers.map(sub => <PlayerRow player={sub} isMainPlayer={false} key={sub.Id} />)
       }
-      {numberOfEmptyRow > 0 && Array(numberOfEmptyRow).fill(<div className="empty-player-row"></div>)}
+      {numberOfEmptyRow > 0 && Array.from(Array(numberOfEmptyRow).keys()).map(x => <div className="empty-player-row" key={x}></div>)}
     </div>
   );
 }

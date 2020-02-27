@@ -15,7 +15,7 @@ const Substitution: React.FC<Props> = (props: Props) => {
   return (
     <div>
       {sortedSubstitutionEvents?.map(event => <SubstitutionRow substitutionEvent={event} key={event.Id} />)}
-      {numberOfEmptyRow > 0 && Array(numberOfEmptyRow).fill(<div className="empty-substitution-item"></div>)}
+      {numberOfEmptyRow > 0 && Array.from(Array(numberOfEmptyRow).keys()).map(x => <div className="empty-substitution-item" key={x}></div>)}
     </div>
   );
 };
