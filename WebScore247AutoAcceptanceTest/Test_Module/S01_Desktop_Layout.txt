@@ -41,3 +41,6 @@ Breadcrumbs
     #Backgroup_color
     sleep    3s
     [Teardown]    Close Browser
+
+Verify Optional Function
+    Verify Optional Function

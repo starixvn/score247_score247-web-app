@@ -7,177 +7,202 @@ Resource          ../Interfaces/CreateDataTool/LoginPage.txt
 Resource          ../Actions/CommonAction.txt
 
 *** Keywords ***
-Verify Live Match
+test1212
+    ###--- Create new match ----###
     ${NewMatchID}    Create New Match    sr:tournament:17
+    ###--- Match Start ----###
     Scenario MatchStart
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    1
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    1
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Open Home Page
-    sleep    3s
+    ###--- Check main data ----###
+    setup and open android phone
     # Check Status
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should not be equal    -    ${Status_Result_txt}
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    1s
     Should be equal    0 - 0    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    0 - 0    ${1H_Result_txt}
-    sleep    1s
+    ###--- Score change scenario ----###
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    regular_period    10
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
+    ###--- Check main data ----###
     sleep    5s
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    1s
+    sleep    3s
     Should be equal    1 - 0    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    1 - 0    ${1H_Result_txt}
+
+Get extra line
+    [Arguments]    ${NewMatchID}
+    ${Status_Result_Xpath}=    Catenate    //tr[@data-match-id='${NewMatchID}']/td[@class="text-extra"]/span
+    ${Status_Result_Xpath}=    Replace String    ${Status_Result_Xpath}    ${space}    ${empty}
+    Selenium2Library.Page Should Contain Element    ${Status_Result_Xpath}    timeout=60
+    ${Status_Result_txt}    Selenium2Library.Get text    ${Status_Result_Xpath}
+    ${Status_Result_txt}=    Replace String    ${Status_Result_txt}    ${space}    ${empty}
+    [Return]    ${Status_Result_txt}
+
+Check Main_info_mobile
+    ###--- Create new match ----###
+    ###--- Create new match ----###
+    ${NewMatchID}    Create New Match    sr:tournament:17
+    ###--- Match Start ----###
+    Scenario MatchStart
+    Sleep    20s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    1
+    ${CurrentRow}=    Get Row Event
+    Log To Console    ${CurrentRow}
+    ###--- Check main data ----###
+    setup and open android phone
+    # Check Status
+    ${Status_Result_txt}    Get Status    ${NewMatchID}
+    Should not be equal    -    ${Status_Result_txt}
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    Should be equal    0 - 0    ${Score_Result_txt}
+    ###--- Score change scenario ----###
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
+    Score Change    home    regular_period    10
+    Sleep    20s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    ${CurrentRow}=    Get Row Event
+    Switch Application    MyApp1
+    ###--- Check main data ----###
+    sleep    5s
+    # Check Score
+    ${Score_Result_txt}    get Score    ${NewMatchID}
+    sleep    3s
+    Should be equal    1 - 0    ${Score_Result_txt}
+    ###--- Score change scenario ----###
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    regular_period    10
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
-    sleep    5s
+    Switch Application    MyApp1
+    ###--- Check main data ----###
+    Switch Application    MyApp1
+    sleep    2s
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    1s
+    sleep    3s
     Should be equal    1 - 1    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    1 - 1    ${1H_Result_txt}
-    ###### Card Event scenario
-    Selenium2Library.switch browser    tab1
+    ###---    Card Event scenario yellow_card----###
     # yellow card for Home
+    Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
-    sleep    2s
+    sleep    3s
     Card Event    home    yellow_card    11
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
+    ###--- Check main data ----###
     sleep    5s
     # check no. of yellow card
     ${YellowCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
     Should be equal    1    ${YellowCard_Result_txt}
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    1s
     Should be equal    1 - 1    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    1 - 1    ${1H_Result_txt}
+    ###---    Card Event scenario red_card----###
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
+    sleep    3s
     Card Event    home    red_card    12
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
+    ###--- Check main data ----###
     sleep    5s
     ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
     Should be equal    1    ${RedCard_Result_txt}
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    1s
     Should be equal    1 - 1    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    1 - 1    ${1H_Result_txt}
+    ###---    Card Event scenario yellow_red_card ----###
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
+    sleep    3s
     Card Event    home    yellow_red_card    13
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
+    ###--- Check main data ----###
     sleep    5s
     ${RedCard_Result_txt}    Get red card value for Home    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    1s
+    sleep    3s
     Should be equal    1 - 1    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    1 - 1    ${1H_Result_txt}
-    sleep    1s
+    ###---    Card Event scenario yellow ----###
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
-    sleep    2s
+    sleep    3s
     Card Event    away    yellow_card    14
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
+    ###--- Check main data ----###
     sleep    5s
     ${YellowCard_Result_txt}    Get yellow card value for Away    ${NewMatchID}
     Should be equal    1    ${YellowCard_Result_txt}
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    1s
+    sleep    3s
     Should be equal    1 - 1    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    1 - 1    ${1H_Result_txt}
+    ###---    Card Event scenario red away ----###
     Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
+    sleep    3s
     Card Event    away    red_card    15
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    1    ${RedCard_Result_txt}
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    1s
+    sleep    3s
     Should be equal    1 - 1    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    1 - 1    ${1H_Result_txt}
+    ###---    Card Event scenario yellow_red_card away ----###
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
+    sleep    3s
     Card Event    away    yellow_red_card    16
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
     # Check Score
     ${Score_Result_txt}    get Score    ${NewMatchID}
     Should be equal    1 - 1    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    1 - 1    ${1H_Result_txt}
     ####### Injury Time 1H ####
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
+    sleep    3s
     Injury Time    1st_half
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
@@ -187,32 +212,27 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    extra_time    45
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
     Should be equal    2 - 1    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 1    ${1H_Result_txt}
+    ## Score change
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    extra_time    45
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    2 - 2    ${Score_Result_txt}
-    # Check Score 1H
-    ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
     # Check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
     Should be equal    1    ${RedCard_Result_txt}
@@ -222,23 +242,27 @@ Verify Live Match
     Should be equal    1    ${RedCard_Result_txt}
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
-    ## Break time 1H
+    ###-------- Break time 1H
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
+    sleep    3s
     Match Time Event    break_start
     sleep    15s
     Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    HT    ${Status_Result_txt}
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    #${Score_Result_txt}    Replace String    ${Score_Result_txt}    ${space}    ${empty}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    2 - 2    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
     Should be equal    1    ${RedCard_Result_txt}
@@ -248,34 +272,35 @@ Verify Live Match
     Should be equal    1    ${RedCard_Result_txt}
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
-    ####### 2nd Start
+    #######----- 2nd Start
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    2nd_period_start
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
     Should be true    ${Status_Result_txt}>45
+    #######----- 2nd Start - score change Home
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    regular_period    55
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    ### check main data
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    3 - 2    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
     Should be equal    1    ${RedCard_Result_txt}
@@ -285,20 +310,21 @@ Verify Live Match
     Should be equal    1    ${RedCard_Result_txt}
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
+    #######----- 2nd Start - score change Away
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    regular_period    55
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    3 - 3    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
     Should be equal    1    ${RedCard_Result_txt}
@@ -308,50 +334,54 @@ Verify Live Match
     Should be equal    1    ${RedCard_Result_txt}
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
-    ####### Injury Time 2H ####
+    #######----- Injury Time 2H -------####
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
+    sleep    3s
     Injury Time    2nd_half
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
+    # check main data
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
     Should be equal    90'+    ${Status_Result_txt}
-    # Score change in Injury time
+    # Score change home in Injury time
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    extra_time    90
-    sleep    15s
-    Wait Until Keyword Succeeds    20 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    4 - 3    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    # Score change away in Injury time
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    extra_time    90
-    sleep    15s
-    Wait Until Keyword Succeeds    30 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    4 - 4    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     # Check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
     Should be equal    1    ${RedCard_Result_txt}
@@ -366,11 +396,10 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    await_extra
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    Await. ET    ${Status_Result_txt}
@@ -382,43 +411,47 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    1st_extra_start
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
     Should be true    ${Status_Result_txt}>90
+    #Score change
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    overtime    100
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    5 - 4    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
+    Select Window    new
+    ####### score change away
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    overtime    100
-    sleep    15s
     Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    Get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    5 - 5    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
     Should be equal    1    ${RedCard_Result_txt}
@@ -428,15 +461,16 @@ Verify Live Match
     Should be equal    1    ${RedCard_Result_txt}
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
+    # Card event
     Selenium2Library.switch browser    tab1
-    # yellow card for Home
     Selenium2Library.Reload Page
-    sleep    2s
+    sleep    3s
+    # yellow card for Home
     Card Event    home    yellow_card    100
     Wait Until Keyword Succeeds    20 times    4s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
@@ -448,13 +482,13 @@ Verify Live Match
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    Log to console    ${Score_Result_txt}
-    #Should be equal    4 - 4    ${Score_Result_txt}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
+    Should be equal    5 - 5    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     #Check Extra Line
-    Log to console    121212
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[1-1]    ${Extra_Result_txt}
@@ -463,47 +497,52 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Injury Time    1st_extra
-    sleep    15s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    5
-    Should be equal    105'+    ${Status_Result_txt}
+    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
+    Should be equal    105+    ${Status_Result_txt}
     # score change
-    Selenium2Library.switch browser    tab1
-    Selenium2Library.Reload Page
+    AppiumLibrary.switch browser    tab1
+    AppiumLibrary.Reload Page
     sleep    3s
     Score Change    home    overtime    105
     sleep    15s
     Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    6 - 5    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[2-1]    ${Extra_Result_txt}
-    Selenium2Library.switch browser    tab1
-    Selenium2Library.Reload Page
+    # Score change
+    AppiumLibrary.switch browser    tab1
+    AppiumLibrary.Reload Page
     sleep    3s
     Score Change    away    overtime    105
     sleep    15s
     Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    Get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    6 - 6    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[2-2]    ${Extra_Result_txt}
@@ -521,24 +560,22 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    break_extra
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    ETHT    ${Status_Result_txt}
-    ####### Ext_Time    2nd    start
+    #######----- Ext_Time    2nd    start
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    2nd_extra_start
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
@@ -548,33 +585,36 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    overtime    110
-    sleep    15s
     Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    7 - 6    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[3-2]    ${Extra_Result_txt}
+    # Score change
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    overtime    110
-    sleep    15s
     Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    Get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    7 - 7    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[3-3]    ${Extra_Result_txt}
@@ -592,11 +632,10 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Injury Time    2nd_extra
-    sleep    15s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    5
@@ -606,33 +645,37 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    overtime    120
-    sleep    15s
     Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    8 - 7    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-3]    ${Extra_Result_txt}
-    Selenium2Library.switch browser    tab1
-    Selenium2Library.Reload Page
+    # Score change
+    AppiumLibrary.switch browser    tab1
+    AppiumLibrary.Reload Page
     sleep    3s
     Score Change    away    overtime    120
     sleep    15s
     Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Score_Result_txt}    Get Score    ${NewMatchID}
+    ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
+    Log To Console    ${Score_Result_txt}
     Should be equal    8 - 8    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
-    Should be equal    2 - 2    ${1H_Result_txt}
+    Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4]    ${Extra_Result_txt}
@@ -650,11 +693,10 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    await_penalty
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    Await. PEN    ${Status_Result_txt}
@@ -663,11 +705,10 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    penalty_start
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
@@ -679,56 +720,55 @@ Verify Live Match
     Selenium2Library.Reload Page
     sleep    3s
     PEN Shoot Event    home    scored    Mike
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
+    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[1-0]    ${Extra_Result_txt}
-    Selenium2Library.switch browser    tab1
-    Selenium2Library.Reload Page
+    AppiumLibrary.switch browser    tab1
+    AppiumLibrary.Reload Page
     sleep    3s
     PEN Shoot Event    away    scored    Mike
     sleep    15s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1n
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[1-1]    ${Extra_Result_txt}
-    Selenium2Library.switch browser    tab1
-    Selenium2Library.Reload Page
+    AppiumLibrary.switch browser    tab1
+    AppiumLibrary.Reload Page
     sleep    3s
     PEN Shoot Event    home    scored    Mike
     sleep    15s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
-    Selenium2Library.switch browser    tab1
-    Selenium2Library.Reload Page
+    AppiumLibrary.switch browser    tab1
+    AppiumLibrary.Reload Page
     sleep    3s
     PEN Shoot Event    away    missed    Mike
     sleep    15s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
@@ -736,287 +776,81 @@ Verify Live Match
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
     ######### End Match After Pen
-    Selenium2Library.switch browser    tab1
-    Selenium2Library.Reload Page
+    AppiumLibrary.switch browser    tab1
+    AppiumLibrary.Reload Page
     sleep    3s
     Match Time End    match_end_pen    home
     sleep    15s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    AP    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],AGGR[10-10],PEN[2-1]    ${Extra_Result_txt}
+    Check Icon Arrow    ${NewMatchID}
+    Check Icon Pen    ${NewMatchID}
 
-Get extra line
+Get Status
     [Arguments]    ${NewMatchID}
-    ${Status_Result_Xpath}=    Catenate    //tr[@data-match-id='${NewMatchID}']/td[@class="text-extra"]/span
-    ${Status_Result_Xpath}=    Replace String    ${Status_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${Status_Result_Xpath}    timeout=60
-    ${Status_Result_txt}    Selenium2Library.Get text    ${Status_Result_Xpath}
-    ${Status_Result_txt}=    Replace String    ${Status_Result_txt}    ${space}    ${empty}
+    ${Status_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]//span[@class="match-status"]
+    AppiumLibrary.Page Should Contain Element    ${Status_Result_Xpath}    timeout=60
+    ${Status_Result_txt}    AppiumLibrary.Get text    ${Status_Result_Xpath}
     [Return]    ${Status_Result_txt}
-
-Test001
-    open Home page
-    ${NewMatchID}    Set Variable    sr:match:985849441
-    ######### Break Awaiting Penalty    Await. PEN
-    Login Create Data Page
-    Selenium2Library.Page Should Contain Element    //td[.=contains(text(),'sr:match:985849441')]//ancestor::tr/td[11]/a[1]    timeout=60
-    Selenium2Library.Click Element    //td[.=contains(text(),'sr:match:985849441')]//ancestor::tr/td[11]/a[1]
-    Selenium2Library.Reload Page
-    sleep    3s
-    Match Time Event    await_penalty
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    34
-    ${CurrentRow}=    Get Row Event
-    Log To Console    ${CurrentRow}
-    Selenium2Library.switch browser    tab2
-    sleep    15s
-    ${Status_Result_txt}    Get Status    ${NewMatchID}
-    Should be equal    Await. PEN    ${Status_Result_txt}
-
-Match Time Event
-    [Arguments]    ${type}
-    Selenium2Library.Reload Page
-    ${TimeLine}    Get Time Line
-    Selenium2Library.Page Should Contain Element    ${MatchTimeEvent}    timeout=60
-    Selenium2Library.Click Element    ${MatchTimeEvent}
-    Selenium2Library.Clear Element Text    //*[@id="EventTimeForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]
-    Selenium2Library.Input Text    //*[@id="EventTimeForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]    ${TimeLine}
-    Selenium2Library.Page Should Contain Element    ${MatchTime_EventType}    timeout=60
-    Select From List By value    ${MatchTime_EventType}    ${type}
-    Selenium2Library.Page Should Contain Element    ${MatchTime_Process}    timeout=60
-    Selenium2Library.Click button    ${MatchTime_Process}
-    Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
-    Selenium2Library.Click button    ${ApplyEvent_btn}
-    sleep    5s
-
-Match Time End
-    [Arguments]    ${type}    ${arg}
-    Selenium2Library.Reload Page
-    ${TimeLine}    Get Time Line
-    Selenium2Library.Page Should Contain Element    ${MatchTimeEvent}    timeout=60
-    Selenium2Library.Click Element    ${MatchTimeEvent}
-    Selenium2Library.Clear Element Text    //*[@id="EventTimeForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]
-    Selenium2Library.Input Text    //*[@id="EventTimeForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]    ${TimeLine}
-    Selenium2Library.Page Should Contain Element    ${MatchTime_EventType}    timeout=60
-    Select From List By value    ${MatchTime_EventType}    ${type}
-    Selenium2Library.Page Should Contain Element    //*[@id="aggregate_input"]/select    timeout=60
-    Select From List By value    //*[@id="aggregate_input"]/select    ${arg}
-    Selenium2Library.Clear Element Text    //*[@id="aggregate_input"]/input[1]
-    Selenium2Library.Input Text    //*[@id="aggregate_input"]/input[1]    10
-    Selenium2Library.Clear Element Text    //*[@id="aggregate_input"]/input[2]
-    Selenium2Library.Input Text    //*[@id="aggregate_input"]/input[2]    10
-    Selenium2Library.Page Should Contain Element    ${MatchTime_Process}    timeout=60
-    Selenium2Library.Click button    ${MatchTime_Process}
-    Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
-    Selenium2Library.Click button    ${ApplyEvent_btn}
-    sleep    5s
-
-Score Change
-    [Arguments]    ${team}    ${Period}    ${Time}
-    Selenium2Library.Reload Page
-    ${TimeLine}    Get Time Line
-    Selenium2Library.Page Should Contain Element    ${MatchScoreEvent}    timeout=60
-    Selenium2Library.Click Element    ${MatchScoreEvent}
-    Selenium2Library.Page Should Contain Element    ${MatchScoreEvent_MatchTime}    timeout=60
-    Selenium2Library.Input Text    ${MatchScoreEvent_MatchTime}    ${Time}
-    Selenium2Library.Page Should Contain Element    ${MatchScoreEvent_Team_sel}    timeout=60
-    Select From List By value    ${MatchScoreEvent_Team_sel}    ${team}
-    Selenium2Library.Page Should Contain Element    ${MatchScoreEvent_Period_sel}    timeout=60
-    Select From List By value    ${MatchScoreEvent_Period_sel}    ${Period}
-    Selenium2Library.Clear Element Text    //*[@id="EventScoreForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]
-    Selenium2Library.Input Text    //*[@id="EventScoreForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]    ${TimeLine}
-    Selenium2Library.Page Should Contain Element    ${MatchScoreEvent_Process}    timeout=60
-    Selenium2Library.Click button    ${MatchScoreEvent_Process}
-    Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
-    Selenium2Library.Click button    ${ApplyEvent_btn}
-
-PEN Shoot Event
-    [Arguments]    ${team}    ${scored}    ${player}
-    Selenium2Library.Reload Page
-    ${TimeLine}    Get Time Line
-    Selenium2Library.Page Should Contain Element    ${PSO_Event}    timeout=60
-    Selenium2Library.Click Element    ${PSO_Event}
-    Selenium2Library.Page Should Contain Element    ${PSO_Team_sel}    timeout=60
-    Select From List By value    ${PSO_Team_sel}    ${team}
-    Selenium2Library.Page Should Contain Element    ${PSO_Player}
-    Selenium2Library.Input Text    ${PSO_Player}    ${player}
-    Selenium2Library.Page Should Contain Element    ${PSO_scored_sel}    timeout=60
-    Select From List By value    ${PSO_scored_sel}    ${scored}
-    Selenium2Library.Clear Element Text    ${PSO_Timeline}
-    Selenium2Library.Input Text    ${PSO_Timeline}    ${TimeLine}
-    Selenium2Library.Page Should Contain Element    ${PSO_Process}    timeout=60
-    Selenium2Library.Click button    ${PSO_Process}
-    Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
-    Selenium2Library.Click button    ${ApplyEvent_btn}
-
-Card Event
-    [Arguments]    ${Team}    ${Type}    ${Matchtime}
-    Selenium2Library.Reload Page
-    ${TimeLine}    Get Time Line
-    Selenium2Library.Page Should Contain Element    ${CardEvent}    timeout=60
-    Selenium2Library.Click Element    ${CardEvent}
-    Selenium2Library.Page Should Contain Element    ${CardEvent_MatchTime}    timeout=60
-    Selenium2Library.Input Text    ${CardEvent_MatchTime}    ${Matchtime}
-    Selenium2Library.Page Should Contain Element    ${CardEvent_Type_sel}    timeout=60
-    Select From List By value    ${CardEvent_Type_sel}    ${Type}
-    Selenium2Library.Page Should Contain Element    ${CardEvent_Team_sel}    timeout=60
-    Select From List By value    ${CardEvent_Team_sel}    ${Team}
-    Selenium2Library.Clear Element Text    //*[@id="EventCardForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]
-    Selenium2Library.Input Text    //*[@id="EventCardForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]    ${TimeLine}
-    Selenium2Library.Page Should Contain Element    ${CardEvent_Process}    timeout=60
-    Selenium2Library.Click button    ${CardEvent_Process}
-    Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
-    Selenium2Library.Click button    ${ApplyEvent_btn}
-
-Injury Time
-    [Arguments]    ${Period Type}
-    Selenium2Library.Reload Page
-    ${TimeLine}    Get Time Line
-    Selenium2Library.Page Should Contain Element    ${InjuryTimeExtraEvent}    timeout=60
-    Selenium2Library.Click Element    ${InjuryTimeExtraEvent}
-    Selenium2Library.Page Should Contain Element    ${InjuryTimeExtra}    timeout=60
-    Selenium2Library.Input Text    ${InjuryTimeExtra}    5
-    Selenium2Library.Clear Element Text    //*[@id="EventInjuryExtraTimeForm"]/div[1]/div[4]//*[@id="payload_timeline_hour"]
-    Selenium2Library.Input Text    //*[@id="EventInjuryExtraTimeForm"]/div[1]/div[4]//*[@id="payload_timeline_hour"]    ${TimeLine}
-    Selenium2Library.Page Should Contain Element    ${InjuryPeriodType}    timeout=60
-    Select From List By value    ${InjuryPeriodType}    ${Period Type}
-    Selenium2Library.Page Should Contain Element    ${Injury_Process}    timeout=60
-    Selenium2Library.Click button    ${Injury_Process}
-    Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
-    Selenium2Library.Click button    ${ApplyEvent_btn}
-
-Get TimeLine
-    sleep    2s
-    ${Timeline_txt}    Selenium2Library.Get Text    ${Timeline}
-    ${Timeline_txt}=    Replace String    ${Timeline_txt}    ${space}    ${empty}
-    ${Timeline_txt}=    Get Substring    ${Timeline_txt}    10    18
-    Log To Console    ${Timeline_txt}
-    ${Timeline_txt}=    Convert Time    ${Timeline_txt}    timer    exclude_millis=yes
-    ${Timeline_txt}=    Add Time To Time    ${Timeline_txt}    00:02:00    timer    exclude_millis=yes
-    Log To Console    ${Timeline_txt}
-    [Return]    ${Timeline_txt}
-
-Wait Create Event
-    [Arguments]    ${value}
-    Selenium2Library.Reload Page
-    ${rowcount}    Selenium2Library.Get Matching Xpath Count    @{row}
-    Should be true    ${rowcount}>${value}
-
-Get Row Event
-    ${CurrentRow}    Selenium2Library.Get Matching Xpath Count    @{row}
-    [Return]    ${CurrentRow}
-
-Scenario Match start
-    Selenium2Library.Page Should Contain Element    ${Scenario_sel}    timeout=60
-    Select From List By value    ${Scenario_sel}    ${Scenario_MatchStart}
-    Selenium2Library.Page Should Contain Element    ${Apply_Scenario_btn}    timeout=60
-    Selenium2Library.Click button    ${Apply_Scenario_btn}
-    sleep    5s
-
-Scenario 2nd Injury Time
-    Selenium2Library.Page Should Contain Element    ${Scenario_sel}    timeout=60
-    Select From List By value    ${Scenario_sel}    ${Scenario_2nd_Injury}
-    Selenium2Library.Page Should Contain Element    ${Apply_Scenario_btn}    timeout=60
-    Selenium2Library.Click button    ${Apply_Scenario_btn}
-    sleep    5s
 
 Get yellow card value for Home
     [Arguments]    ${NewMatchID}
-    ${YellowCard_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[5]//span[@class='yellow-card']
-    ${YellowCard_Result_Xpath}=    Replace String    ${YellowCard_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${YellowCard_Result_Xpath}    timeout=60
-    ${YellowCard_Result_txt}    Selenium2Library.Get text    ${YellowCard_Result_Xpath}
-    [Return]    ${YellowCard_Result_txt}
-
-Get yellow card value for Home General
-    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class="home-section"]//span[@class="yellow-card"]    timeout=60
-    ${YellowCard_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class="home-section"]//span[@class="yellow-card"]
+    ${YellowCard_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-right col-home"]/span[@class="yellow-card"]
+    AppiumLibrary.Page Should Contain Element    ${YellowCard_Result_Xpath}    timeout=60
+    ${YellowCard_Result_txt}    AppiumLibrary.Get text    ${YellowCard_Result_Xpath}
     [Return]    ${YellowCard_Result_txt}
 
 Get red card value for Home
     [Arguments]    ${NewMatchID}
-    ${RedCard_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[5]//span[@class='red-card']
-    ${RedCard_Result_Xpath}=    Replace String    ${RedCard_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${RedCard_Result_Xpath}    timeout=60
-    ${RedCard_Result_txt}    Selenium2Library.Get text    ${RedCard_Result_Xpath}
+    ${RedCard_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-right col-home"]/span[@class="red-card"]
+    AppiumLibrary.Page Should Contain Element    ${RedCard_Result_Xpath}    timeout=60
+    ${RedCard_Result_txt}    AppiumLibrary.Get text    ${RedCard_Result_Xpath}
     [Return]    ${RedCard_Result_txt}
-
-Get yellow card value for Away General
-    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class="away-section"]//span[@class="yellow-card"]    timeout=60
-    ${YellowCard_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class="away-section"]//span[@class="yellow-card"]
-    [Return]    ${YellowCard_Result_txt}
-
-Get red card value for Home General
-    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class="home-section"]//span[@class="red-card"]    timeout=60
-    ${YellowCard_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class="home-section"]//span[@class="red-card"]
-    [Return]    ${YellowCard_Result_txt}
-
-Get red card value for Away General
-    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class="away-section"]//span[@class="red-card"]    timeout=60
-    ${YellowCard_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class="away-section"]//span[@class="red-card"]
-    [Return]    ${YellowCard_Result_txt}
 
 Get yellow card value for Away
     [Arguments]    ${NewMatchID}
-    ${YellowCard_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[7]//span[@class='yellow-card']
-    ${YellowCard_Result_Xpath}=    Replace String    ${YellowCard_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${YellowCard_Result_Xpath}    timeout=60
-    ${YellowCard_Result_txt}    Selenium2Library.Get text    ${YellowCard_Result_Xpath}
+    ${YellowCard_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-left col-away"]/span[@class="yellow-card"]
+    AppiumLibrary.Page Should Contain Element    ${YellowCard_Result_Xpath}    timeout=60
+    ${YellowCard_Result_txt}    AppiumLibrary.Get text    ${YellowCard_Result_Xpath}
     [Return]    ${YellowCard_Result_txt}
 
 Get red card value for Away
     [Arguments]    ${NewMatchID}
-    ${RedCard_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[7]//span[@class='red-card']
-    ${RedCard_Result_Xpath}=    Replace String    ${RedCard_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${RedCard_Result_Xpath}    timeout=60
-    ${RedCard_Result_txt}    Selenium2Library.Get text    ${RedCard_Result_Xpath}
+    ${RedCard_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-left col-away"]/span[@class="red-card"]
+    AppiumLibrary.Page Should Contain Element    ${RedCard_Result_Xpath}    timeout=60
+    ${RedCard_Result_txt}    AppiumLibrary.Get text    ${RedCard_Result_Xpath}
     [Return]    ${RedCard_Result_txt}
-
-Get Status
-    [Arguments]    ${NewMatchID}
-    ${Status_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[4]
-    ${Status_Result_Xpath}=    Replace String    ${Status_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${Status_Result_Xpath}    timeout=60
-    ${Status_Result_txt}    Selenium2Library.Get text    ${Status_Result_Xpath}
-    [Return]    ${Status_Result_txt}
-
-Get Status General
-    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class='status']    timeout=60
-    ${Status_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class='status']
-    [Return]    ${Status_Result_txt}
-
-Get Score General
-    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class='home-score']    timeout=60
-    ${Score_Home_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class='home-score']
-    Selenium2Library.Page Should Contain Element    //*[@id="__next"]//div[@class='away-score']    timeout=60
-    ${Score_Away_Result_txt}    Selenium2Library.Get text    //*[@id="__next"]//div[@class='away-score']
-    ${Score_Result_txt}=    Catenate    SEPARATOR=    ${Score_Home_Result_txt}-${Score_Away_Result_txt}
-    [Return]    ${Score_Result_txt}
 
 Get Score
     [Arguments]    ${NewMatchID}
-    ${Score_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[6]
-    ${Score_Result_Xpath}=    Replace String    ${Score_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${Score_Result_Xpath}    timeout=60
-    ${Score_Result_txt}    Selenium2Library.Get text    ${Score_Result_Xpath}
+    ${Score_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-score"]
+    AppiumLibrary.Page Should Contain Element    ${Score_Result_Xpath}    timeout=60
+    ${Score_Result_txt}    AppiumLibrary.Get text    ${Score_Result_Xpath}
     [Return]    ${Score_Result_txt}
 
 Get Score 1H
     [Arguments]    ${NewMatchID}
-    ${1H_Result_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[8]
-    ${1H_Result_Xpath}=    Replace String    ${1H_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${1H_Result_Xpath}    timeout=60
-    ${1H_Result_txt}    Selenium2Library.Get text    ${1H_Result_Xpath}
+    ${1H_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]//div[@class="text-1H"]
+    AppiumLibrary.Page Should Contain Element    ${1H_Result_Xpath}    timeout=60
+    ${1H_Result_txt}    AppiumLibrary.Get text    ${1H_Result_Xpath}
     [Return]    ${1H_Result_txt}
 
-Get Score 1H General
-    Selenium2Library.Page Should Contain Element    //div[@class="score"]/div[@class="half-score"]    timeout=60
-    ${1H_Result_txt}    Selenium2Library.Get text    //div[@class="score"]/div[@class="half-score"]
-    [Return]    ${1H_Result_txt}
+Check Icon Pen
+    Arguments]    ${NewMatchID}
+    ${Pen_Icon_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[5]/i[@class="icon-penalty"]
+    ${Pen_Icon_Xpath}=    Replace String    ${Pen_Icon_Xpath}    ${space}    ${empty}
+    AppiumLibrary.Element Should Be Visible    ${Pen_Icon_Xpath}
+
+Check Icon Arrow
+    Arguments]    ${NewMatchID}
+    ${arrow_Icon_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[5]/i[@class="icon-arrow-right"]
+    ${arrow_Icon_Xpath}=    Replace String    ${arrow_Icon_Xpath}    ${space}    ${empty}
+    AppiumLibrary.Element Should Be Visible    ${arrow_Icon_Xpath}

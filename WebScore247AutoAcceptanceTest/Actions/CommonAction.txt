@@ -16,7 +16,49 @@ Get CSS Property Value
     [Return]    ${prop_val}
 
 setup and open android phone
-    ${androiddriver1}=    Open Application    http://127.0.0.1:4723/wd/hub    platformName=android    platformVersion=7.0    deviceName=emulator-5554    automationName=uiautomator2
-    ...    browserName=Chrome
-    Go To Url    https://score247-web.nexdev.net
+    Close All Applications
+    ${androiddriver1}=    Open Application    http://127.0.0.1:4723/wd/hub    alias=MyApp1    newCommandTimeout=1200    platformName=android    platformVersion=8.1
+    ...    deviceName=cac6d888    automationName=uiautomator2    browserName=Chrome
+    Go To Url    https://score247-web-test.nexdev.net/
     sleep    5s
+    AppiumLibrary.Click Element    //*[@id="__next"]/div/div[3]/button[1]
+    sleep    5s
+
+Get TimeLine
+    sleep    2s
+    ${Timeline_txt}    Selenium2Library.Get Text    ${Timeline}
+    ${Timeline_txt}=    Replace String    ${Timeline_txt}    ${space}    ${empty}
+    ${Timeline_txt}=    Get Substring    ${Timeline_txt}    10    18
+    Log To Console    ${Timeline_txt}
+    ${Timeline_txt}=    Convert Time    ${Timeline_txt}    timer    exclude_millis=yes
+    ${Timeline_txt}=    Add Time To Time    ${Timeline_txt}    00:02:00    timer    exclude_millis=yes
+    Log To Console    ${Timeline_txt}
+    [Return]    ${Timeline_txt}
+
+Wait Create Event
+    [Arguments]    ${value}
+    Selenium2Library.Reload Page
+    ${rowcount}    Selenium2Library.Get Matching Xpath Count    @{row}
+    Should be true    ${rowcount}>${value}
+
+Get Row Event
+    ${CurrentRow}    Selenium2Library.Get Matching Xpath Count    @{row}
+    [Return]    ${CurrentRow}
+
+Open General Info Desktop
+    [Arguments]    ${NewMatchID}
+    ${Score_Result_Xpath}=    Catenate    SEPARATOR=    //input[@id = '${NewMatchID}']//ancestor::tr/td[6]
+    Selenium2Library.Page Should Contain Element    ${Score_Result_Xpath}    timeout=60
+    Selenium2Library.Click Element    ${Score_Result_Xpath}
+    Select Window    new
+
+Backgroup_color
+    ${BG}    Get CSS Property Value    //body/div/div/div/div[2]/div[2]/div[3]/table/tbody/tr[1]/td[2]    background-color
+    Log To Console    ${BG}
+
+Get CSS Property Value
+    [Arguments]    ${locator}    ${attribute name}
+    [Documentation]    Get the CSS property value of an Element.
+    ${css}=    Selenium2Library.Get WebElement    ${locator}
+    ${prop_val}=    Call Method    ${css}    value_of_css_property    ${attribute name}
+    [Return]    ${prop_val}

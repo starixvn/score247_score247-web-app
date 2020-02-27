@@ -7,6 +7,34 @@ Resource          ../Interfaces/Desktop/01_Layout/DateBar_Web.txt
 Resource          ../Interfaces/Desktop/01_Layout/Breadcrumbs.txt
 
 *** Keywords ***
+Verify Optional Function
+    # check show only
+    Open Home page
+    ${IsElementVisible}=    Run Keyword And Return Status    Selenium2Library.Page Should Contain Element    //tr[1]/td[1]/div[@class="checkbox"]/input
+    Log to console    ${IsElementVisible}
+    Run Keyword unless    ${IsElementVisible}    Terminate Process
+    ${Row_O}=    Selenium2Library.Get Matching Xpath Count    //tr[@class="match-row"]/td[1]/div
+    Log to console    ${Row_O}
+    #Run Keyword If    ${Row}<1    Log to console    There is no data for checking
+    #Run Keyword If    ${Row}<1    Terminate Process
+    ${MatchID}=    Selenium2Library.Get Element Attribute    //tr[1]/td[1]/div[@class="checkbox"]/input@id
+    Log to console    ${MatchID}
+    ${FisrtMatch_Xpath}=    Catenate    SEPARATOR=    //label[@for="${MatchID}"]
+    Selenium2Library.Click Element    ${FisrtMatch_Xpath}
+    Selenium2Library.Click Element    //div[@class="show-hide"]/span[@class="show-only"]
+    ${Row_E}=    Selenium2Library.Get Matching Xpath Count    //tr[@class="match-row"]/td[1]/div
+    Should Be equal    ${Row_E}    1
+    ${MatchID_E}=    Selenium2Library.Get Element Attribute    //tr[1]/td[1]/div[@class="checkbox"]/input@id
+    Should Be equal    ${MatchID_E}    ${MatchID}
+    # Show All
+    Selenium2Library.Click Element    //div[@class="show-hide"]/span[@class="show-all"]
+    ${Row_E}=    Selenium2Library.Get Matching Xpath Count    //tr[@class="match-row"]/td[1]/div
+    Should Be equal    ${Row_E}    ${Row_O}
+    ${FisrtMatch_Xpath}=    Catenate    SEPARATOR=    //label[@for="${MatchID}"]
+    Selenium2Library.Click Element    ${FisrtMatch_Xpath}
+    Selenium2Library.Click Element    //div[@class="show-hide"]/span[@class="hide"]
+    Selenium2Library.Page Should Not Contain Element    ${FisrtMatch_Xpath}
+
 Assert Header
     # Check Header
     Selenium2Library.Page Should Contain Element    ${Header}    timeout=30s
@@ -177,14 +205,3 @@ Assert Date_Bar
     Should be equal    ${Today-1_txt}    ${date-1}
     ${Today-2_txt}    Selenium2Library.Get Text    ${Today-2}
     Should be equal    ${Today-2_txt}    ${date-2}
-
-Backgroup_color
-    ${BG}    Get CSS Property Value    //body/div/div/div/div[2]/div[2]/div[3]/table/tbody/tr[1]/td[2]    background-color
-    Log To Console    ${BG}
-
-Get CSS Property Value
-    [Arguments]    ${locator}    ${attribute name}
-    [Documentation]    Get the CSS property value of an Element.
-    ${css}=    Selenium2Library.Get WebElement    ${locator}
-    ${prop_val}=    Call Method    ${css}    value_of_css_property    ${attribute name}
-    [Return]    ${prop_val}

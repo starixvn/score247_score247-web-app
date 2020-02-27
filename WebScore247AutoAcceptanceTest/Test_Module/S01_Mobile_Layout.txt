@@ -8,7 +8,9 @@ Library           Dialogs
 Library           Process
 Resource          ../Actions/Layout_Mobile.txt
 Resource          ../Actions/CommonAction.txt
+Resource          ../Actions/MainInfo_Mobile.txt
 Library           ExcelLibrary
+Resource          ../Actions/CreateDataTool.txt
 
 *** Test Cases ***
 Header
@@ -28,3 +30,7 @@ Date_bar
     #Backgroup_color
     sleep    3s
     [Teardown]    Close Browser
+
+Verify Match Info
+    Check Main_info_mobile
+    #test1212
