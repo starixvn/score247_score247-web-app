@@ -101,7 +101,9 @@
 
 //////////   line-ups   ////////////
 .card {
-  &.substitution, &.substitute-player, &.coach {
+  &.substitution,
+  &.substitute-player,
+  &.coach {
     margin-top: 1.2rem;
   }
 }
@@ -156,7 +158,6 @@
   .icon-arrow-up {
     top: -0.3rem;
   }
-
 }
 .substitution-item {
   display: grid;
@@ -164,7 +165,7 @@
   grid-template-rows: 1fr 1fr;
   justify-items: center;
   align-items: center;
-  border-bottom: 1px solid #DEE2E6;
+  border-bottom: 1px solid #dee2e6;
   &:last-child {
     border-bottom: none;
   }
@@ -179,7 +180,7 @@
 
   [class*="subs"] {
     justify-self: left;
-    padding: .6rem 1.2rem;
+    padding: 0.6rem 1.2rem;
     .player-row {
       padding: 0;
     }
@@ -191,11 +192,23 @@
     font-weight: bold;
   }
 }
+.empty-substitution-item {
+  height: 55px;
+  &:last-child {
+    height: 54px;
+  }
+}
 .substitute-player {
   .player-row:last-child {
     border-bottom: none;
   }
-} 
+  .empty-player-row {
+    height: 40px;
+  }
+  .empty-player-row:last-child {
+    height: 39px;
+  }
+}
 .icon-substitute-player {
   font-size: 1rem;
 }
@@ -211,7 +224,7 @@
   padding: 0;
 }
 .coach .player-row {
-  border-bottom: none; 
+  border-bottom: none;
   .mobile & {
     padding-left: 6.8rem;
   }

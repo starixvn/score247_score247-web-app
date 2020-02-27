@@ -11,7 +11,6 @@ import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Card from "../../../common/basic/card";
-import Commentary from '../commentary';
 
 type Props = {
   matchInfo: MatchInfo;
@@ -22,6 +21,18 @@ type Props = {
 const Desktop: React.FC<Props> = props => {
   const [selectedTabIndex, setTab] = useState(0);
   const { t } = useTranslation(ResourceType.SOCCER);
+  const maxNumberOfSubstitutionEvent = props.matchLineUps?.Id ? (props.matchLineUps.Home.SubstitutionEvents.length - props.matchLineUps.Away.SubstitutionEvents.length > 0 ?
+    props.matchLineUps.Home.SubstitutionEvents.length :
+    props.matchLineUps.Away.SubstitutionEvents.length) : 0;
+
+  const maxNumberOfSubstitutePlayers = props.matchLineUps?.Id ? (props.matchLineUps.Home.Substitutions.length - props.matchLineUps.Away.Substitutions.length > 0 ?
+    props.matchLineUps.Home.Substitutions.length :
+    props.matchLineUps.Away.Substitutions.length) : 0;
+
+  const isShowingSubstitutionEvents = props.matchLineUps?.Id ?
+    (props.matchLineUps.Home.SubstitutionEvents?.some(x => x) ||
+      props.matchLineUps.Away.SubstitutionEvents?.some(x => x)) :
+    false;
 
   return (
     <>
@@ -56,7 +67,12 @@ const Desktop: React.FC<Props> = props => {
         <TabPanel>
           <div className="info-tab">
             <div className="line-ups left">
-              {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Home} pitchView={props.matchLineUps.PitchView} />)}
+              {props.matchLineUps?.Id && (<TeamLineUps
+                maxNumberOfSubstitutionEvent={maxNumberOfSubstitutionEvent}
+                lineups={props.matchLineUps.Home}
+                pitchView={props.matchLineUps.PitchView}
+                maxNumberOfSubstitutePlayers={maxNumberOfSubstitutePlayers}
+                isShowingSubstitutionEvents={isShowingSubstitutionEvents} />)}
             </div>
             <div className="center">
               <BallTracker matchId={props.matchInfo.Match.Id} />
@@ -70,7 +86,12 @@ const Desktop: React.FC<Props> = props => {
               </Card>
             </div>
             <div className="line-ups right">
-              {props.matchLineUps?.Id && (<TeamLineUps lineups={props.matchLineUps.Away} pitchView={props.matchLineUps.PitchView} />)}
+              {props.matchLineUps?.Id && (<TeamLineUps
+                maxNumberOfSubstitutionEvent={maxNumberOfSubstitutionEvent}
+                lineups={props.matchLineUps.Away}
+                pitchView={props.matchLineUps.PitchView}
+                maxNumberOfSubstitutePlayers={maxNumberOfSubstitutePlayers}
+                isShowingSubstitutionEvents={isShowingSubstitutionEvents} />)}
             </div>
           </div>
         </TabPanel>

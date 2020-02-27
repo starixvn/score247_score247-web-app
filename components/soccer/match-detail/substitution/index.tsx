@@ -5,14 +5,17 @@ import SubstitutionRow from './substitution-row';
 
 type Props = {
   substitutionEvents: TimelineEvent[];
+  maxNumberOfSubstitutionEvent: number;
 };
 
 const Substitution: React.FC<Props> = (props: Props) => {
   const sortedSubstitutionEvents = props.substitutionEvents ? sortArray(props.substitutionEvents, "MatchTime", "DESC") : props.substitutionEvents;
+  const numberOfEmptyRow = props.maxNumberOfSubstitutionEvent - sortedSubstitutionEvents.length;
 
   return (
     <div>
       {sortedSubstitutionEvents?.map(event => <SubstitutionRow substitutionEvent={event} key={event.Id} />)}
+      {numberOfEmptyRow > 0 && Array(numberOfEmptyRow).fill(<div className="empty-substitution-item"></div>)}
     </div>
   );
 };

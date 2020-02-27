@@ -88,14 +88,16 @@ const Mobile: React.FC<Props> = props => {
                 {(matchLineUps.Home.SubstitutionEvents?.some(x => x) || matchLineUps.Away.SubstitutionEvents?.some(x => x))
                   && (<Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={["icon-arrow-down1", "icon-arrow-up"]} className="substitution">
                     <div className="line-ups-wrapper">
-                      {matchLineUps.Home.SubstitutionEvents?.some(x => x) && <Substitution substitutionEvents={matchLineUps.Home.SubstitutionEvents} />}
-                      {matchLineUps.Away.SubstitutionEvents?.some(x => x) && <Substitution substitutionEvents={matchLineUps.Away.SubstitutionEvents} />}
+                      {matchLineUps.Home.SubstitutionEvents?.some(x => x) &&
+                        <Substitution substitutionEvents={matchLineUps.Home.SubstitutionEvents} maxNumberOfSubstitutionEvent={matchLineUps.Home.SubstitutionEvents.length} />}
+                      {matchLineUps.Away.SubstitutionEvents?.some(x => x) &&
+                        <Substitution substitutionEvents={matchLineUps.Away.SubstitutionEvents} maxNumberOfSubstitutionEvent={matchLineUps.Away.SubstitutionEvents.length} />}
                     </div>
                   </Card>)}
                 <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"} className="substitute-player">
                   <div className="line-ups-wrapper">
-                    <SubstitutePlayers substitutePlayers={matchLineUps.Home.Substitutions} />
-                    <SubstitutePlayers substitutePlayers={matchLineUps.Away.Substitutions} />
+                    <SubstitutePlayers substitutePlayers={matchLineUps.Home.Substitutions} maxNumberOfSubstitutePlayers={matchLineUps.Home.Substitutions.length} />
+                    <SubstitutePlayers substitutePlayers={matchLineUps.Away.Substitutions} maxNumberOfSubstitutePlayers={matchLineUps.Away.Substitutions.length} />
                   </div>
                 </Card>
                 <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon={"icon-account"}>
