@@ -4,7 +4,7 @@ import Select, { ValueType } from "react-select";
 import Router from "next/router";
 import { SportsEnum } from "../../../../common/enums/sport-enum";
 import { filter } from "lodash";
-import { WithTranslation } from "next-i18next";
+import { WithTranslation, TFunction } from "next-i18next";
 import { withTranslation } from "../../../../common/helpers/Localizer";
 import { ResourceType, CommonResourceKey } from "../../../../common/resources";
 import { useDeviceContext } from "../../../../contexts/device-context";
@@ -21,16 +21,17 @@ interface SelectOptions {
   forSport: string;
 }
 
-const createOptions = () => {
+const createOptions = (t: TFunction) => {
   const createdOptions = [];
   for (const item in SportsEnum) {
     const icon = `icon-${item.toLowerCase()}`;
     const labelWithIcon = (
       <span>
         <i className={icon} />
-        {item}
+        {t(item.toLowerCase()).toUpperCase()}
       </span>
     );
+
     if (item.toLowerCase() === SportsEnum.SOCCER) {
       createdOptions.push({
         value: "/",
@@ -55,7 +56,7 @@ const onChangeSportMobile = (selectedOption: ValueType<SelectOptions>) => {
 
 const Top: React.FunctionComponent<Props> = props => {
   const { t, sport } = props;
-  const sportOptions = createOptions();
+  const sportOptions = createOptions(t);
   const { isMobile } = useDeviceContext();
   const [showSideBar, setSideBar] = useState(false);
 

@@ -30,22 +30,22 @@ export const supportedLanguages: Language[] = [
   },
   {
     code: "vi",
-    name: "Vietnamese"
+    name: "Tiếng Việt"
   },
   {
     code: "id",
-    name: "Indonesian"
+    name: "Bahasa Indonesia"
   },
   {
     code: "th",
-    name: "Thai"
+    name: "ไทย"
   },
   {
     code: "zhTW",
-    name: "Chinese (Traditional)"
+    name: "繁体中文"
   },
   {
     code: "zhCN",
-    name: "Chinese (Simplified)"
+    name: "体中文"
   }
 ];

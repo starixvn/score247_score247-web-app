@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import "./sidebar.scss";
 import Mobile from "../../../../common/language-selection/mobile";
+import {
+  useTranslation,
+  supportedLanguages
+} from "../../../../../common/helpers/Localizer";
+import { useRouter } from "next/router";
+import { SportsEnum } from "../../../../../common/enums/sport-enum";
 
 type Props = {
   isActive: boolean;
 };
 
 export default function SideBar(props: Props) {
+  const { i18n, t } = useTranslation();
   const [showLanguageSelection, setLanguageSelection] = useState(false);
-
+  const { pathname } = useRouter();
+  const href = pathname.split("/")[1];
+  const sport = href.toLowerCase() || SportsEnum.SOCCER;
   return (
     <>
       <div className={`push-menu ${props.isActive && "active"}`}>
@@ -21,7 +30,7 @@ export default function SideBar(props: Props) {
                 Default Sport
               </div>
               <div className="value">
-                <span className="text">Soccer</span>
+                <span className="text">{t(sport)}</span>
                 <span className="icon-arrow-down caret-right"></span>
               </div>
             </div>
@@ -31,7 +40,9 @@ export default function SideBar(props: Props) {
                 Default Language
               </div>
               <div className="value">
-                <span className="text">English</span>
+                <span className="text">
+                  {supportedLanguages.find(x => x.code === i18n.language)?.name}
+                </span>
                 <span className="icon-arrow-down caret-right"></span>
               </div>
             </div>
