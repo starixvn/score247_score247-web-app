@@ -19,6 +19,9 @@
 }
 
 .react-tabs {
+  .react-tabs__tab-panel--selected {
+    margin-top: 1.2rem;
+  }
   .react-tabs__tab-list {
     background-color: #1b3464;
     border-bottom: none;
