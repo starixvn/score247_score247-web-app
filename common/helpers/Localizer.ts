@@ -42,10 +42,10 @@ export const supportedLanguages: Language[] = [
   },
   {
     code: "zhTW",
-    name: "繁体中文"
+    name: "繁體中文"
   },
   {
     code: "zhCN",
-    name: "体中文"
+    name: "简体中文"
   }
 ];
