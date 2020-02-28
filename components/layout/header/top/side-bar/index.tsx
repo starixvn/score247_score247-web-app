@@ -82,10 +82,12 @@ export default function SideBar(props: Props) {
           </div>
         </div>
       </div>
-      <Mobile
-        isActive={showLanguageSelection}
-        onFinished={() => setLanguageSelection(false)}
-      />
+      {showLanguageSelection && (
+        <Mobile
+          isActive={showLanguageSelection}
+          onFinished={() => setLanguageSelection(false)}
+        />
+      )}
     </>
   );
 }

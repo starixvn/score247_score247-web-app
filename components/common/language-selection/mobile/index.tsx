@@ -1,5 +1,5 @@
 import "./style.scss";
-import React from "react";
+import React, { RefObject } from "react";
 import {
   Language,
   supportedLanguages,
@@ -15,8 +15,10 @@ type Props = {
 } & WithTranslation;
 
 class Mobile extends React.PureComponent<Props> {
+  wrapper: RefObject<HTMLDivElement>;
   constructor(props: Props) {
     super(props);
+    this.wrapper = React.createRef();
   }
 
   handleLanguageChange = (
@@ -46,16 +48,27 @@ class Mobile extends React.PureComponent<Props> {
     );
   };
 
+  handleClose = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const element = this.wrapper.current;
+    if (element) {
+      element.onanimationend = () => this.props.onFinished();
+      element.style.animation = "fadeOut 0.2s ease-out";
+    }
+  };
+
   render() {
     return (
-      <div className={`language-box ${this.props.isActive && "active"}`}>
+      <div
+        className={`language-box ${this.props.isActive && "active"}`}
+        ref={this.wrapper}
+      >
         <div className="function-box">
-          <div className="back-box" onClick={this.props.onFinished}>
+          <div className="back-box" onClick={this.handleClose}>
             <span className="icon-arrow-down back"></span>
             <span>back</span>
           </div>
           <span className="txt-title">Select Language</span>
-          <span className="done" onClick={this.props.onFinished}>
+          <span className="done" onClick={this.handleClose}>
             Done
           </span>
         </div>
