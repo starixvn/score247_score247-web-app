@@ -1,4 +1,5 @@
 *** Settings ***
+Test Setup        Set Appium Timeout \ \ \ 300 seconds
 Library           OperatingSystem
 Library           AppiumLibrary
 Library           Screenshot
@@ -11,6 +12,7 @@ Resource          ../Actions/CommonAction.txt
 Resource          ../Actions/MainInfo_Mobile.txt
 Library           ExcelLibrary
 Resource          ../Actions/CreateDataTool.txt
+Resource          ../Actions/GeneralInfo_Mobile.txt
 
 *** Test Cases ***
 Header
@@ -31,6 +33,10 @@ Date_bar
     sleep    3s
     [Teardown]    Close Browser
 
-Verify Match Info
+Verify Main Info
+    [Setup]    Set Appium Timeout    300 seconds
     Check Main_info_mobile
     #test1212
+
+Verify Match Info
+    CheckGeneral_info_mobile

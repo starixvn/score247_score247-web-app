@@ -15,46 +15,6 @@ Open General Info mobile
     Log To Console    2323232
     AppiumLibrary.Click Element    ${Score_Result_Xpath}
 
-test
-    ###--- Create new match ----###
-    ${NewMatchID}    Create New Match    sr:tournament:17
-    ###--- Match Start ----###
-    Scenario MatchStart
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    1
-    ${CurrentRow}=    Get Row Event
-    Log To Console    ${CurrentRow}
-    Close Window
-    ###--- Check main data ----###
-    setup and open android phone
-    sleep    3s
-    # Check Status
-    ${Status_Result_txt}    Get Score    ${NewMatchID}
-    Log To Console    ${Status_Result_txt}
-    ###--- Check match info ----###
-    Open General Info mobile    ${NewMatchID}
-    sleep    5s
-    Log To Console    444444
-    # Check Status
-    ${Status_Result_txt}    Get Status General
-    Log To Console    5555
-    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
-    Log To Console    ${Status_Result_txt}
-    ###--- Score change scenario ----###
-    Login Create Data Page
-    ${Event}=    Catenate    SEPARATOR=    //td[contains(.,'${NewMatchID}')]//ancestor::tr/td[11]/a[1]
-    Selenium2Library.Click Element    ${Event}
-    Selenium2Library.Reload Page
-    sleep    3s
-    Score Change    home    regular_period    10
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
-    ${CurrentRow}=    Get Row Event
-    Close Window
-    ${Status_Result_txt}    Get Status General
-    Log To Console    5555
-    ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
-    Log To Console    ${Status_Result_txt}
-
 CheckGeneral_info_mobile
     ###--- Create new match ----###
     ${NewMatchID}    Create New Match    sr:tournament:17

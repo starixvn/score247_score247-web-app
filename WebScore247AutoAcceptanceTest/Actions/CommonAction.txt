@@ -17,8 +17,8 @@ Get CSS Property Value
 
 setup and open android phone
     Close All Applications
-    ${androiddriver1}=    Open Application    http://127.0.0.1:4723/wd/hub    alias=MyApp1    newCommandTimeout=1200    platformName=android    platformVersion=8.1
-    ...    deviceName=cac6d888    automationName=uiautomator2    browserName=Chrome
+    ${androiddriver1}=    Open Application    http://127.0.0.1:4723/wd/hub    alias=MyApp1    newCommandTimeout=300    platformName=android    platformVersion=7.0
+    ...    deviceName=emulator-5554    automationName=uiautomator2    browserName=Chrome
     Go To Url    https://score247-web-test.nexdev.net/
     sleep    5s
     AppiumLibrary.Click Element    //*[@id="__next"]/div/div[3]/button[1]

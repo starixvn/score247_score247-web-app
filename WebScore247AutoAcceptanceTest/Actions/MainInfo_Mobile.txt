@@ -7,45 +7,18 @@ Resource          ../Interfaces/CreateDataTool/LoginPage.txt
 Resource          ../Actions/CommonAction.txt
 
 *** Keywords ***
-test1212
-    ###--- Create new match ----###
-    ${NewMatchID}    Create New Match    sr:tournament:17
-    ###--- Match Start ----###
-    Scenario MatchStart
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    1
-    ${CurrentRow}=    Get Row Event
-    Log To Console    ${CurrentRow}
-    ###--- Check main data ----###
-    setup and open android phone
-    # Check Status
-    ${Status_Result_txt}    Get Status    ${NewMatchID}
-    Should not be equal    -    ${Status_Result_txt}
-    # Check Score
-    ${Score_Result_txt}    get Score    ${NewMatchID}
-    Should be equal    0 - 0    ${Score_Result_txt}
-    ###--- Score change scenario ----###
-    Selenium2Library.switch browser    tab1
-    Selenium2Library.Reload Page
-    sleep    3s
-    Score Change    home    regular_period    10
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
-    ${CurrentRow}=    Get Row Event
-    Switch Application    MyApp1
-    ###--- Check main data ----###
-    sleep    5s
-    # Check Score
-    ${Score_Result_txt}    get Score    ${NewMatchID}
-    sleep    3s
-    Should be equal    1 - 0    ${Score_Result_txt}
-
 Get extra line
     [Arguments]    ${NewMatchID}
-    ${Status_Result_Xpath}=    Catenate    //tr[@data-match-id='${NewMatchID}']/td[@class="text-extra"]/span
-    ${Status_Result_Xpath}=    Replace String    ${Status_Result_Xpath}    ${space}    ${empty}
-    Selenium2Library.Page Should Contain Element    ${Status_Result_Xpath}    timeout=60
-    ${Status_Result_txt}    Selenium2Library.Get text    ${Status_Result_Xpath}
+    ${Status_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-extra"]/span
+    #Log to console    ${Status_Result_Xpath}
+    AppiumLibrary.Page Should Contain Element    ${Status_Result_Xpath}    timeout=60
+    ${Status_Result_txt}    AppiumLibrary.Get text    ${Status_Result_Xpath}
     ${Status_Result_txt}=    Replace String    ${Status_Result_txt}    ${space}    ${empty}
     [Return]    ${Status_Result_txt}
+
+Reset Application Timeout
+    ${Timeout}    Get Appium Timeout
+    Log To Console    ${Timeout}
 
 Check Main_info_mobile
     ###--- Create new match ----###
@@ -53,7 +26,7 @@ Check Main_info_mobile
     ${NewMatchID}    Create New Match    sr:tournament:17
     ###--- Match Start ----###
     Scenario MatchStart
-    Sleep    20s
+    Sleep    10s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    1
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
@@ -70,10 +43,11 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    regular_period    10
-    Sleep    20s
+    Sleep    10s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
+    Reset Application Timeout
     ###--- Check main data ----###
     sleep    5s
     # Check Score
@@ -85,7 +59,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    regular_period    10
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
     ###--- Check main data ----###
@@ -101,7 +76,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Card Event    home    yellow_card    11
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -118,7 +94,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Card Event    home    red_card    12
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -134,7 +111,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Card Event    home    yellow_red_card    13
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -151,7 +129,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Card Event    away    yellow_card    14
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -168,7 +147,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Card Event    away    red_card    15
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -184,7 +164,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Card Event    away    yellow_red_card    16
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -199,10 +180,12 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Injury Time    1st_half
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
+    Reset Application Timeout
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    4
@@ -212,7 +195,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    extra_time    45
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -224,7 +208,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    extra_time    45
-    Wait Until Keyword Succeeds    50 times    10s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -247,8 +232,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    break_start
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -277,7 +262,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    2nd_period_start
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -290,7 +276,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    regular_period    55
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     ### check main data
     sleep    5s
@@ -315,7 +302,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    regular_period    55
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
@@ -339,7 +327,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Injury Time    2nd_half
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -353,7 +342,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    extra_time    90
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -370,7 +360,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    extra_time    90
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -396,22 +387,26 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    await_extra
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    Await. ET    ${Status_Result_txt}
+    Log To Console    ${Status_Result_txt}
     #Check Extra Line
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Should be equal    FT[4-4]    ${Extra_Result_txt}
+    Log To Console    ${Extra_Result_txt}
     ####### Ext_Time    1st    start
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    1st_extra_start
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -424,7 +419,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    overtime    100
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
     sleep    5s
@@ -435,13 +431,13 @@ Check Main_info_mobile
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    (2 - 2)    ${1H_Result_txt}
-    Select Window    new
     ####### score change away
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    overtime    100
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
     sleep    5s
@@ -497,6 +493,7 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Injury Time    1st_extra
+    Sleep    10s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
@@ -507,14 +504,15 @@ Check Main_info_mobile
     ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
     Should be equal    105+    ${Status_Result_txt}
     # score change
-    AppiumLibrary.switch browser    tab1
-    AppiumLibrary.Reload Page
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    overtime    105
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
+    Reset Application Timeout
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
     ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
@@ -527,12 +525,12 @@ Check Main_info_mobile
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[2-1]    ${Extra_Result_txt}
     # Score change
-    AppiumLibrary.switch browser    tab1
-    AppiumLibrary.Reload Page
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    overtime    105
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
     sleep    5s
@@ -560,7 +558,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    break_extra
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -572,7 +571,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    2nd_extra_start
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -585,7 +585,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    overtime    110
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
     sleep    5s
@@ -604,7 +605,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    overtime    110
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
     sleep    5s
@@ -632,10 +634,12 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Injury Time    2nd_extra
+    Sleep    10s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
+    Reset Application Timeout
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     ${Status_Result_txt}=    Get Substring    ${Status_Result_txt}    0    5
@@ -645,7 +649,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Score Change    home    overtime    120
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
     sleep    5s
@@ -660,12 +665,12 @@ Check Main_info_mobile
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-3]    ${Extra_Result_txt}
     # Score change
-    AppiumLibrary.switch browser    tab1
-    AppiumLibrary.Reload Page
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
     sleep    3s
     Score Change    away    overtime    120
-    sleep    15s
-    Wait Until Keyword Succeeds    50 times    4s    Wait Create Event    ${CurrentRow}
+    sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
     sleep    5s
@@ -693,7 +698,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    await_penalty
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -705,7 +711,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     Match Time Event    penalty_start
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -720,7 +727,8 @@ Check Main_info_mobile
     Selenium2Library.Reload Page
     sleep    3s
     PEN Shoot Event    home    scored    Mike
-    Wait Until Keyword Succeeds    50 times    5s    Wait Create Event    ${CurrentRow}
+    Sleep    10s
+    Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
     Switch Application    MyApp1
@@ -730,26 +738,26 @@ Check Main_info_mobile
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[1-0]    ${Extra_Result_txt}
-    AppiumLibrary.switch browser    tab1
-    AppiumLibrary.Reload Page
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
     sleep    3s
     PEN Shoot Event    away    scored    Mike
-    sleep    15s
+    sleep    10s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
-    Switch Application    MyApp1n
+    Switch Application    MyApp1
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[1-1]    ${Extra_Result_txt}
-    AppiumLibrary.switch browser    tab1
-    AppiumLibrary.Reload Page
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
     sleep    3s
     PEN Shoot Event    home    scored    Mike
-    sleep    15s
+    sleep    10s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
@@ -760,11 +768,11 @@ Check Main_info_mobile
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
-    AppiumLibrary.switch browser    tab1
-    AppiumLibrary.Reload Page
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
     sleep    3s
     PEN Shoot Event    away    missed    Mike
-    sleep    15s
+    sleep    10s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
@@ -776,11 +784,11 @@ Check Main_info_mobile
     Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
     ######### End Match After Pen
-    AppiumLibrary.switch browser    tab1
-    AppiumLibrary.Reload Page
+    Selenium2Library.switch browser    tab1
+    Selenium2Library.Reload Page
     sleep    3s
     Match Time End    match_end_pen    home
-    sleep    15s
+    sleep    10s
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Log To Console    ${CurrentRow}
@@ -844,13 +852,11 @@ Get Score 1H
     [Return]    ${1H_Result_txt}
 
 Check Icon Pen
-    Arguments]    ${NewMatchID}
-    ${Pen_Icon_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[5]/i[@class="icon-penalty"]
-    ${Pen_Icon_Xpath}=    Replace String    ${Pen_Icon_Xpath}    ${space}    ${empty}
+    [Arguments]    ${NewMatchID}
+    ${Pen_Icon_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id='${NewMatchID}']//i[@class="icon-penalty"]
     AppiumLibrary.Element Should Be Visible    ${Pen_Icon_Xpath}
 
 Check Icon Arrow
-    Arguments]    ${NewMatchID}
-    ${arrow_Icon_Xpath}=    Catenate    //input[@id = '${NewMatchID}']//ancestor::tr/td[5]/i[@class="icon-arrow-right"]
-    ${arrow_Icon_Xpath}=    Replace String    ${arrow_Icon_Xpath}    ${space}    ${empty}
+    [Arguments]    ${NewMatchID}
+    ${arrow_Icon_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id='${NewMatchID}']//i[@class="icon-arrow-right"]
     AppiumLibrary.Element Should Be Visible    ${arrow_Icon_Xpath}

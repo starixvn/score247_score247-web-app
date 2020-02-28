@@ -16,9 +16,6 @@ Resource          ../Actions/CheckLiveMatch_Desktop.txt
 Verify LeaguesCode
     Verify LeaguesCode    1
 
-01 Test
-    Test001
-
 Post Match - Postponed Match
     Verify Postponed Match
 

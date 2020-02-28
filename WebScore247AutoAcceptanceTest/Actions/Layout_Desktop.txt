@@ -11,12 +11,9 @@ Verify Optional Function
     # check show only
     Open Home page
     ${IsElementVisible}=    Run Keyword And Return Status    Selenium2Library.Page Should Contain Element    //tr[1]/td[1]/div[@class="checkbox"]/input
-    Log to console    ${IsElementVisible}
     Run Keyword unless    ${IsElementVisible}    Terminate Process
     ${Row_O}=    Selenium2Library.Get Matching Xpath Count    //tr[@class="match-row"]/td[1]/div
     Log to console    ${Row_O}
-    #Run Keyword If    ${Row}<1    Log to console    There is no data for checking
-    #Run Keyword If    ${Row}<1    Terminate Process
     ${MatchID}=    Selenium2Library.Get Element Attribute    //tr[1]/td[1]/div[@class="checkbox"]/input@id
     Log to console    ${MatchID}
     ${FisrtMatch_Xpath}=    Catenate    SEPARATOR=    //label[@for="${MatchID}"]
@@ -34,6 +31,7 @@ Verify Optional Function
     Selenium2Library.Click Element    ${FisrtMatch_Xpath}
     Selenium2Library.Click Element    //div[@class="show-hide"]/span[@class="hide"]
     Selenium2Library.Page Should Not Contain Element    ${FisrtMatch_Xpath}
+    Selenium2Library.Close Browser
 
 Assert Header
     # Check Header

@@ -9,6 +9,9 @@ Library           Dialogs
 Library           Process
 Resource          ../Actions/Layout_Desktop.txt
 Resource          ../Actions/CommonAction.txt
+Resource          ../Actions/CreateDataTool.txt
+Resource          ../Actions/ViewMatchInfo_Desktop.txt
+Resource          ../Actions/CheckLiveMatch_Desktop.txt
 Library           ExcelLibrary
 
 *** Test Cases ***
@@ -44,3 +47,6 @@ Breadcrumbs
 
 Verify Optional Function
     Verify Optional Function
+
+Verify Live Match
+    Verify Live Match Desktop
