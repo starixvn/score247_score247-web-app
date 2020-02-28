@@ -75,7 +75,7 @@ const Top: React.FunctionComponent<Props> = props => {
             isSearchable={false}
           />
         </div>
-        <SideBar isActive={showSideBar} />
+        <SideBar isActive={showSideBar} onClose={() =>  setSideBar(false)} />
       </>
     );
   }

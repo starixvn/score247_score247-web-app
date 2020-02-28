@@ -2,20 +2,36 @@ import "./league-cell.scss";
 import React from "react";
 import { MatchSummary } from "../../../../apis/soccer/models";
 
-const LeagueCell: React.FC<{ match: MatchSummary, rowSpan?: number }> = ({ match, rowSpan }) => {
-    const league = match.IsInternationalLeague ? match.LeagueAbbreviation : `${match.CountryCode} ${match.LeagueAbbreviation}`;
-    const leagueTitle = match.IsInternationalLeague ? match.LeagueName : `${match.CountryName} ${match.LeagueName}`;
+const buildLeagueAbbreviation = (leagueName: string): string => {
+  return leagueName
+    .split(/[\s.-]/)
+    .map(i => i.charAt(0))
+    .join("");
+};
 
-    return (
-        <td
-            rowSpan={rowSpan}
-            className={`league ${match.LeagueRegion}`}
-            title={leagueTitle}
-            onClick={(event) => { event.stopPropagation(); }}
-        >
-            {league}
-        </td>
-    );
+const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
+  match,
+  rowSpan
+}) => {
+  const league = match.IsInternationalLeague
+    ? buildLeagueAbbreviation(match.LeagueName)
+    : `${match.CountryCode} ${buildLeagueAbbreviation(match.LeagueName)}`;
+  const leagueTitle = match.IsInternationalLeague
+    ? match.LeagueName
+    : `${match.CountryName} ${match.LeagueName}`;
+
+  return (
+    <td
+      rowSpan={rowSpan}
+      className={`league ${match.LeagueRegion}`}
+      title={leagueTitle}
+      onClick={event => {
+        event.stopPropagation();
+      }}
+    >
+      {league}
+    </td>
+  );
 };
 
 export default LeagueCell;

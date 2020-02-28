@@ -10,6 +10,7 @@ import { SportsEnum } from "../../../../../common/enums/sport-enum";
 
 type Props = {
   isActive: boolean;
+  onClose: () => void;
 };
 
 export default function SideBar(props: Props) {
@@ -18,6 +19,7 @@ export default function SideBar(props: Props) {
   const { pathname } = useRouter();
   const href = pathname.split("/")[1];
   const sport = href.toLowerCase() || SportsEnum.SOCCER;
+
   return (
     <>
       <div className={`push-menu ${props.isActive && "active"}`}>
