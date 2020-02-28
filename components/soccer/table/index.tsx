@@ -130,9 +130,8 @@ class SoccerTable extends React.Component<Props> {
   render() {
     const { matches } = this.props;
     const bodyRows = matches && matches.length > 0 ? this.renderBodyRows(matches) : <EmptyRow />;
-
     return (
-      <table className="table">
+      <table className="table score-page">
         <Header />
         <tbody>{bodyRows}</tbody>
       </table>

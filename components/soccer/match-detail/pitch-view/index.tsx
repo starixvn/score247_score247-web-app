@@ -6,7 +6,10 @@ type Props = {
 
 export default function PitchView(props: Props) {
     return(
-      <div className="pitch-wrapper"><div className="pitch-view" dangerouslySetInnerHTML={{__html: props.pitchView}}>
-      </div></div>
+      <>
+        <div className="pitch-wrapper"><div className="pitch-view" dangerouslySetInnerHTML={{__html: props.pitchView}}>
+        </div></div>
+        <div className="empty"></div>
+      </>
     );
 }

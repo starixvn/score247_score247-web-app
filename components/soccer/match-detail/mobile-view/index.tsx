@@ -74,6 +74,7 @@ const Mobile: React.FC<Props> = props => {
                         <span className="team-name">{matchLineUps.Away.Name}</span>
                         <span className="formation">{matchLineUps.Away.Formation}</span>
                       </div>
+                      <div className="empty"></div>
                     </Card>
                   )
                   : (

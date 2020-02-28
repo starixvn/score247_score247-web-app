@@ -51,7 +51,7 @@ export default function ExtraMatchInfoRow(props: Props) {
     const showAggregateScore = AggregateWinnerId && EventStatus.Value === MatchStatusType.CLOSED.value;
 
     return (
-      <tr data-match-id={Id} onClick={props.onClick}>
+      <tr data-match-id={Id} onClick={props.onClick} className="text-extra-line">
         <td className="text-extra" colSpan={colSpan}>
           <span className="extra-match-info">
             {renderRegularPeriodScore(regularPeriods)}

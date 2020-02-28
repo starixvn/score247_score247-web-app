@@ -4,8 +4,9 @@
     border: 1px solid #DFDFDF;
     background: #fff;
     table-layout: fixed;
-    .mobile & {
-        margin-top: 4.6rem;
+ 
+    tr:hover, tr:hover + tr.text-extra-line, tr + tr.text-extra-line:hover  {
+        background-color: #FFFEEB;
     }
 }
 

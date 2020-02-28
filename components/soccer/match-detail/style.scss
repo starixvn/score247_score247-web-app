@@ -225,6 +225,27 @@
 .card.pitch-view-team {
   margin-top: 0;
   padding: 0;
+  position: relative;
+  .empty {
+    background-color: #4f6b0e;
+    height: .5rem;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    @media screen and (min-device-width: 768px) {
+      height: .6rem;
+    }
+    @media screen and (min-width: 1024px) {
+      .left & {
+        height: .4rem;
+        background-color: transparent;
+      }
+      .right & {
+        height: .5rem;
+        background-color: #59741C;
+      }
+    }
+  }
 }
 .coach .player-row {
   border-bottom: none;

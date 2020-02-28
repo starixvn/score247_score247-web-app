@@ -73,9 +73,10 @@ class DateBar extends Component<Props, State> {
   };
 
   render() {
+    const {i18n} = this.props;
     return (
       <div className="nav-date">
-        <div className="date-bar">
+        <div className={`date-bar ${i18n.language === "vi" && "vi-lang"}`}>
           <span
             className={`date-item live-score ${this.props.onlyLiveMatch && "active"}`}
             onClick={this.handleLiveMatchChange}
@@ -91,7 +92,7 @@ class DateBar extends Component<Props, State> {
             dateFormat={DateTimeFormat.DATE_ONLY}
             minDate={this.minDate}
             maxDate={this.maxDate}
-            locale={this.props.i18n.language}
+            locale={i18n.language}
             showPopperArrow={false}
             className={this.getDatePickerClassName()}
             popperPlacement="end-right"
