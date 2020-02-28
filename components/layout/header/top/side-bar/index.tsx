@@ -7,6 +7,7 @@ import {
 } from "../../../../../common/helpers/Localizer";
 import { useRouter } from "next/router";
 import { SportsEnum } from "../../../../../common/enums/sport-enum";
+import countryFlag from "../../../../common/language-selection/country-flag";
 
 type Props = {
   isActive: boolean;
@@ -42,6 +43,7 @@ export default function SideBar(props: Props) {
                 Default Language
               </div>
               <div className="value">
+                <img src={`/static/images/${countryFlag[i18n.language]}`}></img>
                 <span className="text">
                   {supportedLanguages.find(x => x.code === i18n.language)?.name}
                 </span>
