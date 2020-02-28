@@ -116,20 +116,29 @@
   }
 }
 
-.pitch-view {
-  .left & {
+.left {
+  .pitch-view {
     clip-path: inset(0 0 50% 0);
     -webkit-clip-path: inset(0 0 50% 0);
   }
+  .jersey {
+    color: #30C2FF;
+  }
+}
 
-  .right & {
+.right {
+  .pitch-view {
     clip-path: inset(50% 0 0 0);
     -webkit-clip-path: inset(50% 0 0 0);
     position: absolute;
     width: 100%;
     bottom: 0;
   }
+  .jersey {
+    color: #FA2E58;
+  }
 }
+
 
 .sub-wrapper {
   .sub-title {
@@ -178,18 +187,12 @@
     padding-left: 0.8rem;
   }
 
-  [class*="subs"] {
+  [class*="player"] {
     justify-self: left;
     padding: 0.6rem 1.2rem;
-    .player-row {
-      padding: 0;
-    }
     .event-statistic {
       width: unset;
     }
-  }
-  .subs-in {
-    font-weight: bold;
   }
 }
 .empty-substitution-item {
