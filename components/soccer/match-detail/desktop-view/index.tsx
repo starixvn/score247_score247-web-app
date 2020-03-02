@@ -21,13 +21,13 @@ type Props = {
 const Desktop: React.FC<Props> = props => {
   const [selectedTabIndex, setTab] = useState(0);
   const { t } = useTranslation(ResourceType.SOCCER);
-  const maxNumberOfSubstitutionEvent = props.matchLineUps?.Id ? (props.matchLineUps.Home.SubstitutionEvents.length - props.matchLineUps.Away.SubstitutionEvents.length > 0 ?
-    props.matchLineUps.Home.SubstitutionEvents.length :
-    props.matchLineUps.Away.SubstitutionEvents.length) : 0;
+  const maxNumberOfSubstitutionEvent = props.matchLineUps?.Id ? (props.matchLineUps.Home?.SubstitutionEvents?.length - props.matchLineUps.Away?.SubstitutionEvents?.length > 0 ?
+    props.matchLineUps.Home?.SubstitutionEvents?.length :
+    props.matchLineUps.Away?.SubstitutionEvents?.length) : 0;
 
-  const maxNumberOfSubstitutePlayers = props.matchLineUps?.Id ? (props.matchLineUps.Home.Substitutions.length - props.matchLineUps.Away.Substitutions.length > 0 ?
-    props.matchLineUps.Home.Substitutions.length :
-    props.matchLineUps.Away.Substitutions.length) : 0;
+  const maxNumberOfSubstitutePlayers = props.matchLineUps?.Id ? (props.matchLineUps.Home?.Substitutions?.length - props.matchLineUps.Away?.Substitutions?.length > 0 ?
+    props.matchLineUps.Home?.Substitutions?.length :
+    props.matchLineUps.Away?.Substitutions?.length) : 0;
 
   const isShowingSubstitutionEvents = props.matchLineUps?.Id ?
     (props.matchLineUps.Home.SubstitutionEvents?.some(x => x) ||

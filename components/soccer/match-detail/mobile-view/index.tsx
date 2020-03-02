@@ -17,6 +17,7 @@ import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Commentary from '../commentary';
+import MobileSubstitution from '../mobile-substitution';
 
 type Props = {
   matchInfo: MatchInfo;
@@ -93,6 +94,8 @@ const Mobile: React.FC<Props> = props => {
                         <Substitution substitutionEvents={matchLineUps.Home.SubstitutionEvents} maxNumberOfSubstitutionEvent={matchLineUps.Home.SubstitutionEvents.length} />}
                       {matchLineUps.Away.SubstitutionEvents?.some(x => x) &&
                         <Substitution substitutionEvents={matchLineUps.Away.SubstitutionEvents} maxNumberOfSubstitutionEvent={matchLineUps.Away.SubstitutionEvents.length} />}
+                      {/* {matchLineUps.Home.SubstitutionEvents?.some(x => x) || matchLineUps.Away.SubstitutionEvents?.some(x => x) &&
+                        <MobileSubstitution substitutionEvents={matchLineUps} />} */}
                     </div>
                   </Card>)}
                 <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"} className="substitute-player">
