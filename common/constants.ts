@@ -14,6 +14,7 @@ export class DateTimeFormat {
   public static readonly LONG_DATE = "iiii dd/MM/yyyy";
   public static readonly UTC_ISO = "yyyy-MM-dd'T'HH:mm:ss'Z'";
   public static readonly DATE_TIME = "HH:mm dd MMM, yyyy";
+  public static readonly WEEKDATE_AND_DATE = "EEEE dd MMM yyyy"
 }
 
 export class DisplayMode {
