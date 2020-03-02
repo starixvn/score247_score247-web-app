@@ -1,5 +1,5 @@
 *** Settings ***
-Test Setup        Set Appium Timeout \ \ \ 300 seconds
+Test Setup
 Library           OperatingSystem
 Library           AppiumLibrary
 Library           Screenshot
@@ -39,4 +39,5 @@ Verify Main Info
     #test1212
 
 Verify Match Info
+    [Setup]    Set Appium Timeout    300 seconds
     CheckGeneral_info_mobile

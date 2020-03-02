@@ -22,7 +22,6 @@ Reset Application Timeout
 
 Check Main_info_mobile
     ###--- Create new match ----###
-    ###--- Create new match ----###
     ${NewMatchID}    Create New Match    sr:tournament:17
     ###--- Match Start ----###
     Scenario MatchStart
@@ -47,7 +46,6 @@ Check Main_info_mobile
     Wait Until Keyword Succeeds    50 times    3s    Wait Create Event    ${CurrentRow}
     ${CurrentRow}=    Get Row Event
     Switch Application    MyApp1
-    Reset Application Timeout
     ###--- Check main data ----###
     sleep    5s
     # Check Score
