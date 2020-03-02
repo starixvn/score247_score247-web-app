@@ -1,29 +1,37 @@
 import React from "react";
-import { TimelineEvent, MatchLineups } from "../../../../apis/soccer/models";
-import { sortArray } from "../../../../common/utils/sort";
+import { MatchLineups } from "../../../../apis/soccer/models";
 import SubstitutionRow from './../substitution/substitution-row';
 
 type Props = {
-    substitutionEvents: MatchLineups;
+    matchLineups: MatchLineups;
 };
 
 const render = (no: number, substitutionEvents: MatchLineups) => {
+    const result: JSX.Element[] = [];
+
     for (let i = 0; i < no; i++) {
-        <SubstitutionRow
-            substitutionEvent={substitutionEvents.Away.SubstitutionEvents[i]}
-            key={substitutionEvents.Away.SubstitutionEvents[i].Id} />
+        result.push(
+            <div className="mobile-lineups-row" key={i}>
+                {substitutionEvents.Home.SubstitutionEvents[i] && <div className="home-sub"><SubstitutionRow
+                    substitutionEvent={substitutionEvents.Home.SubstitutionEvents[i]}
+                    key={substitutionEvents.Home.SubstitutionEvents[i].Id} /></div>}
+                {substitutionEvents.Away.SubstitutionEvents[i] && <div className="away-sub"><SubstitutionRow
+                    substitutionEvent={substitutionEvents.Away.SubstitutionEvents[i]}
+                    key={substitutionEvents.Away.SubstitutionEvents[i].Id} /></div>}
+            </div>);
     }
+
+    return result;
 };
 
 const MobileSubstitution: React.FC<Props> = (props: Props) => {
-    const maxNumberOfEvents = props.substitutionEvents.Away.SubstitutionEvents?.length > props.substitutionEvents.Home.SubstitutionEvents?.length ?
-        props.substitutionEvents.Away.SubstitutionEvents?.length :
-        props.substitutionEvents.Home.SubstitutionEvents?.length;
+    const maxNumberOfEvents = props.matchLineups.Away.SubstitutionEvents?.length > props.matchLineups.Home.SubstitutionEvents?.length ?
+        props.matchLineups.Away.SubstitutionEvents?.length :
+        props.matchLineups.Home.SubstitutionEvents?.length;
 
     return (
         <div>
-            {/* {sortedSubstitutionEvents?.map(event => <SubstitutionRow substitutionEvent={event} key={event.Id} />)}
-            {numberOfEmptyRow > 0 && Array.from(Array(numberOfEmptyRow).keys()).map(x => <div className="empty-substitution-item" key={x}></div>)} */}
+            {render(maxNumberOfEvents, props.matchLineups)}
         </div>
     );
 };

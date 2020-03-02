@@ -9,8 +9,6 @@ import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { MatchLineups, MatchCommentary } from "../../../../apis/soccer/models";
 import PitchView from "../pitch-view";
 import StartingLineups from "../starting-lineups";
-import SubstitutePlayers from "../substitute-players";
-import Substitution from '../substitution';
 import TeamCoach from "../coach";
 import Card from "../../../common/basic/card";
 import OtherInfo from "../other-info";
@@ -18,6 +16,8 @@ import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Commentary from '../commentary';
 import MobileSubstitution from '../mobile-substitution';
+import MobileSubstitutePlayers from '../mobile-substitute-players';
+import MobileStartingLineups from '../mobile-starting-lineups';
 
 type Props = {
   matchInfo: MatchInfo;
@@ -81,8 +81,7 @@ const Mobile: React.FC<Props> = props => {
                   : (
                     <Card title={t(SoccerResourceKey.LINE_UPS)}>
                       <div className="line-ups-wrapper">
-                        <StartingLineups lineups={matchLineUps.Home.Players} />
-                        <StartingLineups lineups={matchLineUps.Away.Players} />
+                        <MobileStartingLineups matchLineups={matchLineUps} />
                       </div>
                     </Card>
                   )
@@ -90,18 +89,12 @@ const Mobile: React.FC<Props> = props => {
                 {(matchLineUps.Home.SubstitutionEvents?.some(x => x) || matchLineUps.Away.SubstitutionEvents?.some(x => x))
                   && (<Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={["icon-arrow-down1", "icon-arrow-up"]} className="substitution">
                     <div className="line-ups-wrapper">
-                      {matchLineUps.Home.SubstitutionEvents?.some(x => x) &&
-                        <Substitution substitutionEvents={matchLineUps.Home.SubstitutionEvents} maxNumberOfSubstitutionEvent={matchLineUps.Home.SubstitutionEvents.length} />}
-                      {matchLineUps.Away.SubstitutionEvents?.some(x => x) &&
-                        <Substitution substitutionEvents={matchLineUps.Away.SubstitutionEvents} maxNumberOfSubstitutionEvent={matchLineUps.Away.SubstitutionEvents.length} />}
-                      {/* {matchLineUps.Home.SubstitutionEvents?.some(x => x) || matchLineUps.Away.SubstitutionEvents?.some(x => x) &&
-                        <MobileSubstitution substitutionEvents={matchLineUps} />} */}
+                      <MobileSubstitution matchLineups={matchLineUps} />
                     </div>
                   </Card>)}
                 <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"} className="substitute-player">
                   <div className="line-ups-wrapper">
-                    <SubstitutePlayers substitutePlayers={matchLineUps.Home.Substitutions} maxNumberOfSubstitutePlayers={matchLineUps.Home.Substitutions.length} />
-                    <SubstitutePlayers substitutePlayers={matchLineUps.Away.Substitutions} maxNumberOfSubstitutePlayers={matchLineUps.Away.Substitutions.length} />
+                    <MobileSubstitutePlayers matchLineups={matchLineUps} />
                   </div>
                 </Card>
                 <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon={"icon-account"}>
