@@ -5,13 +5,14 @@ import Advertisement from "../../../common/advertisement";
 import GeneralInfo from "../general-info";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
-import { MatchLineups, MatchCommentary } from "../../../../apis/soccer/models";
+import { MatchLineups } from "../../../../apis/soccer/models";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Card from "../../../common/basic/card";
 import LeagueTable from "../league-table";
 import TeamLineUps from "./team-lineups";
+import Commentary from "../commentary";
 
 type Props = {
   matchInfo: MatchInfo;
