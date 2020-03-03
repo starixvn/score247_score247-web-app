@@ -4,7 +4,7 @@ Library           DateTime
 
 *** Keywords ***
 Open Home page
-    open browser    https://score247-web-test.nexdev.net/    Chrome    alias=tab2
+    open browser    https://score247-web-test.nexdev.net/    Firefox    alias=tab2
     Maximize Browser Window
     sleep    3s
 
