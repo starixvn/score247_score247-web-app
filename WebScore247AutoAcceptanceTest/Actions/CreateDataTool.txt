@@ -17,7 +17,6 @@ Get First Letter
     [Return]    ${result}
 
 Login Create Data Page
-    Set Environment Variable    webdriver.gecko.driver    //Workspace//geckodriver.exe
     open browser    http://ha.nexdev.net:7873/dev/    Firefox    alias=tab1
     Maximize Browser Window
     Selenium2Library.Page Should Contain Element    ${Login_username_txt}    timeout=15
