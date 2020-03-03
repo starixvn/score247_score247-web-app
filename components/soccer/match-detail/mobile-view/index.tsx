@@ -55,7 +55,7 @@ const Mobile: React.FC<Props> = props => {
           </TabPanel>
           <TabPanel>
             <BallTracker matchId={matchInfo.Match.Id} />
-            {/* {props.matchCommentaries?.some(x => x) && <Commentary comments={props.matchCommentaries} />} */}
+            {props.matchCommentaries?.some(x => x) && <Commentary comments={props.matchCommentaries} />}
           </TabPanel>
           <TabPanel>
             <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} className="statistics" />

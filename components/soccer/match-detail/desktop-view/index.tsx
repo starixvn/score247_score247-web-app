@@ -11,6 +11,7 @@ import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Card from "../../../common/basic/card";
+import Commentary from "../commentary";
 
 type Props = {
   matchInfo: MatchInfo;
@@ -95,8 +96,7 @@ const Desktop: React.FC<Props> = props => {
             </div>
           </div>
         </TabPanel>
-        {/* <TabPanel><Commentary comments={props.matchCommentaries} /></TabPanel> */}
-        <TabPanel>Commentary page</TabPanel>
+        <TabPanel><Commentary comments={props.matchCommentaries} /></TabPanel>
         <TabPanel>
           <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} className="statistics" />
         </TabPanel>
