@@ -4,9 +4,13 @@
     padding: 1.2rem;
     align-items: center;
     border-bottom: 1px solid #DEE2E6;
+    .info {
+        display: flex;
+    }
     .jersey {
         width: 1.8rem;
         display: inline-block;
+        padding-right: .4rem;
     }
     .icon-own-goal:before {
         font-size: 1.9rem;

@@ -26,10 +26,19 @@
     &:last-child {
         border-bottom: none;
     }
-    .home-sub .jersey {
-        color: #30C2FF;
+    .home-sub{
+        
+        .jersey {
+            color: #30C2FF;
+        }
+        .player-row {
+            padding-right: 0;
+        }
     }
     .away-sub .jersey {
         color: #FA2E58;
+    }
+    .player-row {
+        border-bottom: none;
     }
 }
