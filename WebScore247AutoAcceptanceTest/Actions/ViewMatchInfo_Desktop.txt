@@ -32,11 +32,12 @@ Check leagues code Mobile
 
 Verify LeaguesCode
     [Arguments]    ${view}
-    Open Excel    D:/RB/247/Data set/Test.xls
+    Open Excel    D:/Git/score247-web-app/WebScore247AutoAcceptanceTest/Data set/Test.xls
     ${RowCount}    Get Row Count    Sheet1
-    : FOR    ${row}    IN RANGE    0    3
+    : FOR    ${row}    IN RANGE    0    ${RowCount}
     \    ${val1}    Read Cell Data By Coordinates    Sheet1    0    ${row}
     \    ${val2}    Read Cell Data By Coordinates    Sheet1    1    ${row}
+    \    ${val2}=    Replace String    ${val2}    -    ${space}
     \    ${val3}    Read Cell Data By Coordinates    Sheet1    2    ${row}
     \    ${lengthval3}    Get Length    ${val3}
     \    ${LeagueCode}    Get First Letter    ${val2}

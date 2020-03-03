@@ -34,10 +34,10 @@ Date_bar
     [Teardown]    Close Browser
 
 Verify Main Info
-    [Setup]    Set Appium Timeout    300 seconds
+    [Setup]    Set Appium Timeout    600 seconds
     Check Main_info_mobile
     #test1212
 
 Verify Match Info
-    [Setup]    Set Appium Timeout    300 seconds
+    [Setup]    Set Appium Timeout    600 seconds
     CheckGeneral_info_mobile

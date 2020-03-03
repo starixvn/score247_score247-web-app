@@ -4,16 +4,10 @@ Library           DateTime
 
 *** Keywords ***
 Open Home page
-    open browser    https://score247-web-test.nexdev.net/    Firefox    alias=tab2
+    Set Environment Variable    webdriver.chrome.driver    //WebScore247AutoAcceptanceTest/Driver
+    open browser    https://score247-web-test.nexdev.net/    Chrome    alias=tab2
     Maximize Browser Window
     sleep    3s
-
-Get CSS Property Value
-    [Arguments]    ${locator}    ${attribute name}
-    [Documentation]    Get the CSS property value of an Element.
-    ${css}=    Get WebElement    ${locator}
-    ${prop_val}=    Call Method    ${css}    value_of_css_property    ${attribute name}
-    [Return]    ${prop_val}
 
 setup and open android phone
     Close All Applications
@@ -51,6 +45,7 @@ Open General Info Desktop
     Selenium2Library.Page Should Contain Element    ${Score_Result_Xpath}    timeout=60
     Selenium2Library.Click Element    ${Score_Result_Xpath}
     Select Window    new
+    sleep    3s
 
 Backgroup_color
     ${BG}    Get CSS Property Value    //body/div/div/div/div[2]/div[2]/div[3]/table/tbody/tr[1]/td[2]    background-color
