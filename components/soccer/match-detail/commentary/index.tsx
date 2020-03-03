@@ -1,8 +1,10 @@
 import React from "react";
+import React, { useState } from "react";
 import { MatchCommentary } from '../../../../apis/soccer/models';
 import CommentaryRow from './commentary-row';
 import { withTranslation } from "../../../../common/helpers/Localizer";
 import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
+import { useDeviceContext } from "../../../../contexts/device-context";
 import Card from "../../../common/basic/card";
 import { WithTranslation } from "react-i18next";
 import { SoccerAPI } from "../../../../apis/soccer/soccer-api";

@@ -1,0 +1,24 @@
+.commentary-row {
+    display: grid;
+    grid-template-columns: 6rem 5rem 1fr;
+    padding: .8rem 0;
+    border-bottom: 1px solid #DEE2E6;
+    &:last-child {
+        border-bottom: none;
+    }
+    .time-cell {
+        text-align: right;
+    }
+    .commentary-icon-cell {
+        text-align: center;
+    }
+    .commentary-desc-cell {
+        text-align: left;
+    }
+    &.special-event {
+        .commentary-desc-cell {
+            color: #FF7D00;
+            font-weight: 500;
+        }
+    }
+}
