@@ -8,7 +8,9 @@ import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { MatchLineups } from "../../../../apis/soccer/models";
 import PitchView from "../pitch-view";
+import StartingLineups from "../starting-lineups";
 import TeamCoach from "../coach";
+import Card from "../../../common/basic/card";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
@@ -77,7 +79,7 @@ const Mobile: React.FC<Props> = props => {
                     </Card>
                   )
                   : (
-                    <Card title={t(SoccerResourceKey.LINE_UPS)}>
+                    <Card title={t(SoccerResourceKey.LINE_UPS)} className="non-formation">
                       <MobileStartingLineups matchLineups={matchLineUps} />
                     </Card>
                   )

@@ -1,19 +1,40 @@
+.commentary {
+    margin-top: 1.2rem;
+}
 .commentary-row {
     display: grid;
     grid-template-columns: 6rem 5rem 1fr;
     padding: .8rem 0;
     border-bottom: 1px solid #DEE2E6;
+    align-items: center;
+    .mobile & {
+        grid-template-columns: 3.6rem 3rem 1fr;
+        font-size: 1.2rem;
+        [class*="icon"] {
+            font-size: 1.8rem;
+        }
+        .icon-goal-pen {
+            font-size: 2.6rem;
+        }
+        .icon-own-goal {
+            font-size: 2.4rem;
+        }
+    }
     &:last-child {
         border-bottom: none;
     }
     .time-cell {
         text-align: right;
+        .mobile & {
+            font-size: 1rem;
+        }
     }
     .commentary-icon-cell {
         text-align: center;
     }
     .commentary-desc-cell {
         text-align: left;
+        padding: 0 .4rem;
     }
     &.special-event {
         .commentary-desc-cell {
