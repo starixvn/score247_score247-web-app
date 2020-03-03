@@ -22,13 +22,13 @@ import MobileStartingLineups from '../mobile-starting-lineups';
 type Props = {
   matchInfo: MatchInfo;
   matchLineUps: MatchLineups | null;
-  matchCommentaries: MatchCommentary[] | null;
 };
 
 const Mobile: React.FC<Props> = props => {
   const { t } = useTranslation(ResourceType.SOCCER);
   const [selectedTabIndex, setTab] = useState(0);
   const { matchInfo, matchLineUps } = props;
+  console.log(matchInfo)
 
   return (
     <>
@@ -55,7 +55,7 @@ const Mobile: React.FC<Props> = props => {
           </TabPanel>
           <TabPanel>
             <BallTracker matchId={matchInfo.Match.Id} />
-            {props.matchCommentaries?.some(x => x) && <Commentary comments={props.matchCommentaries} />}
+            <Commentary matchId={matchInfo.Match.Id} date={matchInfo.Match.EventDate[0]} />
           </TabPanel>
           <TabPanel>
             <SportRadarWidget matchId={matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} className="statistics" />

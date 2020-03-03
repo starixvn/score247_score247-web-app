@@ -16,7 +16,6 @@ import Commentary from "../commentary";
 type Props = {
   matchInfo: MatchInfo;
   matchLineUps: MatchLineups | null;
-  matchCommentaries: MatchCommentary[] | null;
 };
 
 const Desktop: React.FC<Props> = props => {
@@ -96,7 +95,7 @@ const Desktop: React.FC<Props> = props => {
             </div>
           </div>
         </TabPanel>
-        <TabPanel><Commentary comments={props.matchCommentaries} /></TabPanel>
+        <TabPanel><Commentary matchId={props.matchInfo.Match.Id} date={props.matchInfo.Match.EventDate[0]} /></TabPanel>
         <TabPanel>
           <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-statistics" tabName={WidgetTab.STATISTICS} className="statistics" />
         </TabPanel>

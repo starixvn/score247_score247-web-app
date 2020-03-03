@@ -25,7 +25,6 @@ type Props = {
 type State = {
   matchInfo: MatchInfo | null;
   matchLineUps: MatchLineups | null;
-  matchCommentaries: MatchCommentary[] | null;
   soccerSignalRClient?: SoccerSignalRClient;
 };
 
@@ -46,18 +45,13 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
     this.state = {
       matchInfo: null,
-      matchLineUps: null,
-      matchCommentaries: null
+      matchLineUps: null
     };
   }
 
   async componentDidMount() {
     const matchInfo = await SoccerAPI.GetMatch(this.props.matchId);
     const matchLineUps = await SoccerAPI.GetMatchLineups(
-      this.props.matchId,
-      new Date(matchInfo.Match.EventDate[0])
-    );
-    const matchCommentaries = await SoccerAPI.GetMatchCommentaries(
       this.props.matchId,
       new Date(matchInfo.Match.EventDate[0])
     );
@@ -68,7 +62,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
 
     this.setupSignalClient();
 
-    this.setState({ matchInfo, matchLineUps, matchCommentaries });
+    this.setState({ matchInfo, matchLineUps });
   }
 
   setupSignalClient() {
@@ -133,7 +127,6 @@ class SoccerMatchDetail extends React.Component<Props, State> {
           <MobileView
             matchInfo={this.state.matchInfo}
             matchLineUps={this.state.matchLineUps}
-            matchCommentaries={this.state.matchCommentaries}
           />
         );
       }
@@ -141,7 +134,6 @@ class SoccerMatchDetail extends React.Component<Props, State> {
         <DesktopView
           matchInfo={this.state.matchInfo}
           matchLineUps={this.state.matchLineUps}
-          matchCommentaries={this.state.matchCommentaries}
         />
       );
     }

@@ -1,31 +1,58 @@
-import React, { useState } from "react";
+import React from "react";
 import { MatchCommentary } from '../../../../apis/soccer/models';
 import CommentaryRow from './commentary-row';
-import { useTranslation } from "../../../../common/helpers/Localizer";
+import { withTranslation } from "../../../../common/helpers/Localizer";
 import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import Card from "../../../common/basic/card";
+import { WithTranslation } from "react-i18next";
+import { SoccerAPI } from "../../../../apis/soccer/soccer-api";
 
 type Props = {
-  comments: MatchCommentary[] | null;
-};
+  matchId: string;
+  date: Date;
+} & WithTranslation;
 
-const Commentary: React.FC<Props> = (props: Props) => {
-  const { t } = useTranslation(ResourceType.SOCCER);
-  const comments = props.comments || []
+type State = {
+  comments: MatchCommentary[]
+}
 
-  const commentaryBody = (
-    <div className="commantaries">
-      {[...comments].reverse().map(x => <CommentaryRow comment={x} key={x.TimelineId} />)}
-    </div>
-  );
+class Commentary extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
 
-  console.log(comments)
+    this.state = {
+      comments: []
+    }
+  }
 
-  return (
-    <Card title={t(SoccerResourceKey.COMMENTARY)} className="commentary">
-      {commentaryBody}
-    </Card>
-  );
-};
+  async componentDidMount() {
+    const comments = await SoccerAPI.GetMatchCommentaries(
+      this.props.matchId,
+      new Date(this.props.date)
+    );
 
-export default Commentary;
+    if (comments && comments.length > 0 ) {
+      this.setState({ comments: comments.filter(comment => comment.Commentaries && comment.Commentaries.length > 0) })
+    }
+  }
+
+  render() {
+    const { t } = this.props
+    console.log(this.state);
+    const commentaryBody = (
+      <div className="commantaries">
+        {this.state.comments.reverse().map(x => <CommentaryRow comment={x} key={x.TimelineId} />)}
+      </div>
+    );
+
+    const commentary = this.state.comments.length > 0 ? (
+      <Card title={t(SoccerResourceKey.COMMENTARY)} className="commentary">
+        {commentaryBody}
+      </Card>
+    ) : null;
+
+    return commentary;
+  }
+}
+
+export default withTranslation(ResourceType.SOCCER)(Commentary);

@@ -14,21 +14,26 @@ const getEventClass = (comment: MatchCommentary) => {
     switch (comment.TimelineType.Value) {
         case EventTypes.SCORE_CHANGE.value:
             if (comment.GoalScorer.Method === SoccerGoalMethod.OWN_GOAL) {
-                return "own-goal";
+                return "icon-own-goal";
             } else if (comment.GoalScorer.Method === SoccerGoalMethod.PENALTY) {
-                return "penalty-goal";
+                return "icon-penalty-goal";
             }
-            return "goal";
-
+            return "icon-goal";
+        
         case EventTypes.RED_CARD.value:
-            return "red-card";
+            return "icon-red-card";
 
         case EventTypes.YELLOW_CARD.value:
-            return "yellow-card";
+            return "icon-yellow-card";
 
         case EventTypes.YELLOW_RED_CARD.value:
             return "yellow-red-card";
 
+        case EventTypes.PENALTY_MISSED.value:
+            return "penalty-missed"
+
+        case EventTypes.SUBSTITUTION.value:
+            return "icon-substitute-player";
         default:
             return "";
     }
