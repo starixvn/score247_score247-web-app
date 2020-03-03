@@ -14,3 +14,8 @@ export * from "./team-statistic";
 export * from "./match-lineups";
 export * from "./team-lineups";
 export * from "./coach";
+export * from "./league-table";
+export * from "./league-season";
+export * from "./league-group-note";
+export * from "./league-group-table";
+export * from "./team-outcome";

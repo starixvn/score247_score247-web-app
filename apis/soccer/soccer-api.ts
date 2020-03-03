@@ -4,6 +4,7 @@ import { startOfDay, endOfDay } from "date-fns";
 import { covertToUTC } from "../../common/helpers/date-time-helper";
 import API from "../../common/helpers/api-helper";
 import { MatchStatistic } from "./models/match-statistic";
+import { LeagueTable } from "./models/league-table";
 
 
 export const SoccerAPI = {
@@ -50,6 +51,12 @@ export const SoccerAPI = {
 
   GetMajorLeagues: async (language = "en-US"): Promise<League[]> => {
     const response = await API.get(`${appSettings.soccerAPIBaseUrl}/soccer/${language}/leagues/major`);
+
+    return response.data;
+  },
+
+  GetLeagueTable: async (leagueId: string, seasondId: string, groupName: string, language = "en-US"): Promise<LeagueTable> => {
+    const response = await API.get(`${appSettings.soccerAPIBaseUrl}/${language}/leagues/${leagueId}/seasons/${seasondId}/table/${groupName}`);
 
     return response.data;
   }

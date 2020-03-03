@@ -44,4 +44,6 @@ export interface MatchSummary {
   LeagueAbbreviation: string;
   LeagueRegion: string;
   InjuryTimes: InjuryTimes;
+  LeagueGroupName: string;
+  GroupName: string;
 }

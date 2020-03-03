@@ -4,7 +4,7 @@ import { MatchSummary } from "../../../../apis/soccer/models";
 
 const buildLeagueAbbreviation = (leagueName: string): string => {
   return leagueName
-    .split(/[\s.-]/)
+    .split(/[\s]/)
     .map(i => i.charAt(0))
     .join("");
 };

@@ -8,4 +8,6 @@ export interface League {
   IsInternational: boolean;
   Region: string;
   SeasonId: string;
+  HasGroups: boolean;
+  Abbreviation: string;
 }
