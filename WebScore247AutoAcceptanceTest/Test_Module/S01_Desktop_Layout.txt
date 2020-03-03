@@ -15,6 +15,9 @@ Resource          ../Actions/CheckLiveMatch_Desktop.txt
 Library           ExcelLibrary
 
 *** Test Cases ***
+Check Browser
+    ${version}=    Get Browser Version    Firefox
+
 Header
     Open Home page
     #sleep    3s
