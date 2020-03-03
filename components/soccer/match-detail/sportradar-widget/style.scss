@@ -1880,7 +1880,7 @@ $color-switch: #76D672;
 
     .sr-lmt-plus__comp-padding {        
         .timeline & {
-            padding-bottom: 80%;
+            padding-bottom: 75%;
         }
     }
    
@@ -1940,5 +1940,15 @@ $color-switch: #76D672;
             position: relative;
         }
     }
+    @media screen and (max-device-width: 480px) {
+        .timeline {
+            .sr-lmt-plus__comp-padding {
+                padding-bottom: 110%;
+            }
+        }
+    }
+    
+
+    
 
 }
