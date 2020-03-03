@@ -1,4 +1,4 @@
-import "./style.scss"; 
+import "./style.scss";
 import React, { Component } from "react";
 import DatePicker from "../date-picker";
 import { addDays, isSameDay, addYears } from "date-fns";
@@ -73,7 +73,7 @@ class DateBar extends Component<Props, State> {
   };
 
   render() {
-    const {i18n} = this.props;
+    const { i18n } = this.props;
     return (
       <div className="nav-date">
         <div className={`date-bar ${i18n.language === "vi" && "vi-lang"}`}>
@@ -82,7 +82,7 @@ class DateBar extends Component<Props, State> {
             onClick={this.handleLiveMatchChange}
           >
             <i className="icon-live" />
-            <span className="has-live" />
+            <span className={`${this.props.isHavingLiveMatches && "has-live"}`} />
           </span>
           {this.state.dateList.map(this.renderDate)}
           <DatePicker

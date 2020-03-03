@@ -11,6 +11,7 @@ import { findIndex, uniqBy } from "lodash";
 import SoccerFilterBar from "../filter-bar";
 import { League } from "./type";
 import { updateMatchFromEvent } from "../../../common/helpers/soccer-match-helper";
+import { MatchStatusType } from '../../../common/enums/match-status-type';
 
 type State = {
   filterText: string;
@@ -20,15 +21,19 @@ type State = {
   sortByValue: number;
   selectedLeagues: string[];
   filteredMatchByLeagues: MatchSummary[];
+  isShowingLiveMatches: boolean;
 };
 
 class FilterSoccerTable extends React.Component<{}, State> {
   private readonly cacheExpiryTimeInMinutes = 120;
   private readonly defaultSortProperty = "EventDate";
+  private readonly liveMatchesFetchIntervalInMilliseconds = 60000;
+  private readonly timeToRemoveEndedMatchesInMilliseconds = 10800000;
   displayMatches: MatchSummary[];
   soccerTableRef: React.RefObject<SoccerTable>;
   displayLeagues: League[];
   filteredAndSortedMatchByLeague: MatchSummary[];
+  interval?: number;
 
   constructor(props: {}) {
     super(props);
@@ -45,12 +50,25 @@ class FilterSoccerTable extends React.Component<{}, State> {
       selectedDate: new Date(),
       sortByValue: SoccerSortOptions.KICK_OFF_TIME,
       selectedLeagues: [],
-      filteredMatchByLeagues: []
+      filteredMatchByLeagues: [],
+      isShowingLiveMatches: false
     };
   }
 
   async componentDidMount() {
     await this.handleDateChange(new Date());
+  }
+
+  componentDidUpdate() {
+    if (this.state.isShowingLiveMatches) {
+      this.interval = this.interval ?? window.setInterval(() => this.handleLiveButtonClick(), this.liveMatchesFetchIntervalInMilliseconds);
+    } else {
+      window.clearInterval(this.interval);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   handleDateChange = async (date: Date) => {
@@ -72,12 +90,16 @@ class FilterSoccerTable extends React.Component<{}, State> {
       selectedDate: date,
       filterText: "",
       selectedLeagues: this.displayLeagues.map(match => match.id),
-      filteredMatchByLeagues: matches
+      filteredMatchByLeagues: matches,
+      isShowingLiveMatches: false
     });
   };
 
   handleLiveButtonClick = async () => {
     const matches = await SoccerAPI.GetLiveMatches();
+    const removedMatches = matches.filter(match => match.EventStatus.Value === MatchStatusType.CLOSED.value &&
+      new Date().getTime() - (match.EventDate[0] as Date).getTime() > this.timeToRemoveEndedMatchesInMilliseconds);
+    const filteredMatches = matches.filter(match => !removedMatches.includes(match));
 
     this.displayMatches = this.parseData(matches);
     this.displayLeagues = uniqBy(
@@ -90,11 +112,12 @@ class FilterSoccerTable extends React.Component<{}, State> {
     ).sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
 
     this.setState({
-      matches: matches,
+      matches: filteredMatches,
       displayMode: DisplayMode.SHOW_ALL,
       filterText: "",
       selectedLeagues: this.displayLeagues.map(match => match.id),
-      filteredMatchByLeagues: matches
+      filteredMatchByLeagues: matches,
+      isShowingLiveMatches: true
     });
   };
 

@@ -17,22 +17,28 @@ import withLoadingPage from "../hoc/with-loading-page";
 import LeftBar from "../components/common/left-bar";
 import RightBar from "../components/common/right-bar";
 import { ResourceType, CommonResourceKey } from "../common/resources";
+import { SoccerAPI } from '../apis/soccer/soccer-api';
+import { MatchStatusType } from '../common/enums/match-status-type';
 
 type State = {
   selectedDate: Date;
   onlyLiveMatch: boolean;
   soccerSignalRClient?: SoccerSignalRClient;
+  numberOfLiveMatches: number;
 };
 
 class SoccerPage extends React.Component<WithTranslation, State> {
+  private readonly timeToRemoveEndedMatchesInMilliseconds = 10800000;
   today: Date = new Date();
   filterSoccerTable: React.RefObject<FilterSoccerTable>;
+
   constructor(props: WithTranslation) {
     super(props);
     this.state = {
       selectedDate: new Date(),
       onlyLiveMatch: false,
-      soccerSignalRClient: undefined
+      soccerSignalRClient: undefined,
+      numberOfLiveMatches: 0
     };
     this.filterSoccerTable = React.createRef<FilterSoccerTable>();
   }
@@ -44,6 +50,15 @@ class SoccerPage extends React.Component<WithTranslation, State> {
   }
 
   async componentDidMount() {
+    const liveMatches = await SoccerAPI.GetLiveMatches();
+    const removedMatches = liveMatches.filter(match => match.EventStatus.Value === MatchStatusType.CLOSED.value &&
+      new Date().getTime() - (match.EventDate[0] as Date).getTime() > this.timeToRemoveEndedMatchesInMilliseconds);
+    const filteredLiveMatches = liveMatches.filter(match => !removedMatches.includes(match));
+
+    this.setState({
+      numberOfLiveMatches: filteredLiveMatches.length
+    });
+
     this.setupSignalClient();
   }
 
@@ -131,6 +146,7 @@ class SoccerPage extends React.Component<WithTranslation, State> {
             onLiveMatchChange={this.handleLiveButtonClick}
             onlyLiveMatch={this.state.onlyLiveMatch}
             selectedDate={this.state.selectedDate}
+            isHavingLiveMatches={this.state.numberOfLiveMatches > 0}
           />
           <div className="content">
             <FilterSoccerTable ref={this.filterSoccerTable} />

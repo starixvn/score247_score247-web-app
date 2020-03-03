@@ -8,5 +8,6 @@ export type Props = {
   onDateChange: (date: Date) => void;
   onLiveMatchChange: () => void;
   selectedDate: Date;
-  onlyLiveMatch: boolean
+  onlyLiveMatch: boolean,
+  isHavingLiveMatches: boolean
 } & WithTranslation;
