@@ -104,6 +104,14 @@
 }
 
 //////////   line-ups   ////////////
+.card {
+  &.substitution,
+  &.substitute-player,
+  &.coach {
+    margin-top: 1.2rem;
+  }
+}
+
 .pitch-wrapper {
   height: 23.7rem;
   position: relative;
