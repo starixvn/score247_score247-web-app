@@ -5,10 +5,9 @@ type Props = {
     comment: MatchCommentary
 };
 
-const BuildEventTime = (comment: MatchCommentary) =>
-    !comment.StoppageTime
-        ? `${comment.MatchTime}'`
-        : `${comment.MatchTime}'+${comment.StoppageTime}`;
+const BuildEventTime = (comment: MatchCommentary) => comment.MatchTime > 0
+    ? (!comment.StoppageTime ? `${comment.MatchTime}'` : `${comment.MatchTime}'+${comment.StoppageTime}`)
+    : ''
 
 const TimeCell: React.FC<Props> = (props: Props) =>
     <div className="time-cell">

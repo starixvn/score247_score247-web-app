@@ -3,8 +3,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import {
   MatchInfo,
-  MatchLineups,
-  MatchCommentary
+  MatchLineups
 } from "../../../apis/soccer/models";
 import { SoccerAPI } from "../../../apis/soccer/soccer-api";
 import { SoccerSignalRClient } from "../../../apis/soccer/soccer-signalr-client";

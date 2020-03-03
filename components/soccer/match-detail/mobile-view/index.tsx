@@ -6,7 +6,7 @@ import GeneralInfo from "../general-info";
 import SwipeableViews from "react-swipeable-views";
 import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { MatchLineups, MatchCommentary } from "../../../../apis/soccer/models";
+import { MatchLineups } from "../../../../apis/soccer/models";
 import PitchView from "../pitch-view";
 import TeamCoach from "../coach";
 import OtherInfo from "../other-info";
@@ -27,7 +27,6 @@ const Mobile: React.FC<Props> = props => {
   const { t } = useTranslation(ResourceType.SOCCER);
   const [selectedTabIndex, setTab] = useState(0);
   const { matchInfo, matchLineUps } = props;
-  console.log(matchInfo)
 
   return (
     <>
@@ -79,16 +78,16 @@ const Mobile: React.FC<Props> = props => {
                   )
                   : (
                     <Card title={t(SoccerResourceKey.LINE_UPS)}>
-                        <MobileStartingLineups matchLineups={matchLineUps} />
+                      <MobileStartingLineups matchLineups={matchLineUps} />
                     </Card>
                   )
                 }
                 {(matchLineUps.Home.SubstitutionEvents?.some(x => x) || matchLineUps.Away.SubstitutionEvents?.some(x => x))
-                  && (<Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={["icon-arrow-down1", "icon-arrow-up"]} className="substitution">                    
-                      <MobileSubstitution matchLineups={matchLineUps} />
+                  && (<Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={["icon-arrow-down1", "icon-arrow-up"]} className="substitution">
+                    <MobileSubstitution matchLineups={matchLineUps} />
                   </Card>)}
-                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"} className="substitute-player">                  
-                    <MobileSubstitutePlayers matchLineups={matchLineUps} />
+                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"} className="substitute-player">
+                  <MobileSubstitutePlayers matchLineups={matchLineUps} />
                 </Card>
                 <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon={"icon-account"}>
                   <div className="mobile-lineups-row">

@@ -26,22 +26,25 @@ class Commentary extends React.Component<Props, State> {
   }
 
   async componentDidMount() {
-    const comments = await SoccerAPI.GetMatchCommentaries(
-      this.props.matchId,
-      new Date(this.props.date)
-    );
+    if (this.props.matchId) {
+      const comments = await SoccerAPI.GetMatchCommentaries(
+        this.props.matchId,
+        new Date(this.props.date)
+      );
 
-    if (comments && comments.length > 0) {
-      this.setState({ comments: comments.filter(comment => comment.Commentaries && comment.Commentaries.length > 0) })
+      if (comments && comments.length > 0) {
+        this.setState({ comments: comments.filter(comment => comment.Commentaries && comment.Commentaries.length > 0) })
+      }
     }
   }
 
   render() {
-    const { t } = this.props
-    console.log(this.state);
+    const { t } = this.props;
+    const comments = this.state.comments.reverse();
+
     const commentaryBody = (
       <div className="commantaries">
-        {this.state.comments.reverse().map(x => <CommentaryRow comment={x} key={x.TimelineId} />)}
+        {comments.map(x => <CommentaryRow comment={x} key={x.TimelineId} />)}
       </div>
     );
 
