@@ -80,25 +80,19 @@ const Mobile: React.FC<Props> = props => {
                   )
                   : (
                     <Card title={t(SoccerResourceKey.LINE_UPS)}>
-                      <div className="line-ups-wrapper">
                         <MobileStartingLineups matchLineups={matchLineUps} />
-                      </div>
                     </Card>
                   )
                 }
                 {(matchLineUps.Home.SubstitutionEvents?.some(x => x) || matchLineUps.Away.SubstitutionEvents?.some(x => x))
-                  && (<Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={["icon-arrow-down1", "icon-arrow-up"]} className="substitution">
-                    <div className="line-ups-wrapper">
+                  && (<Card title={t(SoccerResourceKey.SUBSTITUTION)} titleIcon={["icon-arrow-down1", "icon-arrow-up"]} className="substitution">                    
                       <MobileSubstitution matchLineups={matchLineUps} />
-                    </div>
                   </Card>)}
-                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"} className="substitute-player">
-                  <div className="line-ups-wrapper">
+                <Card title={t(SoccerResourceKey.SUBSTITUTE_PLAYERS)} titleIcon={"icon-substitute-player"} className="substitute-player">                  
                     <MobileSubstitutePlayers matchLineups={matchLineUps} />
-                  </div>
                 </Card>
                 <Card className="coach" title={t(SoccerResourceKey.COACH)} titleIcon={"icon-account"}>
-                  <div className="line-ups-wrapper">
+                  <div className="mobile-lineups-row">
                     <TeamCoach coach={matchLineUps.Home.Coach} />
                     <TeamCoach coach={matchLineUps.Away.Coach} />
                   </div>

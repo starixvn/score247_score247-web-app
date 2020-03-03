@@ -19,7 +19,17 @@
     }
 }
 
-.line-ups-wrapper {
+.mobile-lineups-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #DEE2E6;
+    &:last-child {
+        border-bottom: none;
+    }
+    .home-sub .jersey {
+        color: #30C2FF;
+    }
+    .away-sub .jersey {
+        color: #FA2E58;
+    }
 }
