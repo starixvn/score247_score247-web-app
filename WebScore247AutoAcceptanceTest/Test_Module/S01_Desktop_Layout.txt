@@ -45,8 +45,8 @@ Breadcrumbs
     sleep    3s
     [Teardown]    Close Browser
 
-Verify Optional Function
+Verify_Optional_Function
     Verify Optional Function
 
-Verify Live Match
+Verify_Live_Match
     Verify Live Match Desktop

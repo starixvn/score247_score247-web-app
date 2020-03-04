@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20200304 13:53:25.683" generator="Robot 3.1.2 (Python 2.7.17 on win32)">
+<suite source="D:\Git\score247-web-app\WebScore247AutoAcceptanceTest\Test_Module\S01_Desktop_Layout.txt" id="s1" name="S01 Desktop Layout">
+<test id="s1-t1" name="Header">
+<kw name="Open Home page" library="CommonAction">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>https://score247-web-test.nexdev.net/</arg>
+<arg>Chrome</arg>
+<arg>alias=tab2</arg>
+</arguments>
+<msg timestamp="20200304 13:53:26.460" level="INFO">Opening browser 'Chrome' to base url 'https://score247-web-test.nexdev.net/'</msg>
+<status status="PASS" endtime="20200304 13:53:35.519" starttime="20200304 13:53:26.460"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20200304 13:53:39.648" starttime="20200304 13:53:35.519"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3s</arg>
+</arguments>
+<msg timestamp="20200304 13:53:42.648" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20200304 13:53:42.648" starttime="20200304 13:53:39.648"></status>
+</kw>
+<status status="PASS" endtime="20200304 13:53:42.649" starttime="20200304 13:53:26.459"></status>
+</kw>
+<kw name="Assert Header" library="Layout_Desktop">
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${Header}</arg>
+<arg>timeout=30s</arg>
+</arguments>
+<msg timestamp="20200304 13:53:42.692" level="INFO">Current page contains element '//div/header/div[@class ='header-top']'.</msg>
+<status status="PASS" endtime="20200304 13:53:42.693" starttime="20200304 13:53:42.651"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${Header}</arg>
+</arguments>
+<msg timestamp="20200304 13:53:42.694" level="INFO">Verifying element '//div/header/div[@class ='header-top']' is visible.</msg>
+<status status="PASS" endtime="20200304 13:53:42.731" starttime="20200304 13:53:42.693"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${Header_logo}</arg>
+</arguments>
+<msg timestamp="20200304 13:53:42.732" level="INFO">Verifying element '//div/header/div[1]/div[1]/div[1]/img[1]' is visible.</msg>
+<status status="PASS" endtime="20200304 13:53:42.775" starttime="20200304 13:53:42.732"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${Header_logo_text}</arg>
+</arguments>
+<msg timestamp="20200304 13:53:42.776" level="INFO">Verifying element '//div/header/div[1]/div[1]/div[1]/img[2]' is visible.</msg>
+<status status="PASS" endtime="20200304 13:53:42.812" starttime="20200304 13:53:42.776"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${Languages_btn}</arg>
+</arguments>
+<msg timestamp="20200304 13:53:42.813" level="INFO">Verifying element '//body/div/div/header/div[1]/div/div[2]/div[1]' is visible.</msg>
+<status status="PASS" endtime="20200304 13:53:42.834" starttime="20200304 13:53:42.813"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${Login_btn}</arg>
+</arguments>
+<msg timestamp="20200304 13:53:42.835" level="INFO">Verifying element '//body/div/div/header/div[1]/div/div[2]/div[2]' is visible.</msg>
+<status status="PASS" endtime="20200304 13:53:42.856" starttime="20200304 13:53:42.834"></status>
+</kw>
+<status status="PASS" endtime="20200304 13:53:42.856" starttime="20200304 13:53:42.649"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3s</arg>
+</arguments>
+<msg timestamp="20200304 13:53:45.858" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20200304 13:53:45.858" starttime="20200304 13:53:42.857"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20200304 13:53:48.017" starttime="20200304 13:53:45.859"></status>
+</kw>
+<status status="PASS" endtime="20200304 13:53:48.018" critical="yes" starttime="20200304 13:53:26.459"></status>
+</test>
+<test id="s1-t2" name="Function_bar">
+<kw name="Open Home page" library="CommonAction">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>https://score247-web-test.nexdev.net/</arg>
+<arg>Chrome</arg>
+<arg>alias=tab2</arg>
+</arguments>
+<msg timestamp="20200304 13:53:48.024" level="INFO">Opening browser 'Chrome' to base url 'https://score247-web-test.nexdev.net/'</msg>
+<status status="PASS" endtime="20200304 13:54:01.584" starttime="20200304 13:53:48.023"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20200304 13:54:07.210" starttime="20200304 13:54:01.585"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3s</arg>
+</arguments>
+<msg timestamp="20200304 13:54:10.211" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20200304 13:54:10.211" starttime="20200304 13:54:07.210"></status>
+</kw>
+<status status="PASS" endtime="20200304 13:54:10.211" starttime="20200304 13:53:48.021"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3s</arg>
+</arguments>
+<msg timestamp="20200304 13:54:13.212" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20200304 13:54:13.212" starttime="20200304 13:54:10.211"></status>
+</kw>
+<kw name="Assert Fn_bar" library="Layout_Desktop">
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${Soccer_Sports}</arg>
+<arg>timeout=30s</arg>
+</arguments>
+<msg timestamp="20200304 13:54:15.142" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[1]/ul/li[1]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:15.142" starttime="20200304 13:54:13.213"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${Soccer_Sports}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:15.142" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[1]/ul/li[1]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:17.867" starttime="20200304 13:54:15.142"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${Basketball_Sports}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:17.868" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[1]/ul/li[2]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:20.649" starttime="20200304 13:54:17.868"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${Esports_Sports}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:20.649" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[1]/ul/li[3]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:23.447" starttime="20200304 13:54:20.649"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${leagues_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:23.447" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[2]/ul/li[1]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:26.772" starttime="20200304 13:54:23.447"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${my_favorites_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:26.772" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[2]/ul/li[2]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:29.605" starttime="20200304 13:54:26.772"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${news_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:29.605" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[2]/ul/li[3]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:32.398" starttime="20200304 13:54:29.605"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${tv_schedules_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:32.399" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[2]/ul/li[4]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:35.207" starttime="20200304 13:54:32.398"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${mobile_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:35.208" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[2]/ul/li[5]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:38.093" starttime="20200304 13:54:35.207"></status>
+</kw>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by `locator` is visible.</doc>
+<arguments>
+<arg>${settings_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:38.093" level="INFO">Verifying element '//body/div/div/header/nav[1]/div/div[2]/ul/li[6]/a' is visible.</msg>
+<status status="PASS" endtime="20200304 13:54:41.056" starttime="20200304 13:54:38.093"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${soccer_menu}@class</arg>
+</arguments>
+<assign>
+<var>${soccer_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:43.856" level="INFO">${soccer_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:43.856" starttime="20200304 13:54:41.056"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${soccer_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:43.856" starttime="20200304 13:54:43.856"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>${Basketball_Sports}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:43.857" level="INFO">Clicking element '//body/div/div/header/nav[1]/div/div[1]/ul/li[2]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:52.220" starttime="20200304 13:54:43.857"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${Basketball_menu}</arg>
+<arg>timeout=15</arg>
+</arguments>
+<msg timestamp="20200304 13:54:52.250" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[1]/ul/li[2]'.</msg>
+<status status="PASS" endtime="20200304 13:54:52.250" starttime="20200304 13:54:52.220"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${Basketball_menu}@class</arg>
+</arguments>
+<assign>
+<var>${basketball_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:52.266" level="INFO">${basketball_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:52.266" starttime="20200304 13:54:52.250"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${basketball_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:52.267" starttime="20200304 13:54:52.266"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>${Esports_Sports}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:52.267" level="INFO">Clicking element '//body/div/div/header/nav[1]/div/div[1]/ul/li[3]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:52.317" starttime="20200304 13:54:52.267"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${esports_menu}</arg>
+<arg>timeout=15</arg>
+</arguments>
+<msg timestamp="20200304 13:54:52.334" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[1]/ul/li[3]'.</msg>
+<status status="PASS" endtime="20200304 13:54:52.334" starttime="20200304 13:54:52.317"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.335" level="INFO">Slept 1 second</msg>
+<status status="PASS" endtime="20200304 13:54:53.335" starttime="20200304 13:54:52.335"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${esports_menu}@class</arg>
+</arguments>
+<assign>
+<var>${esports_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:53.347" level="INFO">${esports_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:53.347" starttime="20200304 13:54:53.335"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${esports_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:53.347" starttime="20200304 13:54:53.347"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>${leagues_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.348" level="INFO">Clicking element '//body/div/div/header/nav[1]/div/div[2]/ul/li[1]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.392" starttime="20200304 13:54:53.347"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${leagues_menu}</arg>
+<arg>timeout=15</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.403" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[2]/ul/li[1]'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.403" starttime="20200304 13:54:53.392"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${leagues_menu}@class</arg>
+</arguments>
+<assign>
+<var>${leagues_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:53.415" level="INFO">${leagues_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:53.415" starttime="20200304 13:54:53.403"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${leagues_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:53.416" starttime="20200304 13:54:53.416"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>${my_favorites_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.416" level="INFO">Clicking element '//body/div/div/header/nav[1]/div/div[2]/ul/li[2]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.458" starttime="20200304 13:54:53.416"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${my_favorites_menu}</arg>
+<arg>timeout=15</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.469" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[2]/ul/li[2]'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.469" starttime="20200304 13:54:53.458"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${my_favorites_menu}@class</arg>
+</arguments>
+<assign>
+<var>${my_favorites_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:53.480" level="INFO">${my_favorites_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:53.481" starttime="20200304 13:54:53.469"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${my_favorites_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:53.481" starttime="20200304 13:54:53.481"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>${news_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.481" level="INFO">Clicking element '//body/div/div/header/nav[1]/div/div[2]/ul/li[3]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.539" starttime="20200304 13:54:53.481"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${news_menu}</arg>
+<arg>timeout=15</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.551" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[2]/ul/li[3]'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.551" starttime="20200304 13:54:53.539"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${news_menu}@class</arg>
+</arguments>
+<assign>
+<var>${news_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:53.562" level="INFO">${news_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:53.562" starttime="20200304 13:54:53.551"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${news_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:53.563" starttime="20200304 13:54:53.562"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>${tv_schedules_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.563" level="INFO">Clicking element '//body/div/div/header/nav[1]/div/div[2]/ul/li[4]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.610" starttime="20200304 13:54:53.563"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${tv_schedules_menu}</arg>
+<arg>timeout=15</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.623" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[2]/ul/li[4]'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.623" starttime="20200304 13:54:53.610"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${tv_schedules_menu}@class</arg>
+</arguments>
+<assign>
+<var>${schedules_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:53.634" level="INFO">${schedules_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:53.634" starttime="20200304 13:54:53.623"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${schedules_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:53.634" starttime="20200304 13:54:53.634"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>${mobile_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.635" level="INFO">Clicking element '//body/div/div/header/nav[1]/div/div[2]/ul/li[5]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.690" starttime="20200304 13:54:53.634"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${mobile_menu}</arg>
+<arg>timeout=15</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.702" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[2]/ul/li[5]'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.702" starttime="20200304 13:54:53.690"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${mobile_menu}@class</arg>
+</arguments>
+<assign>
+<var>${mobile_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:53.713" level="INFO">${mobile_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:53.713" starttime="20200304 13:54:53.703"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${mobile_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:53.714" starttime="20200304 13:54:53.713"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>${settings_fn_bar}</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.714" level="INFO">Clicking element '//body/div/div/header/nav[1]/div/div[2]/ul/li[6]/a'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.758" starttime="20200304 13:54:53.714"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${settings_menu}</arg>
+<arg>timeout=15</arg>
+</arguments>
+<msg timestamp="20200304 13:54:53.769" level="INFO">Current page contains element '//body/div/div/header/nav[1]/div/div[2]/ul/li[6]'.</msg>
+<status status="PASS" endtime="20200304 13:54:53.769" starttime="20200304 13:54:53.758"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Return value of element attribute.</doc>
+<arguments>
+<arg>${settings_menu}@class</arg>
+</arguments>
+<assign>
+<var>${settings_highlighted}</var>
+</assign>
+<msg timestamp="20200304 13:54:53.779" level="INFO">${settings_highlighted} = menu-item active</msg>
+<status status="PASS" endtime="20200304 13:54:53.779" starttime="20200304 13:54:53.769"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${settings_highlighted}</arg>
+<arg>menu-item active</arg>
+</arguments>
+<status status="PASS" endtime="20200304 13:54:53.780" starttime="20200304 13:54:53.779"></status>
+</kw>
+<status status="PASS" endtime="20200304 13:54:53.780" starttime="20200304 13:54:13.213"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3s</arg>
+</arguments>
+<msg timestamp="20200304 13:54:56.780" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20200304 13:54:56.780" starttime="20200304 13:54:53.780"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20200304 13:54:58.925" starttime="20200304 13:54:56.781"></status>
+</kw>
+<status status="PASS" endtime="20200304 13:54:58.926" critical="yes" starttime="20200304 13:53:48.020"></status>
+</test>
+<test id="s1-t3" name="Date_bar">
+<kw name="Open Home page" library="CommonAction">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>https://score247-web-test.nexdev.net/</arg>
+<arg>Chrome</arg>
+<arg>alias=tab2</arg>
+</arguments>
+<msg timestamp="20200304 13:54:58.931" level="INFO">Opening browser 'Chrome' to base url 'https://score247-web-test.nexdev.net/'</msg>
+<status status="PASS" endtime="20200304 13:55:06.181" starttime="20200304 13:54:58.930"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20200304 13:55:10.308" starttime="20200304 13:55:06.181"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3s</arg>
+</arguments>
+<msg timestamp="20200304 13:55:13.309" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20200304 13:55:13.309" starttime="20200304 13:55:10.308"></status>
+</kw>
+<status status="PASS" endtime="20200304 13:55:13.309" starttime="20200304 13:54:58.929"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3s</arg>
+</arguments>
+<msg timestamp="20200304 13:55:16.312" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20200304 13:55:16.312" starttime="20200304 13:55:13.310"></status>
+</kw>
+<kw name="Assert Date_Bar" library="Layout_Desktop">
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<arguments>
+<arg>result_format='%Y-%m-%d %H:%M'</arg>
+</arguments>
+<assign>
+<var>${Now}</var>
+</assign>
+<msg timestamp="20200304 13:55:16.316" level="INFO">${Now} = '2020-03-04 13:55'</msg>
+<status status="PASS" endtime="20200304 13:55:16.316" starttime="20200304 13:55:16.314"></status>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<doc>Converts between supported `date formats`.</doc>
+<arguments>
+<arg>${Now}</arg>
+<arg>result_format=%d %b</arg>
+</arguments>
+<assign>
+<var>${date_today}</var>
+</assign>
+<msg timestamp="20200304 13:55:16.332" level="INFO">${date_today} = 04 Mar</msg>
+<status status="PASS" endtime="20200304 13:55:16.333" starttime="20200304 13:55:16.317"></status>
+</kw>
+<kw name="Add Time To Date" library="DateTime">
+<doc>Adds time to date and returns the resulting date.</doc>
+<arguments>
+<arg>${Now}</arg>
+<arg>1 days</arg>
+<arg>result_format=%d %b</arg>
+</arguments>
+<assign>
+<var>${date+1}</var>
+</assign>
+<msg timestamp="20200304 13:55:16.335" level="INFO">${date+1} = 05 Mar</msg>
+<status status="PASS" endtime="20200304 13:55:16.335" starttime="20200304 13:55:16.333"></status>
+</kw>
+<kw name="Add Time To Date" library="DateTime">
+<doc>Adds time to date and returns the resulting date.</doc>
+<arguments>
+<arg>${Now}</arg>
+<arg>2 days</arg>
+<arg>result_format=%d %b</arg>
+</arguments>
+<assign>
+<var>${date+2}</var>
+</assign>
+<msg timestamp="20200304 13:55:16.338" level="INFO">${date+2} = 06 Mar</msg>
+<status status="PASS" endtime="20200304 13:55:16.338" starttime="20200304 13:55:16.336"></status>
+</kw>
+<kw name="Add Time To Date" library="DateTime">
+<doc>Adds time to date and returns the resulting date.</doc>
+<arguments>
+<arg>${Now}</arg>
+<arg>-1 days</arg>
+<arg>result_format=%d %b</arg>
+</arguments>
+<assign>
+<var>${date-1}</var>
+</assign>
+<msg timestamp="20200304 13:55:16.340" level="INFO">${date-1} = 03 Mar</msg>
+<status status="PASS" endtime="20200304 13:55:16.340" starttime="20200304 13:55:16.338"></status>
+</kw>
+<kw name="Add Time To Date" library="DateTime">
+<doc>Adds time to date and returns the resulting date.</doc>
+<arguments>
+<arg>${Now}</arg>
+<arg>-2 days</arg>
+<arg>result_format=%d %b</arg>
+</arguments>
+<assign>
+<var>${date-2}</var>
+</assign>
+<msg timestamp="20200304 13:55:16.343" level="INFO">${date-2} = 02 Mar</msg>
+<status status="PASS" endtime="20200304 13:55:16.344" starttime="20200304 13:55:16.341"></status>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<arguments>
+<arg>result_format=%A</arg>
+</arguments>
+<assign>
+<var>${CurrentDay}</var>
+</assign>
+<msg timestamp="20200304 13:55:16.346" level="INFO">${CurrentDay} = Wednesday</msg>
+<status status="PASS" endtime="20200304 13:55:16.346" starttime="20200304 13:55:16.344"></status>
+</kw>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>${Today}</arg>
+<arg>timeout=35</arg>
+</arguments>
+<msg timestamp="20200304 13:55:16.379" level="INFO">&lt;html lang="en"&gt;&lt;head&gt;&lt;meta name="theme-color" content="#F8F9FC"&gt;&lt;meta name="Description" content="Score247"&gt;&lt;link rel="manifest" href="/manifest.json"&gt;&lt;link rel="icon" href="/favicon.ico"&gt;&lt;link rel="apple-touch-icon" href="/static/images/icon152x152.png"&gt;&lt;meta charset="utf-8"&gt;&lt;title&gt;soccer | Score247 Official Website&lt;/title&gt;&lt;meta name="viewport" content="initial-scale=0.3,user-scalable=yes"&gt;&lt;meta name="next-head-count" content="3"&gt;&lt;link rel="preload" href="/_next/static/css/commons.40da2070.chunk.css" as="style"&gt;&lt;link rel="stylesheet" href="/_next/static/css/commons.40da2070.chunk.css"&gt;&lt;link rel="preload" href="/_next/static/css/styles.d24afbbc.chunk.css" as="style"&gt;&lt;link rel="stylesheet" href="/_next/static/css/styles.d24afbbc.chunk.css"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/index.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/_app.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/runtime/webpack-6d53b3649dddb4608257.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/chunks/commons.98c69ac543feb2781fdc.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/chunks/styles.ab155c0e96c83d9382fe.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/runtime/main-b704f9ef4bd2f47f43f0.js" as="script"&gt;&lt;style data-emotion-css="2b097c-container"&gt;.css-2b097c-container{position:relative;box-sizing:border-box;}&lt;/style&gt;&lt;style data-emotion-css="yk16xz-control"&gt;.css-yk16xz-control{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background-color:hsl(0,0%,100%);border-color:hsl(0,0%,80%);border-radius:4px;border-style:solid;border-width:1px;cursor:default;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;min-height:38px;outline:0 !important;position:relative;-webkit-transition:all 100ms;transition:all 100ms;box-sizing:border-box;}.css-yk16xz-control:hover{border-color:hsl(0,0%,70%);}&lt;/style&gt;&lt;style data-emotion-css="1hwfws3"&gt;.css-1hwfws3{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;padding:2px 8px;-webkit-overflow-scrolling:touch;position:relative;overflow:hidden;box-sizing:border-box;}&lt;/style&gt;&lt;style data-emotion-css="1w6chc4-singleValue"&gt;.css-1w6chc4-singleValue{color:hsl(0,0%,20%);margin-left:2px;margin-right:2px;max-width:calc(100% - 8px);overflow:hidden;position:absolute;text-overflow:ellipsis;white-space:nowrap;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);box-sizing:border-box;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}.css-1w6chc4-singleValue:before{content:"Sort by:";}&lt;/style&gt;&lt;style data-emotion-css="62g3xt-dummyInput"&gt;.css-62g3xt-dummyInput{background:0;border:0;font-size:inherit;outline:0;padding:0;width:1px;color:transparent;left:-100px;opacity:0;position:relative;-webkit-transform:scale(0);-ms-transform:scale(0);transform:scale(0);}&lt;/style&gt;&lt;style data-emotion-css="1wy0on6"&gt;.css-1wy0on6{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-align-self:stretch;-ms-flex-item-align:stretch;align-self:stretch;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;box-sizing:border-box;}&lt;/style&gt;&lt;style data-emotion-css="1okebmr-indicatorSeparator"&gt;.css-1okebmr-indicatorSeparator{-webkit-align-self:stretch;-ms-flex-item-align:stretch;align-self:stretch;background-color:hsl(0,0%,80%);margin-bottom:8px;margin-top:8px;width:1px;box-sizing:border-box;}&lt;/style&gt;&lt;style data-emotion-css="tlfecz-indicatorContainer"&gt;.css-tlfecz-indicatorContainer{color:hsl(0,0%,80%);display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;padding:8px;-webkit-transition:color 150ms;transition:color 150ms;box-sizing:border-box;}.css-tlfecz-indicatorContainer:hover{color:hsl(0,0%,60%);}&lt;/style&gt;&lt;style data-emotion-css="19bqh2r"&gt;.css-19bqh2r{display:inline-block;fill:currentColor;line-height:1;stroke:currentColor;stroke-width:0;}&lt;/style&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/basketball.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/esports.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/soccer/leagues.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/soccer/favorites.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/soccer/news.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/soccer/tv.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/mobile.js" as="script"&gt;&lt;link rel="preload" href="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/settings.js" as="script"&gt;&lt;/head&gt;&lt;body&gt;&lt;div id="__next"&gt;&lt;div class="wrap-page"&gt;&lt;header&gt;&lt;div class="header-top"&gt;&lt;div class="container"&gt;&lt;div class="logo"&gt;&lt;img src="/static/images/Logo.png" alt="Logo"&gt;&lt;img class="logo-text" src="/static/images/SCORE247.png" alt="Logo"&gt;&lt;/div&gt;&lt;div class="user-languages"&gt;&lt;div class="language-box"&gt;&lt;div class="language-selection"&gt;&lt;img src="/static/images/flag_en.svg"&gt;&lt;span class="text"&gt;English&lt;/span&gt;&lt;span class="icon-arrow-down"&gt;&lt;/span&gt;&lt;/div&gt;&lt;ul class="ddl-language false"&gt;&lt;li class="language-item active" data-lang="en"&gt;&lt;img src="/static/images/flag_en.svg"&gt;&lt;span class="text"&gt;English&lt;/span&gt;&lt;span class="icon-check"&gt;&lt;/span&gt;&lt;/li&gt;&lt;li class="language-item active" data-lang="vi"&gt;&lt;img src="/static/images/flag_vn.svg"&gt;&lt;span class="text"&gt;Tiếng Việt&lt;/span&gt;&lt;/li&gt;&lt;li class="language-item active" data-lang="id"&gt;&lt;img src="/static/images/flag_indo.svg"&gt;&lt;span class="text"&gt;Bahasa Indonesia&lt;/span&gt;&lt;/li&gt;&lt;li class="language-item active" data-lang="th"&gt;&lt;img src="/static/images/flag_th.svg"&gt;&lt;span class="text"&gt;ไทย&lt;/span&gt;&lt;/li&gt;&lt;li class="language-item active" data-lang="zhTW"&gt;&lt;img src="/static/images/flag_cn1.svg"&gt;&lt;span class="text"&gt;繁體中文&lt;/span&gt;&lt;/li&gt;&lt;li class="language-item active" data-lang="zhCN"&gt;&lt;img src="/static/images/flag_cn2.svg"&gt;&lt;span class="text"&gt;简体中文&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class="login"&gt;Login&lt;!-- --&gt;/&lt;!-- --&gt;Register&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;nav class="nav-menu hide-mobile"&gt;&lt;div class="container"&gt;&lt;div class="nav-sports"&gt;&lt;ul class="menu"&gt;&lt;li class="menu-item active"&gt;&lt;a class="nav-link" href="/"&gt;&lt;i class="icon-soccer"&gt;&lt;/i&gt;soccer&lt;/a&gt;&lt;/li&gt;&lt;li class="menu-item"&gt;&lt;a class="nav-link" href="/basketball"&gt;&lt;i class="icon-basketball"&gt;&lt;/i&gt;basketball&lt;/a&gt;&lt;/li&gt;&lt;li class="menu-item"&gt;&lt;a class="nav-link" href="/esports"&gt;&lt;i class="icon-esports"&gt;&lt;/i&gt;eSports&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div class="nav-function"&gt;&lt;ul class="menu"&gt;&lt;li class="menu-item"&gt;&lt;a class="nav-link" href="/soccer/leagues"&gt;&lt;i class=""&gt;&lt;/i&gt;leagues&lt;/a&gt;&lt;/li&gt;&lt;li class="menu-item"&gt;&lt;a class="nav-link" href="/soccer/favorites"&gt;&lt;i class=""&gt;&lt;/i&gt;my favorites&lt;/a&gt;&lt;/li&gt;&lt;li class="menu-item"&gt;&lt;a class="nav-link" href="/soccer/news"&gt;&lt;i class=""&gt;&lt;/i&gt;news&lt;/a&gt;&lt;/li&gt;&lt;li class="menu-item"&gt;&lt;a class="nav-link" href="/soccer/tv"&gt;&lt;i class=""&gt;&lt;/i&gt;tv schedules&lt;/a&gt;&lt;/li&gt;&lt;li class="menu-item"&gt;&lt;a class="nav-link" href="/mobile"&gt;&lt;i class=""&gt;&lt;/i&gt;mobile&lt;/a&gt;&lt;/li&gt;&lt;li class="menu-item"&gt;&lt;a class="nav-link" href="/settings"&gt;&lt;i class=""&gt;&lt;/i&gt;settings&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/nav&gt;&lt;/header&gt;&lt;div class="container"&gt;&lt;div class="site-info"&gt;&lt;div class="breadcrumbs"&gt;&lt;span class="selected-sport"&gt;soccer&lt;!-- --&gt; / &lt;/span&gt;&lt;span class="selected-sport"&gt;today&lt;/span&gt;&lt;/div&gt;&lt;div class="GMT-time"&gt;13:55 GMT+7&lt;/div&gt;&lt;/div&gt;&lt;div class="wrap-content"&gt;&lt;div class="left-container hide-mobile"&gt;&lt;div class="banner hide-mobile"&gt;&lt;div class="advertisement-wrapper"&gt;&lt;a href="#"&gt;&lt;img src="/static/images/ads-banner-2.jpg" style="width:100%;max-height:100%"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="block h-200"&gt;Top Events&lt;/div&gt;&lt;div class="block h-200"&gt;List of Leagues&lt;/div&gt;&lt;div class="banner-small block"&gt;Advertising Banner&lt;/div&gt;&lt;div class="banner-big block"&gt;Advertising Banner&lt;/div&gt;&lt;/div&gt;&lt;div class="main-container"&gt;&lt;div class="banner hide-mobile"&gt;&lt;div class="advertisement-wrapper"&gt;&lt;a href="#"&gt;&lt;img src="/static/images/ads-banner-1.jpg" style="width:100%;max-height:100%"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="nav-date"&gt;&lt;div class="date-bar false"&gt;&lt;span class="date-item live-score false"&gt;&lt;i class="icon-live"&gt;&lt;/i&gt;&lt;span class="has-live"&gt;&lt;/span&gt;&lt;/span&gt;&lt;div class="date-item"&gt;&lt;div class="days"&gt;Mon&lt;/div&gt;&lt;div class="format-date"&gt;02 Mar&lt;/div&gt;&lt;/div&gt;&lt;div class="date-item"&gt;&lt;div class="days"&gt;Tue&lt;/div&gt;&lt;div class="format-date"&gt;03 Mar&lt;/div&gt;&lt;/div&gt;&lt;div class="date-item active"&gt;&lt;div class="days"&gt;today&lt;/div&gt;&lt;div class="format-date"&gt;04 Mar&lt;/div&gt;&lt;/div&gt;&lt;div class="date-item"&gt;&lt;div class="days"&gt;Thu&lt;/div&gt;&lt;div class="format-date"&gt;05 Mar&lt;/div&gt;&lt;/div&gt;&lt;div class="date-item"&gt;&lt;div class="days"&gt;Fri&lt;/div&gt;&lt;div class="format-date"&gt;06 Mar&lt;/div&gt;&lt;/div&gt;&lt;div class="datepicker-wrapper "&gt;&lt;div class="react-datepicker-wrapper"&gt;&lt;div class="react-datepicker__input-container"&gt;&lt;span&gt;&lt;i class="icon-calendar"&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="content"&gt;&lt;div class="search-filter"&gt;&lt;div class="show-hide"&gt;&lt;span class="show-all"&gt;Show All&lt;/span&gt;&lt;span class="hide"&gt;Hide&lt;/span&gt;&lt;span class="show-only"&gt;Show Only&lt;/span&gt;&lt;/div&gt;&lt;div class="combo-search"&gt;&lt;div class="filter-event"&gt;Filter by League&lt;/div&gt;&lt;div class="sort-dropdown css-2b097c-container"&gt;&lt;div class="select__control css-yk16xz-control"&gt;&lt;div class="select__value-container select__value-container--has-value css-1hwfws3"&gt;&lt;div class="select__single-value css-1w6chc4-singleValue"&gt;KO time&lt;/div&gt;&lt;input id="react-select-1-input" readonly="" tabindex="0" value="" class="css-62g3xt-dummyInput"&gt;&lt;/div&gt;&lt;div class="select__indicators css-1wy0on6"&gt;&lt;span class="select__indicator-separator css-1okebmr-indicatorSeparator"&gt;&lt;/span&gt;&lt;div aria-hidden="true" class="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"&gt;&lt;svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-19bqh2r"&gt;&lt;path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="search-section"&gt;&lt;div class="search-box"&gt;&lt;span class="icon-search"&gt;&lt;/span&gt;&lt;input type="text" placeholder="Search" value="" class="txt-search"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;table class="table score-page"&gt;&lt;thead&gt;&lt;tr&gt;&lt;th class="col-check"&gt;&lt;/th&gt;&lt;th class="col-league"&gt;League&lt;/th&gt;&lt;th class="col-time"&gt;Time&lt;/th&gt;&lt;th class="col-status"&gt;Status&lt;/th&gt;&lt;th class="col-home"&gt;Home&lt;/th&gt;&lt;th class="col-score"&gt;score&lt;/th&gt;&lt;th class="col-away"&gt;Away&lt;/th&gt;&lt;th class="width-50"&gt;1H&lt;/th&gt;&lt;th class="col-favorites"&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr class="match-row" data-match-id="sr:match:1743842960"&gt;&lt;td&gt;&lt;div class="checkbox"&gt;&lt;input id="sr:match:1743842960" type="checkbox" value="sr:match:1743842960"&gt;&lt;label for="sr:match:1743842960"&gt;&lt;/label&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="league intl" title="World Cup"&gt;WC&lt;/td&gt;&lt;td&gt;13:00&lt;/td&gt;&lt;td class=""&gt;45'&lt;/td&gt;&lt;td class="text-right col-home"&gt;Akra&lt;/td&gt;&lt;td class="text-score"&gt;0 - 0&lt;/td&gt;&lt;td class="text-left col-away"&gt;AD Parla&lt;/td&gt;&lt;td class="text-1H"&gt;0 - 0&lt;/td&gt;&lt;td&gt;&lt;i class="icon-menu-favorites"&gt;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr class="match-row" data-match-id="sr:match:424252173"&gt;&lt;td&gt;&lt;div class="checkbox"&gt;&lt;input id="sr:match:424252173" type="checkbox" value="sr:match:424252173"&gt;&lt;label for="sr:match:424252173"&gt;&lt;/label&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="league eu" title="Italy Serie A"&gt;ITA SA&lt;/td&gt;&lt;td&gt;13:05&lt;/td&gt;&lt;td class=""&gt;45'&lt;/td&gt;&lt;td class="text-right col-home"&gt;Yadah FC&lt;/td&gt;&lt;td class="text-score"&gt;0 - 0&lt;/td&gt;&lt;td class="text-left col-away"&gt;Somalia&lt;/td&gt;&lt;td class="text-1H"&gt;0 - 0&lt;/td&gt;&lt;td&gt;&lt;i class="icon-menu-favorites"&gt;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr class="match-row" data-match-id="sr:match:1566187942"&gt;&lt;td&gt;&lt;div class="checkbox"&gt;&lt;input id="sr:match:1566187942" type="checkbox" value="sr:match:1566187942"&gt;&lt;label for="sr:match:1566187942"&gt;&lt;/label&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="league intl" title="World Cup"&gt;WC&lt;/td&gt;&lt;td&gt;13:10&lt;/td&gt;&lt;td class=""&gt;45'&lt;/td&gt;&lt;td class="text-right col-home"&gt;SK Lisen&lt;/td&gt;&lt;td class="text-score"&gt;1 - 0&lt;/td&gt;&lt;td class="text-left col-away"&gt;Rwanda&lt;span class="red-card"&gt;1&lt;/span&gt;&lt;/td&gt;&lt;td class="text-1H"&gt;1 - 0&lt;/td&gt;&lt;td&gt;&lt;i class="icon-menu-favorites"&gt;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="latest-title" colspan="9"&gt;Last Results (WEDNESDAY 04 MAR 2020)&lt;/td&gt;&lt;/tr&gt;&lt;tr class="match-row" data-match-id="sr:match:843591227"&gt;&lt;td rowspan="2"&gt;&lt;div class="checkbox"&gt;&lt;input id="sr:match:843591227" type="checkbox" value="sr:match:843591227"&gt;&lt;label for="sr:match:843591227"&gt;&lt;/label&gt;&lt;/div&gt;&lt;/td&gt;&lt;td rowspan="2" class="league intl" title="World Cup"&gt;WC&lt;/td&gt;&lt;td rowspan="2"&gt;08:00&lt;/td&gt;&lt;td rowspan="2" class=""&gt;FT&lt;/td&gt;&lt;td class="text-right col-home"&gt;&lt;i class="icon-arrow-right"&gt;&lt;/i&gt;&lt;span class="red-card"&gt;2&lt;/span&gt;&lt;span class="yellow-card"&gt;3&lt;/span&gt;1.FC Monheim&lt;/td&gt;&lt;td class="text-score"&gt;3 - 3&lt;/td&gt;&lt;td class="text-left col-away"&gt;1 Dezembro&lt;span class="yellow-card"&gt;3&lt;/span&gt;&lt;span class="red-card"&gt;1&lt;/span&gt;&lt;i class="icon-penalty"&gt;&lt;/i&gt;&lt;/td&gt;&lt;td rowspan="2" class="text-1H"&gt;1 - 1&lt;/td&gt;&lt;td rowspan="2"&gt;&lt;i class="icon-menu-favorites"&gt;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr data-match-id="sr:match:843591227" class="text-extra-line"&gt;&lt;td class="text-extra" colspan="3"&gt;&lt;span class="extra-match-info"&gt;FT [3 - 3], ET [0 - 0], AGGR [0 - 0], PEN [3 - 4]&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr class="match-row" data-match-id="sr:match:793613201"&gt;&lt;td rowspan="2"&gt;&lt;div class="checkbox"&gt;&lt;input id="sr:match:793613201" type="checkbox" value="sr:match:793613201"&gt;&lt;label for="sr:match:793613201"&gt;&lt;/label&gt;&lt;/div&gt;&lt;/td&gt;&lt;td rowspan="2" class="league intl" title="World Cup"&gt;WC&lt;/td&gt;&lt;td rowspan="2"&gt;11:00&lt;/td&gt;&lt;td rowspan="2" class=""&gt;FT&lt;/td&gt;&lt;td class="text-right col-home"&gt;&lt;i class="icon-arrow-right"&gt;&lt;/i&gt;&lt;span class="yellow-card"&gt;1&lt;/span&gt;Porsanger&lt;/td&gt;&lt;td class="text-score"&gt;1 - 0&lt;/td&gt;&lt;td class="text-left col-away"&gt;Scd Durango&lt;/td&gt;&lt;td rowspan="2" class="text-1H"&gt;1 - 0&lt;/td&gt;&lt;td rowspan="2"&gt;&lt;i class="icon-menu-favorites"&gt;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr data-match-id="sr:match:793613201" class="text-extra-line"&gt;&lt;td class="text-extra" colspan="3"&gt;&lt;span class="extra-match-info"&gt;FT [1 - 0], AGGR [0 - 0]&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="9" class="advertisement-row"&gt;&lt;div class="advertisement-wrapper"&gt;&lt;a href="#"&gt;&lt;img src="/static/images/ads-banner-1.jpg" style="width: 100%; max-height: 100%;"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr class="match-row" data-match-id="sr:match:348097932"&gt;&lt;td rowspan="2"&gt;&lt;div class="checkbox"&gt;&lt;input id="sr:match:348097932" type="checkbox" value="sr:match:348097932"&gt;&lt;label for="sr:match:348097932"&gt;&lt;/label&gt;&lt;/div&gt;&lt;/td&gt;&lt;td rowspan="2" class="league intl" title="World Cup"&gt;WC&lt;/td&gt;&lt;td rowspan="2"&gt;11:30&lt;/td&gt;&lt;td rowspan="2" class=""&gt;FT&lt;/td&gt;&lt;td class="text-right col-home"&gt;Yarmouk&lt;/td&gt;&lt;td class="text-score"&gt;0 - 1&lt;/td&gt;&lt;td class="text-left col-away"&gt;ZPC Kariba&lt;i class="icon-arrow-right"&gt;&lt;/i&gt;&lt;/td&gt;&lt;td rowspan="2" class="text-1H"&gt;0 - 1&lt;/td&gt;&lt;td rowspan="2"&gt;&lt;i class="icon-menu-favorites"&gt;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr data-match-id="sr:match:348097932" class="text-extra-line"&gt;&lt;td class="text-extra" colspan="3"&gt;&lt;span class="extra-match-info"&gt;FT [0 - 1], AGGR [0 - 0]&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr class="match-row" data-match-id="sr:match:1037985254"&gt;&lt;td rowspan="2"&gt;&lt;div class="checkbox"&gt;&lt;input id="sr:match:1037985254" type="checkbox" value="sr:match:1037985254"&gt;&lt;label for="sr:match:1037985254"&gt;&lt;/label&gt;&lt;/div&gt;&lt;/td&gt;&lt;td rowspan="2" class="league eu" title="England Premier League"&gt;ENG PL&lt;/td&gt;&lt;td rowspan="2"&gt;13:00&lt;/td&gt;&lt;td rowspan="2" class=""&gt;AP&lt;/td&gt;&lt;td class="text-right col-home"&gt;&lt;i class="icon-arrow-right"&gt;&lt;/i&gt;&lt;i class="icon-penalty"&gt;&lt;/i&gt;&lt;span class="red-card"&gt;2&lt;/span&gt;&lt;span class="yellow-card"&gt;2&lt;/span&gt;00Mike-Real Madrid&lt;/td&gt;&lt;td class="text-score"&gt;8 - 8&lt;/td&gt;&lt;td class="text-left col-away"&gt;00Mike-Stockport County FC&lt;span class="yellow-card"&gt;1&lt;/span&gt;&lt;span class="red-card"&gt;2&lt;/span&gt;&lt;/td&gt;&lt;td rowspan="2" class="text-1H"&gt;2 - 2&lt;/td&gt;&lt;td rowspan="2"&gt;&lt;i class="icon-menu-favorites"&gt;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr data-match-id="sr:match:1037985254" class="text-extra-line"&gt;&lt;td class="text-extra" colspan="3"&gt;&lt;span class="extra-match-info"&gt;FT [4 - 4], ET [4 - 4], AGGR [10 - 10], PEN [2 - 1]&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;div class="calendar-switch"&gt;&lt;button class="btn btn-primary-outline"&gt;03 Mar 2020&lt;/button&gt;&lt;button class="btn btn-primary-outline"&gt;05 Mar 2020&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="right-container hide-mobile"&gt;&lt;div class="banner hide-mobile"&gt;&lt;div class="advertisement-wrapper"&gt;&lt;a href="#"&gt;&lt;img src="/static/images/ads-banner-3.jpg" style="width:100%;max-height:100%"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="block h-400"&gt;League Table&lt;/div&gt;&lt;div class="banner-small block"&gt;Advertising Banner&lt;/div&gt;&lt;div class="banner-big block"&gt;Advertising Banner&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;footer&gt;&lt;div class="container"&gt;&lt;p&gt;2019 Score247, Inc. All right reserved&lt;/p&gt;&lt;/div&gt;&lt;/footer&gt;&lt;/div&gt;&lt;/div&gt;&lt;script async="" src="https://widgets.sir.sportradar.com/549fbd108dfa14a21c701dc45cd9b73a/widgetloader" n="SIR"&gt;&lt;/script&gt;&lt;script id="__NEXT_DATA__" type="application/json"&gt;{"dataManager":"[]","props":{"initialI18nStore":{"en":{"soccer":{"matchinfo":"match info","score":"Score","first_half":"1H","substitution":"substitution","substitute_players":"substitute players","coach":"coach","line_ups":"line-ups","aggregate_score":"2nd leg, aggregate score: {{score}}","info":"Info","tracker":"Tracker","stats":"Stats","h2h":"H2H","table":"Table","commentary":"Commentary","statistics":"Statistics","referee":"Referee","venue":"Venue","spectators":"Spectators"},"common":{"basketball":"basketball","esports":"eSports","soccer":"soccer","today":"today","live":"live","livematch":"Live match","myfavorites":"my favorites","favorites":"favorites","leagues":"leagues","news":"news","tvschedules":"tv schedules","tv":"tv","mobile":"mobile","settings":"settings","kickofftime":"Kick-off time","site_title":"Score247 Official Website","copyright":"2019 Score247, Inc. All right reserved","desktop":"Desktop","loading_page_note":"You are using a smart device. Please select one of the following browsing mode that's compatible with your device.","download_from_app_store":"Download from App Store","or_mobile_application":"or mobile application","languages":"Languages","login":"Login","register":"Register","cancel":"Cancel","league":"League","time":"Time","status":"Status","home":"Home","away":"Away","no_matches_found":"There are no matches available.","show_all":"Show All","hide":"Hide","show_only":"Show Only","filter_by_league":"Filter by League","league_filtering":"League filtering","check_all":"Check all","find_leagues":"Find leagues","ok":"OK","last_results":"Last Results","cancelled_matches":"Cancelled/postponed/abandoned/delayed/interrupted matches","search":"Search"}}},"initialLanguage":"en","i18nServerInstance":null,"pageProps":{"namespacesRequired":["soccer","common"]}},"page":"/","query":{},"buildId":"jtZeaivCpJlGpUtrCjPLm","runtimeConfig":{"soccerAPIBaseUrl":"https://score247-api1.nexdev.net/dev/api/soccer","sentryDSN":"https://83c6b7e30522412a9cdcb5594d650916@sentry.nexdev.net/90","soccerPublisherUrl":"https://score247-api2.nexdev.net/dev","numberOfRowEveryAd":5,"authenticateUrl":"https://api.score247.net/api/authenticate/generateToken","encryptKey":"350cd642f6764a154a9e4f03eb3121b6","salt":"382af5535cba45839752a452c16bc618","sportRadarWidgetKey":"549fbd108dfa14a21c701dc45cd9b73a","assetsUrl":"https://assets-dev.nexdev.net"}}&lt;/script&gt;&lt;script nomodule="" src="/_next/static/runtime/polyfills-8cf63c2824ab67885018.js"&gt;&lt;/script&gt;&lt;script async="" data-next-page="/" src="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/index.js"&gt;&lt;/script&gt;&lt;script async="" data-next-page="/_app" src="/_next/static/jtZeaivCpJlGpUtrCjPLm/pages/_app.js"&gt;&lt;/script&gt;&lt;script src="/_next/static/runtime/webpack-6d53b3649dddb4608257.js" async=""&gt;&lt;/script&gt;&lt;script src="/_next/static/chunks/commons.98c69ac543feb2781fdc.js" async=""&gt;&lt;/script&gt;&lt;script src="/_next/static/chunks/styles.ab155c0e96c83d9382fe.js" async=""&gt;&lt;/script&gt;&lt;script src="/_next/static/runtime/main-b704f9ef4bd2f47f43f0.js" async=""&gt;&lt;/script&gt;&lt;div class="ReactModalPortal"&gt;&lt;/div&gt;&lt;script async=""&gt;(function(a,b,c,d,e,f,g,h,i){a[e]||(i=a[e]=function(){(a[e].q=a[e].q||[]).push(arguments)},i.l=1*new Date,i.o=f,
+        g=b.createElement(c),h=b.getElementsByTagName(c)[0],g.async=1,g.src=d,g.setAttribute("n",e),h.parentNode.insertBefore(g,h)
+        )})(window,document,"script","https://widgets.sir.sportradar.com/549fbd108dfa14a21c701dc45cd9b73a/widgetloader","SIR", {
+            language: 'en'
+        });&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
