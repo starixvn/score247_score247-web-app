@@ -10,7 +10,6 @@ import { MatchLineups } from "../../../../apis/soccer/models";
 import PitchView from "../pitch-view";
 import StartingLineups from "../starting-lineups";
 import TeamCoach from "../coach";
-import Card from "../../../common/basic/card";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
