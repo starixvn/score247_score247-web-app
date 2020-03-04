@@ -6,7 +6,7 @@ import { EventTypes } from '../../../../../common/enums/event-type';
 import { SoccerGoalMethod } from '../../../../../common/enums/soccer-goal-method';
 
 type Props = {
-    comment: MatchCommentary
+    comment: MatchCommentary;
 };
 
 const getIcon = (comment: MatchCommentary) => {
@@ -73,7 +73,7 @@ const CommentaryRow: React.FC<Props> = (props: Props) => {
         </div>
     ) : null;
 
-    return component
+    return component;
 }
 
 export default CommentaryRow;

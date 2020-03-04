@@ -15,8 +15,8 @@ type Props = {
 } & WithTranslation;
 
 type State = {
-  comments: MatchCommentary[]
-}
+  comments: MatchCommentary[];
+};
 
 class Commentary extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -24,7 +24,7 @@ class Commentary extends React.Component<Props, State> {
 
     this.state = {
       comments: []
-    }
+    };
   }
 
   async componentDidMount() {
@@ -35,14 +35,23 @@ class Commentary extends React.Component<Props, State> {
       );
 
       if (comments && comments.length > 0) {
-        this.setState({ comments: comments.filter(comment => comment.Commentaries && comment.Commentaries.length > 0) })
+        this.setState({ comments: comments.filter(comment => comment.Commentaries && comment.Commentaries.length > 0) });
       }
     }
   }
 
   render() {
     const { t } = this.props;
-    const comments = this.state.comments.reverse();
+    const comments = this.state.comments.sort((a, b) => {
+      if (a.MatchTime == b.MatchTime) {
+        const stoppageTimeA = parseInt(a.StoppageTime || "0");
+        const stoppageTimeB = parseInt(a.StoppageTime || "0");
+
+        return stoppageTimeB - stoppageTimeA;
+      }
+
+      return b.MatchTime - a.MatchTime;
+    });
 
     const commentaryBody = (
       <div className="commantaries">

@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-    comment: string
+    comment: string;
 };
 
 const CommentaryCell: React.FC<Props> = (props: Props) => (
