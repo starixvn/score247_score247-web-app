@@ -54,7 +54,10 @@
     }
     .substitution {
         [class*="icon-arrow"] {
-            font-size: 0.8rem;
+            font-size: 1rem;
+        }
+        .icon-arrow-down1 {
+            left: 4px;
         }
     }
     .yellow-to-red {
