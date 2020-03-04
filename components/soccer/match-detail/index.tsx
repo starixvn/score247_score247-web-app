@@ -136,6 +136,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
           <MobileView
             matchInfo={this.state.matchInfo}
             matchLineUps={this.state.matchLineUps}
+            leagueTable={this.state.leagueTable}
           />
         );
       }

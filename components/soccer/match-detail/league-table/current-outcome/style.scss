@@ -1,5 +1,24 @@
-.outcome {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
+[class*="possitive"], [class*="negative"] {
+    color: #fff;
+}
+.possitive-1 {
+    background-color: #007e34;
+}
+.possitive-2 {
+    background-color: #0099cb;
+}
+.possitive-3 {
+    background-color: #2abbac;
+}
+.possitive-4 {
+    background-color: #0e47a1;
+}
+.possitive-5 {
+    background-color: #4f0ea1;
+}
+.negative-1 {
+    background-color: #e30000;
+}
+.negative-2 {
+    background-color: #e77676;
 }

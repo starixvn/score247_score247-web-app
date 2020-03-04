@@ -33,8 +33,7 @@ const getIcon = (comment: MatchCommentary) => {
 
         case EventTypes.PENALTY_MISSED.value:
             return <div className="miss-penalty">
-                <span className="icon-goal-pen" />
-                <span className="icon-miss"/>
+                <img src="/static/images/miss-penalty.svg"></img>
             </div>;
 
         case EventTypes.SUBSTITUTION.value:

@@ -20,8 +20,8 @@ export default function Outcomes(props: Props) {
 
 export function Outcome(outcome: TeamOutcome) {
   return (
-    <div>
-      <i className="outcome" style={{backgroundColor: outcomeColor[outcome.Value]}}/>
+    <div className="outcome-item">
+      <div className={outcomeColor[outcome.Value]}/>
       {outcome.FriendlyName}
     </div>
   );

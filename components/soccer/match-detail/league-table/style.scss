@@ -1,0 +1,57 @@
+.tbl-team-standings {
+    th {
+        font-size: 1.4rem;
+        color: #3A3B45;
+        .mobile & {
+            font-size: 1.2rem;
+            font-weight: normal;
+        }
+    }
+    td {
+        padding: .9rem 0;
+        &.odd {
+            background-color: #f3f3f3;
+        }
+    }
+    .col {
+        width: 12rem;
+        .mobile & {
+            width: 3.2rem;
+        }
+    }
+    .team-name {
+        text-align: left;
+        padding: 0 .4rem;
+    }
+    .col-outcome {
+        width: 4rem;
+    }
+}
+
+.note-box {
+    margin: 1.2rem;
+    background-color: #FFFEEB;
+    color: #3A3B45;
+    border-radius: 3px;
+    padding: .8rem 1.2rem 1.2rem;
+    border: 1px solid #FCF8AF;
+    .team {
+        font-weight: 500;
+        margin-bottom: 1.2rem;
+    }
+    .note {
+        font-style: italic;
+    }
+}
+
+.outcome-item {
+    display: flex;
+    align-items: center;
+    padding: .4rem 1.6rem;
+    color: #000;
+    .outcome {
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-right: .4rem;
+    }
+}

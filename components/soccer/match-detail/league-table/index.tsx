@@ -3,6 +3,7 @@ import { Props } from "./type";
 import TeamStandings from "./team-standings";
 import Notes from "./notes";
 import Outcomes from "./current-outcome";
+import "./style.scss";
 
 export default function LeagueTable(props: Props) {
   const { leagueTable } = props;

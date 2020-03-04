@@ -7,7 +7,7 @@ import { Props } from "./type";
 
 export default function TeamStandings(props: Props) {
   return (
-    <table>
+    <table className="tbl-team-standings">
       <Header />
       <tbody>
         {props.teamStandings.map(standing => (
@@ -24,15 +24,15 @@ function Header() {
     return (
       <thead>
         <tr>
-          <th>#</th>
+          <th className="col">#</th>
           <th>Team</th>
-          <th>P</th>
-          <th>Win</th>
-          <th>L</th>
-          <th>D</th>
-          <th>GF</th>
-          <th>GA</th>
-          <th>PTS</th>
+          <th className="col">P</th>
+          <th className="col">W</th>
+          <th className="col">L</th>
+          <th className="col">D</th>
+          <th className="col">GF</th>
+          <th className="col">GA</th>
+          <th className="col">PTS</th>
         </tr>
       </thead>
     );
@@ -41,15 +41,15 @@ function Header() {
   return (
     <thead>
       <tr>
-        <th>#</th>
+        <th className="col-outcome">#</th>
         <th>Team</th>
-        <th>Played</th>
-        <th>Win</th>
-        <th>Lose</th>
-        <th>Draw</th>
-        <th>Goal For</th>
-        <th>Goal Against</th>
-        <th>Points</th>
+        <th className="col">Played</th>
+        <th className="col">Win</th>
+        <th className="col">Lose</th>
+        <th className="col">Draw</th>
+        <th className="col">Goal For</th>
+        <th className="col">Goal Against</th>
+        <th className="col">Points</th>
       </tr>
     </thead>
   );
@@ -58,17 +58,17 @@ function Header() {
 export function Row(props: TeamStanding) {
   return (
     <tr>
-      <td style={{ backgroundColor: outcomeColor[props.Outcome.Value] }}>
+      <td className={outcomeColor[props.Outcome.Value]}>
         {props.Rank}
       </td>
-      <td>{props.Name}</td>
-      <td>{props.Played}</td>
+      <td className="team-name">{props.Name}</td>
+      <td className="odd">{props.Played}</td>
       <td>{props.Win}</td>
-      <td>{props.Loss}</td>
+      <td className="odd">{props.Loss}</td>
       <td>{props.Draw}</td>
-      <td>{props.GoalsFor}</td>
-      <td>{props.GoalsAgainst}</td>
-      <td>{props.Points}</td>
+      <td className="odd">{props.GoalsFor}</td>
+      <td >{props.GoalsAgainst}</td>
+      <td className="odd">{props.Points}</td>
     </tr>
   );
 }

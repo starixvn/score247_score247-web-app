@@ -17,8 +17,9 @@ export default function Notes(props: Props) {
 
 export function TeamNote(note: LeagueGroupNote) {
   return (
-    <div>
-      {note.TeamName}: {note.Comments.join(", ")}
+        <div className="note-box">
+            <div className="team">{note.TeamName}</div>
+            <div className="note">{note.Comments.join(", ")}</div>
     </div>
   );
 }
