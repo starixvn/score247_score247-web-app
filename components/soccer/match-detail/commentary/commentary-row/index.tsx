@@ -44,7 +44,7 @@ const getIcon = (comment: MatchCommentary) => {
             </div>;
         default:
             return null;
-    };
+    }
 };
 
 const getCommentContent = (comment: MatchCommentary) => {
@@ -56,7 +56,7 @@ const getCommentContent = (comment: MatchCommentary) => {
     }
 
     return content;
-}
+};
 
 const CommentaryRow: React.FC<Props> = (props: Props) => {
     const icon = getIcon(props.comment);
