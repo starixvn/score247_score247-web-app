@@ -51,7 +51,7 @@ class Commentary extends React.Component<Props, State> {
 
       return b.MatchTime - a.MatchTime;
     };
-    const comments = this.state.comments.sort(compareFunc);
+    const comments = [...this.state.comments].sort(compareFunc);
 
     const commentaryBody = (
       <div className="commantaries">

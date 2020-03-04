@@ -1,49 +1,5 @@
 jest.mock("../../../../apis/soccer/soccer-api", () => ({
-  GetMatchCommentaries: (id: string) => {
-    const commentary = {
-      Text: "comment"
-    };
-
-    const timelineType = {
-      Value: 0,
-      DisplayName: ""
-    };
-
-    const comment = {
-      TimelineId: "1",
-      TimelineType: timelineType,
-      Time: [],
-      MatchTime: 12,
-      StoppageTime: null,
-      Commentaries: [commentary],
-      GoalScorer: null,
-      IsPenaltyShootOutScored: false
-    };
-
-    return id ? [comment] : [];
-  }
-}));
-jest.mock("../../../../common/helpers/Localizer", () => ({
-  withTranslation: () => Component => {
-    Component.defaultProps = { ...Component.defaultProps, t: () => "" }
-
-    return Component;
-  }
-}));
-import * as React from "react";
-import { shallow } from "enzyme";
-import Commentary from ".";
-
-
-describe("<Commentary />", () => {
-  it("should render correctly with empty array", () => {
-    const wrapper = shallow(<Commentary matchId="1" date={new Date(0)} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it("should render correctly when commentary has elements", () => {
-    const wrapper = shallow(<Commentary matchId="" date={new Date(0)} />);
-
+  GetMatchCommentaries: async (id: string) => {
     const commentary = {
       Text: "comment"
     };
@@ -78,10 +34,29 @@ describe("<Commentary />", () => {
     comment5.MatchTime = 14;
     comment5.StoppageTime = "2";
 
-    wrapper.setState({
-      comments: [comment1, comment2, comment3, comment4, comment5]
-    })
+    return id ? [comment1, comment2, comment3, comment4, comment5] : [];
+  }
+}));
+jest.mock("../../../../common/helpers/Localizer", () => ({
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: () => "" }
 
+    return Component;
+  }
+}));
+import * as React from "react";
+import { shallow } from "enzyme";
+import Commentary from ".";
+
+
+describe("<Commentary />", () => {
+  it("should render correctly with empty array", () => {
+    const wrapper = shallow(<Commentary matchId="" date={new Date(0)} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("should render correctly when commentary has elements", () => {
+    const wrapper = shallow(<Commentary matchId="1" date={new Date(0)} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
