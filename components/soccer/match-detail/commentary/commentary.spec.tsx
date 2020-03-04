@@ -35,7 +35,7 @@ jest.mock("../../../../apis/soccer/soccer-api", () => ({
       comment5.MatchTime = 14;
       comment5.StoppageTime = "2";
 
-      return id ? [comment1, comment2, comment3, comment4, comment5] : [];
+      return id ? [comment1, comment2, comment3, comment4, comment5] : null;
     }
   }
 }));
