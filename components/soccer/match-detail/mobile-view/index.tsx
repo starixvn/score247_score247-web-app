@@ -8,21 +8,18 @@ import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { MatchLineups } from "../../../../apis/soccer/models";
 import PitchView from "../pitch-view";
-import StartingLineups from "../starting-lineups";
 import TeamCoach from "../coach";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Card from "../../../common/basic/card";
-import Commentary from '../commentary';
 import MobileSubstitution from '../mobile-substitution';
 import MobileSubstitutePlayers from '../mobile-substitute-players';
 import MobileStartingLineups from '../mobile-starting-lineups';
+import Commentary from '../commentary';
+import { Props } from "./type";
+import LeagueTable from "../league-table";
 
-type Props = {
-  matchInfo: MatchInfo;
-  matchLineUps: MatchLineups | null;
-};
 
 const Mobile: React.FC<Props> = props => {
   const { t } = useTranslation(ResourceType.SOCCER);
@@ -39,7 +36,7 @@ const Mobile: React.FC<Props> = props => {
           <Tab>{t(SoccerResourceKey.STATS)}</Tab>
           <Tab>{t(SoccerResourceKey.LINE_UPS)}</Tab>
           <Tab>{t(SoccerResourceKey.H2H)}</Tab>
-          <Tab>{t(SoccerResourceKey.TABLE)}</Tab>
+          {props.leagueTable?.GroupTables?.length && <Tab>{t(SoccerResourceKey.TABLE)}</Tab>}
         </TabList>
         <SwipeableViews index={selectedTabIndex} onChangeIndex={setTab} enableMouseEvents>
           <TabPanel>
@@ -102,9 +99,11 @@ const Mobile: React.FC<Props> = props => {
           <TabPanel>
             <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-headToHead" tabName={WidgetTab.H2H} className="h2h" />
           </TabPanel>
-          <TabPanel>
-            <SportRadarWidget matchId={props.matchInfo.Match.Id} widgetId="sr-widget-standings" tabName={WidgetTab.STANDINGS} />
-          </TabPanel>
+          {props.leagueTable?.GroupTables?.length &&  
+            <TabPanel>
+              <LeagueTable leagueTable={props.leagueTable} />
+            </TabPanel>
+          }         
         </SwipeableViews>
       </Tabs>
     </>
