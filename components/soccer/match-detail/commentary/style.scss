@@ -1,27 +1,36 @@
 .commentary {
     margin-top: 1.2rem;
+    .card-title {
+        padding: .7rem 1.2rem 1.2rem;
+        .icon-note {
+            font-size: 1.8rem;
+            position: relative;
+            top: 4px;
+        }
+    }
 }
 .commentary-row {
     display: grid;
     grid-template-columns: 6rem 5rem 1fr;
     padding: .8rem 0;
     border-bottom: 1px solid #DEE2E6;
-    align-items: center;
+    align-items: center;    
+    min-height: 4rem;  
     .mobile & {
-        grid-template-columns: 3.6rem 3rem 1fr;
-        font-size: 1.2rem;
-        [class*="icon"] {
-            font-size: 1.8rem;
-        }
-        .icon-goal-pen {
-            font-size: 2.6rem;
-        }
-        .icon-own-goal {
-            font-size: 2.4rem;
-        }
+        grid-template-columns: 4rem 3rem 1fr;
+        font-size: 1.2rem;      
     }
     &:last-child {
         border-bottom: none;
+    }
+    [class*="icon"] {
+        font-size: 1.8rem;
+    }
+    .icon-goal-pen {
+        font-size: 2.6rem;
+    }
+    .icon-own-goal {
+        font-size: 2.4rem;
     }
     .time-cell {
         text-align: right;
@@ -40,6 +49,32 @@
         .commentary-desc-cell {
             color: #FF7D00;
             font-weight: 500;
+        }
+    }
+    .substitution {
+        [class*="icon-arrow"] {
+            font-size: 0.8rem;
+        }
+    }
+    .yellow-to-red {
+        position: relative;
+        [class$="card"] {
+        }
+        .red-card {
+            position: absolute;
+            left: 11px;
+            top: -3px;
+        }
+    }
+    .miss-penalty {
+        position: relative;
+        .icon-miss {
+            font-size: 1.2rem;
+            position: absolute;
+            right: 11px;
+            .mobile & {
+                right: 0;
+            }
         }
     }
 }

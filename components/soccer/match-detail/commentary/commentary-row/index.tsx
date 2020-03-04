@@ -20,28 +20,28 @@ const getIcon = (comment: MatchCommentary) => {
             return <span className="icon-goal" />;
 
         case EventTypes.RED_CARD.value:
-            return <span className="icon-red-card" />;
+            return <span className="red-card" />;
 
         case EventTypes.YELLOW_CARD.value:
-            return <span className="icon-yellow-card" />;
+            return <span className="yellow-card" />;
 
         case EventTypes.YELLOW_RED_CARD.value:
-            return <>
-                <span className="icon-yellow-card" />
-                <span className="icon-red-card" />
-            </>;
+            return <div className="yellow-to-red">
+                <span className="yellow-card" />
+                <span className="red-card" />
+            </div>;
 
         case EventTypes.PENALTY_MISSED.value:
-            return <>
-                <span className="icon-goal" />
-                <span />
-            </>;
+            return <div className="miss-penalty">
+                <span className="icon-goal-pen" />
+                <span className="icon-miss"/>
+            </div>;
 
         case EventTypes.SUBSTITUTION.value:
-            return <>
-                <span className="icon-out" />
-                <span className="icon-in" />
-            </>;
+            return <div className="substitution">
+                <span className="icon-arrow-down1" />
+                <span className="icon-arrow-up" />
+            </div>;
         default:
             return null;
     }

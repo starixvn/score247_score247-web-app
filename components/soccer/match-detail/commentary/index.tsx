@@ -1,4 +1,4 @@
-import React from "react";
+import "./style.scss";
 import React, { useState } from "react";
 import { MatchCommentary } from '../../../../apis/soccer/models';
 import CommentaryRow from './commentary-row';
@@ -51,7 +51,7 @@ class Commentary extends React.Component<Props, State> {
     );
 
     const commentary = this.state.comments.length > 0 ? (
-      <Card title={t(SoccerResourceKey.COMMENTARY)} className="commentary">
+      <Card title={t(SoccerResourceKey.COMMENTARY)} className="commentary" titleIcon={"icon-note"}>
         {commentaryBody}
       </Card>
     ) : null;
