@@ -33,7 +33,7 @@ class Commentary extends React.Component<Props, State> {
         new Date(this.props.date)
       );
 
-      if (comments && comments.length > 0) {
+      if (comments) {
         this.setState({ comments: comments.filter(comment => comment.Commentaries && comment.Commentaries.length > 0) });
       }
     }
