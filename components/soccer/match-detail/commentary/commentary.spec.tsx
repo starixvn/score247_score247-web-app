@@ -38,6 +38,13 @@ jest.mock("../../../../apis/soccer/soccer-api", () => ({
     return matchId ? [comment1, comment2, comment3, comment4, comment5] : [];
   }
 }));
+jest.mock("../../../../common/helpers/Localizer", () => ({
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: () => "" }
+
+    return Component;
+  }
+}));
 import * as React from "react";
 import { shallow } from "enzyme";
 import Commentary from ".";
