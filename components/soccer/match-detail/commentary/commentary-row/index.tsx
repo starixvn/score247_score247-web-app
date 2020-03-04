@@ -15,7 +15,7 @@ const getIcon = (comment: MatchCommentary) => {
             if (comment.GoalScorer.Method === SoccerGoalMethod.OWN_GOAL) {
                 return <span className="icon-own-goal" />;
             } else if (comment.GoalScorer.Method === SoccerGoalMethod.PENALTY) {
-                return <span className="icon-penalty-goal" />;
+                return <span className="icon-goal-pen" />;
             }
             return <span className="icon-goal" />;
 

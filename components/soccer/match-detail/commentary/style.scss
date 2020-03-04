@@ -12,7 +12,6 @@
 .commentary-row {
     display: grid;
     grid-template-columns: 6rem 5rem 1fr;
-    padding: .8rem 0;
     border-bottom: 1px solid #DEE2E6;
     align-items: center;    
     min-height: 4rem;  
@@ -26,11 +25,8 @@
     [class*="icon"] {
         font-size: 1.8rem;
     }
-    .icon-goal-pen {
+    .icon-goal-pen, .icon-own-goal {
         font-size: 2.6rem;
-    }
-    .icon-own-goal {
-        font-size: 2.4rem;
     }
     .time-cell {
         text-align: right;
@@ -40,10 +36,15 @@
     }
     .commentary-icon-cell {
         text-align: center;
+        position: relative;
+        top: 2px;
     }
     .commentary-desc-cell {
         text-align: left;
-        padding: 0 .4rem;
+        padding: 0 1.2rem 0 .4rem;
+        .mobile & {
+            padding: 0 .4rem;
+        }
     }
     &.special-event {
         .commentary-desc-cell {
@@ -69,11 +70,12 @@
     .miss-penalty {
         position: relative;
         .icon-miss {
-            font-size: 1.2rem;
+            font-size: 1rem;
             position: absolute;
             right: 11px;
             .mobile & {
-                right: 0;
+                right: 3px;
+                top: 1px
             }
         }
     }
