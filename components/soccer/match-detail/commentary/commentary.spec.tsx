@@ -1,5 +1,27 @@
 jest.mock("../../../../apis/soccer/soccer-api", () => ({
-  GetMatchCommentaries: () => []
+  GetMatchCommentaries: (id: string) => {
+    const commentary = {
+      Text: "comment"
+    };
+
+    const timelineType = {
+      Value: 0,
+      DisplayName: ""
+    };
+
+    const comment = {
+      TimelineId: "1",
+      TimelineType: timelineType,
+      Time: [],
+      MatchTime: 12,
+      StoppageTime: null,
+      Commentaries: [commentary],
+      GoalScorer: null,
+      IsPenaltyShootOutScored: false
+    };
+
+    return id ? [comment] : [];
+  }
 }));
 jest.mock("../../../../common/helpers/Localizer", () => ({
   withTranslation: () => Component => {
@@ -15,7 +37,7 @@ import Commentary from ".";
 
 describe("<Commentary />", () => {
   it("should render correctly with empty array", () => {
-    const wrapper = shallow(<Commentary matchId="" date={new Date(0)} />);
+    const wrapper = shallow(<Commentary matchId="1" date={new Date(0)} />);
     expect(wrapper).toMatchSnapshot();
   });
 

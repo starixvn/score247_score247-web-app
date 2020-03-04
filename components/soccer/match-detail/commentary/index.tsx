@@ -41,7 +41,7 @@ class Commentary extends React.Component<Props, State> {
 
   render() {
     const { t } = this.props;
-    const comments = this.state.comments.sort((a, b) => {
+    const compareFunc = (a: MatchCommentary, b: MatchCommentary) => {
       if (a.MatchTime === b.MatchTime) {
         const stoppageTimeA = parseInt(a.StoppageTime || "0");
         const stoppageTimeB = parseInt(b.StoppageTime || "0");
@@ -50,7 +50,8 @@ class Commentary extends React.Component<Props, State> {
       }
 
       return b.MatchTime - a.MatchTime;
-    });
+    };
+    const comments = this.state.comments.sort(compareFunc);
 
     const commentaryBody = (
       <div className="commantaries">
