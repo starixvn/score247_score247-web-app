@@ -44,7 +44,7 @@ const getIcon = (comment: MatchCommentary) => {
             </div>;
         default:
             return null;
-    }
+    };
 };
 
 const getCommentContent = (comment: MatchCommentary) => {
@@ -60,8 +60,8 @@ const getCommentContent = (comment: MatchCommentary) => {
 
 const CommentaryRow: React.FC<Props> = (props: Props) => {
     const icon = getIcon(props.comment);
-    const commentContent = getCommentContent(props.comment)
-    const specialEvent = icon ? 'special-event' : ''
+    const commentContent = getCommentContent(props.comment);
+    const specialEvent = icon ? 'special-event' : '';
 
     const component = commentContent.length !== 0 ? (
         <div className={`commentary-row ${specialEvent}`}>
@@ -74,6 +74,6 @@ const CommentaryRow: React.FC<Props> = (props: Props) => {
     ) : null;
 
     return component;
-}
+};
 
 export default CommentaryRow;
