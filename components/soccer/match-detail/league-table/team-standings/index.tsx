@@ -2,10 +2,8 @@ import React from "react";
 import { TeamStanding } from "../../../../../apis/soccer/models/team-standing";
 import { useDeviceContext } from "../../../../../contexts/device-context";
 import outcomeColor from "../../../../../common/enums/outcome-color";
+import { Props } from "./type";
 
-type Props = {
-  teamStandings: TeamStanding[];
-};
 
 export default function TeamStandings(props: Props) {
   return (
@@ -57,7 +55,7 @@ function Header() {
   );
 }
 
-function Row(props: TeamStanding) {
+export function Row(props: TeamStanding) {
   return (
     <tr>
       <td style={{ backgroundColor: outcomeColor[props.Outcome.Value] }}>
