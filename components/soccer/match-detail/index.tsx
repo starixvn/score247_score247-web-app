@@ -3,7 +3,8 @@ import React from "react";
 import dynamic from "next/dynamic";
 import {
   MatchInfo,
-  MatchLineups
+  MatchLineups,
+  LeagueTable
 } from "../../../apis/soccer/models";
 import { SoccerAPI } from "../../../apis/soccer/soccer-api";
 import { SoccerSignalRClient } from "../../../apis/soccer/soccer-signalr-client";
@@ -25,6 +26,7 @@ type State = {
   matchInfo: MatchInfo | null;
   matchLineUps: MatchLineups | null;
   soccerSignalRClient?: SoccerSignalRClient;
+  leagueTable?: LeagueTable ;
 };
 
 class SoccerMatchDetail extends React.Component<Props, State> {
@@ -59,9 +61,17 @@ class SoccerMatchDetail extends React.Component<Props, State> {
       matchInfo.TimelineEvents = [];
     }
 
+    const { Match } = matchInfo;
+
+    const leagueTable = await SoccerAPI.GetLeagueTable(
+      Match.LeagueId,
+      Match.LeagueSeasonId,
+      Match.LeagueGroupName
+    );
+
     this.setupSignalClient();
 
-    this.setState({ matchInfo, matchLineUps });
+    this.setState({ matchInfo, matchLineUps, leagueTable });
   }
 
   setupSignalClient() {
@@ -133,6 +143,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
         <DesktopView
           matchInfo={this.state.matchInfo}
           matchLineUps={this.state.matchLineUps}
+          leagueTable={this.state.leagueTable}
         />
       );
     }

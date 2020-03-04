@@ -18,7 +18,7 @@ const DesktopView: React.FC<Props> = props => {
       <div className="extra-info">
         <div className="league-name">
           <img src={`${appSettings.assetsUrl}/flags/${match.CountryCode}.svg`} />
-          {match?.LeagueName}
+          {match?.LeagueGroupName}
         </div>
         <div className="kick-off-time">
           {`${t(CommonResourceKey.KICK_OFF_TIME)}: ${formatDate(

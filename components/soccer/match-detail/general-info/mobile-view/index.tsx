@@ -17,7 +17,7 @@ const MobileView: React.FC<Props> = props => {
         <div className="extra-info">
           <div className="league-name">
             <img src={`${appSettings.assetsUrl}/flags/${match.CountryCode}.svg`} />
-            {match?.LeagueName}
+            {match?.LeagueGroupName}
           </div>
           <div className="kick-off-time">
             {formatDate(new Date(match.EventDate[0]), DateTimeFormat.DAY_MONTH_ONLY)}

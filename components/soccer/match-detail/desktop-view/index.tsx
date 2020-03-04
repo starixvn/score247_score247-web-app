@@ -4,8 +4,6 @@ import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import Advertisement from "../../../common/advertisement";
 import GeneralInfo from "../general-info";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { MatchInfo } from "../../../../apis/soccer/models/match-info";
-import { MatchLineups } from "../../../../apis/soccer/models";
 import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
@@ -13,11 +11,7 @@ import Card from "../../../common/basic/card";
 import LeagueTable from "../league-table";
 import TeamLineUps from "./team-lineups";
 import Commentary from "../commentary";
-
-type Props = {
-  matchInfo: MatchInfo;
-  matchLineUps: MatchLineups | null;
-};
+import { Props } from "./type";
 
 const Desktop: React.FC<Props> = props => {
   const [selectedTabIndex, setTab] = useState(0);
@@ -70,7 +64,9 @@ const Desktop: React.FC<Props> = props => {
             <Tab>{t(SoccerResourceKey.COMMENTARY)}</Tab>
             <Tab>{t(SoccerResourceKey.STATISTICS)}</Tab>
             <Tab>{t(SoccerResourceKey.H2H)}</Tab>
-            <Tab>{t(SoccerResourceKey.TABLE)}</Tab>
+            {props.leagueTable?.GroupTables?.length && (
+              <Tab>{t(SoccerResourceKey.TABLE)}</Tab>
+            )}
           </TabList>
         </div>
         <TabPanel>
@@ -120,7 +116,12 @@ const Desktop: React.FC<Props> = props => {
             </div>
           </div>
         </TabPanel>
-        <TabPanel><Commentary matchId={props.matchInfo.Match.Id} date={props.matchInfo.Match.EventDate[0]} /></TabPanel>
+        <TabPanel>
+          <Commentary
+            matchId={props.matchInfo.Match.Id}
+            date={props.matchInfo.Match.EventDate[0]}
+          />
+        </TabPanel>
         <TabPanel>
           <SportRadarWidget
             matchId={props.matchInfo.Match.Id}
@@ -136,9 +137,11 @@ const Desktop: React.FC<Props> = props => {
             tabName={WidgetTab.H2H}
           />
         </TabPanel>
-        <TabPanel>
-          <LeagueTable match={props.matchInfo.Match} />
-        </TabPanel>
+        {props.leagueTable?.GroupTables?.length && (
+          <TabPanel>
+            <LeagueTable leagueTable={props.leagueTable} />
+          </TabPanel>
+        )}
       </Tabs>
     </>
   );
