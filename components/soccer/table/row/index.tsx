@@ -17,7 +17,7 @@ import LeagueCell from "../league-cell";
 import FavoriteCell from "../favorite-cell";
 import { DeviceContextType } from "../../../../contexts/device-context-type";
 import { MatchStatusType } from "../../../../common/enums/match-status-type";
-import Router  from "next/router";
+import Router from "next/router";
 
 type Props = {
   match: MatchSummary;

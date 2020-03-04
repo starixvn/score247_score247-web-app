@@ -27,6 +27,7 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
       title={leagueTitle}
       onClick={event => {
         event.stopPropagation();
+        // window.open(`/soccer/leagues/${match.LeagueId}`);
       }}
     >
       {league}
