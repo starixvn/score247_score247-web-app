@@ -7,4 +7,4 @@ export const SoccerAPI = {
   GetMatchLineups: async () => [],
   GetMajorLeagues: async () => [],
   GetLeagueTable: async () => null
-}
+};
