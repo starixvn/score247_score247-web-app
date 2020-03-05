@@ -18,7 +18,7 @@ const Desktop: React.FC<Props> = props => {
   const { t } = useTranslation(ResourceType.SOCCER);
   const maxNumberOfSubstitutionEvent = props.matchLineUps?.Id
     ? props.matchLineUps.Home?.SubstitutionEvents?.length -
-      props.matchLineUps.Away?.SubstitutionEvents?.length >
+        props.matchLineUps.Away?.SubstitutionEvents?.length >
       0
       ? props.matchLineUps.Home?.SubstitutionEvents?.length
       : props.matchLineUps.Away?.SubstitutionEvents?.length
@@ -26,7 +26,7 @@ const Desktop: React.FC<Props> = props => {
 
   const maxNumberOfSubstitutePlayers = props.matchLineUps?.Id
     ? props.matchLineUps.Home?.Substitutions?.length -
-      props.matchLineUps.Away?.Substitutions?.length >
+        props.matchLineUps.Away?.Substitutions?.length >
       0
       ? props.matchLineUps.Home?.Substitutions?.length
       : props.matchLineUps.Away?.Substitutions?.length
@@ -34,7 +34,7 @@ const Desktop: React.FC<Props> = props => {
 
   const isShowingSubstitutionEvents = props.matchLineUps?.Id
     ? props.matchLineUps.Home.SubstitutionEvents?.some(x => x) ||
-    props.matchLineUps.Away.SubstitutionEvents?.some(x => x)
+      props.matchLineUps.Away.SubstitutionEvents?.some(x => x)
     : false;
 
   return (
@@ -87,13 +87,13 @@ const Desktop: React.FC<Props> = props => {
               {(props.matchInfo.Venue ||
                 props.matchInfo.Referee ||
                 props.matchInfo.Attendance > 0) && (
-                  <Card
-                    title={t(SoccerResourceKey.MATCH_INFO)}
-                    titleIcon={"icon-info"}
-                  >
-                    <OtherInfo matchInfo={props.matchInfo} />
-                  </Card>
-                )}
+                <Card
+                  title={t(SoccerResourceKey.MATCH_INFO)}
+                  titleIcon={"icon-info"}
+                >
+                  <OtherInfo matchInfo={props.matchInfo} />
+                </Card>
+              )}
               <Card>
                 <SportRadarWidget
                   matchId={props.matchInfo.Match.Id}
@@ -139,7 +139,11 @@ const Desktop: React.FC<Props> = props => {
         </TabPanel>
         {props.leagueTable?.GroupTables?.length && (
           <TabPanel>
-            <LeagueTable leagueTable={props.leagueTable} />
+            <LeagueTable
+              leagueTable={props.leagueTable}
+              homeTeamId={props.matchInfo.Match.HomeTeamId}
+              awayTeamId={props.matchInfo.Match.AwayTeamId}
+            />
           </TabPanel>
         )}
       </Tabs>

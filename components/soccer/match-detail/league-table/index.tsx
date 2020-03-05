@@ -8,10 +8,14 @@ import "./style.scss";
 export default function LeagueTable(props: Props) {
   const { leagueTable } = props;
   const groupTable = leagueTable.GroupTables[0];
-  
+
   return (
     <>
-      <TeamStandings teamStandings={groupTable.TeamStandings} />
+      <TeamStandings
+        teamStandings={groupTable.TeamStandings}
+        awayTeamId={props.awayTeamId}
+        homeTeamId={props.homeTeamId}
+      />
       <Notes notes={groupTable.GroupNotes} />
       <Outcomes outcomes={groupTable.OutcomeList} />
     </>
