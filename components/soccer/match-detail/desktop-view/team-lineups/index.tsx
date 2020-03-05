@@ -1,9 +1,9 @@
 import React from "react";
 import { TeamLineups } from "../../../../../apis/soccer/models";
+import PitchView from "../../pitch-view";
+import TeamCoach from "../../coach";
 import StartingLineups from "../../starting-lineups";
 import SubstitutePlayers from "../../substitute-players";
-import TeamCoach from "../../coach";
-import PitchView from "../../pitch-view";
 import Substitution from "../../substitution";
 import { useTranslation } from "../../../../../common/helpers/Localizer";
 import { ResourceType, SoccerResourceKey } from "../../../../../common/resources";

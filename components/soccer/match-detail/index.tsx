@@ -66,7 +66,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     const leagueTable = await SoccerAPI.GetLeagueTable(
       Match.LeagueId,
       Match.LeagueSeasonId,
-      Match.LeagueGroupName
+      Match.LeagueRoundGroup || encodeURI(" ")
     );
 
     this.setupSignalClient();

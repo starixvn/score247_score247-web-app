@@ -2,7 +2,7 @@ import React from "react";
 import { Props } from "./type";
 import TeamStandings from "./team-standings";
 import Notes from "./notes";
-import TeamOutcomes from "./current-outcome";
+import Outcomes from "./current-outcome";
 
 export default function LeagueTable(props: Props) {
   const { leagueTable } = props;
@@ -12,7 +12,7 @@ export default function LeagueTable(props: Props) {
     <>
       <TeamStandings teamStandings={groupTable.TeamStandings} />
       <Notes notes={groupTable.GroupNotes} />
-      <TeamOutcomes outcomes={groupTable.OutcomeList} />
+      <Outcomes outcomes={groupTable.OutcomeList} />
     </>
   );
 }

@@ -2,12 +2,9 @@ import "./style.scss";
 import React from "react";
 import { TeamOutcome } from "../../../../../apis/soccer/models";
 import outcomeColor from "../../../../../common/enums/outcome-color";
+import { Props } from "./type";
 
-type Props = {
-  outcomes: TeamOutcome[];
-};
-
-export default function TeamOutcomes(props: Props) {
+export default function Outcomes(props: Props) {
   if (props.outcomes.length > 0) {
     return (
       <div>
@@ -21,7 +18,7 @@ export default function TeamOutcomes(props: Props) {
   return null;
 }
 
-function Outcome(outcome: TeamOutcome) {
+export function Outcome(outcome: TeamOutcome) {
   return (
     <div>
       <i className="outcome" style={{backgroundColor: outcomeColor[outcome.Value]}}/>
