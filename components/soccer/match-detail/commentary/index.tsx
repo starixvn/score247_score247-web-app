@@ -46,6 +46,13 @@ class Commentary extends React.Component<Props, State> {
         const stoppageTimeA = parseInt(a.StoppageTime || "0");
         const stoppageTimeB = parseInt(b.StoppageTime || "0");
 
+        if (stoppageTimeA === stoppageTimeB) {
+          const eventTimeA = new Date(a.Time[0]).getTime();
+          const eventTimeB = new Date(b.Time[0]).getTime();
+
+          return eventTimeB - eventTimeA;
+        }
+
         return stoppageTimeB - stoppageTimeA;
       }
 

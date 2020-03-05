@@ -4,7 +4,21 @@ import { State, Props } from "./type";
 import DateBar from "./index";
 import DatePicker from "../date-picker";
 
-jest.mock("../../common/helpers/Localizer", () => jest.requireActual("../../common/helpers/__mocks__/Localizer"));
+jest.mock("../../../common/helpers/Localizer", () => ({
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: () => "" }
+
+    return Component;
+  },
+  useTranslation: () => ({
+    t: (key: string): string => key,
+    i18n: {
+      language: "en",
+      languages: ["en", "fr"],
+      isInitialized: true
+    }
+  })
+}));
 
 describe("DateBar", () => {
   let props: Props;
@@ -35,7 +49,6 @@ describe("DateBar", () => {
   it("should call onLiveMatchChange when clicking on live match button", () => {
     const wrapper = shallow(<DateBar {...props} />);
     wrapper
-      .dive()
       .find(".live-score")
       .at(0)
       .simulate("click");
@@ -45,7 +58,6 @@ describe("DateBar", () => {
   it("should call onDateChange when clicking on date button", () => {
     const wrapper = shallow(<DateBar {...props} />);
     wrapper
-      .dive()
       .find("div.date-item")
       .at(0)
       .simulate("click");
@@ -66,7 +78,8 @@ describe("DateBar", () => {
       selectedDate: new Date(2019, 1, 1),
       t: (key: string): string => key,
       i18n: instance,
-      tReady: true
+      tReady: true,
+      isHavingLiveMatches: true
     };
 
     const wrapper = mount(<DateBar {...notSameDayProps} />);

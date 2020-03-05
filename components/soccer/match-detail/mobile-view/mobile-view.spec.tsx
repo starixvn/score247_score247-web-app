@@ -1,3 +1,4 @@
+jest.mock("../../../../app-settings");
 import React from "react";
 import { shallow } from "enzyme";
 import Mobile from "./index";

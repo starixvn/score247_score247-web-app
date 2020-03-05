@@ -1,5 +1,5 @@
-
-jest.mock("../../../../common/helpers/Localizer", () => jest.requireActual("../../../../common/helpers/__mocks__/Localizer"));
+jest.mock("../../../../app-settings");
+jest.mock("../../../../common/helpers/Localizer");
 
 import React from "react";
 import { shallow } from "enzyme";

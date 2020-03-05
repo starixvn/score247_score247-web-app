@@ -2,9 +2,13 @@ import React from "react";
 import { shallow } from "enzyme";
 import DateSwitch from "./index";
 
-jest.mock("../../common/helpers/Localizer", () =>
-  jest.requireActual("../../common/helpers/__mocks__/Localizer")
-);
+jest.mock("../../../common/helpers/Localizer", () => ({
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: () => "" }
+
+    return Component;
+  }
+}));
 
 describe("DateSwitch", () => {
   let props: any;
@@ -21,7 +25,6 @@ describe("DateSwitch", () => {
   it("should call onClick when clicking on button", () => {
     const wrapper = shallow(<DateSwitch {...props} />);
     wrapper
-      .dive()
       .find("button")
       .at(0)
       .simulate("click");

@@ -5,6 +5,8 @@ import { PeriodType } from '../../../common/enums/period-type';
 import { MatchStatusType } from '../../../common/enums/match-status-type';
 import { DeviceContext } from '../../../contexts/device-context';
 
+jest.mock("../../../app-settings");
+
 describe("<SoccerMatchDetail />", () => {
     it("should render correctly", () => {
         const props: any = {

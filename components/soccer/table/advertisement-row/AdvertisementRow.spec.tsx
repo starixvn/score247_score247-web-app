@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import { Props } from "./type";
 import AdvertisementRow from "./index";
 import * as DeviceContext from "../../../../contexts/device-context";
-import Advertisement from "../../../advertisement";
+import Advertisement from "../../../../advertisement";
 
 describe("AdvertisementRow", () => {
   let props: Props;

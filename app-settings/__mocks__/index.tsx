@@ -1,6 +1,5 @@
 import AppSettings from "../type";
 
-
 const appSettings: any = {//NOSONAR
   numberOfRowEveryAd: 5
 };

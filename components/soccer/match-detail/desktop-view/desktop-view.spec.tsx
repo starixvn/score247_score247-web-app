@@ -1,3 +1,4 @@
+jest.mock("../../../../app-settings");
 import React from "react";
 import { shallow, render } from "enzyme";
 import Desktop from "./index";
