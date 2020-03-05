@@ -66,7 +66,7 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
           </div>
           {league?.GroupTables?.length && (
             <TabPanel>
-              <LeagueTableComponent leagueTable={league} />
+              {/* <LeagueTableComponent leagueTable={league} /> */}
             </TabPanel>
           )}
           <TabPanel>
