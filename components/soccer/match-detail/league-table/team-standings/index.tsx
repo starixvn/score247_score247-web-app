@@ -11,7 +11,7 @@ export default function TeamStandings(props: Props) {
       <Header />
       <tbody>
         {props.teamStandings.map(standing => (
-          <Row key={standing.Id} {...standing} highLighted={standing.Id === props.homeTeamId || standing.Id === props.awayTeamId}/>
+          <Row key={standing.Id} {...standing} isHighLighted={standing.Id === props.homeTeamId || standing.Id === props.awayTeamId}/>
         ))}
       </tbody>
     </table>
@@ -55,9 +55,9 @@ function Header() {
   );
 }
 
-export function Row(props: TeamStanding & {highLighted: boolean}) {
+export function Row(props: TeamStanding & {isHighLighted: boolean}) {
   return (
-    <tr className={props.highLighted ? "highlight" : ""}>
+    <tr className={props.isHighLighted ? "highlight" : ""}>
       <td className={outcomeColor[props.Outcome.Value]}>
         {props.Rank}
       </td>

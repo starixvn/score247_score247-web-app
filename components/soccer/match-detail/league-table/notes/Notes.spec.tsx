@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import Notes, { TeamNote } from "./index";
 import { Props } from "./type";
+
 describe("Notes", () => {
   it("should render TeamNote if notes isnt empty", () => {
     const props: Props =  {
