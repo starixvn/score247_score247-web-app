@@ -11,7 +11,7 @@ function DatePickerWrapper(props: ReactDatePickerProps) {
   const { i18n } = useTranslation();
   
   return (
-    <div className={`datepicker-wrapper ${className}`}>
+    <div className={`date-item datepicker-wrapper ${className}`}>
       <DatePicker locale={i18n.language} {...rest} />
     </div>
   );

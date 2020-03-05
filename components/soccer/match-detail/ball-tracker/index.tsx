@@ -22,8 +22,8 @@ class BallTracker extends React.Component<Props, State> {
       ? "collapse"
       : "expand";
     const ballTrackerHeader = (
-      <div className="ball-tracker-header">
-        <span className="text">Ball Tracker</span>
+      <div className="ball-tracker-header">        
+        <span className="text"><span className="icon-tracker"></span>Ball Tracker</span>
         <span
           className={collapseExpandClass}
           onClick={() =>

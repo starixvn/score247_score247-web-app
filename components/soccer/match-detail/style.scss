@@ -49,6 +49,7 @@
     max-width: 100%;
     text-align: center;
     padding: 1rem 0 1.1rem;
+    position: relative;
     &:focus {
       box-shadow: none;
       outline: none;
@@ -56,23 +57,40 @@
         content: unset;
       }
     }
+    &:before {
+      content: '';
+      height: .2rem;
+      width: 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: #E70C12;
+      transition: width .1s ease-out;
+    }
+    &:hover, &.react-tabs__tab--selected {
+      color: #ff7d00;
+      &:before {
+        width: 100%;
+      }
+    }
 
     .mobile & {
       font-size: 1.2rem;
       color: #000;
       padding: 0.8rem 0 0.2rem;
+      &:before {
+        background-color: #ff7d00;
+      }
     }
   }
 
   .react-tabs__tab--selected {
     border-radius: 0;
     background-color: #122344;
-    border-bottom: 1px solid #e70c12;
+    color: #ff7d00;
 
     .mobile & {
       background-color: #f8f9fc;
-      color: #ff7d00;
-      border-bottom: 2px solid #ff7d00;
       font-weight: bold;
     }
   }

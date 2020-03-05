@@ -108,9 +108,13 @@
 
   .reference-info {
     position: absolute;
+    display: flex;
     .mobile & {
       position: unset;
     }
+    .icon-penalty, .icon-arrow-right {
+      font-size: 1.6rem;
+    }    
   }
 
   .home-name,

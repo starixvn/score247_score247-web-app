@@ -56,49 +56,48 @@
   align-items: center;
   font-size: 1.4rem;
   height: 6.2rem;
-  .datepicker-wrapper, .date-item {
+  .date-item {
     flex-grow: 1;
     flex-basis: 0;
     max-width: 100%;
-    text-align: center;
-    vertical-align: middle;
-    padding: 1.4rem 1.8rem;
     cursor: pointer;
     position: relative;
-  }
-  .date-item
-    {       
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #6E707A;
+    &:before {
+      content: '';
+      height: .2rem;
+      background-color: #FF7D00;
+      width: 0;
+      position: absolute;
+      bottom: -1px;
+      left: 0;        
+      transition: width .1s ease-out;
+    }
+
+    &.active, &:hover {
+      color: #FF7D00;
+      font-weight: bold;
       &:before {
-        content: '';
-        height: .2rem;
-        background-color: #FF7D00;
-        width: 0;
-        position: absolute;
-        bottom: -1px;
-        left: 0;        
-        transition: width .1s ease-out;
-      }
-
-      &.active, &:hover {
-        color: #FF7D00;
-        font-weight: bold;
-        &:before {
-          width: 100%;
-        }
-      }
-      
-
-      .mobile & {        
-        font-size: 0.9rem;
-        padding: 0 1rem;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        width: 100%;
       }
     }
+    
+
+    .mobile & {        
+      font-size: 0.9rem;
+      padding: 0 1rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
   .date-item.live-score {
-    padding: 2.1rem 1.8rem 1.8rem;
     .mobile & {
       padding: 1.4rem 1rem 1.2rem;
     }
@@ -160,14 +159,11 @@
   }
 
   .datepicker-wrapper {
-    padding: 0 1rem;
     cursor: pointer;
 
-    &.active {
-      border-bottom: 0;
-
+    &.active, &:hover {
       .icon-calendar::before {
-        color: #3a3b45;
+        color: #FF7D00;
       }
     }
 
@@ -175,6 +171,9 @@
       font-size: 2rem;
       display: inline-block;
       vertical-align: middle;
+      &:before {
+        color: #9193A1;
+      }
     }
   }
 
