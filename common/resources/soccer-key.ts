@@ -17,4 +17,5 @@ export class SoccerResourceKey {
     public static readonly REFEREE = "referee";
     public static readonly VENUE = "venue";
     public static readonly SPECTATORS = "spectators";
+    public static readonly FIXTURE = "fixture";
 }

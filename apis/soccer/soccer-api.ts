@@ -55,8 +55,8 @@ export const SoccerAPI = {
     return response.data;
   },
 
-  GetLeagueTable: async (leagueId: string, seasondId: string, groupName: string, language = "en-US"): Promise<LeagueTable> => {
-    const response = await API.get(`${appSettings.soccerAPIBaseUrl}/${language}/leagues/${leagueId}/seasons/${seasondId}/table/${groupName}`);
+  GetLeagueTable: async (leagueId: string | string[], seasonId: string, groupName: string, language = "en-US"): Promise<LeagueTable> => {
+    const response = await API.get(`${appSettings.soccerAPIBaseUrl}/${language}/leagues/${leagueId}/seasons/${seasonId}/table/${groupName}`);
 
     return response.data;
   }

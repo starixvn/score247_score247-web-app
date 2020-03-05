@@ -1,6 +1,8 @@
 import "./league-cell.scss";
 import React from "react";
 import { MatchSummary } from "../../../../apis/soccer/models";
+import Router from "next/router";
+import { useDeviceContext } from '../../../../contexts/device-context';
 
 const buildLeagueAbbreviation = (leagueName: string): string => {
   return leagueName
@@ -19,15 +21,21 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
   const leagueTitle = match.IsInternationalLeague
     ? match.LeagueName
     : `${match.CountryName} ${match.LeagueName}`;
+  const { isMobile } = useDeviceContext();
+  const groupName = match.LeagueRoundGroup ? `&groupName=${match.LeagueRoundGroup}` : ``;
 
   return (
     <td
       rowSpan={rowSpan}
       className={`league ${match.LeagueRegion}`}
       title={leagueTitle}
-      onClick={event => {
-        event.stopPropagation();
-        // window.open(`/soccer/leagues/${match.LeagueId}`);
+      onClick={() => {
+        if (isMobile) {
+          Router.push({ pathname: "/soccer/leagues/details", query: { id: match.LeagueId, seasonId: match.LeagueSeasonId, groupName: match.LeagueRoundGroup } });
+        }
+        else {
+          window.open(`/soccer/leagues/details?id=${match.LeagueId}&seasonId=${match.LeagueSeasonId}${groupName}`);
+        }
       }}
     >
       {league}

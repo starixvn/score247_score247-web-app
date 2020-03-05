@@ -26,7 +26,7 @@ type State = {
   matchInfo: MatchInfo | null;
   matchLineUps: MatchLineups | null;
   soccerSignalRClient?: SoccerSignalRClient;
-  leagueTable?: LeagueTable ;
+  leagueTable?: LeagueTable;
 };
 
 class SoccerMatchDetail extends React.Component<Props, State> {
