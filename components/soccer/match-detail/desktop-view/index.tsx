@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import Advertisement from "../../../common/advertisement";
-import GeneralInfo from "../general-info";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import GeneralInfo from "../general-info";
 import OtherInfo from "../other-info";
+import TeamLineUps from "./team-lineups";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Card from "../../../common/basic/card";
 import LeagueTable from "../league-table";
-import TeamLineUps from "./team-lineups";
 import Commentary from "../commentary";
 import { Props } from "./type";
 

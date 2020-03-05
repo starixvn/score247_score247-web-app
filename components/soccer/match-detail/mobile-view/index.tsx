@@ -2,24 +2,21 @@ import "./style.scss";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
-import GeneralInfo from "../general-info";
 import SwipeableViews from "react-swipeable-views";
-import { MatchInfo } from "../../../../apis/soccer/models/match-info";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { MatchLineups } from "../../../../apis/soccer/models";
+import GeneralInfo from "../general-info";
+import OtherInfo from "../other-info";
 import PitchView from "../pitch-view";
 import TeamCoach from "../coach";
-import OtherInfo from "../other-info";
 import BallTracker from "../ball-tracker";
 import SportRadarWidget, { WidgetTab } from "../sportradar-widget";
 import Card from "../../../common/basic/card";
 import MobileSubstitution from '../mobile-substitution';
 import MobileSubstitutePlayers from '../mobile-substitute-players';
 import MobileStartingLineups from '../mobile-starting-lineups';
+import LeagueTable from "../league-table";
 import Commentary from '../commentary';
 import { Props } from "./type";
-import LeagueTable from "../league-table";
-
 
 const Mobile: React.FC<Props> = props => {
   const { t } = useTranslation(ResourceType.SOCCER);
