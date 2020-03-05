@@ -14,14 +14,18 @@ const BuildEventTime = (substitutionEvent: TimelineEvent) =>
 
 const SubstitutionRow: React.FC<Props> = (props: Props) => {
     const eventStatisticFormatted = { [EventTypes.SUBSTITUTION.value]: 1 };
-    props.substitutionEvent.PlayerIn.EventStatisticFormatted = props.substitutionEvent.PlayerIn.EventStatisticFormatted ?? eventStatisticFormatted;
-    props.substitutionEvent.PlayerOut.EventStatisticFormatted = props.substitutionEvent.PlayerOut.EventStatisticFormatted ?? eventStatisticFormatted;
+    if (props.substitutionEvent.PlayerIn) {
+        props.substitutionEvent.PlayerIn.EventStatisticFormatted = props.substitutionEvent.PlayerIn.EventStatisticFormatted ?? eventStatisticFormatted;
+    }
+    if (props.substitutionEvent.PlayerOut) {
+        props.substitutionEvent.PlayerOut.EventStatisticFormatted = props.substitutionEvent.PlayerOut.EventStatisticFormatted ?? eventStatisticFormatted;
+    }
 
     return (
         <div className="substitution-item">
             <div className="time">{BuildEventTime(props.substitutionEvent)}</div>
-                {PlayerRow({ player: props.substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: true })}         
-                {PlayerRow({ player: props.substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: false })}
+            {props.substitutionEvent.PlayerOut && PlayerRow({ player: props.substitutionEvent.PlayerOut, displayScore: false, isMainPlayer: true })}
+            {props.substitutionEvent.PlayerIn && PlayerRow({ player: props.substitutionEvent.PlayerIn, displayScore: false, isMainPlayer: false })}
         </div >);
 };
 
