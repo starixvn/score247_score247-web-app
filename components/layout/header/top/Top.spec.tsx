@@ -22,6 +22,9 @@ jest.mock("../../../../common/helpers/Localizer", () => ({
   })
 }));
 jest.mock("next/router", () => ({ push: jest.fn(), useRouter: jest.fn() }));
+jest.mock("../../../../contexts/device-context", () => ({
+  useDeviceContext: () => ({ isMobile: true })
+}))
 
 describe("<Top/>", () => {
   it("should render correctly", () => {
@@ -30,13 +33,8 @@ describe("<Top/>", () => {
   });
 
   it("should redirect when select sport in dropdown", () => {
-    const wrapper = mount(
-      <DeviceContextProvider value={{ isMobile: true }}>
-          <Top sport={SportsEnum.SOCCER} />
-      </DeviceContextProvider>
-    );
+    const wrapper = shallow(<Top sport={SportsEnum.SOCCER} />);
 
-    console.log(wrapper)
     wrapper.find(".sport-dropdown").simulate("change", {
       value: "/basketball",
       label: SportsEnum.BASKETBALL.toUpperCase()
