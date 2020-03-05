@@ -63,6 +63,13 @@
     .note {
         font-style: italic;
     }
+
+    .note-item {
+        &:last-child {
+            margin-bottom: unset;
+        }
+        margin-bottom: 1.2rem;
+    }
 }
 
 .outcome-item {
