@@ -16,6 +16,7 @@
   height: 4rem;
   border-bottom: 1px solid #dee2e6;
   align-items: center;
+  padding: 0 1.2rem;
 
   .kick-off-time {
     font-size: 1.4rem;
@@ -103,6 +104,9 @@
     .icon-penalty, .icon-arrow-right {
       font-size: 1.6rem;
     } 
+    [class$="card"] {
+      margin: 0;
+    }
     .mobile & {
       position: unset;
       [class$="card"] {
