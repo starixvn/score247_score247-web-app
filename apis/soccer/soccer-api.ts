@@ -5,8 +5,6 @@ import { covertToUTC } from "../../common/helpers/date-time-helper";
 import API from "../../common/helpers/api-helper";
 import { MatchStatistic } from "./models/match-statistic";
 import { LeagueTable } from "./models/league-table";
-import { SoccerMatch } from "./models/soccer-match";
-
 
 export const SoccerAPI = {
   GetMatchesByDate: async (date: Date, language = "en-US"): Promise<MatchSummary[]> => {
@@ -62,7 +60,7 @@ export const SoccerAPI = {
     return response.data;
   },
 
-  GetFixtures: async (leagueId: string | string[], seasonId: string, groupName: string, language = "en-US"): Promise<SoccerMatch[]> => {
+  GetFixtures: async (leagueId: string | string[], seasonId: string, groupName: string, language = "en-US"): Promise<MatchSummary[]> => {
     const response = await API.get(`${appSettings.soccerAPIBaseUrl}/${language}/leagues/${leagueId}/seasons/${seasonId}/matches/${groupName}`);
 
     return response.data;

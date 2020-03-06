@@ -8,22 +8,22 @@ import { CommonResourceKey, ResourceType, SoccerResourceKey } from "../../../com
 import { SoccerAPI } from '../../../apis/soccer/soccer-api';
 import { Tabs, TabList, Tab, TabPanel, resetIdCounter } from 'react-tabs';
 import LeagueTableComponent from '../../../components/soccer/match-detail/league-table';
-import { LeagueTable } from '../../../apis/soccer/models';
+import { LeagueTable, MatchSummary } from '../../../apis/soccer/models';
 import LeagueInfo from '../../../components/soccer/league-info';
-import { SoccerMatch } from "../../../apis/soccer/models/soccer-match";
 import { MatchStatusHelper } from "../../../common/enums/match-status-type";
 import { SoccerBanner } from '../../../components/soccer/banner';
+import FixtureTable from "../../../components/soccer/table/fixture-table";
 
 type Props = {
   league?: LeagueTable;
   countryCode: string | string[];
   leagueGroupName: string | string[];
-  fixtures: SoccerMatch[];
-  results: SoccerMatch[];
+  fixtures: MatchSummary[];
+  results: MatchSummary[];
 };
 
 const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
-  const { t, league } = props;
+  const { t, league, fixtures, results } = props;
   const [selectedTabIndex, setTab] = useState(0);
   const isShowTableTab = league?.GroupTables?.length ? league?.GroupTables?.length > 0 : false;
   resetIdCounter();
@@ -57,7 +57,7 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
             </TabPanel>
           )}
           <TabPanel>
-            FIXTURES
+            <FixtureTable fixtures={fixtures} results={results}/>
         </TabPanel>
         </Tabs>
       </>
@@ -70,12 +70,12 @@ SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
   const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), roundGroup?.toString());
   const allMatches = await SoccerAPI.GetFixtures(id.toString(), seasonId.toString(), leagueGroupName?.toString());
 
-  const isFixture = (match: SoccerMatch) =>
+  const isFixture = (match: MatchSummary) =>
     MatchStatusHelper.isLiveMatch(match.MatchStatus) ||
     MatchStatusHelper.isNotStarted(match.MatchStatus) ||
     new Date(match.EventDate[0]).getTime() > Date.now();
 
-  const compareTwoSoccerMatchByEventTime = (a: SoccerMatch, b: SoccerMatch) =>
+  const compareTwoSoccerMatchByEventTime = (a: MatchSummary, b: MatchSummary) =>
     new Date(a.EventDate[0]).getTime() - new Date(b.EventDate[0]).getTime();
 
   const orderedMatches = [...allMatches].sort(compareTwoSoccerMatchByEventTime);
@@ -87,8 +87,8 @@ SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
     league,
     leagueGroupName,
     countryCode,
-    fixtures,
-    results
+    fixtures: fixtures,
+    results: results
   };
 };
 
