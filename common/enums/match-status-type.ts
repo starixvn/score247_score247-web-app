@@ -99,6 +99,10 @@ export class MatchStatusHelper {
   static isLiveMatch(matchStatus?: Enumeration): boolean {
     return MatchStatusType.LIVE.value === matchStatus?.Value;
   }
+
+  static isNotStarted(matchStatus?: Enumeration): boolean {
+    return MatchStatusType.NOT_STARTED.value === matchStatus?.Value;
+  }
 }
 
 export const MatchStatusTypeDic: MatchStatusKeyNumberValue = {};

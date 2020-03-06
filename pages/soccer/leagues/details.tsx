@@ -12,6 +12,7 @@ import { LeagueTable } from '../../../apis/soccer/models';
 import Advertisement from '../../../components/common/advertisement';
 import LeagueInfo from '../../../components/soccer/league-info';
 import { SoccerMatch } from "../../../apis/soccer/models/soccer-match";
+import { MatchStatusHelper } from "../../../common/enums/match-status-type";
 
 type Props = {
   leagueId: string | string[];
@@ -19,6 +20,7 @@ type Props = {
   groupName: string | string[];
   league?: LeagueTable;
   fixtures: SoccerMatch[];
+  results: SoccerMatch[];
 };
 
 const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
@@ -84,10 +86,21 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
 };
 
 SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
-  console.log(query);
   const { id, seasonId, groupName, roundGroup } = query;
   const league = await SoccerAPI.GetLeagueTable(id as string, seasonId as string, roundGroup as string);
-  const fixtures = await SoccerAPI.GetFixtures(id as string, seasonId as string, groupName as string);
+  const allMatches = await SoccerAPI.GetFixtures(id as string, seasonId as string, groupName as string);
+
+  const isFixture = (match: SoccerMatch) =>
+    MatchStatusHelper.isLiveMatch(match.MatchStatus) ||
+    MatchStatusHelper.isNotStarted(match.MatchStatus) ||
+    new Date(match.EventDate[0]).getTime() > Date.now();
+
+  const compareTwoSoccerMatchByEventTime = (a: SoccerMatch, b: SoccerMatch) =>
+    new Date(a.EventDate[0]).getTime() - new Date(b.EventDate[0]).getTime();
+
+  const orderedMatches = [...allMatches].sort(compareTwoSoccerMatchByEventTime);
+  const fixtures = orderedMatches.filter(isFixture);
+  const results = orderedMatches.filter((match) => !isFixture(match));
 
   return {
     leagueId: id,
@@ -95,7 +108,8 @@ SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
     groupName: groupName,
     namespacesRequired: [ResourceType.SOCCER],
     league: league,
-    fixtures
+    fixtures,
+    results
   };
 };
 
