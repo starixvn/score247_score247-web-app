@@ -11,13 +11,14 @@ import LeagueTableComponent from '../../../components/soccer/match-detail/league
 import { LeagueTable } from '../../../apis/soccer/models';
 import Advertisement from '../../../components/common/advertisement';
 import LeagueInfo from '../../../components/soccer/league-info';
-import { SoccerBanner } from '../../../components/soccer/banner';
+import { SoccerMatch } from "../../../apis/soccer/models/soccer-match";
 
 type Props = {
   leagueId: string | string[];
   seasonId: string | string[];
   groupName: string | string[];
   league?: LeagueTable;
+  fixtures: SoccerMatch[];
 };
 
 const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
@@ -34,8 +35,28 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
       ]}
     >
       <SoccerBanner />
-      <div className="league-info">
-        <LeagueInfo leagueName={league?.League?.Name} countryCode={league?.League?.CountryCode} />
+      <div className="banner-top">
+        <div className="banner-left">
+          <Advertisement
+            imageSrc="/static/images/ads-banner-detail-2.png"
+            href="#"
+          />
+        </div>
+        <div className="banner-center">
+          <Advertisement imageSrc="/static/images/ads-banner-1.png" href="#" />
+        </div>
+        <div className="banner-right">
+          <Advertisement
+            imageSrc="/static/images/ads-banner-detail-3.png"
+            href="#"
+          />
+        </div>
+      </div>
+      <div className="extra-info">
+        <div className="league-name">
+          <img src={`${appSettings.assetsUrl}/flags/${league?.League?.CountryCode}.svg`} />
+          {league?.League?.Name}
+        </div>
         <span className="icon-menu-favorites"></span>
       </div>
       <>
@@ -63,14 +84,18 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
 };
 
 SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
-  const { id, seasonId, groupName } = query;
-  const league = await SoccerAPI.GetLeagueTable(id as string, seasonId as string, groupName as string);
+  console.log(query);
+  const { id, seasonId, groupName, roundGroup } = query;
+  const league = await SoccerAPI.GetLeagueTable(id as string, seasonId as string, roundGroup as string);
+  const fixtures = await SoccerAPI.GetFixtures(id as string, seasonId as string, groupName as string);
+
   return {
     leagueId: id,
     seasonId: seasonId,
     groupName: groupName,
     namespacesRequired: [ResourceType.SOCCER],
-    league: league
+    league: league,
+    fixtures
   };
 };
 
