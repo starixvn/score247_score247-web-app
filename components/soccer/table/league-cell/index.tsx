@@ -22,7 +22,7 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
     ? match.LeagueName
     : `${match.CountryName} ${match.LeagueName}`;
   const { isMobile } = useDeviceContext();
-  const groupName = match.LeagueRoundGroup ? `&groupName=${match.LeagueRoundGroup}` : ``;
+  const roundGroup = match.LeagueRoundGroup ? `&groupName=${match.LeagueRoundGroup}` : ``;
   const leagueId = `id=${match.LeagueId}`;
   const seasonId = `&seasonId=${match.LeagueSeasonId}`;
   const leagueGroupName = `&leagueGroupName=${match.LeagueGroupName}`;
@@ -40,14 +40,14 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
             query: {
               id: match.LeagueId,
               seasonId: match.LeagueSeasonId,
-              groupName: match.LeagueRoundGroup,
+              roundGroup: match.LeagueRoundGroup,
               leagueGroupName: match.LeagueGroupName,
               countryCode: match.CountryCode
             }
           });
         }
         else {
-          window.open(`/soccer/leagues/details?${leagueId}${seasonId}${groupName}${leagueGroupName}${countryCode}`);
+          window.open(`/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`);
         }
       }}
     >

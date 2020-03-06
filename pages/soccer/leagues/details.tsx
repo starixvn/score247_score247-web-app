@@ -15,9 +15,6 @@ import { MatchStatusHelper } from "../../../common/enums/match-status-type";
 import { SoccerBanner } from '../../../components/soccer/banner';
 
 type Props = {
-  leagueId: string | string[];
-  seasonId: string | string[];
-  groupName: string | string[];
   league?: LeagueTable;
   countryCode: string | string[];
   leagueGroupName: string | string[];
@@ -69,9 +66,9 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
 };
 
 SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
-  const { id, seasonId, groupName, leagueGroupName, countryCode } = query;
-  const league = await SoccerAPI.GetLeagueTable(id as string, seasonId as string, roundGroup as string);
-  const allMatches = await SoccerAPI.GetFixtures(id as string, seasonId as string, groupName as string);
+  const { id, seasonId, roundGroup, leagueGroupName, countryCode } = query;
+  const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), roundGroup?.toString());
+  const allMatches = await SoccerAPI.GetFixtures(id.toString(), seasonId.toString(), leagueGroupName?.toString());
 
   const isFixture = (match: SoccerMatch) =>
     MatchStatusHelper.isLiveMatch(match.MatchStatus) ||
@@ -86,9 +83,6 @@ SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
   const results = orderedMatches.filter((match) => !isFixture(match));
 
   return {
-    leagueId: id,
-    seasonId,
-    groupName,
     namespacesRequired: [ResourceType.SOCCER],
     league,
     leagueGroupName,
