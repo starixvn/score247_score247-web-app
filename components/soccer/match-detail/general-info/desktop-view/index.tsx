@@ -7,9 +7,8 @@ import Score from "../score";
 import { useTranslation } from "../../../../../common/helpers/Localizer";
 import { formatDate } from "../../../../../common/helpers/date-time-helper";
 import { CommonResourceKey } from "../../../../../common/resources";
-import appSettings from "../../../../../app-settings";
 import AggregateScore from "../aggregate-score";
-import LeagueInfo from '../league-info';
+import LeagueInfo from '../../../league-info';
 
 const DesktopView: React.FC<Props> = props => {
   const { match } = props;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
-import Advertisement from "../../../common/advertisement";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import GeneralInfo from "../general-info";
 import OtherInfo from "../other-info";
@@ -12,13 +11,14 @@ import Card from "../../../common/basic/card";
 import LeagueTable from "../league-table";
 import Commentary from "../commentary";
 import { Props } from "./type";
+import { SoccerBanner } from '../../banner';
 
 const Desktop: React.FC<Props> = props => {
   const [selectedTabIndex, setTab] = useState(0);
   const { t } = useTranslation(ResourceType.SOCCER);
   const maxNumberOfSubstitutionEvent = props.matchLineUps?.Id
     ? props.matchLineUps.Home?.SubstitutionEvents?.length -
-        props.matchLineUps.Away?.SubstitutionEvents?.length >
+      props.matchLineUps.Away?.SubstitutionEvents?.length >
       0
       ? props.matchLineUps.Home?.SubstitutionEvents?.length
       : props.matchLineUps.Away?.SubstitutionEvents?.length
@@ -26,7 +26,7 @@ const Desktop: React.FC<Props> = props => {
 
   const maxNumberOfSubstitutePlayers = props.matchLineUps?.Id
     ? props.matchLineUps.Home?.Substitutions?.length -
-        props.matchLineUps.Away?.Substitutions?.length >
+      props.matchLineUps.Away?.Substitutions?.length >
       0
       ? props.matchLineUps.Home?.Substitutions?.length
       : props.matchLineUps.Away?.Substitutions?.length
@@ -34,28 +34,12 @@ const Desktop: React.FC<Props> = props => {
 
   const isShowingSubstitutionEvents = props.matchLineUps?.Id
     ? props.matchLineUps.Home.SubstitutionEvents?.some(x => x) ||
-      props.matchLineUps.Away.SubstitutionEvents?.some(x => x)
+    props.matchLineUps.Away.SubstitutionEvents?.some(x => x)
     : false;
 
   return (
     <>
-      <div className="banner-top">
-        <div className="banner-left">
-          <Advertisement
-            imageSrc="/static/images/ads-banner-detail-2.png"
-            href="#"
-          />
-        </div>
-        <div className="banner-center">
-          <Advertisement imageSrc="/static/images/ads-banner-1.png" href="#" />
-        </div>
-        <div className="banner-right">
-          <Advertisement
-            imageSrc="/static/images/ads-banner-detail-3.png"
-            href="#"
-          />
-        </div>
-      </div>
+      <SoccerBanner />
       <GeneralInfo match={props.matchInfo.Match} />
       <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
         <div>
@@ -87,13 +71,13 @@ const Desktop: React.FC<Props> = props => {
               {(props.matchInfo.Venue ||
                 props.matchInfo.Referee ||
                 props.matchInfo.Attendance > 0) && (
-                <Card
-                  title={t(SoccerResourceKey.MATCH_INFO)}
-                  titleIcon={"icon-info"}
-                >
-                  <OtherInfo matchInfo={props.matchInfo} />
-                </Card>
-              )}
+                  <Card
+                    title={t(SoccerResourceKey.MATCH_INFO)}
+                    titleIcon={"icon-info"}
+                  >
+                    <OtherInfo matchInfo={props.matchInfo} />
+                  </Card>
+                )}
               <Card>
                 <SportRadarWidget
                   matchId={props.matchInfo.Match.Id}

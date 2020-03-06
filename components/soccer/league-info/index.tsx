@@ -1,6 +1,6 @@
 import "./styles.scss";
 import React from "react";
-import appSettings from '../../../../../app-settings';
+import appSettings from '../../../app-settings';
 
 type Props = {
     leagueName?: string;

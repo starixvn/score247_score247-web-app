@@ -10,7 +10,8 @@ import { Tabs, TabList, Tab, TabPanel, resetIdCounter } from 'react-tabs';
 import LeagueTableComponent from '../../../components/soccer/match-detail/league-table';
 import { LeagueTable } from '../../../apis/soccer/models';
 import Advertisement from '../../../components/common/advertisement';
-import LeagueInfo from '../../../components/soccer/match-detail/general-info/league-info';
+import LeagueInfo from '../../../components/soccer/league-info';
+import { SoccerBanner } from '../../../components/soccer/banner';
 
 type Props = {
   leagueId: string | string[];
@@ -32,23 +33,7 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
         t(SoccerResourceKey.MATCH_INFO, { ns: ResourceType.SOCCER })
       ]}
     >
-      <div className="banner-top">
-        <div className="banner-left">
-          <Advertisement
-            imageSrc="/static/images/ads-banner-detail-2.png"
-            href="#"
-          />
-        </div>
-        <div className="banner-center">
-          <Advertisement imageSrc="/static/images/ads-banner-1.png" href="#" />
-        </div>
-        <div className="banner-right">
-          <Advertisement
-            imageSrc="/static/images/ads-banner-detail-3.png"
-            href="#"
-          />
-        </div>
-      </div>
+      <SoccerBanner />
       <div className="league-info">
         <LeagueInfo leagueName={league?.League?.Name} countryCode={league?.League?.CountryCode} />
         <span className="icon-menu-favorites"></span>

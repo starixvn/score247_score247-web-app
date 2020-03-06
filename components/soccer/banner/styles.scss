@@ -1,0 +1,17 @@
+.banner-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+
+  [class*="banner"] {
+    padding: 0 0.4rem;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
