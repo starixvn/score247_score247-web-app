@@ -21,11 +21,10 @@
   .kick-off-time {
     font-size: 1.4rem;
     color: #000;
+    .mobile & {
+      font-size: 1.2rem;
+    }
   }
-}
-
-.mobile .extra-info .kick-off-time {
-  text-transform: uppercase;
 }
 
 .main-info {

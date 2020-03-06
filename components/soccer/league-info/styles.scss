@@ -1,18 +1,25 @@
-.league-name {
-  font-size: 1.4rem;
-  color: #000;
-}
 
 .league-name {
   text-transform: uppercase;
   font-weight: bold;
   display: flex;
   align-items: center;
+  font-size: 1.4rem;
+  color: #000;
+  .mobile & {
+    text-transform: unset;
+    font-size: 1.2rem;
+    font-weight: normal;
+  }
 
   img {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    width: 3rem;
-    height: 2rem;
+    width: 2.4rem;
+    height: 1.8rem;
     margin-right: 0.8rem;
+    .mobile & {
+      width: 1.8rem;
+      height: 1.3rem;
+    }
   }
 }
