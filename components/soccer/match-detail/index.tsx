@@ -41,6 +41,8 @@ class SoccerMatchDetail extends React.Component<Props, State> {
     EventTypes.MATCH_STARTED.value
   ];
 
+  delayTime = 5000;
+
   constructor(props: Props) {
     super(props);
 
@@ -122,7 +124,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
             new Date(matchInfo.Match.EventDate[0])
           );
           this.setState({ matchInfo, matchLineUps });
-        }, 5000); //NOSONAR
+        }, this.delayTime);
       } else {
         this.setState({ matchInfo });
       }
