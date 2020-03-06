@@ -6,7 +6,7 @@ import withLoadingPage from "../../../hoc/with-loading-page";
 import { CommonResourceKey, ResourceType, SoccerResourceKey } from "../../../common/resources";
 import appSettings from '../../../app-settings';
 import { SoccerAPI } from '../../../apis/soccer/soccer-api';
-import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
+import { Tabs, TabList, Tab, TabPanel, resetIdCounter } from 'react-tabs';
 import LeagueTableComponent from '../../../components/soccer/match-detail/league-table';
 import { LeagueTable } from '../../../apis/soccer/models';
 import Advertisement from '../../../components/common/advertisement';
@@ -21,6 +21,7 @@ type Props = {
 const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
   const { t, league } = props;
   const [selectedTabIndex, setTab] = useState(0);
+  resetIdCounter();
 
   return (
     <Layout
@@ -66,7 +67,7 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
           </div>
           {league?.GroupTables?.length && (
             <TabPanel>
-              {/* <LeagueTableComponent leagueTable={league} /> */}
+              <LeagueTableComponent leagueTable={league} homeTeamId="" awayTeamId="" />
             </TabPanel>
           )}
           <TabPanel>
