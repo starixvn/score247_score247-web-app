@@ -13,6 +13,7 @@ import Advertisement from '../../../components/common/advertisement';
 import LeagueInfo from '../../../components/soccer/league-info';
 import { SoccerMatch } from "../../../apis/soccer/models/soccer-match";
 import { MatchStatusHelper } from "../../../common/enums/match-status-type";
+import { SoccerBanner } from '../../../components/soccer/banner';
 
 type Props = {
   leagueId: string | string[];
@@ -37,28 +38,8 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
       ]}
     >
       <SoccerBanner />
-      <div className="banner-top">
-        <div className="banner-left">
-          <Advertisement
-            imageSrc="/static/images/ads-banner-detail-2.png"
-            href="#"
-          />
-        </div>
-        <div className="banner-center">
-          <Advertisement imageSrc="/static/images/ads-banner-1.png" href="#" />
-        </div>
-        <div className="banner-right">
-          <Advertisement
-            imageSrc="/static/images/ads-banner-detail-3.png"
-            href="#"
-          />
-        </div>
-      </div>
-      <div className="extra-info">
-        <div className="league-name">
-          <img src={`${appSettings.assetsUrl}/flags/${league?.League?.CountryCode}.svg`} />
-          {league?.League?.Name}
-        </div>
+      <div className="league-info">
+        <LeagueInfo leagueName={league?.League?.Name} countryCode={league?.League?.CountryCode} />
         <span className="icon-menu-favorites"></span>
       </div>
       <>
