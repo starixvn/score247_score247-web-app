@@ -1,4 +1,5 @@
 import "./styles.scss";
+import "../styles.scss";
 import React, { useState } from "react";
 import Layout from "../../../components/layout";
 import { LocalizedPage } from "../../../common/helpers/Localizer";
@@ -18,6 +19,8 @@ type Props = {
   seasonId: string | string[];
   groupName: string | string[];
   league?: LeagueTable;
+  countryCode: string | string[];
+  leagueGroupName: string | string[];
   fixtures: SoccerMatch[];
   results: SoccerMatch[];
 };
@@ -25,6 +28,7 @@ type Props = {
 const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
   const { t, league } = props;
   const [selectedTabIndex, setTab] = useState(0);
+  const isShowTableTab = league?.GroupTables?.length ? league?.GroupTables?.length > 0 : false;
   resetIdCounter();
 
   return (
@@ -32,25 +36,25 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
       title={t(CommonResourceKey.SOCCER)}
       breadcrumbs={[
         t(CommonResourceKey.SOCCER),
-        t(SoccerResourceKey.MATCH_INFO, { ns: ResourceType.SOCCER })
+        t(SoccerResourceKey.LEAGUE_DETAIL, { ns: ResourceType.SOCCER })
       ]}
     >
       <SoccerBanner />
       <div className="league-info">
-        <LeagueInfo leagueName={league?.League?.Name} countryCode={league?.League?.CountryCode} />
+        <LeagueInfo leagueName={props.leagueGroupName.toString()} countryCode={props.countryCode?.toString()} />
         <span className="icon-menu-favorites"></span>
       </div>
       <>
         <Tabs selectedIndex={selectedTabIndex} onSelect={setTab}>
           <div>
             <TabList>
-              {league?.GroupTables?.length && (
+              {isShowTableTab && (
                 <Tab>{t(SoccerResourceKey.TABLE)}</Tab>
               )}
               <Tab>{t(SoccerResourceKey.FIXTURE)}</Tab>
             </TabList>
           </div>
-          {league?.GroupTables?.length && (
+          {league?.GroupTables && isShowTableTab && (
             <TabPanel>
               <LeagueTableComponent leagueTable={league} homeTeamId="" awayTeamId="" />
             </TabPanel>
@@ -65,7 +69,7 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
 };
 
 SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
-  const { id, seasonId, groupName, roundGroup } = query;
+  const { id, seasonId, groupName, leagueGroupName, countryCode } = query;
   const league = await SoccerAPI.GetLeagueTable(id as string, seasonId as string, roundGroup as string);
   const allMatches = await SoccerAPI.GetFixtures(id as string, seasonId as string, groupName as string);
 
@@ -83,10 +87,12 @@ SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
 
   return {
     leagueId: id,
-    seasonId: seasonId,
-    groupName: groupName,
+    seasonId,
+    groupName,
     namespacesRequired: [ResourceType.SOCCER],
-    league: league,
+    league,
+    leagueGroupName,
+    countryCode,
     fixtures,
     results
   };

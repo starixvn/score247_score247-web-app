@@ -18,4 +18,5 @@ export class SoccerResourceKey {
     public static readonly VENUE = "venue";
     public static readonly SPECTATORS = "spectators";
     public static readonly FIXTURE = "fixture";
+    public static readonly LEAGUE_DETAIL = "league_detail";
 }
