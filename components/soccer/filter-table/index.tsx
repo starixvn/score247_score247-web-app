@@ -101,7 +101,7 @@ class FilterSoccerTable extends React.Component<{}, State> {
       new Date().getTime() - (match.EventDate[0] as Date).getTime() > this.timeToRemoveEndedMatchesInMilliseconds);
     const filteredMatches = matches.filter(match => !removedMatches.includes(match));
 
-    this.displayMatches = this.parseData(matches);
+    this.displayMatches = this.parseData(filteredMatches);
     this.displayLeagues = uniqBy(
       matches.map(match => ({
         name: match.LeagueName,
@@ -116,7 +116,7 @@ class FilterSoccerTable extends React.Component<{}, State> {
       displayMode: DisplayMode.SHOW_ALL,
       filterText: "",
       selectedLeagues: this.displayLeagues.map(match => match.id),
-      filteredMatchByLeagues: matches,
+      filteredMatchByLeagues: filteredMatches,
       isShowingLiveMatches: true
     });
   };
@@ -229,7 +229,6 @@ class FilterSoccerTable extends React.Component<{}, State> {
   render() {
     const { filterText, sortByValue } = this.state;
     let filteredMatches: MatchSummary[] = [];
-
     if (sortByValue === SoccerSortOptions.LEAGUE) {
       filteredMatches = this.state.filteredMatchByLeagues.filter(
         match => findIndex(this.displayMatches, match) >= 0
