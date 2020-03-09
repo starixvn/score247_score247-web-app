@@ -49,3 +49,6 @@ jspm_packages
 
 *audit.report.json
 *audit.report.html
+
+# Intellij
+.idea/*

@@ -1,9 +1,9 @@
 import React from "react";
-import { MatchCommentary } from "../../../../../apis/soccer/models";
+import {MatchCommentary} from "../../../../../apis/soccer/models";
 import TimeCell from '../time-cell';
 import CommentaryCell from '../commentary-cell';
-import { EventTypes } from '../../../../../common/enums/event-type';
-import { SoccerGoalMethod } from '../../../../../common/enums/soccer-goal-method';
+import {EventTypes} from '../../../../../common/enums/event-type';
+import {SoccerGoalMethod} from '../../../../../common/enums/soccer-goal-method';
 
 type Props = {
     comment: MatchCommentary;
@@ -33,7 +33,7 @@ const getIcon = (comment: MatchCommentary) => {
 
         case EventTypes.PENALTY_MISSED.value:
             return <div className="miss-penalty">
-                <img src="/static/images/miss-penalty.svg"></img>
+                <img src="/static/images/miss-penalty.svg"/>
             </div>;
 
         case EventTypes.SUBSTITUTION.value:
@@ -41,6 +41,13 @@ const getIcon = (comment: MatchCommentary) => {
                 <span className="icon-arrow-down1" />
                 <span className="icon-arrow-up" />
             </div>;
+
+        case EventTypes.VIDEO_ASSISTANT_REFEREE.value:
+        case EventTypes.VIDEO_ASSISTANT_REFEREE_OVER.value:
+        case EventTypes.CANCELLED_VIDEO_ASSISTANT_REFEREE.value:
+        case EventTypes.POSSIBLE_VIDEO_ASSISTANT_REFEREE.value:
+            return <span className="icon-var-event" />;
+
         default:
             return null;
     }
@@ -62,17 +69,15 @@ const CommentaryRow: React.FC<Props> = (props: Props) => {
     const commentContent = getCommentContent(props.comment);
     const specialEvent = icon ? 'special-event' : '';
 
-    const component = commentContent.length !== 0 ? (
+    return commentContent.length !== 0 ? (
         <div className={`commentary-row ${specialEvent}`}>
-            <TimeCell comment={props.comment} />
+            <TimeCell comment={props.comment}/>
             <div className="commentary-icon-cell">
                 {icon}
             </div>
-            <CommentaryCell comment={commentContent} />
+            <CommentaryCell comment={commentContent}/>
         </div>
     ) : null;
-
-    return component;
 };
 
 export default CommentaryRow;

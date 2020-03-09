@@ -66,10 +66,10 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
           )}
           <TabPanel>
             Fixture
-            {/* <Button className="btn-show-results btn" onClick={handleShowAllResults}>
+            {/* <Button className="btn btn-show-results" onClick={handleShowAllResults}>
               {t(isShowAllResults ? SoccerResourceKey.HIDE_ALL_RESULTS : SoccerResourceKey.SHOW_ALL_RESULTS, {ns: ResourceType.SOCCER})}
             </Button>
-            <FixtureTable fixtures={fixtures} results={results} isShowAllResults={isShowAllResults}/> */}
+            <FixtureTable fixtures={fixtures} results={results} isShowAllResults={isShowAllResults}/>*/}
           </TabPanel>
         </Tabs>
       </>
