@@ -18,7 +18,7 @@ type Props = {
 
 class SoccerRow extends React.Component<Props> {
   private readonly hasExtraInfoRowSpan = 0;
-  private ref = React.createRef<HTMLTableRowElement>()
+  private readonly ref = React.createRef<HTMLTableRowElement>();
 
   static contextType = DeviceContext;
 
@@ -64,7 +64,7 @@ class SoccerRow extends React.Component<Props> {
   };
 
   scrollIntoView() {
-    this.ref.current?.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
+    this.ref.current?.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
 
   render() {

@@ -34,7 +34,7 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
   const handleShowAllResults = (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     event.preventDefault();
     setShowAllResults(!isShowAllResults);
-  }
+  };
 
   return (
     <Layout

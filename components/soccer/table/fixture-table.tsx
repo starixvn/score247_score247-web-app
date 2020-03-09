@@ -24,7 +24,7 @@ type MatchGroupByDate = {
 class FixtureTable extends React.Component<Props> {
   private renderedRow = 0;
   private displayedAdvertisements = advertisements.slice();
-  private firstFixture = React.createRef<SoccerRow>();
+  private readonly firstFixture = React.createRef<SoccerRow>();
 
   renderAdvertisement = () => {
     if (this.displayedAdvertisements.length === 0) {
@@ -39,7 +39,7 @@ class FixtureTable extends React.Component<Props> {
     );
   };
 
-  renderRow = (match: MatchSummary, isFirstFixture: boolean = false) => {
+  renderRow = (match: MatchSummary, isFirstFixture = false) => {
     this.renderedRow++;
     const renderAd = this.renderedRow % appSettings.numberOfRowEveryAd === 0;
 
@@ -51,7 +51,7 @@ class FixtureTable extends React.Component<Props> {
     );
   };
 
-  renderGroup = (group: MatchGroupByDate, isFixture: boolean = false) => {
+  renderGroup = (group: MatchGroupByDate, isFixture = false) => {
     return (
       <>
         {Object.keys(group).map((key: string, keyIndex: number) => (
