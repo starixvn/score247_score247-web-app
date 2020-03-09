@@ -40,7 +40,7 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
             query: {
               id: match.LeagueId,
               seasonId: match.LeagueSeasonId,
-              roundGroup: match.LeagueRoundGroup,
+              groupName: match.LeagueRoundGroup,
               leagueGroupName: match.LeagueGroupName,
               countryCode: match.CountryCode
             }

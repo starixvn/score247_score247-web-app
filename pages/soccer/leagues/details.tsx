@@ -57,7 +57,8 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
             </TabPanel>
           )}
           <TabPanel>
-            <FixtureTable fixtures={fixtures} results={results}/>
+            Fixture
+            {/* <FixtureTable fixtures={fixtures} results={results}/> */}
         </TabPanel>
         </Tabs>
       </>
@@ -66,8 +67,8 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
 };
 
 SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
-  const { id, seasonId, roundGroup, leagueGroupName, countryCode } = query;
-  const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), roundGroup?.toString());
+  const { id, seasonId, groupName, leagueGroupName, countryCode } = query;
+  const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), groupName?.toString());
   const allMatches = await SoccerAPI.GetFixtures(id.toString(), seasonId.toString(), leagueGroupName?.toString());
 
   const isFixture = (match: MatchSummary) =>
@@ -85,7 +86,7 @@ SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
   return {
     namespacesRequired: [ResourceType.SOCCER],
     league,
-    leagueGroupName,
+    leagueGroupName: leagueGroupName,
     countryCode,
     fixtures: fixtures,
     results: results
