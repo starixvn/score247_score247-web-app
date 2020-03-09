@@ -266,6 +266,7 @@ class FilterSoccerTable extends React.Component<{}, State> {
           matches={filteredMatches}
           ref={this.soccerTableRef}
           selectedDate={this.state.selectedDate}
+          isShowingLiveMatches={this.state.isShowingLiveMatches}
         />
       </>
     );
