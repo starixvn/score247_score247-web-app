@@ -16,28 +16,6 @@ pipeline{
 
     stages{
 
-        stage("SonarQube Analysis - https://sonarqube.nexdev.net/dashboard?id=score247-web-app"){
-            steps{
-                script{
-                    pipelineLib.sonarScanner()
-                }
-            }
-
-            post{
-                always{
-                    script{
-                        if(manager.logContains(".*Quality gate status.*")){
-                            pipelineLib.generateSonarQubeReport("score247-web-app")
-                        }
-                    }
-
-                    archiveArtifacts "*.xml,*.email"
-
-                    step([$class: 'ACIPluginPublisher', name: '*.xml', shownOnProjectPage: false])
-                }
-            }
-        }
-
         stage("Typescript Unittest & Coverage"){
             steps{
                 script{
