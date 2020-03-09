@@ -10,7 +10,7 @@ type Props = {
 };
 
 type IconHolder = {
-    [key: number]: any;
+    [key: number]: JSX.Element;
 };
 
 const icons: IconHolder = {
