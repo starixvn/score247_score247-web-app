@@ -11,6 +11,11 @@ body {
     font-family: 'Roboto', Verdana, Geneva, Tahoma, sans-serif;
 }
 
+html, body, #__next {
+    height: 100%;
+}
+ 
+
 *,
 ::after,
 ::before {
