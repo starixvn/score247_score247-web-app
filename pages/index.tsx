@@ -76,7 +76,7 @@ class SoccerPage extends React.Component<WithTranslation, State> {
   };
 
   handleLiveButtonClick = async () => {
-    this.setState({ onlyLiveMatch: true });
+    this.setState({ onlyLiveMatch: true, selectedDate: this.today });
     await this.filterSoccerTable.current?.handleLiveButtonClick();
   };
 

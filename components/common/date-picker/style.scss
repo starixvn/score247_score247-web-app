@@ -43,7 +43,7 @@
       }
     }
 
-    .react-datepicker__day--today {
+    .react-datepicker__day--today:not(.react-datepicker__day--selected) {
       background-color: #fce5e6;
       color: #3A3B45;
       border-radius: 50%;
