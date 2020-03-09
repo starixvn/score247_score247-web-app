@@ -13,6 +13,7 @@ import LeagueInfo from '../../../components/soccer/league-info';
 import { MatchStatusHelper } from "../../../common/enums/match-status-type";
 import { SoccerBanner } from '../../../components/soccer/banner';
 import FixtureTable from "../../../components/soccer/table/fixture-table";
+import Button from "../../../components/common/basic/button";
 
 type Props = {
   league?: LeagueTable;
@@ -25,8 +26,15 @@ type Props = {
 const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
   const { t, league, fixtures, results } = props;
   const [selectedTabIndex, setTab] = useState(0);
+  const [isShowAllResults, setShowAllResults] = useState(false);
   const isShowTableTab = league?.GroupTables?.length ? league?.GroupTables?.length > 0 : false;
+
   resetIdCounter();
+
+  const handleShowAllResults = (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    event.preventDefault();
+    setShowAllResults(!isShowAllResults);
+  }
 
   return (
     <Layout
@@ -46,9 +54,9 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
           <div>
             <TabList>
               {isShowTableTab && (
-                <Tab>{t(SoccerResourceKey.TABLE)}</Tab>
+                <Tab>{t(SoccerResourceKey.TABLE, {ns: ResourceType.SOCCER})}</Tab>
               )}
-              <Tab>{t(SoccerResourceKey.FIXTURE)}</Tab>
+              <Tab>{t(SoccerResourceKey.FIXTURE, {ns: ResourceType.SOCCER})}</Tab>
             </TabList>
           </div>
           {league?.GroupTables && isShowTableTab && (
@@ -58,8 +66,11 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
           )}
           <TabPanel>
             Fixture
-            {/* <FixtureTable fixtures={fixtures} results={results}/> */}
-        </TabPanel>
+            {/* <Button className="btn-show-results btn" onClick={handleShowAllResults}>
+              {t(isShowAllResults ? SoccerResourceKey.HIDE_ALL_RESULTS : SoccerResourceKey.SHOW_ALL_RESULTS, {ns: ResourceType.SOCCER})}
+            </Button>
+            <FixtureTable fixtures={fixtures} results={results} isShowAllResults={isShowAllResults}/> */}
+          </TabPanel>
         </Tabs>
       </>
     </Layout>

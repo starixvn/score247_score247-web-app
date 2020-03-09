@@ -18,6 +18,8 @@ type Props = {
 
 class SoccerRow extends React.Component<Props> {
   private readonly hasExtraInfoRowSpan = 0;
+  private ref = React.createRef<HTMLTableRowElement>()
+
   static contextType = DeviceContext;
 
   handleClick = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
@@ -61,6 +63,10 @@ class SoccerRow extends React.Component<Props> {
     };
   };
 
+  scrollIntoView() {
+    this.ref.current?.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
+  }
+
   render() {
     const { match } = this.props;
     const firstHalfPeriod =
@@ -87,6 +93,7 @@ class SoccerRow extends React.Component<Props> {
           className="match-row"
           onClick={this.handleClick}
           data-match-id={match.Id}
+          ref={this.ref}
         >
           <TimeAndStatusCell rowSpan={rowSpan} match={match} />
           <HomeTeamCell {...homeTeamCellProps} />

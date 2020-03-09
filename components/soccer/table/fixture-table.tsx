@@ -14,31 +14,17 @@ import EmptyRow from "./empty-row";
 export type Props = {
   fixtures: MatchSummary[];
   results: MatchSummary[];
-};
-
-export type State = {
   isShowAllResults: boolean;
-}
+};
 
 type MatchGroupByDate = {
   [key: string] : MatchSummary[];
-}
+};
 
-class FixtureTable extends React.Component<Props, State> {
+class FixtureTable extends React.Component<Props> {
   private renderedRow = 0;
   private displayedAdvertisements = advertisements.slice();
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      isShowAllResults: false
-    }
-  }
-
-  changeShowAllResults(value: boolean) {
-    this.setState({ isShowAllResults: value });
-  }
+  private firstFixture = React.createRef<SoccerRow>();
 
   renderAdvertisement = () => {
     if (this.displayedAdvertisements.length === 0) {
@@ -53,25 +39,25 @@ class FixtureTable extends React.Component<Props, State> {
     );
   };
 
-  renderRow = (match: MatchSummary) => {
+  renderRow = (match: MatchSummary, isFirstFixture: boolean = false) => {
     this.renderedRow++;
     const renderAd = this.renderedRow % appSettings.numberOfRowEveryAd === 0;
 
     return (
       <Fragment key={match.Id}>
-        <SoccerRow match={match} />
+        {isFirstFixture ? <SoccerRow match={match} /> : <SoccerRow match={match} ref={this.firstFixture}/>}
         {renderAd && this.renderAdvertisement()}
       </Fragment>
     );
   };
 
-  renderGroup = (group: MatchGroupByDate) => {
+  renderGroup = (group: MatchGroupByDate, isFixture: boolean = false) => {
     return (
       <>
-        {Object.keys(group).map((key: string) => (
+        {Object.keys(group).map((key: string, keyIndex: number) => (
           <Fragment key={key}>
             {<TitleRow className="latest-title" title={key} key={key}/>}
-            {group[key].map(this.renderRow)}
+            {group[key].map((record, index) => this.renderRow(record, isFixture && keyIndex === 0 && index === 0))}
           </Fragment>
         ))}        
       </>
@@ -94,21 +80,31 @@ class FixtureTable extends React.Component<Props, State> {
   }
 
   renderBodyRows(fixtures: MatchSummary[], results: MatchSummary[]) {
-    if ((this.state.isShowAllResults && results.length > 0) || fixtures.length > 0) {
+    if ((this.props.isShowAllResults && results.length > 0) || fixtures.length > 0) {
       this.renderedRow = 0;
       this.displayedAdvertisements = advertisements.slice();
-      const resultGroups = this.state.isShowAllResults ? this.groupMatchByDate(results) : {};
+      const resultGroups = this.props.isShowAllResults ? this.groupMatchByDate(results) : {};
       const fixtureGroups = this.groupMatchByDate(fixtures);
 
       return (
         <>
           {this.renderGroup(resultGroups)}
-          {this.renderGroup(fixtureGroups)}
+          {this.renderGroup(fixtureGroups, true)}
         </>
       );
     }
     
     return <EmptyRow />;
+  }
+
+  scrollToFirstFixture() {
+    if (this.firstFixture.current) {
+      this.firstFixture.current.scrollIntoView();
+    }
+  }
+
+  componentDidUpdate() {
+    this.scrollToFirstFixture();
   }
 
   render() {

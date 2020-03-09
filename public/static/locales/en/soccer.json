@@ -17,5 +17,7 @@
   "referee": "Referee",
   "venue": "Venue",
   "spectators": "Spectators",
-  "league_detail": "League detail"
+  "league_detail": "League detail",
+  "show_all_results": "Show all resutls",
+  "hide_all_results": "Hide all reuslts"
 }
