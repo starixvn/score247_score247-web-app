@@ -83,6 +83,9 @@
       .mobile & {
         justify-content: flex-end;
       }
+      span {
+        margin-left: .4rem
+      }
     }
   }
 
@@ -94,18 +97,21 @@
       .mobile & {
         justify-content: flex-start;
       }
+      span {
+        margin-right: .4rem
+      }
     }
   }
 
   .reference-info {
     position: absolute;
     display: flex;
-    .icon-penalty, .icon-arrow-right {
-      font-size: 1.6rem;
-    } 
     [class$="card"] {
       margin: 0;
     }
+    .icon-penalty, .icon-arrow-right {
+      font-size: 1.6rem;
+    } 
     .mobile & {
       position: unset;
       [class$="card"] {
