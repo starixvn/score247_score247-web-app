@@ -10,7 +10,7 @@ type Props = {
 const LeagueInfo: React.FC<Props> = props => {
     return (
         <div className="league-name">
-            <img src={`${appSettings.assetsUrl}/flags/${props.countryCode}.svg`} />
+            <img src={props.countryCode ? `${appSettings.assetsUrl}/flags/${props.countryCode}.svg` : `/static/images/league-flag-default.svg`} />
             {props.leagueName}
         </div>
     );
