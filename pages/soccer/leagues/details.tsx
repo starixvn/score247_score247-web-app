@@ -78,8 +78,8 @@ const SoccerLeagueDetailPage: LocalizedPage<Props> = props => {
 };
 
 SoccerLeagueDetailPage.getInitialProps = async ({ query }) => {
-  const { id, seasonId, groupName, leagueGroupName, countryCode } = query;
-  const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), groupName?.toString());
+  const { id, seasonId, roundGroup, leagueGroupName, countryCode } = query;
+  const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), roundGroup ? roundGroup.toString() : encodeURI("white space"));
   const allMatches = await SoccerAPI.GetFixtures(id.toString(), seasonId.toString(), leagueGroupName?.toString());
 
   const isFixture = (match: MatchSummary) =>

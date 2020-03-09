@@ -15,41 +15,33 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
   match,
   rowSpan
 }) => {
+  const { isMobile } = useDeviceContext();
+
   const league = match.IsInternationalLeague
     ? buildLeagueAbbreviation(match.LeagueName)
     : `${match.CountryCode} ${buildLeagueAbbreviation(match.LeagueName)}`;
   const leagueTitle = match.IsInternationalLeague
     ? match.LeagueName
     : `${match.CountryName} ${match.LeagueName}`;
-  const { isMobile } = useDeviceContext();
-  const roundGroup = match.LeagueRoundGroup ? `&groupName=${match.LeagueRoundGroup}` : ``;
+  const roundGroup = match.LeagueRoundGroup ? `&roundGroup=${match.LeagueRoundGroup}` : ``;
   const leagueId = `id=${match.LeagueId}`;
   const seasonId = `&seasonId=${match.LeagueSeasonId}`;
   const leagueGroupName = `&leagueGroupName=${match.LeagueGroupName}`;
   const countryCode = match.CountryCode ? `&countryCode=${match.CountryCode}` : ``;
-
+  const handleOnClick = () => {
+    if (isMobile) {
+      Router.push(`/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`);
+    }
+    else {
+      window.open(`/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`);
+    }
+  };
   return (
     <td
       rowSpan={rowSpan}
       className={`league ${match.LeagueRegion}`}
       title={leagueTitle}
-      onClick={() => {
-        if (isMobile) {
-          Router.push({
-            pathname: "/soccer/leagues/details",
-            query: {
-              id: match.LeagueId,
-              seasonId: match.LeagueSeasonId,
-              groupName: match.LeagueRoundGroup,
-              leagueGroupName: match.LeagueGroupName,
-              countryCode: match.CountryCode
-            }
-          });
-        }
-        else {
-          window.open(`/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`);
-        }
-      }}
+      onClick={handleOnClick}
     >
       {league}
     </td>
