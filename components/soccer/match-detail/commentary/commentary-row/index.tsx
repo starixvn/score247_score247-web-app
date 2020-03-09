@@ -9,47 +9,46 @@ type Props = {
     comment: MatchCommentary;
 };
 
+type IconHolder = {
+    [key: number]: any;
+};
+
+const icons: IconHolder = {
+    [EventTypes.RED_CARD.value]: <span className="red-card"/>,
+    [EventTypes.YELLOW_CARD.value]: <span className="yellow-card"/>,
+    [EventTypes.YELLOW_RED_CARD.value]: (
+        <div className="yellow-to-red">
+            <span className="yellow-card"/>
+            <span className="red-card"/>
+        </div>
+    ),
+    [EventTypes.PENALTY_MISSED.value]: (
+        <div className="miss-penalty">
+            <img src="/static/images/miss-penalty.svg"/>
+        </div>
+    ),
+    [EventTypes.SUBSTITUTION.value]: (
+        <div className="substitution">
+            <span className="icon-arrow-down1"/>
+            <span className="icon-arrow-up"/>
+        </div>
+    ),
+    [EventTypes.VIDEO_ASSISTANT_REFEREE.value]: <span className="icon-var"/>,
+    [EventTypes.VIDEO_ASSISTANT_REFEREE_OVER.value]: <span className="icon-var"/>,
+    [EventTypes.CANCELLED_VIDEO_ASSISTANT_REFEREE.value]: <span className="icon-var"/>,
+    [EventTypes.POSSIBLE_VIDEO_ASSISTANT_REFEREE.value]: <span className="icon-var"/>
+};
+
 const getIcon = (comment: MatchCommentary) => {
-    switch (comment.TimelineType.Value) {
-        case EventTypes.SCORE_CHANGE.value:
-            if (comment.GoalScorer.Method === SoccerGoalMethod.OWN_GOAL) {
-                return <span className="icon-own-goal" />;
-            } else if (comment.GoalScorer.Method === SoccerGoalMethod.PENALTY) {
-                return <span className="icon-goal-pen" />;
-            }
-            return <span className="icon-goal" />;
-
-        case EventTypes.RED_CARD.value:
-            return <span className="red-card" />;
-
-        case EventTypes.YELLOW_CARD.value:
-            return <span className="yellow-card" />;
-
-        case EventTypes.YELLOW_RED_CARD.value:
-            return <div className="yellow-to-red">
-                <span className="yellow-card" />
-                <span className="red-card" />
-            </div>;
-
-        case EventTypes.PENALTY_MISSED.value:
-            return <div className="miss-penalty">
-                <img src="/static/images/miss-penalty.svg"/>
-            </div>;
-
-        case EventTypes.SUBSTITUTION.value:
-            return <div className="substitution">
-                <span className="icon-arrow-down1" />
-                <span className="icon-arrow-up" />
-            </div>;
-
-        case EventTypes.VIDEO_ASSISTANT_REFEREE.value:
-        case EventTypes.VIDEO_ASSISTANT_REFEREE_OVER.value:
-        case EventTypes.CANCELLED_VIDEO_ASSISTANT_REFEREE.value:
-        case EventTypes.POSSIBLE_VIDEO_ASSISTANT_REFEREE.value:
-            return <span className="icon-var-event" />;
-
-        default:
-            return null;
+    if (comment.TimelineType.Value === EventTypes.SCORE_CHANGE.value) {
+        if (comment.GoalScorer.Method === SoccerGoalMethod.OWN_GOAL) {
+            return <span className="icon-own-goal"/>;
+        } else if (comment.GoalScorer.Method === SoccerGoalMethod.PENALTY) {
+            return <span className="icon-goal-pen"/>;
+        }
+        return <span className="icon-goal"/>;
+    } else {
+        return icons[comment.TimelineType.Value];
     }
 };
 
