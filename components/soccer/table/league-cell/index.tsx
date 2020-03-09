@@ -28,12 +28,13 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
   const seasonId = `&seasonId=${match.LeagueSeasonId}`;
   const leagueGroupName = `&leagueGroupName=${match.LeagueGroupName}`;
   const countryCode = match.CountryCode ? `&countryCode=${match.CountryCode}` : ``;
+  const url = `/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`;
   const handleOnClick = () => {
     if (isMobile) {
-      Router.push(`/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`);
+      Router.push(url);
     }
     else {
-      window.open(`/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`);
+      window.open(url);
     }
   };
   return (
