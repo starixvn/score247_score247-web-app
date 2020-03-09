@@ -3,6 +3,7 @@ import React from "react";
 import { MatchSummary } from "../../../../apis/soccer/models";
 import Router from "next/router";
 import { useDeviceContext } from '../../../../contexts/device-context';
+import { EEXIST } from 'constants';
 
 const buildLeagueAbbreviation = (leagueName: string): string => {
   return leagueName
@@ -29,7 +30,8 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
   const leagueGroupName = `&leagueGroupName=${match.LeagueGroupName}`;
   const countryCode = match.CountryCode ? `&countryCode=${match.CountryCode}` : ``;
   const url = `/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`;
-  const handleOnClick = () => {
+  const handleOnClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (isMobile) {
       Router.push(url);
     }
@@ -42,7 +44,7 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
       rowSpan={rowSpan}
       className={`league ${match.LeagueRegion}`}
       title={leagueTitle}
-      onClick={handleOnClick}
+      onClick={(e) => handleOnClick(e)}
     >
       {league}
     </td>

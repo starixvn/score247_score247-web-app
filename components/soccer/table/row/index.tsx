@@ -134,6 +134,7 @@ class SoccerRow extends React.Component<Props, State> {
       <>
         <tr
           className="match-row"
+          onClick={this.handleClick}
           data-match-id={match.Id}
         >
           <DeviceContextConsumer>{renderSelectCell}</DeviceContextConsumer>
