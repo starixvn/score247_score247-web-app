@@ -24,19 +24,29 @@ const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
   const leagueTitle = match.IsInternationalLeague
     ? match.LeagueName
     : `${match.CountryName} ${match.LeagueName}`;
-  const roundGroup = match.LeagueRoundGroup ? `&roundGroup=${match.LeagueRoundGroup}` : ``;
   const leagueId = `id=${match.LeagueId}`;
   const seasonId = `&seasonId=${match.LeagueSeasonId}`;
   const leagueGroupName = `&leagueGroupName=${match.LeagueGroupName}`;
+  const roundGroup = match.LeagueRoundGroup ? `&roundGroup=${match.LeagueRoundGroup}` : ``;
   const countryCode = match.CountryCode ? `&countryCode=${match.CountryCode}` : ``;
-  const url = `/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`;
+  const desktopUrl = `/soccer/leagues/details?${leagueId}${seasonId}${roundGroup}${leagueGroupName}${countryCode}`;
+
   const handleOnClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (isMobile) {
-      Router.push(url);
+      Router.push({
+        pathname: "/soccer/leagues/details",
+        query: {
+          id: match.LeagueId,
+          seasonId: match.LeagueSeasonId,
+          leagueGroupName: match.LeagueGroupName,
+          countryCode: match.CountryCode,
+          roundGroup: match.LeagueRoundGroup
+        }
+      });
     }
     else {
-      window.open(url);
+      window.open(desktopUrl);
     }
   };
   return (

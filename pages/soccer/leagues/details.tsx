@@ -30,8 +30,7 @@ type State = {
 };
 
 class SoccerLeagueDetailPage extends React.Component<Props, State> {
-  static async getInitialProps(ctx: NextPageContext) {
-    const query = ctx.query;
+  static async getInitialProps({ query }: NextPageContext) {
     return { query: query };
   }
 
@@ -46,9 +45,9 @@ class SoccerLeagueDetailPage extends React.Component<Props, State> {
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     const { query } = this.props;
-    const { id, seasonId, roundGroup, leagueGroupName } = query;
+    const { id, seasonId, leagueGroupName, roundGroup } = query;
     resetIdCounter();
 
     const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), roundGroup ? roundGroup.toString() : encodeURI("white space"));
