@@ -34,7 +34,7 @@ class Commentary extends React.Component<Props, State> {
       );
 
       if (comments) {
-        this.setState({ comments: comments.filter(comment => comment.Commentaries && comment.Commentaries.length > 0) });
+        this.setState({ comments });
       }
     }
   }

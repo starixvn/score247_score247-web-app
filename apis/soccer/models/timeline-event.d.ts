@@ -2,6 +2,7 @@ import { Enumeration } from "./enumeration";
 import { GoalScorer } from "./goal-scorer";
 import { Player } from "./player";
 import { Commentary } from "./commentary";
+import { Outcome } from "./outcome";
 
 export interface TimelineEvent {
   Id: string;
@@ -31,4 +32,5 @@ export interface TimelineEvent {
   ShootoutHomeScore: number;
   ShootoutAwayScore: number;
   PenaltyStatus: string;
+  Outcome: OutCome
 }

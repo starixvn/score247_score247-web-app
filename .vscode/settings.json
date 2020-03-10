@@ -11,7 +11,7 @@
 		"**/247": true
     },
     "sonarlint.connectedMode.project": {
-        "serverId": "nexdevsonarqube",
+        "connectionId": "nexdevsonarqube",
         "projectKey": "score247-web-app"
     },
 }
