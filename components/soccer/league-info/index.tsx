@@ -5,7 +5,7 @@ import appSettings from '../../../app-settings';
 type Props = {
     leagueName?: string;
     countryCode?: string;
-}
+};
 
 const LeagueInfo: React.FC<Props> = props => {
     return (

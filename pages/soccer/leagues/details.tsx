@@ -52,21 +52,23 @@ class SoccerLeagueDetailPage extends React.Component<Props, State> {
     resetIdCounter();
 
     const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), roundGroup ? roundGroup.toString() : encodeURI("white space"));
-    // const allMatches = await SoccerAPI.GetFixtures(id.toString(), seasonId.toString(), leagueGroupName?.toString());
-    // const isFixture = (match: MatchSummary) =>
-    //   MatchStatusHelper.isLiveMatch(match.MatchStatus) ||
-    //   MatchStatusHelper.isNotStarted(match.MatchStatus) ||
-    //   new Date(match.EventDate[0]).getTime() > Date.now();
+    const allMatches = await SoccerAPI.GetFixtures(id.toString(), seasonId.toString(), leagueGroupName?.toString());
+    const isFixture = (match: MatchSummary) =>
+      MatchStatusHelper.isLiveMatch(match.MatchStatus) ||
+      MatchStatusHelper.isNotStarted(match.MatchStatus) ||
+      new Date(match.EventDate[0]).getTime() > Date.now();
 
-    // const compareTwoSoccerMatchByEventTime = (a: MatchSummary, b: MatchSummary) =>
-    //   new Date(a.EventDate[0]).getTime() - new Date(b.EventDate[0]).getTime();
+    const compareTwoSoccerMatchByEventTime = (a: MatchSummary, b: MatchSummary) =>
+      new Date(a.EventDate[0]).getTime() - new Date(b.EventDate[0]).getTime();
 
-    // const orderedMatches = [...allMatches].sort(compareTwoSoccerMatchByEventTime);
-    // const fixtures = orderedMatches.filter(isFixture);
-    // const results = orderedMatches.filter((match) => !isFixture(match));
+    const orderedMatches = [...allMatches].sort(compareTwoSoccerMatchByEventTime);
+    const fixtures = orderedMatches.filter(isFixture);
+    const results = orderedMatches.filter((match) => !isFixture(match));
 
     this.setState({
       league,
+      fixtures,
+      results
     });
   }
 
@@ -80,6 +82,7 @@ class SoccerLeagueDetailPage extends React.Component<Props, State> {
   render() {
     const isShowTableTab = this.state.league?.GroupTables?.length ? this.state.league?.GroupTables?.length > 0 : false;
     const { t, query } = this.props;
+    const displayFixtures = false;
 
     return (
       <Layout
@@ -111,10 +114,10 @@ class SoccerLeagueDetailPage extends React.Component<Props, State> {
             )}
             <TabPanel>
               FIXTURES
-              {/* <Button className="btn btn-show-results" onClick={this.handleShowAllResults}>
+              {displayFixtures && <Button className="btn btn-show-results" onClick={this.handleShowAllResults}>
                 {t(this.state.isShowAllResults ? SoccerResourceKey.HIDE_ALL_RESULTS : SoccerResourceKey.SHOW_ALL_RESULTS, { ns: ResourceType.SOCCER })}
-              </Button>
-              <FixtureTable fixtures={this.state.fixtures} results={this.state.results} isShowAllResults={this.state.isShowAllResults} /> */}
+              </Button>}
+              {displayFixtures && <FixtureTable fixtures={this.state.fixtures} results={this.state.results} isShowAllResults={this.state.isShowAllResults} />}
             </TabPanel>
           </Tabs>}
         </>

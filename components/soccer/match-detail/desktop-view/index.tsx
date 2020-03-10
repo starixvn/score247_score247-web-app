@@ -12,30 +12,35 @@ import LeagueTable from "../league-table";
 import Commentary from "../commentary";
 import { Props } from "./type";
 import { SoccerBanner } from '../../banner';
+import { MatchLineups } from '../../../../apis/soccer/models';
+
+const maxNumberOfSubstitutionEvent = (matchLineUps?: MatchLineups) =>
+  matchLineUps?.Id
+    ? matchLineUps.Home?.SubstitutionEvents?.length -
+      matchLineUps.Away?.SubstitutionEvents?.length >
+      0
+      ? matchLineUps.Home?.SubstitutionEvents?.length
+      : matchLineUps.Away?.SubstitutionEvents?.length
+    : 0;
+
+const maxNumberOfSubstitutePlayers = (matchLineUps?: MatchLineups) =>
+  matchLineUps?.Id
+    ? matchLineUps.Home?.Substitutions?.length -
+      matchLineUps.Away?.Substitutions?.length >
+      0
+      ? matchLineUps.Home?.Substitutions?.length
+      : matchLineUps.Away?.Substitutions?.length
+    : 0;
+
+const isShowingSubstitutionEvents = (matchLineUps?: MatchLineups) =>
+  matchLineUps?.Id
+    ? matchLineUps.Home.SubstitutionEvents?.some(x => x) ||
+    matchLineUps.Away.SubstitutionEvents?.some(x => x)
+    : false;
 
 const Desktop: React.FC<Props> = props => {
   const [selectedTabIndex, setTab] = useState(0);
   const { t } = useTranslation(ResourceType.SOCCER);
-  const maxNumberOfSubstitutionEvent = props.matchLineUps?.Id
-    ? props.matchLineUps.Home?.SubstitutionEvents?.length -
-      props.matchLineUps.Away?.SubstitutionEvents?.length >
-      0
-      ? props.matchLineUps.Home?.SubstitutionEvents?.length
-      : props.matchLineUps.Away?.SubstitutionEvents?.length
-    : 0;
-
-  const maxNumberOfSubstitutePlayers = props.matchLineUps?.Id
-    ? props.matchLineUps.Home?.Substitutions?.length -
-      props.matchLineUps.Away?.Substitutions?.length >
-      0
-      ? props.matchLineUps.Home?.Substitutions?.length
-      : props.matchLineUps.Away?.Substitutions?.length
-    : 0;
-
-  const isShowingSubstitutionEvents = props.matchLineUps?.Id
-    ? props.matchLineUps.Home.SubstitutionEvents?.some(x => x) ||
-    props.matchLineUps.Away.SubstitutionEvents?.some(x => x)
-    : false;
 
   return (
     <>
@@ -58,11 +63,11 @@ const Desktop: React.FC<Props> = props => {
             <div className="line-ups left">
               {props.matchLineUps?.Id && (
                 <TeamLineUps
-                  maxNumberOfSubstitutionEvent={maxNumberOfSubstitutionEvent}
+                  maxNumberOfSubstitutionEvent={maxNumberOfSubstitutionEvent(props.matchLineUps)}
                   lineups={props.matchLineUps.Home}
                   pitchView={props.matchLineUps.PitchView}
-                  maxNumberOfSubstitutePlayers={maxNumberOfSubstitutePlayers}
-                  isShowingSubstitutionEvents={isShowingSubstitutionEvents}
+                  maxNumberOfSubstitutePlayers={maxNumberOfSubstitutePlayers(props.matchLineUps)}
+                  isShowingSubstitutionEvents={isShowingSubstitutionEvents(props.matchLineUps)}
                 />
               )}
             </div>
@@ -90,11 +95,11 @@ const Desktop: React.FC<Props> = props => {
             <div className="line-ups right">
               {props.matchLineUps?.Id && (
                 <TeamLineUps
-                  maxNumberOfSubstitutionEvent={maxNumberOfSubstitutionEvent}
+                  maxNumberOfSubstitutionEvent={maxNumberOfSubstitutionEvent(props.matchLineUps)}
                   lineups={props.matchLineUps.Away}
                   pitchView={props.matchLineUps.PitchView}
-                  maxNumberOfSubstitutePlayers={maxNumberOfSubstitutePlayers}
-                  isShowingSubstitutionEvents={isShowingSubstitutionEvents}
+                  maxNumberOfSubstitutePlayers={maxNumberOfSubstitutePlayers(props.matchLineUps)}
+                  isShowingSubstitutionEvents={isShowingSubstitutionEvents(props.matchLineUps)}
                 />
               )}
             </div>
