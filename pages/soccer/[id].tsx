@@ -1,8 +1,7 @@
 import "./styles.scss";
 import React from "react";
 import Layout from "../../components/layout";
-import { LocalizedPage } from "../../common/helpers/Localizer";
-import withLoadingPage from "../../hoc/with-loading-page";
+import { LocalizedPage, withTranslation } from "../../common/helpers/Localizer";
 import SoccerMatchDetail from "../../components/soccer/match-detail";
 import { CommonResourceKey, ResourceType, SoccerResourceKey } from "../../common/resources";
 
@@ -34,4 +33,4 @@ SoccerMatchDetailPage.getInitialProps = async ({ query }) => {
   };
 };
 
-export default withLoadingPage(SoccerMatchDetailPage);
+export default withTranslation()(SoccerMatchDetailPage);

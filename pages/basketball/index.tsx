@@ -1,7 +1,6 @@
 import * as React from "react";
 import Layout from "../../components/layout";
-import { LocalizedPage } from "../../common/helpers/Localizer";
-import withLoadingPage from "../../hoc/with-loading-page";
+import { LocalizedPage, withTranslation } from "../../common/helpers/Localizer";
 import { ResourceType, CommonResourceKey } from "../../common/resources";
 
 const Basketball: LocalizedPage = props => {
@@ -45,4 +44,4 @@ Basketball.getInitialProps = () => ({
   namespacesRequired: [ResourceType.BASKETBALL]
 });
 
-export default withLoadingPage(Basketball);
+export default withTranslation()(Basketball);

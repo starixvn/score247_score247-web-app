@@ -1,7 +1,6 @@
 import * as React from "react";
 import Layout from "../../../components/layout";
-import { LocalizedPage } from "../../../common/helpers/Localizer";
-import withLoadingPage from "../../../hoc/with-loading-page";
+import { LocalizedPage, withTranslation } from "../../../common/helpers/Localizer";
 import { CommonResourceKey, ResourceType } from "../../../common/resources";
 
 const LeaguesPage: LocalizedPage = ({ t }) => {
@@ -20,4 +19,4 @@ LeaguesPage.getInitialProps = async () => {
   };
 };
 
-export default withLoadingPage(LeaguesPage);
+export default withTranslation()(LeaguesPage);

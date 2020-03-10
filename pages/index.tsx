@@ -13,12 +13,12 @@ import appSettings from "../app-settings";
 import { MatchEventSignalRMessage } from "../apis/soccer/models/signalr-messages";
 import { DeviceContextConsumer } from "../contexts/device-context";
 import { DeviceContextType } from "../contexts/device-context-type";
-import withLoadingPage from "../hoc/with-loading-page";
 import LeftBar from "../components/common/left-bar";
 import RightBar from "../components/common/right-bar";
 import { ResourceType, CommonResourceKey } from "../common/resources";
 import { SoccerAPI } from '../apis/soccer/soccer-api';
 import { MatchStatusType } from '../common/enums/match-status-type';
+import { withTranslation } from "../common/helpers/Localizer";
 
 type State = {
   selectedDate: Date;
@@ -161,4 +161,4 @@ class SoccerPage extends React.Component<WithTranslation, State> {
   }
 }
 
-export default withLoadingPage(SoccerPage);
+export default withTranslation()(SoccerPage);

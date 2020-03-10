@@ -1,32 +1,31 @@
+import "../../assets/styles/pages/loading.scss";
 import React from "react";
-import Router from "next/router";
 import cookie from "js-cookie";
 import {
   LocalizedPage,
   withTranslation,
   useTranslation
-} from "../common/helpers/Localizer";
-import { ViewMode, CookieName, MobileAppUrl } from "../common/constants";
-import Button from "../components/common/basic/button";
-import "../assets/styles/pages/loading.scss";
-import { ResourceType, CommonResourceKey } from "../common/resources";
+} from "../../common/helpers/Localizer";
+import { ViewMode, CookieName, MobileAppUrl } from "../../common/constants";
+import Button from "../../components/common/basic/button";
+import { ResourceType, CommonResourceKey } from "../../common/resources";
 import dynamic from "next/dynamic";
 
-const LoadingPageContent = dynamic(
+const Content = dynamic(
   Promise.resolve(() => {
     if (window.matchMedia("(display-mode: standalone)").matches) {
       cookie.set(CookieName.VIEW_MODE, ViewMode.MOBILE);
-      Router.push("/");
+      window.location.reload();
       return null;
     }
-    
+
     const { t } = useTranslation();
     const handleDesktopViewClick = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
       event.preventDefault();
       cookie.set(CookieName.VIEW_MODE, ViewMode.DESKTOP);
-      Router.push("/");
+      window.location.reload();
     };
 
     const handleMobileViewClick = (
@@ -34,7 +33,7 @@ const LoadingPageContent = dynamic(
     ) => {
       event.preventDefault();
       cookie.set(CookieName.VIEW_MODE, ViewMode.MOBILE);
-      Router.push("/");
+      window.location.reload();
     };
 
     const handleAppStoreClick = () => {
@@ -62,7 +61,6 @@ const LoadingPageContent = dynamic(
             {t(CommonResourceKey.DOWNLOAD_FROM_APP_STORE)}
           </Button>
           <div className="logo">
-            {" "}
             <img src="/static/images/score247.svg" alt="Logo" />
           </div>
         </div>
@@ -76,12 +74,12 @@ const LoadingPageContent = dynamic(
   { ssr: false }
 );
 
-const LoadingPage: LocalizedPage = () => {
-  return <LoadingPageContent />;
+const ViewModeSelect: LocalizedPage = () => {
+  return <Content />;
 };
 
-LoadingPage.getInitialProps = () => ({
+ViewModeSelect.getInitialProps = () => ({
   namespacesRequired: [ResourceType.COMMON]
 });
 
-export default withTranslation()(LoadingPage);
+export default withTranslation()(ViewModeSelect);

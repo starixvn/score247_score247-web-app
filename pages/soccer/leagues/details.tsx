@@ -2,7 +2,6 @@ import "./styles.scss";
 import "../styles.scss";
 import React from "react";
 import Layout from "../../../components/layout";
-import withLoadingPage from "../../../hoc/with-loading-page";
 import { CommonResourceKey, ResourceType, SoccerResourceKey } from "../../../common/resources";
 import { SoccerAPI } from '../../../apis/soccer/soccer-api';
 import { Tabs, TabList, Tab, TabPanel, resetIdCounter } from 'react-tabs';
@@ -16,6 +15,7 @@ import Button from "../../../components/common/basic/button";
 import { WithTranslation } from 'react-i18next';
 import { NextPageContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { withTranslation } from "../../../common/helpers/Localizer";
 
 type Props = {
   query: ParsedUrlQuery;
@@ -126,4 +126,4 @@ class SoccerLeagueDetailPage extends React.Component<Props, State> {
   }
 }
 
-export default withLoadingPage(SoccerLeagueDetailPage);
+export default withTranslation()(SoccerLeagueDetailPage);
