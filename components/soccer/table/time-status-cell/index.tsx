@@ -5,6 +5,8 @@ import { TimeStatusCellProps, TimeStatusCellState } from "./types";
 import { DeviceContext } from "../../../../contexts/device-context";
 import "./style.scss";
 import { buildMatchStatus } from "../../../../common/helpers/match-status-helper";
+import { formatDate } from "../../../../common/helpers/date-time-helper";
+import { DateTimeFormat } from "../../../../common/constants";
 
 class TimeAndStatusCell extends React.Component<
   TimeStatusCellProps,
@@ -50,12 +52,9 @@ class TimeAndStatusCell extends React.Component<
   }
 
   render() {
-    const time = new Date(this.props.match.EventDate[0]).toLocaleString(
-      'en-GB',
-      {
-        hour: "2-digit",
-        minute: "2-digit"
-      }
+    const time = formatDate(
+      new Date(this.props.match.EventDate[0]),
+      DateTimeFormat.TIME
     );
 
     const statusCell = ({ isMobile }: { isMobile: boolean }) => {
