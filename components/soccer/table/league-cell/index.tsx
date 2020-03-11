@@ -3,14 +3,7 @@ import React from "react";
 import { MatchSummary } from "../../../../apis/soccer/models";
 import Router from "next/router";
 import { useDeviceContext } from '../../../../contexts/device-context';
-import { EEXIST } from 'constants';
-
-const buildLeagueAbbreviation = (leagueName: string): string => {
-  return leagueName
-    .split(/[\s]/)
-    .map(i => i.charAt(0))
-    .join("");
-};
+import { buildLeagueAbbreviation } from '../../../../common/helpers/soccer-league-helper';
 
 const LeagueCell: React.FC<{ match: MatchSummary; rowSpan?: number }> = ({
   match,

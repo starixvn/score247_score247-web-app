@@ -46,7 +46,7 @@ class TimeAndStatusCell extends React.Component<
     }
   }
 
-  buildMatchStatusClass(match: MatchSummary) {    console.log(match?.MatchStatus);
+  buildMatchStatusClass(match: MatchSummary) {
     return (match?.MatchStatus ? MatchStatusHelper.isCancelStatus(match?.MatchStatus) : MatchStatusHelper.isCancelStatus(match?.EventStatus))
       ? "match-cancel"
       : "";
