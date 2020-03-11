@@ -15,7 +15,6 @@
 .icon-arrow-right,
 .icon-penalty {
     color: #000;
-    margin-right: .4rem;
 }
 
 .col-home, .text-score, .col-away {
@@ -26,6 +25,12 @@
 .col-home,
 .col-away {
     width: 100%;
+}
+.col-home > * {
+    margin-right: .4rem;
+}
+.col-away  > * {
+    margin-left: .4rem;
 }
 
 .col-favorites,

@@ -23,6 +23,7 @@
     color: #000;
     .mobile & {
       font-size: 1.2rem;
+      text-transform: uppercase;
     }
   }
 }
@@ -80,6 +81,9 @@
 
     .reference-info {
       right: 0;
+      > * {
+        margin-left: .4rem;
+      }
       .mobile & {
         justify-content: flex-end;
       }
@@ -94,6 +98,9 @@
 
     .reference-info {
       left: 0;
+      > * {
+        margin-right: .4rem;
+      }
       .mobile & {
         justify-content: flex-start;
       }
@@ -106,9 +113,7 @@
   .reference-info {
     position: absolute;
     display: flex;
-    [class$="card"] {
-      margin: 0;
-    }
+
     .icon-penalty, .icon-arrow-right {
       font-size: 1.6rem;
     } 

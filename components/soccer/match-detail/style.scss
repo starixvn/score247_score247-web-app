@@ -44,8 +44,8 @@
 
 .left {
   .pitch-view {
-    clip-path: inset(0 0 50% 0);
-    -webkit-clip-path: inset(0 0 50% 0);
+    clip-path: inset(0 0 52% 0);
+    -webkit-clip-path: inset(0 0 51.5% 0);
   }
   .jersey {
     color: #30c2ff;
@@ -54,11 +54,11 @@
 
 .right {
   .pitch-view {
-    clip-path: inset(50% 0 0 0);
-    -webkit-clip-path: inset(50% 0 0 0);
+    clip-path: inset(48% 0 0 0);
+    -webkit-clip-path: inset(48.5% 0 0 0);
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: -4px;
   }
   .jersey {
     color: #fa2e58;
@@ -162,8 +162,8 @@
     }
     @media screen and (min-width: 1024px) {
       .left & {
-        height: 0.4rem;
-        background-color: transparent;
+        height: 0.8rem;
+        background-color: #59741C;
       }
       .right & {
         height: 0.5rem;
