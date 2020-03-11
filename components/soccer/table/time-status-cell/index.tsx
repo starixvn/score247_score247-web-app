@@ -51,11 +51,10 @@ class TimeAndStatusCell extends React.Component<
 
   render() {
     const time = new Date(this.props.match.EventDate[0]).toLocaleString(
-      navigator.language,
+      'en-GB',
       {
         hour: "2-digit",
-        minute: "2-digit",
-        hour12: false
+        minute: "2-digit"
       }
     );
 
