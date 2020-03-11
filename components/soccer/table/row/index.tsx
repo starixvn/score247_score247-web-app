@@ -55,11 +55,12 @@ class SoccerRow extends React.Component<Props, State> {
   handleClick = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
     event.preventDefault();
     const { isMobile } = this.context;
+    const url = `/soccer/${this.props.match.Id}/${covertToUTC(new Date(this.props.match.EventDate[0]))}`;
 
     if (isMobile) {
-      Router.push("/soccer/[...id]", `/soccer/${this.props.match.Id}/${covertToUTC(new Date(this.props.match.EventDate[0]))}`);
+      Router.push("/soccer/[id]/[date]", url);
     } else {
-      window.open("/soccer/[...id]", `/soccer/${this.props.match.Id}/${this.props.match.EventDate}`);
+      window.open(url);
     }
   };
 

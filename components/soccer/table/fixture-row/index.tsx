@@ -11,6 +11,7 @@ import { DeviceContext } from "../../../../contexts/device-context";
 import FavoriteCell from "../favorite-cell";
 import { MatchStatusType } from "../../../../common/enums/match-status-type";
 import Router from "next/router";
+import { covertToUTC } from '../../../../common/helpers/date-time-helper';
 
 type Props = {
   match: MatchSummary;
@@ -25,11 +26,12 @@ class SoccerRow extends React.Component<Props> {
   handleClick = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
     event.preventDefault();
     const { isMobile } = this.context;
+    const url = `/soccer/${this.props.match.Id}/${covertToUTC(new Date(this.props.match.EventDate[0]))}`;
 
     if (isMobile) {
-      Router.push("/soccer/[id]", `/soccer/${this.props.match.Id}`);
+      Router.push("/soccer/[id]/[date]", url);
     } else {
-      window.open(`/soccer/${this.props.match.Id}`);
+      window.open(url);
     }
   };
 
