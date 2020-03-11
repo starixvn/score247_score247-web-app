@@ -1,7 +1,6 @@
 import { Enumeration } from "./enumeration";
 import { Commentary } from "./commentary";
 import { GoalScorer } from "./goal-scorer";
-import { Outcome } from "./outcome";
 
 export interface MatchCommentary {
     TimelineId: string;
@@ -12,5 +11,4 @@ export interface MatchCommentary {
     Commentaries: Commentary[];
     GoalScorer: GoalScorer;
     IsPenaltyShootOutScored: boolean;
-    Outcome: Outcome;
 }

@@ -19,5 +19,12 @@
   "spectators": "Spectators",
   "league_detail": "League detail",
   "show_all_results": "Show all results",
-  "hide_all_results": "Hide all results"
+  "hide_all_results": "Hide all results",
+
+  "red_card": "Red card",
+  "yellow_card": "Yellow card",
+  "yellow_red_card": "Yellow to red card",
+  "penalty_missed": "Penalty missed",
+  "video_assistant_referee_over": "Video assistant referee over",
+  "score_change": "Score changed"
 }

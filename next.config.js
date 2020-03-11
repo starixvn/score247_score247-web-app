@@ -9,7 +9,7 @@ const appSettings = {
 const nextConfig = {
   excludeFile: str => /\*.{spec,test}.js/.test(str),
   publicRuntimeConfig: appSettings,
-  webpack: (config, { isServer, buildId }) => {
+  webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.alias["@sentry/node"] = "@sentry/browser";
     }

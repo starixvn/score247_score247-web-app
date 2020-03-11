@@ -1,7 +1,7 @@
 import "./style.scss";
 import React from "react";
-import { MatchCommentary } from '../../../../apis/soccer/models';
-import CommentaryRow from './commentary-row';
+import { MatchCommentary } from "../../../../apis/soccer/models";
+import CommentaryRow from "./commentary-row";
 import { withTranslation } from "../../../../common/helpers/Localizer";
 import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import Card from "../../../common/basic/card";
@@ -62,15 +62,22 @@ class Commentary extends React.Component<Props, State> {
 
     const commentaryBody = (
       <div className="commantaries">
-        {comments.map(x => <CommentaryRow comment={x} key={x.TimelineId} />)}
+        {comments.map(x => (
+          <CommentaryRow comment={x} key={x.TimelineId} />
+        ))}
       </div>
     );
 
-    const commentary = this.state.comments.length > 0 ? (
-      <Card title={t(SoccerResourceKey.COMMENTARY)} className="commentary" titleIcon={"icon-note"}>
-        {commentaryBody}
-      </Card>
-    ) : null;
+    const commentary =
+      this.state.comments.length > 0 ? (
+        <Card
+          title={t(SoccerResourceKey.COMMENTARY)}
+          className="commentary"
+          titleIcon={"icon-note"}
+        >
+          {commentaryBody}
+        </Card>
+      ) : null;
 
     return commentary;
   }

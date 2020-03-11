@@ -1,103 +1,150 @@
 import React from "react";
-import {
-  MatchCommentary,
-  Enumeration
-} from "../../../../../apis/soccer/models";
+import { MatchCommentary } from "../../../../../apis/soccer/models";
 import TimeCell from "../time-cell";
 import CommentaryCell from "../commentary-cell";
 import { EventTypes } from "../../../../../common/enums/event-type";
 import { SoccerGoalMethod } from "../../../../../common/enums/soccer-goal-method";
+import { useTranslation } from "../../../../../common/helpers/Localizer";
+import { ResourceType } from "../../../../../common/resources";
 
 type Props = {
   comment: MatchCommentary;
 };
 
-type IconHolder = {
-  [key: number]: JSX.Element;
+export type CommentaryType = {
+  icon?: JSX.Element;
+  message: string;
 };
 
-const isVAREvent = (event: Enumeration) => {
-  return event.Value === EventTypes.VIDEO_ASSISTANT_REFEREE_OVER.value;
+type SpecialEvent = {
+  type: number;
+  icon: JSX.Element;
+  otherIcons?: {
+    [key: string]: JSX.Element;
+  };
 };
 
-const isHiddenComment = (
-  commentContent: string,
-  comment: MatchCommentary
-): boolean => {
-  return (
-    commentContent.length === 0 ||
-    comment.TimelineType.Value === EventTypes.VIDEO_ASSISTANT_REFEREE.value
-  );
-};
-
-const getIcon = (comment: MatchCommentary) => {
-  const icons: IconHolder = {
-    [EventTypes.RED_CARD.value]: <span className="red-card" />,
-    [EventTypes.YELLOW_CARD.value]: <span className="yellow-card" />,
-    [EventTypes.YELLOW_RED_CARD.value]: (
+const specialEvents: SpecialEvent[] = [
+  {
+    type: EventTypes.RED_CARD.value,
+    icon: <span className="red-card" />
+  },
+  {
+    type: EventTypes.YELLOW_CARD.value,
+    icon: <span className="yellow-card" />
+  },
+  {
+    type: EventTypes.YELLOW_RED_CARD.value,
+    icon: (
       <div className="yellow-to-red">
         <span className="yellow-card" />
         <span className="red-card" />
       </div>
-    ),
-    [EventTypes.PENALTY_MISSED.value]: (
+    )
+  },
+  {
+    type: EventTypes.PENALTY_MISSED.value,
+    icon: (
       <div className="miss-penalty">
         <img src="/static/images/miss-penalty.svg" />
       </div>
-    ),
-    [EventTypes.SUBSTITUTION.value]: (
+    )
+  },
+  {
+    type: EventTypes.SUBSTITUTION.value,
+    icon: (
       <div className="substitution">
         <span className="icon-arrow-down1" />
         <span className="icon-arrow-up" />
       </div>
-    ),
-    [EventTypes.VIDEO_ASSISTANT_REFEREE_OVER.value]: (
-      <span className="icon-var" />
     )
-  };
-
-  if (comment.TimelineType.Value === EventTypes.SCORE_CHANGE.value) {
-    if (comment.GoalScorer.Method === SoccerGoalMethod.OWN_GOAL) {
-      return <span className="icon-own-goal" />;
-    } else if (comment.GoalScorer.Method === SoccerGoalMethod.PENALTY) {
-      return <span className="icon-goal-pen" />;
+  },
+  {
+    type: EventTypes.VIDEO_ASSISTANT_REFEREE_OVER.value,
+    icon: <span className="icon-var" />
+  },
+  {
+    type: EventTypes.SCORE_CHANGE.value,
+    icon: <span className="icon-goal" />,
+    otherIcons: {
+      [SoccerGoalMethod.OWN_GOAL]: <span className="icon-own-goal" />,
+      [SoccerGoalMethod.PENALTY]: <span className="icon-goal-pen" />
     }
-    return <span className="icon-goal" />;
-  } else {
-    return icons[comment.TimelineType.Value];
   }
+];
+
+const getIcon = (comment: MatchCommentary, specialEvent?: SpecialEvent) => {
+  if (specialEvent && specialEvent.type === comment.TimelineType.Value) {
+    if (specialEvent.otherIcons && comment.GoalScorer) {
+      const method: string = comment.GoalScorer.Method;
+      const otherIcon = specialEvent.otherIcons[method];
+
+      if (otherIcon) {
+        return otherIcon;
+      }
+    }
+    return specialEvent.icon;
+  }
+
+  return undefined;
 };
 
-const getCommentContent = (comment: MatchCommentary) => {
-  let content = "";
-
-  if (comment.Commentaries && comment.Commentaries.length > 0) {
-    content = comment.Commentaries.map(x => x.Text).join(".");
-  }
+const getMessage = (
+  comment: MatchCommentary,
+  specialEvent?: SpecialEvent,
+  t?: Function
+) => {
+  let content = comment.Commentaries?.map(x => x.Text).join(".");
 
   if (
-    content.length === 0 &&
-    comment.Outcome &&
-    isVAREvent(comment.TimelineType)
+    specialEvent &&
+    !content &&
+    specialEvent.type === comment.TimelineType.Value &&
+    t
   ) {
-    content = comment.Outcome.CompiledDisplayName;
+    content = t(comment.TimelineType.DisplayName);
   }
 
   return content;
 };
 
-const CommentaryRow: React.FC<Props> = (props: Props) => {
-  const icon = getIcon(props.comment);
-  const commentContent = getCommentContent(props.comment);
-  const specialEvent = icon ? "special-event" : "";
-
-  return isHiddenComment(commentContent, props.comment) ? null : (
-    <div className={`commentary-row ${specialEvent}`}>
-      <TimeCell comment={props.comment} />
-      <div className="commentary-icon-cell">{icon}</div>
-      <CommentaryCell comment={commentContent} />
-    </div>
+const getCommentary: (
+  comment: MatchCommentary,
+  t?: Function
+) => CommentaryType = (comment, t) => {
+  const eventType = comment.TimelineType.Value;
+  const specialEvent = specialEvents.filter(
+    special => special.type === eventType
   );
+
+  return {
+    icon: getIcon(comment, specialEvent[0]),
+    message: getMessage(comment, specialEvent[0], t)
+  };
+};
+
+const isHiddenComment = (comment: CommentaryType): boolean => {
+  return !comment.message || comment.message.length === 0;
+};
+
+const CommentaryRow: React.FC<Props> = (props: Props) => {
+  const { t } = useTranslation(ResourceType.SOCCER);
+  const comment = getCommentary(props.comment, t);
+  const specialEvent = comment.icon ? "special-event" : "";
+  const isHidden = isHiddenComment(comment);
+  
+
+  if (!isHidden) {
+    return (
+      <div className={`commentary-row ${specialEvent}`}>
+        <TimeCell comment={props.comment} />
+        <div className="commentary-icon-cell">{comment.icon}</div>
+        <CommentaryCell comment={comment.message} />
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default CommentaryRow;

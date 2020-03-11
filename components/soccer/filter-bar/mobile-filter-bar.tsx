@@ -76,10 +76,14 @@ class MobileFilterBar extends React.Component<Props, State> {
     }
 
     componentDidMount () {
-        ['click', 'touchend'].forEach(id => document.addEventListener(id, event => this.handleClickOutside(event)));
+        ['click', 'touchend'].forEach(id => document.addEventListener(id, this.handleClickOutside));
     }
 
-    handleClickOutside(event: MouseEvent | Event) {
+    componentWillUnmount() {
+        ['click', 'touchend'].forEach(id => document.removeEventListener(id, this.handleClickOutside));
+    }
+
+    handleClickOutside = (event: MouseEvent | Event) => {
         if (!this.sortButton?.current?.contains(event.target as HTMLElement)) {
             this.setState({ openSortMenu: false });
         }
