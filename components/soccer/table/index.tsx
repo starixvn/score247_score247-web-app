@@ -80,7 +80,7 @@ class SoccerTable extends React.Component<Props> {
   };
 
   isCancelMatch(match: MatchSummary) {
-    return CancelStatus.includes(match.MatchStatus?.Value);
+    return CancelStatus.includes(match.MatchStatus?.Value ?? match.EventStatus?.Value);
   }
 
   isEndMatch(match: MatchSummary) {

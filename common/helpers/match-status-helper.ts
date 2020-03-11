@@ -12,7 +12,7 @@ class PeriodTime {
     public startTime: number,
     public endTime: number,
     public matchStatus: MatchStatus
-  ) {}
+  ) { }
 }
 
 interface IPeriodTimes {
@@ -74,7 +74,7 @@ function buildMatchMinuteText(matchMinute: number, periodTime: PeriodTime) {
 
 export function buildMatchStatus(match: MatchSummary): string {
   if (match?.MatchStatus == null) {
-    return "";
+    return MatchStatusTypeDic[match.EventStatus.Value]?.displayName;
   }
 
   if (MatchStatusHelper.isEventNeedBeShownMinute(match.MatchStatus)) {

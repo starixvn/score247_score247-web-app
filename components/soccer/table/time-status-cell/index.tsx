@@ -11,7 +11,7 @@ import { DateTimeFormat } from "../../../../common/constants";
 class TimeAndStatusCell extends React.Component<
   TimeStatusCellProps,
   TimeStatusCellState
-> {
+  > {
   readonly countMinuteInterval: number = 15000;
   private timerId = 0;
 
@@ -45,8 +45,9 @@ class TimeAndStatusCell extends React.Component<
       window.clearInterval(this.timerId);
     }
   }
-  buildMatchStatusClass(match: MatchSummary) {
-    return MatchStatusHelper.isCancelStatus(match?.MatchStatus)
+
+  buildMatchStatusClass(match: MatchSummary) {    console.log(match?.MatchStatus);
+    return (match?.MatchStatus ? MatchStatusHelper.isCancelStatus(match?.MatchStatus) : MatchStatusHelper.isCancelStatus(match?.EventStatus))
       ? "match-cancel"
       : "";
   }
@@ -70,13 +71,13 @@ class TimeAndStatusCell extends React.Component<
           <span className="match-status">{matchStatus}</span>
         </td>
       ) : (
-        <>
-          <td rowSpan={this.props.rowSpan}>{time}</td>
-          <td rowSpan={this.props.rowSpan} className={matchStatusClass}>
-            {matchStatus}
-          </td>
-        </>
-      );
+          <>
+            <td rowSpan={this.props.rowSpan}>{time}</td>
+            <td rowSpan={this.props.rowSpan} className={matchStatusClass}>
+              {matchStatus}
+            </td>
+          </>
+        );
     };
 
     return <DeviceContext.Consumer>{statusCell}</DeviceContext.Consumer>;
