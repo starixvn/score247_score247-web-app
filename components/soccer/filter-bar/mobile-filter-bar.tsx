@@ -28,6 +28,8 @@ type Props = {
 } & WithTranslation;
 
 class MobileFilterBar extends React.Component<Props, State> {
+    private readonly sortButton = React.createRef<HTMLSpanElement>();
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -73,12 +75,22 @@ class MobileFilterBar extends React.Component<Props, State> {
         });
     }
 
+    componentDidMount () {
+        ['click', 'touchend'].forEach(id => document.addEventListener(id, event => this.handleClickOutside(event)));
+    }
+
+    handleClickOutside(event: MouseEvent | Event) {
+        if (!this.sortButton?.current?.contains(event.target as HTMLElement)) {
+            this.setState({ openSortMenu: false });
+        }
+    }
+
     render() {
         return (
             <>
                 <div className="search-filter">
                     <span className="icon-search" onClick={this.handleSearchClick}></span>
-                    <span className="icon-more" onClick={this.handleSortMenuClick}></span>
+                    <span className="icon-more" onClick={this.handleSortMenuClick} ref={this.sortButton}></span>
                 </div>
                 {this.state.openSearch && <MobileSearchBar {...this.props} onCancel={this.handleCancelClick} />}
                 {this.state.openSortMenu && (
