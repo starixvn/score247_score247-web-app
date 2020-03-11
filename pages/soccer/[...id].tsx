@@ -7,10 +7,11 @@ import { CommonResourceKey, ResourceType, SoccerResourceKey } from "../../common
 
 type Props = {
   matchId: string | string[];
+  eventDate: string
 };
 
 const SoccerMatchDetailPage: LocalizedPage<Props> = props => {
-  const { t, matchId } = props;
+  const { t, matchId, eventDate } = props;
   return (
     <Layout
       title={t(CommonResourceKey.SOCCER)}
@@ -19,16 +20,18 @@ const SoccerMatchDetailPage: LocalizedPage<Props> = props => {
         t(SoccerResourceKey.MATCH_INFO, { ns: ResourceType.SOCCER })
       ]}
     >
-      <SoccerMatchDetail matchId={matchId} />
+      <SoccerMatchDetail matchId={matchId} eventDate={eventDate} />
     </Layout>
   );
 };
 
 SoccerMatchDetailPage.getInitialProps = async ({ query }) => {
-  const { id } = query;
-
+  console.log(query);
+  const id = query.id[0];
+  const eventDate = query.id[1].toString().split(",")[0];
   return {
     matchId: id,
+    eventDate,
     namespacesRequired: [ResourceType.SOCCER]
   };
 };

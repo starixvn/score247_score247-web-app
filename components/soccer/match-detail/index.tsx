@@ -20,6 +20,7 @@ const DesktopView = dynamic(() => import("./desktop-view"));
 
 type Props = {
   matchId: string | string[];
+  eventDate: string;
 };
 
 type State = {
@@ -53,7 +54,7 @@ class SoccerMatchDetail extends React.Component<Props, State> {
   }
 
   async componentDidMount() {
-    const matchInfo = await SoccerAPI.GetMatch(this.props.matchId);
+    const matchInfo = await SoccerAPI.GetMatch(this.props.matchId, this.props.eventDate);
     const matchLineUps = await SoccerAPI.GetMatchLineups(
       this.props.matchId,
       new Date(matchInfo.Match.EventDate[0])
