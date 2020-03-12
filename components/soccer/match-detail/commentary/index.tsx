@@ -7,6 +7,7 @@ import { ResourceType, SoccerResourceKey } from "../../../../common/resources";
 import Card from "../../../common/basic/card";
 import { WithTranslation } from "react-i18next";
 import { SoccerAPI } from "../../../../apis/soccer/soccer-api";
+import { EventTypes } from "../../../../common/enums/event-type";
 
 type Props = {
   matchId: string;
@@ -16,6 +17,16 @@ type Props = {
 type State = {
   comments: MatchCommentary[];
 };
+
+const specialEvents: number[] = [
+  EventTypes.RED_CARD.value,
+  EventTypes.YELLOW_CARD.value,
+  EventTypes.YELLOW_RED_CARD.value,
+  EventTypes.PENALTY_MISSED.value,
+  EventTypes.SUBSTITUTION.value,
+  EventTypes.VIDEO_ASSISTANT_REFEREE_OVER.value,
+  EventTypes.SCORE_CHANGE.value
+];
 
 class Commentary extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -34,7 +45,13 @@ class Commentary extends React.Component<Props, State> {
       );
 
       if (comments) {
-        this.setState({ comments });
+        const filteredComments = comments.filter(
+          comment =>
+            (comment.Commentaries && comment.Commentaries.length > 0) ||
+            specialEvents.includes(comment.TimelineType?.Value)
+        );
+
+        this.setState({ comments: filteredComments });
       }
     }
   }
