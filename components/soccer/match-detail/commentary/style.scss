@@ -62,10 +62,14 @@
     }
     .yellow-to-red {
         position: relative;
+        left: -3px;
         .red-card {
             position: absolute;
-            left: 11px;
+            left: 23px;
             top: -3px;
+            .mobile & {
+                left: 14px;
+            }
         }
     }
     .miss-penalty {
