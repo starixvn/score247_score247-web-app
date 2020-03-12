@@ -24,6 +24,9 @@ export default function SideBar(props: Props) {
   return (
     <>
       <div className={`push-menu ${props.isActive && "active"}`}>
+        <div className="push-menu-head">
+          <span className="icon-close"></span>
+        </div>
         <div className="block-setting">
           <div className="block-title">Settings</div>
           <div className="block-content">
@@ -34,7 +37,7 @@ export default function SideBar(props: Props) {
               </div>
               <div className="value">
                 <span className="text">{t(sport)}</span>
-                <span className="icon-arrow-down caret-right"></span>
+                <span className="icon-caret-left caret-right"></span>
               </div>
             </div>
             <div className="row" onClick={() => setLanguageSelection(true)}>
@@ -47,7 +50,7 @@ export default function SideBar(props: Props) {
                 <span className="text">
                   {supportedLanguages.find(x => x.code === i18n.language)?.name}
                 </span>
-                <span className="icon-arrow-down caret-right"></span>
+                <span className="icon-caret-left caret-right"></span>
               </div>
             </div>
             <div className="row">
@@ -57,7 +60,7 @@ export default function SideBar(props: Props) {
               </div>
               <div className="value">
                 <span className="text">GMT+7</span>
-                <span className="icon-arrow-down caret-right"></span>
+                <span className="icon-caret-left caret-right"></span>
               </div>
             </div>
             <div className="row">
@@ -78,7 +81,7 @@ export default function SideBar(props: Props) {
                 FAQ
               </div>
               <div className="value">
-                <span className="icon-arrow-down caret right"></span>
+                <span className="icon-caret-left caret-right"></span>
               </div>
             </div>
           </div>

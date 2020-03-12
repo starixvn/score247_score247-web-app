@@ -64,8 +64,8 @@ class Mobile extends React.PureComponent<Props> {
       >
         <div className="function-box">
           <div className="back-box" onClick={this.handleClose}>
-            <span className="icon-arrow-down back"></span>
-            <span>back</span>
+            <span className="icon-caret-left"></span>
+            <span>Back</span>
           </div>
           <span className="txt-title">Select Language</span>
           <span className="done" onClick={this.handleClose}>
