@@ -10,7 +10,6 @@ Resource          ../Actions/CommonAction.txt
 Get extra line
     [Arguments]    ${NewMatchID}
     ${Status_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-extra"]/span
-    #Log to console    ${Status_Result_Xpath}
     AppiumLibrary.Page Should Contain Element    ${Status_Result_Xpath}    timeout=60
     ${Status_Result_txt}    AppiumLibrary.Get text    ${Status_Result_Xpath}
     ${Status_Result_txt}=    Replace String    ${Status_Result_txt}    ${space}    ${empty}
@@ -214,7 +213,6 @@ Check Main_info_mobile
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
     ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
-    Log To Console    ${Score_Result_txt}
     Should be equal    2 - 2    ${Score_Result_txt}
     # Check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
@@ -239,7 +237,6 @@ Check Main_info_mobile
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    HT    ${Status_Result_txt}
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    #${Score_Result_txt}    Replace String    ${Score_Result_txt}    ${space}    ${empty}
     ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
     Log To Console    ${Score_Result_txt}
     Should be equal    2 - 2    ${Score_Result_txt}
@@ -281,7 +278,6 @@ Check Main_info_mobile
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
     ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
-    Log To Console    ${Score_Result_txt}
     Should be equal    3 - 2    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
@@ -306,7 +302,6 @@ Check Main_info_mobile
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
     ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
-    Log To Console    ${Score_Result_txt}
     Should be equal    3 - 3    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
@@ -348,7 +343,6 @@ Check Main_info_mobile
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
     ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
-    Log To Console    ${Score_Result_txt}
     Should be equal    4 - 3    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
@@ -366,7 +360,6 @@ Check Main_info_mobile
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
     ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
-    Log To Console    ${Score_Result_txt}
     Should be equal    4 - 4    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
@@ -393,11 +386,9 @@ Check Main_info_mobile
     sleep    5s
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    Await. ET    ${Status_Result_txt}
-    Log To Console    ${Status_Result_txt}
     #Check Extra Line
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
     Should be equal    FT[4-4]    ${Extra_Result_txt}
-    Log To Console    ${Extra_Result_txt}
     ####### Ext_Time    1st    start
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -424,7 +415,6 @@ Check Main_info_mobile
     sleep    5s
     ${Score_Result_txt}    get Score    ${NewMatchID}
     ${Score_Result_txt}=    Get Substring    ${Score_Result_txt}    0    5
-    Log To Console    ${Score_Result_txt}
     Should be equal    5 - 4    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
@@ -484,7 +474,6 @@ Check Main_info_mobile
     Should be equal    (2 - 2)    ${1H_Result_txt}
     #Check Extra Line
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[1-1]    ${Extra_Result_txt}
     ####### Injury Ext_Time    1st
     Selenium2Library.switch browser    tab1
@@ -520,7 +509,6 @@ Check Main_info_mobile
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[2-1]    ${Extra_Result_txt}
     # Score change
     Selenium2Library.switch browser    tab1
@@ -540,7 +528,6 @@ Check Main_info_mobile
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[2-2]    ${Extra_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
@@ -596,7 +583,6 @@ Check Main_info_mobile
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[3-2]    ${Extra_Result_txt}
     # Score change
     Selenium2Library.switch browser    tab1
@@ -660,7 +646,6 @@ Check Main_info_mobile
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-3]    ${Extra_Result_txt}
     # Score change
     Selenium2Library.switch browser    tab1
@@ -680,7 +665,6 @@ Check Main_info_mobile
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    (2 - 2)    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4]    ${Extra_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
@@ -718,7 +702,6 @@ Check Main_info_mobile
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[0-0]    ${Extra_Result_txt}
     ### PEN Shoot Out
     Selenium2Library.switch browser    tab1
@@ -734,7 +717,6 @@ Check Main_info_mobile
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[1-0]    ${Extra_Result_txt}
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -764,7 +746,6 @@ Check Main_info_mobile
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -779,7 +760,6 @@ Check Main_info_mobile
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
     ######### End Match After Pen
     Selenium2Library.switch browser    tab1

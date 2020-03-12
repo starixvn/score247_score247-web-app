@@ -50,11 +50,11 @@ Verify LeaguesCode
     \    Log To Console    ${lengthval3}
     \    Run Keyword If    ${view}>0    Check leagues code Desktop    ${NewMatchID}    ${LeagueCode}
     \    ...    ELSE    Check leagues code Mobile    ${NewMatchID}    ${LeagueCode}
-    \    ${xpathdel}=    Catenate    SEPARATOR=    //td[contains(.,'${NewMatchID}')]//ancestor::tr/td[11]/a[3]
-    \    Delete New Match    ${xpathdel}
+    # \    ${xpathdel}=    Catenate    SEPARATOR=    //td[contains(.,'${NewMatchID}')]//ancestor::tr/td[11]/a[3]
+    # \    Delete New Match    ${xpathdel}
 
 Verify Match Info
-    ${NewMatchID}    Create New Match    sr:tournament:17
+    ${NewMatchID}    Create New Match    sr:tournament:14
     Selenium2Library.Page Should Contain Element    ${KOTime_Xpath}    timeout=115
     ${KOTime_txt}    Selenium2Library.Get text    ${KOTime_Xpath}
     ${KOTime_txt}=    Get Substring    ${KOTime_txt}    11    16

@@ -13,32 +13,32 @@ Resource          ../Actions/ViewMatchInfo_Desktop.txt
 Resource          ../Actions/CheckLiveMatch_Desktop.txt
 
 *** Test Cases ***
-Verify LeaguesCode
+Verify_LeaguesCode
     Verify LeaguesCode    1
 
-Post Match - Postponed Match
+PostMatch_Postponed Match
     Verify Postponed Match
 
-Post Match - start_delayed Match
+PostMatch_start_delayed Match
     Verify start_delayed Match
 
-Post Match - cancel Match
+PostMatch_cancel Match
     Verify cancel Match
 
-Post Match - abandoned Match
+PostMatch_abandoned Match
     Verify abandoned Match
 
-Post Match - interrupted Match
+PostMatch_interrupted Match
     Verify interrupted Match
 
-01 Live Match - Score Change
+01_LiveMatch_Score Change
     Verify Score Change
 
-02 Live Match - Card Event
+02_LiveMatch_Card Event
     Verify Card Event
 
-03 Live Match - Injuty Time
+03_LiveMatch_ Injuty Time
     Verify Injuty Time
 
-04 Live Match - 1H Break Time - 2H
+04_LiveMatch_1H Break Time - 2H
     Verify 1H Break Start

@@ -10,15 +10,12 @@ Resource          ../Actions/CommonAction.txt
 Open General Info mobile
     [Arguments]    ${NewMatchID}
     ${Score_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-score"]
-    Log To Console    2323232
     AppiumLibrary.Page Should Contain Element    ${Score_Result_Xpath}    timeout=60
-    Log To Console    2323232
     AppiumLibrary.Click Element    ${Score_Result_Xpath}
 
 Get extra line
     [Arguments]    ${NewMatchID}
     ${Status_Result_Xpath}=    Catenate    SEPARATOR=    //tr[@data-match-id="${NewMatchID}"]/td[@class="text-extra"]/span
-    #Log to console    ${Status_Result_Xpath}
     AppiumLibrary.Page Should Contain Element    ${Status_Result_Xpath}    timeout=60
     ${Status_Result_txt}    AppiumLibrary.Get text    ${Status_Result_Xpath}
     ${Status_Result_txt}=    Replace String    ${Status_Result_txt}    ${space}    ${empty}

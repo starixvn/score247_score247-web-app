@@ -7,6 +7,20 @@ Resource          ../Interfaces/Desktop/01_Layout/DateBar_Web.txt
 Resource          ../Interfaces/Desktop/01_Layout/Breadcrumbs.txt
 
 *** Keywords ***
+Verify filter leagues
+    Open Home page
+    sleep    5s
+    Selenium2Library.Click Element    //*[@id="__next"]//div[@class="filter-event"]
+    sleep    5s
+    @{listleagues}=    Selenium2Library.Get Webelements    //div[@class="list-league"]//div[@class="league-row-name"]/span
+    #log to console    @{listleagues}
+    : FOR    ${item}    IN    @{listleagues}
+    \    ${item1}    Selenium2Library.Get Text    ${item}
+    \    @{MyList}    Create List    @{MyList}    ${item1}
+    # \    log to console    ${item1}
+    : FOR    ${i}    IN    @{MyList}
+    \    log to console    ${i}
+
 Verify Optional Function
     # check show only
     Open Home page

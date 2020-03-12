@@ -1,6 +1,7 @@
 *** Settings ***
-Library           Selenium2Library
+Library           Selenium2Library    run_on_failure=Selenium2Library.CapturePageScreenshot
 Library           OperatingSystem
+Library           DatabaseLibrary
 Library           AppiumLibrary
 Library           Screenshot
 Library           Collections
@@ -50,3 +51,9 @@ Verify_Optional_Function
 
 Verify_Live_Match
     Verify Live Match Desktop
+
+SQL
+    ConnectMySQL
+
+leagues
+    Verify filter leagues

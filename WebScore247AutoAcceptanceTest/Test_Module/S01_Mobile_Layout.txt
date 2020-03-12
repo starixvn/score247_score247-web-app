@@ -1,7 +1,7 @@
 *** Settings ***
 Test Setup
 Library           OperatingSystem
-Library           AppiumLibrary
+Library           AppiumLibrary    run_on_failure=AppiumLibrary.CapturePageScreenshot
 Library           Screenshot
 Library           Collections
 Library           String
@@ -18,26 +18,23 @@ Resource          ../Actions/GeneralInfo_Mobile.txt
 Header
     setup and open android phone
     Assert Header
-    [Teardown]    Close Browser
 
 Function_bar
     setup and open android phone
     Assert Fn_bar
     sleep    3s
-    [Teardown]    Close Browser
 
 Date_bar
     setup and open android phone
     Assert Date_bar
     #Backgroup_color
     sleep    3s
-    [Teardown]    Close Browser
 
-Verify Main Info
+Verify_Main_Info
     [Setup]    Set Appium Timeout    600 seconds
     Check Main_info_mobile
     #test1212
 
-Verify Match Info
+Verify_Match_Info
     [Setup]    Set Appium Timeout    600 seconds
     CheckGeneral_info_mobile

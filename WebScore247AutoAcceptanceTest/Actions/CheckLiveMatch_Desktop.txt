@@ -31,13 +31,11 @@ Verify Live Match Desktop
     sleep    1s
     ###--- Check match info ----###
     Open General Info Desktop    ${NewMatchID}
-    Log To Console    11111
     # Check Status
     ${Status_Result_txt}    Get Status General
     ${Status_Result_txt}    Remove String    ${Status_Result_txt}    '
     Should be true    ${Status_Result_txt}<46
     # Check Score
-    Log To Console    22222
     ${Score_Result_txt}    Get Score General
     sleep    1s
     Should be equal    0-0    ${Score_Result_txt}
@@ -738,15 +736,12 @@ Verify Live Match Desktop
     ${RedCard_Result_txt}    Get red card value for Away    ${NewMatchID}
     Should be equal    2    ${RedCard_Result_txt}
     ${Score_Result_txt}    get Score    ${NewMatchID}
-    Log to console    ${Score_Result_txt}
     Should be equal    5 - 5    ${Score_Result_txt}
     # Check Score 1H
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    2 - 2    ${1H_Result_txt}
     #Check Extra Line
-    Log to console    121212
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[1-1]    ${Extra_Result_txt}
     ###--- Check match info ----###
     Select Window    new
@@ -799,7 +794,6 @@ Verify Live Match Desktop
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    2 - 2    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[2-1]    ${Extra_Result_txt}
     ###--- Check match info ----###
     Select Window    new
@@ -835,7 +829,6 @@ Verify Live Match Desktop
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    2 - 2    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[2-2]    ${Extra_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
@@ -937,7 +930,6 @@ Verify Live Match Desktop
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    2 - 2    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[3-2]    ${Extra_Result_txt}
     ###--- Check match info ----###
     Select Window    new
@@ -973,7 +965,6 @@ Verify Live Match Desktop
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    2 - 2    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[3-3]    ${Extra_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
@@ -1040,7 +1031,6 @@ Verify Live Match Desktop
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    2 - 2    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-3]    ${Extra_Result_txt}
     ###--- Check match info ----###
     Select Window    new
@@ -1076,7 +1066,6 @@ Verify Live Match Desktop
     ${1H_Result_txt}    Get Score 1H    ${NewMatchID}
     Should be equal    2 - 2    ${1H_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4]    ${Extra_Result_txt}
     # check No. of card
     ${RedCard_Result_txt}    Get yellow card value for Home    ${NewMatchID}
@@ -1155,7 +1144,6 @@ Verify Live Match Desktop
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[0-0]    ${Extra_Result_txt}
     ###--- Check match info ----###
     Select Window    new
@@ -1193,7 +1181,6 @@ Verify Live Match Desktop
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[1-0]    ${Extra_Result_txt}
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -1209,7 +1196,6 @@ Verify Live Match Desktop
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[1-1]    ${Extra_Result_txt}
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -1225,7 +1211,6 @@ Verify Live Match Desktop
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
     Selenium2Library.switch browser    tab1
     Selenium2Library.Reload Page
@@ -1241,7 +1226,6 @@ Verify Live Match Desktop
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    PEN    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],PEN[2-1]    ${Extra_Result_txt}
     ######### End Match After Pen
     Selenium2Library.switch browser    tab1
@@ -1258,7 +1242,6 @@ Verify Live Match Desktop
     ${Status_Result_txt}    Get Status    ${NewMatchID}
     Should be equal    AP    ${Status_Result_txt}
     ${Extra_Result_txt}    Get extra line    ${NewMatchID}
-    Log to console    ${Extra_Result_txt}
     Should be equal    FT[4-4],ET[4-4],AGGR[10-10],PEN[2-1]    ${Extra_Result_txt}
     Check Icon Arrow    ${NewMatchID}
     Check Icon Pen    ${NewMatchID}

@@ -1,20 +1,37 @@
 *** Settings ***
 Library           Selenium2Library
 Library           DateTime
+Library           DatabaseLibrary
 
 *** Keywords ***
+ConnectMySQL
+    Connect To Database    pymysql    ${dbname}    ${dbuser}    ${dbpasswd}    ${dbhost}    ${dbport}
+    Table Must Exist    Commentary
+    ${CountMatch}    Query    SELECT count(m.ID) FROM score247_local_test.Match as m inner join score247_local_test.League as l on m.LeagueId = l.Id where m.EventDate like '%2020-03-10%';
+    ${CountMatch}=    Set Variable    ${CountMatch}[0][0]
+    Log to console    ${CountMatch}
+    @{leaguesList}    Query    SELECT l.name FROM score247_local_test.Match as m inner join score247_local_test.League as l on m.LeagueId = l.Id where m.EventDate like '%2020-03-10%';
+    : FOR    ${item}    IN    @{leaguesList}
+    \    log to console    ${item}
+    ${length}=    Get length    @{leaguesList}
+    log to console    ${length}
+    : FOR    ${item}    IN RANGE    0    ${length}
+    \    log to console    @{leaguesList}[${item}]
+
+Disconnect
+    disconnect from database    ${DB_CONNECT_STRING}
+
 Open Home page
-    #Set Environment Variable    PATH    C:/chromedriver.exe
     open browser    https://score247-web-test.nexdev.net/    Chrome    alias=tab2
     Maximize Browser Window
     sleep    3s
 
 setup and open android phone
     Close All Applications
-    ${androiddriver1}=    Open Application    http://127.0.0.1:4723/wd/hub    alias=MyApp1    newCommandTimeout=300    platformName=android    platformVersion=7.0
+    ${androiddriver1}=    Open Application    http://127.0.0.1:4723/wd/hub    alias=MyApp1    newCommandTimeout=3600    platformName=android    platformVersion=7.0
     ...    deviceName=emulator-5554    automationName=uiautomator2    browserName=Chrome
     Go To Url    https://score247-web-test.nexdev.net/
-    sleep    5s
+    AppiumLibrary.Page Should Contain Element    //*[@id="__next"]/div/div[3]/button[1]    timeout=300
     AppiumLibrary.Click Element    //*[@id="__next"]/div/div[3]/button[1]
     sleep    5s
 
@@ -23,10 +40,8 @@ Get TimeLine
     ${Timeline_txt}    Selenium2Library.Get Text    ${Timeline}
     ${Timeline_txt}=    Replace String    ${Timeline_txt}    ${space}    ${empty}
     ${Timeline_txt}=    Get Substring    ${Timeline_txt}    10    18
-    Log To Console    ${Timeline_txt}
     ${Timeline_txt}=    Convert Time    ${Timeline_txt}    timer    exclude_millis=yes
     ${Timeline_txt}=    Add Time To Time    ${Timeline_txt}    00:02:00    timer    exclude_millis=yes
-    Log To Console    ${Timeline_txt}
     [Return]    ${Timeline_txt}
 
 Wait Create Event

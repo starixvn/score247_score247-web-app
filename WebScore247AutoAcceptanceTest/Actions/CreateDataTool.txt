@@ -18,8 +18,8 @@ Get First Letter
 
 Login Create Data Page
     #Set Environment Variable    PATH    C:/geckodriver.exe
-    open browser    http://ha.nexdev.net:7873/dev/    Firefox    alias=tab1
-    Maximize Browser Window
+    Selenium2Library.open browser    http://ha.nexdev.net:7873/test/    Firefox    alias=tab1
+    Selenium2Library.Maximize Browser Window
     Selenium2Library.Page Should Contain Element    ${Login_username_txt}    timeout=15
     Selenium2Library.Input Text    ${Login_username_txt}    score247
     Selenium2Library.Input Text    ${Login_password_txt}    score@247
@@ -31,15 +31,28 @@ Create New Match
     Selenium2Library.Page Should Contain Element    ${Data_NewMatch_btn}    timeout=15
     Selenium2Library.Click button    ${Data_NewMatch_btn}
     Selenium2Library.Page Should Contain Element    ${Data_League_sel}    timeout=15
-    Select From List By value    ${Data_League_sel}    ${value}
+    Selenium2Library.Select From List By value    ${Data_League_sel}    ${value}
     Selenium2Library.Page Should Contain Element    ${Data_Home_sel}    timeout=15
-    Select From List By value    ${Data_Home_sel}    sr:competitor:2829
+    Selenium2Library.Select From List By value    ${Data_Home_sel}    sr:competitor:2829
     Selenium2Library.Page Should Contain Element    ${Data_Away_sel}    timeout=15
-    Select From List By value    ${Data_Away_sel}    sr:competitor:10
+    Selenium2Library.Select From List By value    ${Data_Away_sel}    sr:competitor:10
     Selenium2Library.Wait Until Page Contains Element    ${Data_Sunmit_btn}    timeout=15
     Selenium2Library.Click button    ${Data_Sunmit_btn}
     Selenium2Library.Wait Until Page Contains Element    ${Data_GetMatchID}    timeout=355
     ${matchID}    Selenium2Library.Get text    ${Data_GetMatchID}
+    #Set Line - ups
+    Selenium2Library.Page Should Contain Element    //*[@id="lineupsEventHeading"]/div    timeout=15
+    Selenium2Library.Click Element    //*[@id="lineupsEventHeading"]/div
+    sleep    2s
+    Selenium2Library.Page Should Contain Element    //*[@id="generateLineupsData"]/div[1]/select    timeout=15
+    Selenium2Library.Select From List By value    //*[@id="generateLineupsData"]/div[1]/select    3-4-3
+    Selenium2Library.Page Should Contain Element    //*[@id="generateLineupsData"]/div[2]/select    timeout=15
+    Selenium2Library.Select From List By value    //*[@id="generateLineupsData"]/div[2]/select    4-1-4-1
+    Selenium2Library.Page Should Contain Element    //*[@id="generateLineupsData"]/div[3]/input    timeout=60
+    Selenium2Library.Click button    //*[@id="generateLineupsData"]/div[3]/input
+    sleep    2s
+    Selenium2Library.Page Should Contain Element    //*[@id="btnApplyLineups"]    timeout=60
+    Selenium2Library.Click button    //*[@id="btnApplyLineups"]
     sleep    2s
     [Return]    ${matchID}
 
@@ -49,13 +62,13 @@ Create Post Match
     Selenium2Library.Page Should Contain Element    ${Data_NewMatch_btn}    timeout=15
     Selenium2Library.Click button    ${Data_NewMatch_btn}
     Selenium2Library.Page Should Contain Element    ${Data_League_sel}    timeout=15
-    Select From List By value    ${Data_League_sel}    ${value}
+    Selenium2Library.Select From List By value    ${Data_League_sel}    ${value}
     Selenium2Library.Page Should Contain Element    ${Data_Home_sel}    timeout=15
-    Select From List By value    ${Data_Home_sel}    sr:team:1759904207
+    Selenium2Library.Select From List By value    ${Data_Home_sel}    sr:team:1759904207
     Selenium2Library.Page Should Contain Element    ${Data_Away_sel}    timeout=15
-    Select From List By value    ${Data_Away_sel}    sr:team:955685600
+    Selenium2Library.Select From List By value    ${Data_Away_sel}    sr:team:955685600
     Selenium2Library.Page Should Contain Element    //*[@id="newMatchStatus"]    timeout=15
-    Select From List By value    //*[@id="newMatchStatus"]    ${Status}
+    Selenium2Library.Select From List By value    //*[@id="newMatchStatus"]    ${Status}
     Select Yeterday Date    //input[@name='Match.Scheduled']
     Selenium2Library.Click Element    //*[@id="Match_Referee"]
     Selenium2Library.Wait Until Page Contains Element    ${Data_Sunmit_btn}    timeout=15
@@ -75,7 +88,7 @@ Delete New Match
     Login Create Data Page
     Selenium2Library.Page Should Contain Element    ${matchcode}    timeout=15
     Selenium2Library.Click Element    ${matchcode}
-    Close Browser
+    Selenium2Library.Close Browser
 
 Delete Post Match
     [Arguments]    ${matchcode}
@@ -86,7 +99,7 @@ Delete Post Match
     sleep    2s
     Selenium2Library.Page Should Contain Element    ${matchcode}    timeout=60
     Selenium2Library.Click Element    ${matchcode}
-    Close Browser
+    Selenium2Library.Close Browser
 
 Match Time Event
     [Arguments]    ${type}
@@ -97,8 +110,12 @@ Match Time Event
     Selenium2Library.Clear Element Text    //*[@id="EventTimeForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]
     Selenium2Library.Input Text    //*[@id="EventTimeForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]    ${TimeLine}
     Selenium2Library.Page Should Contain Element    ${MatchTime_EventType}    timeout=60
-    Select From List By value    ${MatchTime_EventType}    ${type}
+    Selenium2Library.Select From List By value    ${MatchTime_EventType}    ${type}
     Selenium2Library.Page Should Contain Element    ${MatchTime_Process}    timeout=60
+    Selenium2Library.Clear Element Text    //*[@id="EventTimeForm"]//*[@id="commentary1"]
+    Selenium2Library.Input Text    //*[@id="EventTimeForm"]//*[@id="commentary1"]    Match Time Event 01
+    Selenium2Library.Clear Element Text    //*[@id="EventTimeForm"]//*[@id="commentary2"]
+    Selenium2Library.Input Text    //*[@id="EventTimeForm"]//*[@id="commentary2"]    Match Time Event 02
     Selenium2Library.Click button    ${MatchTime_Process}
     Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
     Selenium2Library.Click button    ${ApplyEvent_btn}
@@ -112,9 +129,9 @@ Match Time End
     Selenium2Library.Clear Element Text    //*[@id="EventTimeForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]
     Selenium2Library.Input Text    //*[@id="EventTimeForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]    ${TimeLine}
     Selenium2Library.Page Should Contain Element    ${MatchTime_EventType}    timeout=60
-    Select From List By value    ${MatchTime_EventType}    ${type}
+    Selenium2Library.Select From List By value    ${MatchTime_EventType}    ${type}
     Selenium2Library.Page Should Contain Element    //*[@id="aggregate_input"]/select    timeout=60
-    Select From List By value    //*[@id="aggregate_input"]/select    ${arg}
+    Selenium2Library.Select From List By value    //*[@id="aggregate_input"]/select    ${arg}
     Selenium2Library.Clear Element Text    //*[@id="aggregate_input"]/input[1]
     Selenium2Library.Input Text    //*[@id="aggregate_input"]/input[1]    10
     Selenium2Library.Clear Element Text    //*[@id="aggregate_input"]/input[2]
@@ -130,15 +147,20 @@ Score Change
     ${TimeLine}    Get Time Line
     Selenium2Library.Page Should Contain Element    ${MatchScoreEvent}    timeout=60
     Selenium2Library.Click Element    ${MatchScoreEvent}
+    #Scroll Element Into View    ${MatchScoreEvent_MatchTime}
     Selenium2Library.Page Should Contain Element    ${MatchScoreEvent_MatchTime}    timeout=60
     Selenium2Library.Clear Element Text    ${MatchScoreEvent_MatchTime}
     Selenium2Library.Input Text    ${MatchScoreEvent_MatchTime}    ${Time}
     Selenium2Library.Page Should Contain Element    ${MatchScoreEvent_Team_sel}    timeout=60
-    Select From List By value    ${MatchScoreEvent_Team_sel}    ${team}
+    Selenium2Library.Select From List By value    ${MatchScoreEvent_Team_sel}    ${team}
     Selenium2Library.Page Should Contain Element    ${MatchScoreEvent_Period_sel}    timeout=60
-    Select From List By value    ${MatchScoreEvent_Period_sel}    ${Period}
+    Selenium2Library.Select From List By value    ${MatchScoreEvent_Period_sel}    ${Period}
     Selenium2Library.Clear Element Text    //*[@id="EventScoreForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]
     Selenium2Library.Input Text    //*[@id="EventScoreForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]    ${TimeLine}
+    Selenium2Library.Clear Element Text    //*[@id="EventScoreForm"]//*[@id="commentary1"]
+    Selenium2Library.Input Text    //*[@id="EventScoreForm"]//*[@id="commentary1"]    Score Change Score Change Score Change Score Change Score Change Score Change 01
+    Selenium2Library.Clear Element Text    //*[@id="EventScoreForm"]//*[@id="commentary2"]
+    Selenium2Library.Input Text    //*[@id="EventScoreForm"]//*[@id="commentary2"]    Score Change Score Change Score 02
     Selenium2Library.Page Should Contain Element    ${MatchScoreEvent_Process}    timeout=60
     Selenium2Library.Click button    ${MatchScoreEvent_Process}
     Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
@@ -151,11 +173,11 @@ PEN Shoot Event
     Selenium2Library.Page Should Contain Element    ${PSO_Event}    timeout=60
     Selenium2Library.Click Element    ${PSO_Event}
     Selenium2Library.Page Should Contain Element    ${PSO_Team_sel}    timeout=60
-    Select From List By value    ${PSO_Team_sel}    ${team}
+    Selenium2Library.Select From List By value    ${PSO_Team_sel}    ${team}
     Selenium2Library.Page Should Contain Element    ${PSO_Player}
     Selenium2Library.Input Text    ${PSO_Player}    ${player}
     Selenium2Library.Page Should Contain Element    ${PSO_scored_sel}    timeout=60
-    Select From List By value    ${PSO_scored_sel}    ${scored}
+    Selenium2Library.Select From List By value    ${PSO_scored_sel}    ${scored}
     Selenium2Library.Clear Element Text    ${PSO_Timeline}
     Selenium2Library.Input Text    ${PSO_Timeline}    ${TimeLine}
     Selenium2Library.Page Should Contain Element    ${PSO_Process}    timeout=60
@@ -172,11 +194,15 @@ Card Event
     Selenium2Library.Page Should Contain Element    ${CardEvent_MatchTime}    timeout=60
     Selenium2Library.Input Text    ${CardEvent_MatchTime}    ${Matchtime}
     Selenium2Library.Page Should Contain Element    ${CardEvent_Type_sel}    timeout=60
-    Select From List By value    ${CardEvent_Type_sel}    ${Type}
+    Selenium2Library.Select From List By value    ${CardEvent_Type_sel}    ${Type}
     Selenium2Library.Page Should Contain Element    ${CardEvent_Team_sel}    timeout=60
-    Select From List By value    ${CardEvent_Team_sel}    ${Team}
+    Selenium2Library.Select From List By value    ${CardEvent_Team_sel}    ${Team}
     Selenium2Library.Clear Element Text    //*[@id="EventCardForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]
     Selenium2Library.Input Text    //*[@id="EventCardForm"]/div[1]/div[5]//*[@id="payload_timeline_hour"]    ${TimeLine}
+    Selenium2Library.Clear Element Text    //*[@id="EventCardForm"]//*[@id="commentary1"]
+    Selenium2Library.Input Text    //*[@id="EventCardForm"]//*[@id="commentary1"]    Card Event Card Event Card Event Card Event Card Event Card Event Card Event Card Event Card Event 01
+    Selenium2Library.Clear Element Text    //*[@id="EventCardForm"]//*[@id="commentary2"]
+    Selenium2Library.Input Text    //*[@id="EventCardForm"]//*[@id="commentary2"]    Card Event Card Event Card Event Card Event Card Event Card Event Card Event Card Event Card Event 02
     Selenium2Library.Page Should Contain Element    ${CardEvent_Process}    timeout=60
     Selenium2Library.Click button    ${CardEvent_Process}
     Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
@@ -193,20 +219,25 @@ Injury Time
     Selenium2Library.Clear Element Text    //*[@id="EventInjuryExtraTimeForm"]/div[1]/div[4]//*[@id="payload_timeline_hour"]
     Selenium2Library.Input Text    //*[@id="EventInjuryExtraTimeForm"]/div[1]/div[4]//*[@id="payload_timeline_hour"]    ${TimeLine}
     Selenium2Library.Page Should Contain Element    ${InjuryPeriodType}    timeout=60
-    Select From List By value    ${InjuryPeriodType}    ${Period Type}
+    Selenium2Library.Select From List By value    ${InjuryPeriodType}    ${Period Type}
+    Selenium2Library.Clear Element Text    //*[@id="EventInjuryExtraTimeForm"]//*[@id="commentary1"]
+    Selenium2Library.Input Text    //*[@id="EventInjuryExtraTimeForm"]//*[@id="commentary1"]    Injury Time Injury Injury Injury Time Injury Time Injury Time Injury Time Injury Time Injury Time 01
+    Selenium2Library.Clear Element Text    //*[@id="EventInjuryExtraTimeForm"]//*[@id="commentary2"]
+    Selenium2Library.Input Text    //*[@id="EventInjuryExtraTimeForm"]//*[@id="commentary2"]    Injury TimeInjury Time 02
     Selenium2Library.Page Should Contain Element    ${Injury_Process}    timeout=60
     Selenium2Library.Click button    ${Injury_Process}
     Selenium2Library.Page Should Contain Element    ${ApplyEvent_btn}    timeout=60
     Selenium2Library.Click button    ${ApplyEvent_btn}
 
 Scenario Match start
+    Selenium2Library.Reload Page
     Selenium2Library.Page Should Contain Element    ${Scenario_sel}    timeout=60
-    Select From List By value    ${Scenario_sel}    ${Scenario_MatchStart}
+    Selenium2Library.Select From List By value    ${Scenario_sel}    ${Scenario_MatchStart}
     Selenium2Library.Page Should Contain Element    ${Apply_Scenario_btn}    timeout=60
     Selenium2Library.Click button    ${Apply_Scenario_btn}
 
 Scenario 2nd Injury Time
     Selenium2Library.Page Should Contain Element    ${Scenario_sel}    timeout=60
-    Select From List By value    ${Scenario_sel}    ${Scenario_2nd_Injury}
+    Selenium2Library.Select From List By value    ${Scenario_sel}    ${Scenario_2nd_Injury}
     Selenium2Library.Page Should Contain Element    ${Apply_Scenario_btn}    timeout=60
     Selenium2Library.Click button    ${Apply_Scenario_btn}

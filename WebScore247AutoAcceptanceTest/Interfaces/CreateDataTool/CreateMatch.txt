@@ -24,7 +24,7 @@ ${InjuryPeriodType}    //*[@id="EventInjuryExtraTimeForm"]//*[@id="eventType"]
 ${InjuryTimeExtra}    //*[@id="EventInjuryExtraTimeForm"]//*[@id="payload_timeline_injury_time_announced"]
 ${Injury_Process}    //*[@id="EventInjuryExtraTimeForm"]/div[2]/button
 @{row}            //*[@id="TimelineTable"]/tbody//td[1]
-${Scenario_MatchStart}    1552157748
+${Scenario_MatchStart}    1191004263
 ${Scenario_2nd_Injury}    573567520
 ######
 ${MatchTimeEvent}    //*[@id="matchTimeEventHeading"]/div
@@ -43,3 +43,10 @@ ${PSO_scored_sel}    //*[@id="EventPenaltyShootForm"]/div[1]/div[7]//*[@id="payl
 ${PSO_Player}     //*[@id="EventPenaltyShootForm"]/div[1]/div[6]/div[1]//*[@id="penaltyGoalScorerName"]
 ${PSO_Process}    //*[@id="EventPenaltyShootForm"]/div[2]/button
 #########
+${DB_CONNECT_STRING}    pymssql    'score247_local_test', 'tester', '1234aaAA', '10.18.200.109:3396'
+${dbname}         score247_local_test
+${dbuser}         tester
+${dbpasswd}       1234aaAA
+${dbhost}         10.18.200.140
+${dbport}         3396
+@{queryResults}
