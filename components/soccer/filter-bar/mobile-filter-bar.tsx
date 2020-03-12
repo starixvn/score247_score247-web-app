@@ -28,7 +28,7 @@ type Props = {
 } & WithTranslation;
 
 class MobileFilterBar extends React.Component<Props, State> {
-    private readonly sortButton = React.createRef<HTMLSpanElement>();
+    private readonly filterBar = React.createRef<HTMLDivElement>();
 
     constructor(props: Props) {
         super(props);
@@ -84,17 +84,17 @@ class MobileFilterBar extends React.Component<Props, State> {
     }
 
     handleClickOutside = (event: MouseEvent | Event) => {
-        if (!this.sortButton?.current?.contains(event.target as HTMLElement)) {
+        if (!this.filterBar?.current?.contains(event.target as HTMLElement)) {
             this.setState({ openSortMenu: false });
         }
     }
 
     render() {
         return (
-            <>
+            <div ref={this.filterBar}>
                 <div className="search-filter">
                     <span className="icon-search" onClick={this.handleSearchClick}></span>
-                    <span className="icon-more" onClick={this.handleSortMenuClick} ref={this.sortButton}></span>
+                    <span className="icon-more" onClick={this.handleSortMenuClick}></span>
                 </div>
                 {this.state.openSearch && <MobileSearchBar {...this.props} onCancel={this.handleCancelClick} />}
                 {this.state.openSortMenu && (
@@ -114,7 +114,7 @@ class MobileFilterBar extends React.Component<Props, State> {
                         onSubmitFilterLeagues={this.props.onSubmitFilterLeagues}
                         onCancel={this.props.onTogglePopup} />
                 </Modal>
-            </>
+            </div>
         );
     }
 }
