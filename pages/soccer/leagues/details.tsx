@@ -50,7 +50,7 @@ class SoccerLeagueDetailPage extends React.Component<Props, State> {
     const { id, seasonId, leagueGroupName, roundGroup } = query;
     resetIdCounter();
 
-    const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), roundGroup ? roundGroup.toString() : encodeURI("white space"));
+    const league = await SoccerAPI.GetLeagueTable(id.toString(), seasonId.toString(), roundGroup ? roundGroup.toString() : encodeURI(" "));
     const allMatches = await SoccerAPI.GetFixtures(id.toString(), seasonId.toString(), leagueGroupName?.toString());
     const isFixture = (match: MatchSummary) =>
       MatchStatusHelper.isLiveMatch(match.MatchStatus) ||
