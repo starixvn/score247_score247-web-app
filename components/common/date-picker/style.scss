@@ -7,7 +7,7 @@
       font-family: 'Roboto', sans-serif;
       font-size: 1.4rem;
       border: 0;
-      box-shadow: 0 0 0.5rem 0 #d7d7d7;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     }  
     .react-datepicker__header {
       background: #fff;
@@ -133,7 +133,7 @@
     //width: 100%;
     transform: translate3d(0, 9rem, 0px) !important;
     background-color: #fff;
-    box-shadow: 0 0 0.5rem 0 #d7d7d7;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     margin-top: 0 !important;
 
     .react-datepicker {
